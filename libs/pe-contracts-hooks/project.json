@@ -1,0 +1,43 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/pe-contracts-hooks/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/pe-contracts-hooks",
+        "tsConfig": "libs/pe-contracts-hooks/tsconfig.lib.json",
+        "project": "libs/pe-contracts-hooks/package.json",
+        "entryFile": "libs/pe-contracts-hooks/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "libs/pe-contracts-hooks/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/pe-contracts-hooks/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/pe-contracts-hooks"],
+      "options": {
+        "jestConfig": "libs/pe-contracts-hooks/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
