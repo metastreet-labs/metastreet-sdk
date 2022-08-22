@@ -1,0 +1,132 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "ILoanPriceOracleParameters",
+  "sourceName": "contracts/wrapper/interfaces/ILoanPriceOracleParameters.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "collateralOracle",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "collateralToken",
+          "type": "address"
+        }
+      ],
+      "name": "getCollateralParameters",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bool",
+              "name": "active",
+              "type": "bool"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint72",
+                  "name": "offset",
+                  "type": "uint72"
+                },
+                {
+                  "internalType": "uint72",
+                  "name": "slope1",
+                  "type": "uint72"
+                },
+                {
+                  "internalType": "uint72",
+                  "name": "slope2",
+                  "type": "uint72"
+                },
+                {
+                  "internalType": "uint96",
+                  "name": "target",
+                  "type": "uint96"
+                },
+                {
+                  "internalType": "uint96",
+                  "name": "max",
+                  "type": "uint96"
+                }
+              ],
+              "internalType": "struct ILoanPriceOracleParameters.PiecewiseLinearModel",
+              "name": "loanToValueRateComponent",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint72",
+                  "name": "offset",
+                  "type": "uint72"
+                },
+                {
+                  "internalType": "uint72",
+                  "name": "slope1",
+                  "type": "uint72"
+                },
+                {
+                  "internalType": "uint72",
+                  "name": "slope2",
+                  "type": "uint72"
+                },
+                {
+                  "internalType": "uint96",
+                  "name": "target",
+                  "type": "uint96"
+                },
+                {
+                  "internalType": "uint96",
+                  "name": "max",
+                  "type": "uint96"
+                }
+              ],
+              "internalType": "struct ILoanPriceOracleParameters.PiecewiseLinearModel",
+              "name": "durationRateComponent",
+              "type": "tuple"
+            },
+            {
+              "internalType": "uint16[3]",
+              "name": "rateComponentWeights",
+              "type": "uint16[3]"
+            }
+          ],
+          "internalType": "struct ILoanPriceOracleParameters.CollateralParameters",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "minimumLoanDuration",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

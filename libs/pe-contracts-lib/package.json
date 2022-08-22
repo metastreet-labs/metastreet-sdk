@@ -1,0 +1,9 @@
+{
+  "name": "@metastreet-labs/pe-contracts-lib",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "scripts": {
+    "copy-abis": "rimraf src/abis && mkdir src/abis && find '../../../metastreet-pe-contracts/artifacts/@openzeppelin' '../../../metastreet-pe-contracts/artifacts/contracts' -type f -not \\( -name '*.dbg.json' \\) -exec cp -prv '{}' './src/abis/' ';'",
+    "codegen": "rimraf src/codegen && typechain --target=ethers-v5 --out-dir src/codegen 'src/abis/**/*.json'"
+  }
+}
