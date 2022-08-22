@@ -2,7 +2,7 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "test": "apps/test",
-    "pe-contracts-lib": "libs/pe-contracts-lib"
+    "pe-contracts-lib": "libs/pe-contracts-lib",
+    "test": "apps/test"
   }
 }
