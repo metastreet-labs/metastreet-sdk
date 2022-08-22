@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@metastreet-labs/pe-contracts-fetchers": ["libs/pe-contracts-fetchers/src/index.ts"],
       "@metastreet-labs/pe-contracts-lib": ["libs/pe-contracts-lib/src/index.ts"]
     }
   },
