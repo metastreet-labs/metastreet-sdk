@@ -1,0 +1,83 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/metastreet-sdk/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/metastreet-sdk",
+        "index": "apps/metastreet-sdk/src/index.html",
+        "baseHref": "/",
+        "main": "apps/metastreet-sdk/src/main.tsx",
+        "polyfills": "apps/metastreet-sdk/src/polyfills.ts",
+        "tsConfig": "apps/metastreet-sdk/tsconfig.app.json",
+        "assets": [
+          "apps/metastreet-sdk/src/favicon.ico",
+          "apps/metastreet-sdk/src/assets"
+        ],
+        "styles": ["apps/metastreet-sdk/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/metastreet-sdk/src/environments/environment.ts",
+              "with": "apps/metastreet-sdk/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "metastreet-sdk:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "metastreet-sdk:build:development"
+        },
+        "production": {
+          "buildTarget": "metastreet-sdk:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/metastreet-sdk/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/metastreet-sdk"],
+      "options": {
+        "jestConfig": "apps/metastreet-sdk/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
