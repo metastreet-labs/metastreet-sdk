@@ -9,6 +9,7 @@
   },
   "private": true,
   "dependencies": {
+    "@tanstack/react-query": "^4.2.1",
     "core-js": "^3.6.5",
     "ethers": "^5.7.0",
     "react": "18.2.0",
