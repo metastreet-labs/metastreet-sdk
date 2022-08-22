@@ -2,7 +2,6 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "metastreet-sdk": "apps/metastreet-sdk",
-    "metastreet-sdk-e2e": "apps/metastreet-sdk-e2e"
+    "test": "apps/test"
   }
 }
