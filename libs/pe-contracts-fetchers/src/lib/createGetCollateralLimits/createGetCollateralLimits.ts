@@ -1,31 +1,39 @@
 import { IERC3156FlashLender__factory, LeverageBuyWrapperV1__factory } from "@metastreet-labs/pe-contracts-lib";
-import { BigNumberish } from "ethers";
+import { BigNumber, BigNumberish } from "ethers";
 import { Deployment } from "../deployments";
 import { SignerOrProvider } from "../types";
 
-interface Params {
-  sop: SignerOrProvider;
+export interface CreateGetCollateralLimitsParams {
+  signerOrProvider: SignerOrProvider;
   deployment: Deployment;
   collectionAddress: string;
   tokenID: string;
   purchasePrice: BigNumberish;
 }
 
+export interface CreateGetCollateralLimitsResult {
+  minDuration: number;
+  maxDuration: number;
+  maxPrincipal: BigNumber;
+  collateralValue: BigNumber;
+  maxLoanToValue: BigNumber;
+}
+
 export function createGetCollateralLimits({
-  sop,
+  signerOrProvider,
   collectionAddress,
   tokenID,
   purchasePrice,
   deployment: { lbWrapperAddress, vaultAddress },
-}: Params) {
+}: CreateGetCollateralLimitsParams) {
   return async () => {
-    const lbWrapper = LeverageBuyWrapperV1__factory.connect(lbWrapperAddress, sop);
+    const lbWrapper = LeverageBuyWrapperV1__factory.connect(lbWrapperAddress, signerOrProvider);
     const limits = await lbWrapper.getCollateralLimits(vaultAddress, collectionAddress, tokenID);
 
     const flashLenderAddress = await lbWrapper.flashLender();
     const wethAddress = await lbWrapper.weth();
 
-    const flashLender = IERC3156FlashLender__factory.connect(flashLenderAddress, sop);
+    const flashLender = IERC3156FlashLender__factory.connect(flashLenderAddress, signerOrProvider);
 
     const flashFee = await flashLender.flashFee(wethAddress, purchasePrice);
 
