@@ -31,6 +31,13 @@
         "lintFilePatterns": ["libs/pe-contracts-hooks/**/*.{ts,tsx,js,jsx}"]
       }
     },
+    "type-check": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "color": true,
+        "command": "npx tsc -p libs/pe-contracts-hooks/tsconfig.lib.json --noEmit --incremental"
+      }
+    },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/pe-contracts-hooks"],

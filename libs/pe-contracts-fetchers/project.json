@@ -32,6 +32,13 @@
         "lintFilePatterns": ["libs/pe-contracts-fetchers/**/*.ts"]
       }
     },
+    "type-check": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "color": true,
+        "command": "npx tsc -p libs/pe-contracts-fetchers/tsconfig.lib.json --noEmit --incremental"
+      }
+    },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/pe-contracts-fetchers"],
