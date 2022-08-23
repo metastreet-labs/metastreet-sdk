@@ -1,15 +1,15 @@
 import {
-  createGetCollateralLimits,
-  CreateGetCollateralLimitsParams,
-  CreateGetCollateralLimitsResult,
+  getCollateralLimits,
+  GetCollateralLimitsParams,
+  GetCollateralLimitsResult,
 } from "@metastreet-sdk/pe-contracts-core";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 import useDeployment from "../useDeployment/useDeployment";
 
-type TokenIdentifier = Pick<CreateGetCollateralLimitsParams, "collectionAddress" | "tokenID">;
+type TokenIdentifier = Pick<GetCollateralLimitsParams, "collectionAddress" | "tokenID">;
 
-export interface UseCollateralLimitsParams extends Omit<CreateGetCollateralLimitsParams, "deployment"> {
-  queryOptions: UseQueryOptions<CreateGetCollateralLimitsResult>;
+export interface UseCollateralLimitsParams extends Omit<GetCollateralLimitsParams, "deployment"> {
+  queryOptions: UseQueryOptions<GetCollateralLimitsResult>;
 }
 
 export function useCollateralLimits({
@@ -20,9 +20,13 @@ export function useCollateralLimits({
   queryOptions,
 }: UseCollateralLimitsParams) {
   const deployment = useDeployment();
+
+  const fetcher = () =>
+    getCollateralLimits({ signerOrProvider, collectionAddress, tokenID, deployment, purchasePrice });
+
   return useQuery({
     queryKey: collateralLimitsQueryKeys.token({ collectionAddress, tokenID }),
-    queryFn: createGetCollateralLimits({ signerOrProvider, collectionAddress, tokenID, deployment, purchasePrice }),
+    queryFn: fetcher,
     ...queryOptions,
   });
 }
