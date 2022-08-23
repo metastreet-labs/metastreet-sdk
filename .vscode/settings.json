@@ -1,0 +1,81 @@
+{
+  // Typescript
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "js/ts.implicitProjectConfig.strictNullChecks": true,
+  "typescript.tsc.autoDetect": "off",
+  "typescript.disableAutomaticTypeAcquisition": true,
+  "typescript.implementationsCodeLens.enabled": true,
+  "typescript.referencesCodeLens.enabled": true,
+
+  "editor.codeActionsOnSave": {
+    // sort and autoremove unused imports
+    "source.organizeImports": true
+  },
+
+  // ESLint
+  "eslint.nodePath": "./node_modules/eslint/lib",
+
+  // Formatter
+  "prettier.prettierPath": "./node_modules/prettier/",
+  // defaultFormatter: prettier for supported languages
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // Format every file by default
+  "editor.formatOnSave": true,
+  // Disable the built-in formatters as we're using prettier
+  "javascript.format.enable": false,
+  "typescript.format.enable": false,
+  // Override some specific user settings that you might have.
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // NPM
+  "npm.packageManager": "npm",
+  "npm.autoDetect": "off",
+
+  // Explicitly enable color decorators
+  "editor.colorDecorators": true,
+
+  // Provide validation for CI and json files
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": ".github/workflows/*.yml",
+    "https://yarnpkg.com/configuration/yarnrc.json": ".yarnrc.yml"
+  },
+  "yaml.schemaStore.enable": false,
+  "json.schemas": [
+    {
+      "fileMatch": ["**/*.openapi.json"],
+      "url": "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/schemas/v3.0/schema.json"
+    },
+    {
+      "fileMatch": ["package.json", "**/package.json"],
+      "url": "https://yarnpkg.com/configuration/manifest.json"
+    }
+  ],
+
+  // Github
+  "github.gitAuthentication": true,
+  "githubIssues.issueBranchTitle": "feature/${issueNumber}-${sanitizedIssueTitle}",
+  "githubIssues.workingIssueFormatScm": "${issueTitle}\nFixes ${issueNumberLabel}",
+  "githubIssues.queries": [
+    {
+      "label": "Issues assigned to me",
+      "query": "default"
+    },
+    {
+      "label": "Issues I created",
+      "query": "author:${user} state:open repo:${owner}/${repository} sort:created-desc"
+    },
+    {
+      "label": "All Open Issues",
+      "query": "state:open repo:${owner}/${repository} sort:created-desc"
+    }
+  ]
+}

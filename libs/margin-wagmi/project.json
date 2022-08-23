@@ -1,0 +1,50 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/margin-wagmi/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/margin-wagmi",
+        "tsConfig": "libs/margin-wagmi/tsconfig.lib.json",
+        "project": "libs/margin-wagmi/package.json",
+        "entryFile": "libs/margin-wagmi/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "libs/margin-wagmi/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/margin-wagmi/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "type-check": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "color": true,
+        "command": "npx tsc -p libs/margin-wagmi/tsconfig.lib.json --noEmit --incremental"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/margin-wagmi"],
+      "options": {
+        "jestConfig": "libs/margin-wagmi/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@metastreet-labs/margin-core": ["libs/margin-core/src/index.ts"],
+      "@metastreet-labs/margin-wagmi": ["libs/margin-wagmi/src/index.ts"],
+      "@metastreet-sdk/pe-contracts-typechain": ["libs/pe-contracts-typechain/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

@@ -67,6 +67,13 @@
         "lintFilePatterns": ["apps/test/**/*.{ts,tsx,js,jsx}"]
       }
     },
+    "type-check": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "color": true,
+        "command": "npx tsc -p apps/test/tsconfig.app.json --noEmit --incremental"
+      }
+    },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/test"],
