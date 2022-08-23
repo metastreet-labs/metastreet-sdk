@@ -24,14 +24,14 @@
     ]
   },
   "dependencies": {
-    "@tanstack/react-query": "^4.2.1",
     "core-js": "^3.6.5",
     "ethers": "^5.7.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.3.0",
     "regenerator-runtime": "0.13.7",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "wagmi": "^0.6.4"
   },
   "devDependencies": {
     "@nrwl/cli": "14.5.8",
