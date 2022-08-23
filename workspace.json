@@ -2,9 +2,9 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "pe-contracts-fetchers": "libs/pe-contracts-fetchers",
-    "pe-contracts-hooks": "libs/pe-contracts-hooks",
-    "pe-contracts-lib": "libs/pe-contracts-lib",
+    "pe-contracts-core": "libs/pe-contracts-core",
+    "pe-contracts-react": "libs/pe-contracts-react",
+    "pe-contracts-typechain": "libs/pe-contracts-typechain",
     "test": "apps/test"
   }
 }

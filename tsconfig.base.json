@@ -15,9 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@metastreet-labs/pe-contracts-fetchers": ["libs/pe-contracts-fetchers/src/index.ts"],
-      "@metastreet-labs/pe-contracts-hooks": ["libs/pe-contracts-hooks/src/index.ts"],
-      "@metastreet-labs/pe-contracts-lib": ["libs/pe-contracts-lib/src/index.ts"]
+      "@metastreet-sdk/pe-contracts-core": ["libs/pe-contracts-core/src/index.ts"],
+      "@metastreet-sdk/pe-contracts-react": ["libs/pe-contracts-react/src/index.ts"],
+      "@metastreet-sdk/pe-contracts-typechain": ["libs/pe-contracts-typechain/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
