@@ -2,7 +2,7 @@ import {
   getCollateralLimits,
   GetCollateralLimitsParams,
   GetCollateralLimitsResult,
-} from "@metastreet-sdk/pe-contracts-core";
+} from "@metastreet-labs/margin-core";
 import { useQuery } from "wagmi";
 import useDeployment from "../useDeployment/useDeployment";
 

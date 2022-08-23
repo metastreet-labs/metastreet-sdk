@@ -2,9 +2,9 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "pe-contracts-core": "libs/pe-contracts-core",
+    "margin-core": "libs/margin-core",
+    "margin-wagmi": "libs/margin-wagmi",
     "pe-contracts-typechain": "libs/pe-contracts-typechain",
-    "pe-contracts-wagmi": "libs/pe-contracts-wagmi",
     "test": "apps/test"
   }
 }

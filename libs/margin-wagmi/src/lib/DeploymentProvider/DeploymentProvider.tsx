@@ -1,4 +1,4 @@
-import { Deployment, DEPLOYMENTS } from "@metastreet-sdk/pe-contracts-core";
+import { Deployment, DEPLOYMENTS } from "@metastreet-labs/margin-core";
 import React, { PropsWithChildren, useMemo } from "react";
 
 export const DeploymentContext = React.createContext<Deployment | undefined>(undefined);

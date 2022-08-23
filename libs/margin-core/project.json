@@ -1,16 +1,16 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/pe-contracts-core/src",
+  "sourceRoot": "libs/margin-core/src",
   "projectType": "library",
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/pe-contracts-core",
-        "main": "libs/pe-contracts-core/src/index.ts",
-        "tsConfig": "libs/pe-contracts-core/tsconfig.lib.json",
-        "assets": ["libs/pe-contracts-core/*.md"]
+        "outputPath": "dist/libs/margin-core",
+        "main": "libs/margin-core/src/index.ts",
+        "tsConfig": "libs/margin-core/tsconfig.lib.json",
+        "assets": ["libs/margin-core/*.md"]
       }
     },
     "publish": {
@@ -29,21 +29,21 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/pe-contracts-core/**/*.ts"]
+        "lintFilePatterns": ["libs/margin-core/**/*.ts"]
       }
     },
     "type-check": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
         "color": true,
-        "command": "npx tsc -p libs/pe-contracts-core/tsconfig.lib.json --noEmit --incremental"
+        "command": "npx tsc -p libs/margin-core/tsconfig.lib.json --noEmit --incremental"
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/pe-contracts-core"],
+      "outputs": ["coverage/libs/margin-core"],
       "options": {
-        "jestConfig": "libs/pe-contracts-core/jest.config.ts",
+        "jestConfig": "libs/margin-core/jest.config.ts",
         "passWithNoTests": true
       }
     }

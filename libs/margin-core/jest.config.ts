@@ -11,5 +11,5 @@ export default {
     "^.+\\.[tj]s$": "ts-jest",
   },
   moduleFileExtensions: ["ts", "js", "html"],
-  coverageDirectory: "../../coverage/libs/pe-contracts-core",
+  coverageDirectory: "../../coverage/libs/margin-core",
 };

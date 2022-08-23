@@ -6,5 +6,5 @@ export default {
     "^.+\\.[tj]sx?$": "babel-jest",
   },
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
-  coverageDirectory: "../../coverage/libs/pe-contracts-wagmi",
+  coverageDirectory: "../../coverage/libs/margin-wagmi",
 };

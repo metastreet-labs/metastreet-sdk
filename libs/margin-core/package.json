@@ -1,5 +1,5 @@
 {
-  "name": "@metastreet-sdk/pe-contracts-core",
+  "name": "@metastreet-labs/margin-core",
   "version": "0.0.1",
   "type": "commonjs"
 }

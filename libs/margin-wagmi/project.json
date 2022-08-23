@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/pe-contracts-wagmi/src",
+  "sourceRoot": "libs/margin-wagmi/src",
   "projectType": "library",
   "tags": [],
   "targets": {
@@ -8,16 +8,16 @@
       "executor": "@nrwl/web:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/pe-contracts-wagmi",
-        "tsConfig": "libs/pe-contracts-wagmi/tsconfig.lib.json",
-        "project": "libs/pe-contracts-wagmi/package.json",
-        "entryFile": "libs/pe-contracts-wagmi/src/index.ts",
+        "outputPath": "dist/libs/margin-wagmi",
+        "tsConfig": "libs/margin-wagmi/tsconfig.lib.json",
+        "project": "libs/margin-wagmi/package.json",
+        "entryFile": "libs/margin-wagmi/src/index.ts",
         "external": ["react/jsx-runtime"],
         "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
         "compiler": "babel",
         "assets": [
           {
-            "glob": "libs/pe-contracts-wagmi/README.md",
+            "glob": "libs/margin-wagmi/README.md",
             "input": ".",
             "output": "."
           }
@@ -28,21 +28,21 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/pe-contracts-wagmi/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["libs/margin-wagmi/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "type-check": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
         "color": true,
-        "command": "npx tsc -p libs/pe-contracts-wagmi/tsconfig.lib.json --noEmit --incremental"
+        "command": "npx tsc -p libs/margin-wagmi/tsconfig.lib.json --noEmit --incremental"
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/pe-contracts-wagmi"],
+      "outputs": ["coverage/libs/margin-wagmi"],
       "options": {
-        "jestConfig": "libs/pe-contracts-wagmi/jest.config.ts",
+        "jestConfig": "libs/margin-wagmi/jest.config.ts",
         "passWithNoTests": true
       }
     }
