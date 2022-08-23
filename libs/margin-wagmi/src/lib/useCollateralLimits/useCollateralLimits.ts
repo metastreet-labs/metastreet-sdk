@@ -12,13 +12,13 @@ export interface UseCollateralLimitsParams extends Omit<GetCollateralLimitsParam
   queryOptions: Parameters<typeof useQuery<GetCollateralLimitsResult, Error>>[2];
 }
 
-export function useCollateralLimits({
+export const useCollateralLimits = ({
   collectionAddress,
   tokenID,
   signerOrProvider,
   purchasePrice,
   queryOptions,
-}: UseCollateralLimitsParams) {
+}: UseCollateralLimitsParams) => {
   const deployment = useDeployment();
 
   const fetcher = () =>
@@ -29,7 +29,7 @@ export function useCollateralLimits({
     fetcher,
     queryOptions
   );
-}
+};
 
 export const collateralLimitsQueryKeys = {
   all: () => ["collateral-limits"],

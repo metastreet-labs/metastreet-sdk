@@ -3,7 +3,7 @@ import NxWelcome from "./nx-welcome";
 
 import { Link, Route, Routes } from "react-router-dom";
 
-export function App() {
+export const App = () => {
   return (
     <>
       <NxWelcome title="test" />
@@ -46,6 +46,6 @@ export function App() {
       {/* END: routes */}
     </>
   );
-}
+};
 
 export default App;
