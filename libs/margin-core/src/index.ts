@@ -1,4 +1,4 @@
 export * from "./lib/deployments";
-export * from "./lib/getCollateralLimits";
-export * from "./lib/getSupportedCollections";
-export * from "./lib/types";
+export * from "./lib/fetchers/getCollateralLimits";
+export * from "./lib/fetchers/getSupportedCollections";
+export * from "./lib/fetchers/types";
