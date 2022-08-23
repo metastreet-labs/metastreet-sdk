@@ -14,9 +14,19 @@ import type {
   Signer,
   utils,
 } from "ethers";
-import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
+import type {
+  FunctionFragment,
+  Result,
+  EventFragment,
+} from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type {
+  TypedEventFilter,
+  TypedEvent,
+  TypedListener,
+  OnEvent,
+  PromiseOrValue,
+} from "./common";
 
 export declare namespace ILeverageBuy {
   export type CollateralLimitsStruct = {
@@ -27,7 +37,13 @@ export declare namespace ILeverageBuy {
     maxPrincipal: PromiseOrValue<BigNumberish>;
   };
 
-  export type CollateralLimitsStructOutput = [number, number, BigNumber, BigNumber, BigNumber] & {
+  export type CollateralLimitsStructOutput = [
+    number,
+    number,
+    BigNumber,
+    BigNumber,
+    BigNumber
+  ] & {
     minDuration: number;
     maxDuration: number;
     maxLoanToValue: BigNumber;
@@ -84,7 +100,10 @@ export interface LeverageBuyWrapperV1Interface extends utils.Interface {
       | "weth"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "IMPLEMENTATION_VERSION", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "IMPLEMENTATION_VERSION",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "buySingleERC721WithETH",
     values: [
@@ -95,15 +114,30 @@ export interface LeverageBuyWrapperV1Interface extends utils.Interface {
       PromiseOrValue<BigNumberish>
     ]
   ): string;
-  encodeFunctionData(functionFragment: "currencyToken", values?: undefined): string;
-  encodeFunctionData(functionFragment: "flashLender", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "currencyToken",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "flashLender",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "getCollateralLimits",
-    values: [PromiseOrValue<string>, PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "onERC721Received",
-    values: [PromiseOrValue<string>, PromiseOrValue<string>, PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "onFlashLoan",
@@ -116,7 +150,10 @@ export interface LeverageBuyWrapperV1Interface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
-  encodeFunctionData(functionFragment: "purchaseEscrow", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "purchaseEscrow",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "quoteRefinance",
     values: [
@@ -149,34 +186,109 @@ export interface LeverageBuyWrapperV1Interface extends utils.Interface {
       PromiseOrValue<BigNumberish>
     ]
   ): string;
-  encodeFunctionData(functionFragment: "renounceOwnership", values?: undefined): string;
-  encodeFunctionData(functionFragment: "reservoirRouter", values?: undefined): string;
-  encodeFunctionData(functionFragment: "setFlashLender", values: [PromiseOrValue<string>]): string;
-  encodeFunctionData(functionFragment: "setPurchaseEscrow", values: [PromiseOrValue<string>]): string;
-  encodeFunctionData(functionFragment: "setReservoirRouter", values: [PromiseOrValue<string>]): string;
-  encodeFunctionData(functionFragment: "supportsInterface", values: [PromiseOrValue<BytesLike>]): string;
-  encodeFunctionData(functionFragment: "transferOwnership", values: [PromiseOrValue<string>]): string;
+  encodeFunctionData(
+    functionFragment: "renounceOwnership",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "reservoirRouter",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setFlashLender",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setPurchaseEscrow",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setReservoirRouter",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(functionFragment: "weth", values?: undefined): string;
 
-  decodeFunctionResult(functionFragment: "IMPLEMENTATION_VERSION", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "buySingleERC721WithETH", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "currencyToken", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "flashLender", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getCollateralLimits", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "onERC721Received", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "onFlashLoan", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "IMPLEMENTATION_VERSION",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "buySingleERC721WithETH",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "currencyToken",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "flashLender",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getCollateralLimits",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC721Received",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onFlashLoan",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "purchaseEscrow", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "quoteRefinance", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "quoteSingleERC721", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "refinanceETH", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "renounceOwnership", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "reservoirRouter", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setFlashLender", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setPurchaseEscrow", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setReservoirRouter", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "supportsInterface", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "purchaseEscrow",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "quoteRefinance",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "quoteSingleERC721",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "refinanceETH",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "reservoirRouter",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setFlashLender",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setPurchaseEscrow",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setReservoirRouter",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "weth", data: BytesLike): Result;
 
   events: {
@@ -199,24 +311,36 @@ export interface LeverageBuyWrapperV1Interface extends utils.Interface {
 export interface FlashLenderUpdatedEventObject {
   flashLender: string;
 }
-export type FlashLenderUpdatedEvent = TypedEvent<[string], FlashLenderUpdatedEventObject>;
+export type FlashLenderUpdatedEvent = TypedEvent<
+  [string],
+  FlashLenderUpdatedEventObject
+>;
 
-export type FlashLenderUpdatedEventFilter = TypedEventFilter<FlashLenderUpdatedEvent>;
+export type FlashLenderUpdatedEventFilter =
+  TypedEventFilter<FlashLenderUpdatedEvent>;
 
 export interface OwnershipTransferredEventObject {
   previousOwner: string;
   newOwner: string;
 }
-export type OwnershipTransferredEvent = TypedEvent<[string, string], OwnershipTransferredEventObject>;
+export type OwnershipTransferredEvent = TypedEvent<
+  [string, string],
+  OwnershipTransferredEventObject
+>;
 
-export type OwnershipTransferredEventFilter = TypedEventFilter<OwnershipTransferredEvent>;
+export type OwnershipTransferredEventFilter =
+  TypedEventFilter<OwnershipTransferredEvent>;
 
 export interface PurchaseEscrowUpdatedEventObject {
   purchaseEscrow: string;
 }
-export type PurchaseEscrowUpdatedEvent = TypedEvent<[string], PurchaseEscrowUpdatedEventObject>;
+export type PurchaseEscrowUpdatedEvent = TypedEvent<
+  [string],
+  PurchaseEscrowUpdatedEventObject
+>;
 
-export type PurchaseEscrowUpdatedEventFilter = TypedEventFilter<PurchaseEscrowUpdatedEvent>;
+export type PurchaseEscrowUpdatedEventFilter =
+  TypedEventFilter<PurchaseEscrowUpdatedEvent>;
 
 export interface PurchasedEventObject {
   buyer: string;
@@ -225,7 +349,10 @@ export interface PurchasedEventObject {
   fee: BigNumber;
   escrowId: BigNumber;
 }
-export type PurchasedEvent = TypedEvent<[string, BigNumber, BigNumber, BigNumber, BigNumber], PurchasedEventObject>;
+export type PurchasedEvent = TypedEvent<
+  [string, BigNumber, BigNumber, BigNumber, BigNumber],
+  PurchasedEventObject
+>;
 
 export type PurchasedEventFilter = TypedEventFilter<PurchasedEvent>;
 
@@ -236,16 +363,23 @@ export interface RefinancedEventObject {
   oldEscrowId: BigNumber;
   newEscrowId: BigNumber;
 }
-export type RefinancedEvent = TypedEvent<[string, BigNumber, BigNumber, BigNumber, BigNumber], RefinancedEventObject>;
+export type RefinancedEvent = TypedEvent<
+  [string, BigNumber, BigNumber, BigNumber, BigNumber],
+  RefinancedEventObject
+>;
 
 export type RefinancedEventFilter = TypedEventFilter<RefinancedEvent>;
 
 export interface ReservoirRouterUpdatedEventObject {
   reservoirRouter: string;
 }
-export type ReservoirRouterUpdatedEvent = TypedEvent<[string], ReservoirRouterUpdatedEventObject>;
+export type ReservoirRouterUpdatedEvent = TypedEvent<
+  [string],
+  ReservoirRouterUpdatedEventObject
+>;
 
-export type ReservoirRouterUpdatedEventFilter = TypedEventFilter<ReservoirRouterUpdatedEvent>;
+export type ReservoirRouterUpdatedEventFilter =
+  TypedEventFilter<ReservoirRouterUpdatedEvent>;
 
 export interface LeverageBuyWrapperV1 extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -260,9 +394,13 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TEvent>>;
 
-  listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+  listeners<TEvent extends TypedEvent>(
+    eventFilter?: TypedEventFilter<TEvent>
+  ): Array<TypedListener<TEvent>>;
   listeners(eventName?: string): Array<Listener>;
-  removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+  removeAllListeners<TEvent extends TypedEvent>(
+    eventFilter: TypedEventFilter<TEvent>
+  ): this;
   removeAllListeners(eventName?: string): this;
   off: OnEvent<this>;
   on: OnEvent<this>;
@@ -354,7 +492,9 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    renounceOwnership(overrides?: Overrides & { from?: PromiseOrValue<string> }): Promise<ContractTransaction>;
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     reservoirRouter(overrides?: CallOverrides): Promise<[string]>;
 
@@ -373,7 +513,10 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean]>;
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
@@ -467,7 +610,9 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  renounceOwnership(overrides?: Overrides & { from?: PromiseOrValue<string> }): Promise<ContractTransaction>;
+  renounceOwnership(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   reservoirRouter(overrides?: CallOverrides): Promise<string>;
 
@@ -486,7 +631,10 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
+  supportsInterface(
+    interfaceId: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   transferOwnership(
     newOwner: PromiseOrValue<string>,
@@ -584,21 +732,38 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
 
     reservoirRouter(overrides?: CallOverrides): Promise<string>;
 
-    setFlashLender(flashLender_: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+    setFlashLender(
+      flashLender_: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    setPurchaseEscrow(purchaseEscrow_: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+    setPurchaseEscrow(
+      purchaseEscrow_: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    setReservoirRouter(reservoirRouter_: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+    setReservoirRouter(
+      reservoirRouter_: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    transferOwnership(newOwner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+    transferOwnership(
+      newOwner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     weth(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
-    "FlashLenderUpdated(address)"(flashLender?: null): FlashLenderUpdatedEventFilter;
+    "FlashLenderUpdated(address)"(
+      flashLender?: null
+    ): FlashLenderUpdatedEventFilter;
     FlashLenderUpdated(flashLender?: null): FlashLenderUpdatedEventFilter;
 
     "OwnershipTransferred(address,address)"(
@@ -610,8 +775,12 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
       newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
 
-    "PurchaseEscrowUpdated(address)"(purchaseEscrow?: null): PurchaseEscrowUpdatedEventFilter;
-    PurchaseEscrowUpdated(purchaseEscrow?: null): PurchaseEscrowUpdatedEventFilter;
+    "PurchaseEscrowUpdated(address)"(
+      purchaseEscrow?: null
+    ): PurchaseEscrowUpdatedEventFilter;
+    PurchaseEscrowUpdated(
+      purchaseEscrow?: null
+    ): PurchaseEscrowUpdatedEventFilter;
 
     "Purchased(address,uint256,uint256,uint256,uint256)"(
       buyer?: PromiseOrValue<string> | null,
@@ -643,8 +812,12 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
       newEscrowId?: PromiseOrValue<BigNumberish> | null
     ): RefinancedEventFilter;
 
-    "ReservoirRouterUpdated(address)"(reservoirRouter?: null): ReservoirRouterUpdatedEventFilter;
-    ReservoirRouterUpdated(reservoirRouter?: null): ReservoirRouterUpdatedEventFilter;
+    "ReservoirRouterUpdated(address)"(
+      reservoirRouter?: null
+    ): ReservoirRouterUpdatedEventFilter;
+    ReservoirRouterUpdated(
+      reservoirRouter?: null
+    ): ReservoirRouterUpdatedEventFilter;
   };
 
   estimateGas: {
@@ -720,7 +893,9 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    renounceOwnership(overrides?: Overrides & { from?: PromiseOrValue<string> }): Promise<BigNumber>;
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     reservoirRouter(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -739,7 +914,10 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
@@ -750,7 +928,9 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
   };
 
   populateTransaction: {
-    IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    IMPLEMENTATION_VERSION(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     buySingleERC721WithETH(
       purchasePrice: PromiseOrValue<BigNumberish>,
@@ -822,7 +1002,9 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    renounceOwnership(overrides?: Overrides & { from?: PromiseOrValue<string> }): Promise<PopulatedTransaction>;
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     reservoirRouter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -841,7 +1023,10 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,

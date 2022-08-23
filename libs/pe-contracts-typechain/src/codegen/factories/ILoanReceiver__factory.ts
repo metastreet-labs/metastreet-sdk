@@ -50,7 +50,10 @@ export class ILoanReceiver__factory {
   static createInterface(): ILoanReceiverInterface {
     return new utils.Interface(_abi) as ILoanReceiverInterface;
   }
-  static connect(address: string, signerOrProvider: Signer | Provider): ILoanReceiver {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): ILoanReceiver {
     return new Contract(address, _abi, signerOrProvider) as ILoanReceiver;
   }
 }

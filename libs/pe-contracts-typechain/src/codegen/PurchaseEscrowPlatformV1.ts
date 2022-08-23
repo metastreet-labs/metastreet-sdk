@@ -14,9 +14,19 @@ import type {
   Signer,
   utils,
 } from "ethers";
-import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
+import type {
+  FunctionFragment,
+  Result,
+  EventFragment,
+} from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type {
+  TypedEventFilter,
+  TypedEvent,
+  TypedListener,
+  OnEvent,
+  PromiseOrValue,
+} from "./common";
 
 export declare namespace IPurchaseEscrow {
   export type PurchaseEscrowTermsStruct = {
@@ -92,8 +102,14 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
       | "withdrawETH"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "IMPLEMENTATION_VERSION", values?: undefined): string;
-  encodeFunctionData(functionFragment: "buyerNoteToken", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "IMPLEMENTATION_VERSION",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "buyerNoteToken",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "create",
     values: [
@@ -105,46 +121,126 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
       PromiseOrValue<BigNumberish>
     ]
   ): string;
-  encodeFunctionData(functionFragment: "currencyToken", values?: undefined): string;
-  encodeFunctionData(functionFragment: "lenderNoteToken", values?: undefined): string;
-  encodeFunctionData(functionFragment: "liquidate", values: [PromiseOrValue<BigNumberish>]): string;
+  encodeFunctionData(
+    functionFragment: "currencyToken",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "lenderNoteToken",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "liquidate",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
   encodeFunctionData(
     functionFragment: "onERC721Received",
-    values: [PromiseOrValue<string>, PromiseOrValue<string>, PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
-  encodeFunctionData(functionFragment: "purchaseEscrows", values: [PromiseOrValue<BigNumberish>]): string;
-  encodeFunctionData(functionFragment: "renounceOwnership", values?: undefined): string;
-  encodeFunctionData(functionFragment: "repay", values: [PromiseOrValue<BigNumberish>]): string;
-  encodeFunctionData(functionFragment: "repayETH", values: [PromiseOrValue<BigNumberish>]): string;
-  encodeFunctionData(functionFragment: "setBuyerNoteTokenBaseURI", values: [PromiseOrValue<string>]): string;
-  encodeFunctionData(functionFragment: "setLenderNoteTokenBaseURI", values: [PromiseOrValue<string>]): string;
-  encodeFunctionData(functionFragment: "supportsInterface", values: [PromiseOrValue<BytesLike>]): string;
-  encodeFunctionData(functionFragment: "transferOwnership", values: [PromiseOrValue<string>]): string;
+  encodeFunctionData(
+    functionFragment: "purchaseEscrows",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "renounceOwnership",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "repay",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "repayETH",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setBuyerNoteTokenBaseURI",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLenderNoteTokenBaseURI",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(
     functionFragment: "withdrawERC20",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(functionFragment: "withdrawETH", values: [PromiseOrValue<BigNumberish>]): string;
+  encodeFunctionData(
+    functionFragment: "withdrawETH",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
 
-  decodeFunctionResult(functionFragment: "IMPLEMENTATION_VERSION", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "buyerNoteToken", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "IMPLEMENTATION_VERSION",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "buyerNoteToken",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "create", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "currencyToken", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "lenderNoteToken", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "currencyToken",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "lenderNoteToken",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "liquidate", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "onERC721Received", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC721Received",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "purchaseEscrows", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "renounceOwnership", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "purchaseEscrows",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceOwnership",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "repay", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "repayETH", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setBuyerNoteTokenBaseURI", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setLenderNoteTokenBaseURI", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "supportsInterface", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "withdrawERC20", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "withdrawETH", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setBuyerNoteTokenBaseURI",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setLenderNoteTokenBaseURI",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawERC20",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawETH",
+    data: BytesLike
+  ): Result;
 
   events: {
     "OwnershipTransferred(address,address)": EventFragment;
@@ -163,9 +259,13 @@ export interface OwnershipTransferredEventObject {
   previousOwner: string;
   newOwner: string;
 }
-export type OwnershipTransferredEvent = TypedEvent<[string, string], OwnershipTransferredEventObject>;
+export type OwnershipTransferredEvent = TypedEvent<
+  [string, string],
+  OwnershipTransferredEventObject
+>;
 
-export type OwnershipTransferredEventFilter = TypedEventFilter<OwnershipTransferredEvent>;
+export type OwnershipTransferredEventFilter =
+  TypedEventFilter<OwnershipTransferredEvent>;
 
 export interface PurchaseEscrowCreatedEventObject {
   escrowId: BigNumber;
@@ -178,25 +278,43 @@ export interface PurchaseEscrowCreatedEventObject {
   duration: BigNumber;
 }
 export type PurchaseEscrowCreatedEvent = TypedEvent<
-  [BigNumber, string, string, string, BigNumber, BigNumber, BigNumber, BigNumber],
+  [
+    BigNumber,
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber
+  ],
   PurchaseEscrowCreatedEventObject
 >;
 
-export type PurchaseEscrowCreatedEventFilter = TypedEventFilter<PurchaseEscrowCreatedEvent>;
+export type PurchaseEscrowCreatedEventFilter =
+  TypedEventFilter<PurchaseEscrowCreatedEvent>;
 
 export interface PurchaseEscrowLiquidatedEventObject {
   escrowId: BigNumber;
 }
-export type PurchaseEscrowLiquidatedEvent = TypedEvent<[BigNumber], PurchaseEscrowLiquidatedEventObject>;
+export type PurchaseEscrowLiquidatedEvent = TypedEvent<
+  [BigNumber],
+  PurchaseEscrowLiquidatedEventObject
+>;
 
-export type PurchaseEscrowLiquidatedEventFilter = TypedEventFilter<PurchaseEscrowLiquidatedEvent>;
+export type PurchaseEscrowLiquidatedEventFilter =
+  TypedEventFilter<PurchaseEscrowLiquidatedEvent>;
 
 export interface PurchaseEscrowRepaidEventObject {
   escrowId: BigNumber;
 }
-export type PurchaseEscrowRepaidEvent = TypedEvent<[BigNumber], PurchaseEscrowRepaidEventObject>;
+export type PurchaseEscrowRepaidEvent = TypedEvent<
+  [BigNumber],
+  PurchaseEscrowRepaidEventObject
+>;
 
-export type PurchaseEscrowRepaidEventFilter = TypedEventFilter<PurchaseEscrowRepaidEvent>;
+export type PurchaseEscrowRepaidEventFilter =
+  TypedEventFilter<PurchaseEscrowRepaidEvent>;
 
 export interface PurchaseEscrowPlatformV1 extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -211,9 +329,13 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TEvent>>;
 
-  listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+  listeners<TEvent extends TypedEvent>(
+    eventFilter?: TypedEventFilter<TEvent>
+  ): Array<TypedListener<TEvent>>;
   listeners(eventName?: string): Array<Listener>;
-  removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+  removeAllListeners<TEvent extends TypedEvent>(
+    eventFilter: TypedEventFilter<TEvent>
+  ): this;
   removeAllListeners(eventName?: string): this;
   off: OnEvent<this>;
   on: OnEvent<this>;
@@ -259,7 +381,9 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[IPurchaseEscrow.PurchaseEscrowTermsStructOutput]>;
 
-    renounceOwnership(overrides?: Overrides & { from?: PromiseOrValue<string> }): Promise<ContractTransaction>;
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     repay(
       escrowId: PromiseOrValue<BigNumberish>,
@@ -281,7 +405,10 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean]>;
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
@@ -338,7 +465,9 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
     overrides?: CallOverrides
   ): Promise<IPurchaseEscrow.PurchaseEscrowTermsStructOutput>;
 
-  renounceOwnership(overrides?: Overrides & { from?: PromiseOrValue<string> }): Promise<ContractTransaction>;
+  renounceOwnership(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   repay(
     escrowId: PromiseOrValue<BigNumberish>,
@@ -360,7 +489,10 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
+  supportsInterface(
+    interfaceId: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   transferOwnership(
     newOwner: PromiseOrValue<string>,
@@ -397,7 +529,10 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
 
     lenderNoteToken(overrides?: CallOverrides): Promise<string>;
 
-    liquidate(escrowId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    liquidate(
+      escrowId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     onERC721Received(
       arg0: PromiseOrValue<string>,
@@ -416,17 +551,35 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
-    repay(escrowId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    repay(
+      escrowId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    repayETH(escrowId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    repayETH(
+      escrowId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    setBuyerNoteTokenBaseURI(baseURI: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+    setBuyerNoteTokenBaseURI(
+      baseURI: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    setLenderNoteTokenBaseURI(baseURI: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+    setLenderNoteTokenBaseURI(
+      baseURI: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    transferOwnership(newOwner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+    transferOwnership(
+      newOwner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     withdrawERC20(
       token: PromiseOrValue<string>,
@@ -434,7 +587,10 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    withdrawETH(amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    withdrawETH(
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
@@ -471,10 +627,16 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
     "PurchaseEscrowLiquidated(uint256)"(
       escrowId?: PromiseOrValue<BigNumberish> | null
     ): PurchaseEscrowLiquidatedEventFilter;
-    PurchaseEscrowLiquidated(escrowId?: PromiseOrValue<BigNumberish> | null): PurchaseEscrowLiquidatedEventFilter;
+    PurchaseEscrowLiquidated(
+      escrowId?: PromiseOrValue<BigNumberish> | null
+    ): PurchaseEscrowLiquidatedEventFilter;
 
-    "PurchaseEscrowRepaid(uint256)"(escrowId?: PromiseOrValue<BigNumberish> | null): PurchaseEscrowRepaidEventFilter;
-    PurchaseEscrowRepaid(escrowId?: PromiseOrValue<BigNumberish> | null): PurchaseEscrowRepaidEventFilter;
+    "PurchaseEscrowRepaid(uint256)"(
+      escrowId?: PromiseOrValue<BigNumberish> | null
+    ): PurchaseEscrowRepaidEventFilter;
+    PurchaseEscrowRepaid(
+      escrowId?: PromiseOrValue<BigNumberish> | null
+    ): PurchaseEscrowRepaidEventFilter;
   };
 
   estimateGas: {
@@ -511,9 +673,14 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
-    purchaseEscrows(escrowId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    purchaseEscrows(
+      escrowId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    renounceOwnership(overrides?: Overrides & { from?: PromiseOrValue<string> }): Promise<BigNumber>;
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     repay(
       escrowId: PromiseOrValue<BigNumberish>,
@@ -535,7 +702,10 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
@@ -555,7 +725,9 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
   };
 
   populateTransaction: {
-    IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    IMPLEMENTATION_VERSION(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     buyerNoteToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -588,9 +760,14 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    purchaseEscrows(escrowId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    purchaseEscrows(
+      escrowId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    renounceOwnership(overrides?: Overrides & { from?: PromiseOrValue<string> }): Promise<PopulatedTransaction>;
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     repay(
       escrowId: PromiseOrValue<BigNumberish>,
@@ -612,7 +789,10 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,

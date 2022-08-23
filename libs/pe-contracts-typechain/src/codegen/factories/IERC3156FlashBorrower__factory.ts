@@ -4,7 +4,10 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IERC3156FlashBorrower, IERC3156FlashBorrowerInterface } from "../IERC3156FlashBorrower";
+import type {
+  IERC3156FlashBorrower,
+  IERC3156FlashBorrowerInterface,
+} from "../IERC3156FlashBorrower";
 
 const _abi = [
   {
@@ -53,7 +56,14 @@ export class IERC3156FlashBorrower__factory {
   static createInterface(): IERC3156FlashBorrowerInterface {
     return new utils.Interface(_abi) as IERC3156FlashBorrowerInterface;
   }
-  static connect(address: string, signerOrProvider: Signer | Provider): IERC3156FlashBorrower {
-    return new Contract(address, _abi, signerOrProvider) as IERC3156FlashBorrower;
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): IERC3156FlashBorrower {
+    return new Contract(
+      address,
+      _abi,
+      signerOrProvider
+    ) as IERC3156FlashBorrower;
   }
 }

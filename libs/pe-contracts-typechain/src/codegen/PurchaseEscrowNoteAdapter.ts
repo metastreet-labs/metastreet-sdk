@@ -13,7 +13,13 @@ import type {
 } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type {
+  TypedEventFilter,
+  TypedEvent,
+  TypedListener,
+  OnEvent,
+  PromiseOrValue,
+} from "./common";
 
 export declare namespace INoteAdapter {
   export type LoanInfoStruct = {
@@ -79,13 +85,34 @@ export interface PurchaseEscrowNoteAdapterInterface extends utils.Interface {
       | "noteToken"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "IMPLEMENTATION_VERSION", values?: undefined): string;
-  encodeFunctionData(functionFragment: "getLiquidateCalldata", values: [PromiseOrValue<BigNumberish>]): string;
-  encodeFunctionData(functionFragment: "getLoanInfo", values: [PromiseOrValue<BigNumberish>]): string;
-  encodeFunctionData(functionFragment: "getUnwrapCalldata", values: [PromiseOrValue<BigNumberish>]): string;
-  encodeFunctionData(functionFragment: "isExpired", values: [PromiseOrValue<BigNumberish>]): string;
-  encodeFunctionData(functionFragment: "isLiquidated", values: [PromiseOrValue<BigNumberish>]): string;
-  encodeFunctionData(functionFragment: "isRepaid", values: [PromiseOrValue<BigNumberish>]): string;
+  encodeFunctionData(
+    functionFragment: "IMPLEMENTATION_VERSION",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getLiquidateCalldata",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getLoanInfo",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getUnwrapCalldata",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isExpired",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isLiquidated",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isRepaid",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
   encodeFunctionData(
     functionFragment: "isSupported",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
@@ -93,14 +120,32 @@ export interface PurchaseEscrowNoteAdapterInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(functionFragment: "noteToken", values?: undefined): string;
 
-  decodeFunctionResult(functionFragment: "IMPLEMENTATION_VERSION", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getLiquidateCalldata", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getLoanInfo", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getUnwrapCalldata", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "IMPLEMENTATION_VERSION",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getLiquidateCalldata",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getLoanInfo",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getUnwrapCalldata",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "isExpired", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "isLiquidated", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "isLiquidated",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "isRepaid", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "isSupported", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "isSupported",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "noteToken", data: BytesLike): Result;
 
@@ -120,9 +165,13 @@ export interface PurchaseEscrowNoteAdapter extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TEvent>>;
 
-  listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+  listeners<TEvent extends TypedEvent>(
+    eventFilter?: TypedEventFilter<TEvent>
+  ): Array<TypedListener<TEvent>>;
   listeners(eventName?: string): Array<Listener>;
-  removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+  removeAllListeners<TEvent extends TypedEvent>(
+    eventFilter: TypedEventFilter<TEvent>
+  ): this;
   removeAllListeners(eventName?: string): this;
   off: OnEvent<this>;
   on: OnEvent<this>;
@@ -132,20 +181,35 @@ export interface PurchaseEscrowNoteAdapter extends BaseContract {
   functions: {
     IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<[string]>;
 
-    getLiquidateCalldata(loanId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[string, string]>;
+    getLiquidateCalldata(
+      loanId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string, string]>;
 
     getLoanInfo(
       noteTokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[INoteAdapter.LoanInfoStructOutput]>;
 
-    getUnwrapCalldata(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[string, string]>;
+    getUnwrapCalldata(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string, string]>;
 
-    isExpired(loanId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[boolean]>;
+    isExpired(
+      loanId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
-    isLiquidated(loanId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[boolean]>;
+    isLiquidated(
+      loanId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
-    isRepaid(loanId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[boolean]>;
+    isRepaid(
+      loanId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
     isSupported(
       noteTokenId: PromiseOrValue<BigNumberish>,
@@ -160,20 +224,35 @@ export interface PurchaseEscrowNoteAdapter extends BaseContract {
 
   IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<string>;
 
-  getLiquidateCalldata(loanId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[string, string]>;
+  getLiquidateCalldata(
+    loanId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<[string, string]>;
 
   getLoanInfo(
     noteTokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<INoteAdapter.LoanInfoStructOutput>;
 
-  getUnwrapCalldata(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[string, string]>;
+  getUnwrapCalldata(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<[string, string]>;
 
-  isExpired(loanId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
+  isExpired(
+    loanId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
-  isLiquidated(loanId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
+  isLiquidated(
+    loanId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
-  isRepaid(loanId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
+  isRepaid(
+    loanId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   isSupported(
     noteTokenId: PromiseOrValue<BigNumberish>,
@@ -188,20 +267,35 @@ export interface PurchaseEscrowNoteAdapter extends BaseContract {
   callStatic: {
     IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<string>;
 
-    getLiquidateCalldata(loanId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[string, string]>;
+    getLiquidateCalldata(
+      loanId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string, string]>;
 
     getLoanInfo(
       noteTokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<INoteAdapter.LoanInfoStructOutput>;
 
-    getUnwrapCalldata(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[string, string]>;
+    getUnwrapCalldata(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string, string]>;
 
-    isExpired(loanId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
+    isExpired(
+      loanId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    isLiquidated(loanId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
+    isLiquidated(
+      loanId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    isRepaid(loanId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
+    isRepaid(
+      loanId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     isSupported(
       noteTokenId: PromiseOrValue<BigNumberish>,
@@ -219,17 +313,35 @@ export interface PurchaseEscrowNoteAdapter extends BaseContract {
   estimateGas: {
     IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getLiquidateCalldata(loanId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    getLiquidateCalldata(
+      loanId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    getLoanInfo(noteTokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    getLoanInfo(
+      noteTokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    getUnwrapCalldata(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    getUnwrapCalldata(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    isExpired(loanId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    isExpired(
+      loanId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    isLiquidated(loanId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    isLiquidated(
+      loanId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    isRepaid(loanId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    isRepaid(
+      loanId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     isSupported(
       noteTokenId: PromiseOrValue<BigNumberish>,
@@ -243,22 +355,39 @@ export interface PurchaseEscrowNoteAdapter extends BaseContract {
   };
 
   populateTransaction: {
-    IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    IMPLEMENTATION_VERSION(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     getLiquidateCalldata(
       loanId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    getLoanInfo(noteTokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getLoanInfo(
+      noteTokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    getUnwrapCalldata(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getUnwrapCalldata(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    isExpired(loanId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    isExpired(
+      loanId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    isLiquidated(loanId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    isLiquidated(
+      loanId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    isRepaid(loanId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    isRepaid(
+      loanId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     isSupported(
       noteTokenId: PromiseOrValue<BigNumberish>,

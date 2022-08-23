@@ -15,14 +15,22 @@ import type {
 } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type {
+  TypedEventFilter,
+  TypedEvent,
+  TypedListener,
+  OnEvent,
+  PromiseOrValue,
+} from "./common";
 
 export interface IReservoirRouterInterface extends utils.Interface {
   functions: {
     "singleERC721ListingFillWithPrecheck(bytes,uint8,address,uint256,address,address,address,uint16)": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "singleERC721ListingFillWithPrecheck"): FunctionFragment;
+  getFunction(
+    nameOrSignatureOrTopic: "singleERC721ListingFillWithPrecheck"
+  ): FunctionFragment;
 
   encodeFunctionData(
     functionFragment: "singleERC721ListingFillWithPrecheck",
@@ -38,7 +46,10 @@ export interface IReservoirRouterInterface extends utils.Interface {
     ]
   ): string;
 
-  decodeFunctionResult(functionFragment: "singleERC721ListingFillWithPrecheck", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "singleERC721ListingFillWithPrecheck",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -56,9 +67,13 @@ export interface IReservoirRouter extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TEvent>>;
 
-  listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+  listeners<TEvent extends TypedEvent>(
+    eventFilter?: TypedEventFilter<TEvent>
+  ): Array<TypedListener<TEvent>>;
   listeners(eventName?: string): Array<Listener>;
-  removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+  removeAllListeners<TEvent extends TypedEvent>(
+    eventFilter: TypedEventFilter<TEvent>
+  ): this;
   removeAllListeners(eventName?: string): this;
   off: OnEvent<this>;
   on: OnEvent<this>;

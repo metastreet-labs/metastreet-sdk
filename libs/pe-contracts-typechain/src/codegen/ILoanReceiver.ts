@@ -15,7 +15,13 @@ import type {
 } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type {
+  TypedEventFilter,
+  TypedEvent,
+  TypedListener,
+  OnEvent,
+  PromiseOrValue,
+} from "./common";
 
 export interface ILoanReceiverInterface extends utils.Interface {
   functions: {
@@ -23,7 +29,9 @@ export interface ILoanReceiverInterface extends utils.Interface {
     "onLoanRepaid(address,uint256)": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "onLoanExpired" | "onLoanRepaid"): FunctionFragment;
+  getFunction(
+    nameOrSignatureOrTopic: "onLoanExpired" | "onLoanRepaid"
+  ): FunctionFragment;
 
   encodeFunctionData(
     functionFragment: "onLoanExpired",
@@ -34,8 +42,14 @@ export interface ILoanReceiverInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
 
-  decodeFunctionResult(functionFragment: "onLoanExpired", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "onLoanRepaid", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "onLoanExpired",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onLoanRepaid",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -53,9 +67,13 @@ export interface ILoanReceiver extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TEvent>>;
 
-  listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+  listeners<TEvent extends TypedEvent>(
+    eventFilter?: TypedEventFilter<TEvent>
+  ): Array<TypedListener<TEvent>>;
   listeners(eventName?: string): Array<Listener>;
-  removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+  removeAllListeners<TEvent extends TypedEvent>(
+    eventFilter: TypedEventFilter<TEvent>
+  ): this;
   removeAllListeners(eventName?: string): this;
   off: OnEvent<this>;
   on: OnEvent<this>;
