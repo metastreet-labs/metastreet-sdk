@@ -16,13 +16,13 @@ export interface GetCollateralLimitsResult {
   maxLoanToValue: BigNumber;
 }
 
-export async function getCollateralLimits({
+export const getCollateralLimits = async ({
   signerOrProvider,
   collectionAddress,
   tokenID,
   purchasePrice,
   deployment: { lbWrapperAddress, vaultAddress },
-}: GetCollateralLimitsParams): Promise<GetCollateralLimitsResult> {
+}: GetCollateralLimitsParams): Promise<GetCollateralLimitsResult> => {
   const lbWrapper = LeverageBuyWrapperV1__factory.connect(lbWrapperAddress, signerOrProvider);
   const limits = await lbWrapper.getCollateralLimits(vaultAddress, collectionAddress, tokenID);
 
@@ -40,4 +40,4 @@ export async function getCollateralLimits({
     collateralValue: limits.collateralValue,
     maxLoanToValue: limits.maxLoanToValue,
   };
-}
+};

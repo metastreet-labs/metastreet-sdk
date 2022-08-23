@@ -7,12 +7,12 @@ export interface DeploymentProviderProps {
   chainId: number;
 }
 
-export function DeploymentProvider({ chainId, children }: PropsWithChildren<DeploymentProviderProps>) {
+export const DeploymentProvider = ({ chainId, children }: PropsWithChildren<DeploymentProviderProps>) => {
   const deployment = useMemo(() => {
     return DEPLOYMENTS[chainId];
   }, [chainId]);
 
   return <DeploymentContext.Provider value={deployment}>{children}</DeploymentContext.Provider>;
-}
+};
 
 export default DeploymentProvider;
