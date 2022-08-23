@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/pe-contracts-react/src",
+  "sourceRoot": "libs/pe-contracts-wagmi/src",
   "projectType": "library",
   "tags": [],
   "targets": {
@@ -8,16 +8,16 @@
       "executor": "@nrwl/web:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/pe-contracts-react",
-        "tsConfig": "libs/pe-contracts-react/tsconfig.lib.json",
-        "project": "libs/pe-contracts-react/package.json",
-        "entryFile": "libs/pe-contracts-react/src/index.ts",
+        "outputPath": "dist/libs/pe-contracts-wagmi",
+        "tsConfig": "libs/pe-contracts-wagmi/tsconfig.lib.json",
+        "project": "libs/pe-contracts-wagmi/package.json",
+        "entryFile": "libs/pe-contracts-wagmi/src/index.ts",
         "external": ["react/jsx-runtime"],
         "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
         "compiler": "babel",
         "assets": [
           {
-            "glob": "libs/pe-contracts-react/README.md",
+            "glob": "libs/pe-contracts-wagmi/README.md",
             "input": ".",
             "output": "."
           }
@@ -28,21 +28,21 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/pe-contracts-react/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["libs/pe-contracts-wagmi/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "type-check": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
         "color": true,
-        "command": "npx tsc -p libs/pe-contracts-react/tsconfig.lib.json --noEmit --incremental"
+        "command": "npx tsc -p libs/pe-contracts-wagmi/tsconfig.lib.json --noEmit --incremental"
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/pe-contracts-react"],
+      "outputs": ["coverage/libs/pe-contracts-wagmi"],
       "options": {
-        "jestConfig": "libs/pe-contracts-react/jest.config.ts",
+        "jestConfig": "libs/pe-contracts-wagmi/jest.config.ts",
         "passWithNoTests": true
       }
     }
