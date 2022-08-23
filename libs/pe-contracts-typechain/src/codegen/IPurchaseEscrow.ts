@@ -14,9 +14,19 @@ import type {
   Signer,
   utils,
 } from "ethers";
-import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
+import type {
+  FunctionFragment,
+  Result,
+  EventFragment,
+} from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type {
+  TypedEventFilter,
+  TypedEvent,
+  TypedListener,
+  OnEvent,
+  PromiseOrValue,
+} from "./common";
 
 export declare namespace IPurchaseEscrow {
   export type PurchaseEscrowTermsStruct = {
@@ -72,7 +82,10 @@ export interface IPurchaseEscrowInterface extends utils.Interface {
       | "repayETH"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "buyerNoteToken", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "buyerNoteToken",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "create",
     values: [
@@ -84,19 +97,49 @@ export interface IPurchaseEscrowInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>
     ]
   ): string;
-  encodeFunctionData(functionFragment: "currencyToken", values?: undefined): string;
-  encodeFunctionData(functionFragment: "lenderNoteToken", values?: undefined): string;
-  encodeFunctionData(functionFragment: "liquidate", values: [PromiseOrValue<BigNumberish>]): string;
-  encodeFunctionData(functionFragment: "purchaseEscrows", values: [PromiseOrValue<BigNumberish>]): string;
-  encodeFunctionData(functionFragment: "repay", values: [PromiseOrValue<BigNumberish>]): string;
-  encodeFunctionData(functionFragment: "repayETH", values: [PromiseOrValue<BigNumberish>]): string;
+  encodeFunctionData(
+    functionFragment: "currencyToken",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "lenderNoteToken",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "liquidate",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "purchaseEscrows",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "repay",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "repayETH",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
 
-  decodeFunctionResult(functionFragment: "buyerNoteToken", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "buyerNoteToken",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "create", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "currencyToken", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "lenderNoteToken", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "currencyToken",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "lenderNoteToken",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "liquidate", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "purchaseEscrows", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "purchaseEscrows",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "repay", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "repayETH", data: BytesLike): Result;
 
@@ -122,25 +165,43 @@ export interface PurchaseEscrowCreatedEventObject {
   duration: BigNumber;
 }
 export type PurchaseEscrowCreatedEvent = TypedEvent<
-  [BigNumber, string, string, string, BigNumber, BigNumber, BigNumber, BigNumber],
+  [
+    BigNumber,
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber
+  ],
   PurchaseEscrowCreatedEventObject
 >;
 
-export type PurchaseEscrowCreatedEventFilter = TypedEventFilter<PurchaseEscrowCreatedEvent>;
+export type PurchaseEscrowCreatedEventFilter =
+  TypedEventFilter<PurchaseEscrowCreatedEvent>;
 
 export interface PurchaseEscrowLiquidatedEventObject {
   escrowId: BigNumber;
 }
-export type PurchaseEscrowLiquidatedEvent = TypedEvent<[BigNumber], PurchaseEscrowLiquidatedEventObject>;
+export type PurchaseEscrowLiquidatedEvent = TypedEvent<
+  [BigNumber],
+  PurchaseEscrowLiquidatedEventObject
+>;
 
-export type PurchaseEscrowLiquidatedEventFilter = TypedEventFilter<PurchaseEscrowLiquidatedEvent>;
+export type PurchaseEscrowLiquidatedEventFilter =
+  TypedEventFilter<PurchaseEscrowLiquidatedEvent>;
 
 export interface PurchaseEscrowRepaidEventObject {
   escrowId: BigNumber;
 }
-export type PurchaseEscrowRepaidEvent = TypedEvent<[BigNumber], PurchaseEscrowRepaidEventObject>;
+export type PurchaseEscrowRepaidEvent = TypedEvent<
+  [BigNumber],
+  PurchaseEscrowRepaidEventObject
+>;
 
-export type PurchaseEscrowRepaidEventFilter = TypedEventFilter<PurchaseEscrowRepaidEvent>;
+export type PurchaseEscrowRepaidEventFilter =
+  TypedEventFilter<PurchaseEscrowRepaidEvent>;
 
 export interface IPurchaseEscrow extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -155,9 +216,13 @@ export interface IPurchaseEscrow extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TEvent>>;
 
-  listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+  listeners<TEvent extends TypedEvent>(
+    eventFilter?: TypedEventFilter<TEvent>
+  ): Array<TypedListener<TEvent>>;
   listeners(eventName?: string): Array<Listener>;
-  removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+  removeAllListeners<TEvent extends TypedEvent>(
+    eventFilter: TypedEventFilter<TEvent>
+  ): this;
   removeAllListeners(eventName?: string): this;
   off: OnEvent<this>;
   on: OnEvent<this>;
@@ -255,16 +320,25 @@ export interface IPurchaseEscrow extends BaseContract {
 
     lenderNoteToken(overrides?: CallOverrides): Promise<string>;
 
-    liquidate(escrowId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    liquidate(
+      escrowId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     purchaseEscrows(
       escrowId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<IPurchaseEscrow.PurchaseEscrowTermsStructOutput>;
 
-    repay(escrowId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    repay(
+      escrowId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    repayETH(escrowId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    repayETH(
+      escrowId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
@@ -292,10 +366,16 @@ export interface IPurchaseEscrow extends BaseContract {
     "PurchaseEscrowLiquidated(uint256)"(
       escrowId?: PromiseOrValue<BigNumberish> | null
     ): PurchaseEscrowLiquidatedEventFilter;
-    PurchaseEscrowLiquidated(escrowId?: PromiseOrValue<BigNumberish> | null): PurchaseEscrowLiquidatedEventFilter;
+    PurchaseEscrowLiquidated(
+      escrowId?: PromiseOrValue<BigNumberish> | null
+    ): PurchaseEscrowLiquidatedEventFilter;
 
-    "PurchaseEscrowRepaid(uint256)"(escrowId?: PromiseOrValue<BigNumberish> | null): PurchaseEscrowRepaidEventFilter;
-    PurchaseEscrowRepaid(escrowId?: PromiseOrValue<BigNumberish> | null): PurchaseEscrowRepaidEventFilter;
+    "PurchaseEscrowRepaid(uint256)"(
+      escrowId?: PromiseOrValue<BigNumberish> | null
+    ): PurchaseEscrowRepaidEventFilter;
+    PurchaseEscrowRepaid(
+      escrowId?: PromiseOrValue<BigNumberish> | null
+    ): PurchaseEscrowRepaidEventFilter;
   };
 
   estimateGas: {
@@ -320,7 +400,10 @@ export interface IPurchaseEscrow extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    purchaseEscrows(escrowId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    purchaseEscrows(
+      escrowId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     repay(
       escrowId: PromiseOrValue<BigNumberish>,
@@ -355,7 +438,10 @@ export interface IPurchaseEscrow extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    purchaseEscrows(escrowId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    purchaseEscrows(
+      escrowId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     repay(
       escrowId: PromiseOrValue<BigNumberish>,

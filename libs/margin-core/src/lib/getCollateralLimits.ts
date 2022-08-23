@@ -1,11 +1,8 @@
 import { IERC3156FlashLender__factory, LeverageBuyWrapperV1__factory } from "@metastreet-sdk/pe-contracts-typechain";
 import { BigNumber, BigNumberish } from "ethers";
-import { Deployment } from "../deployments";
-import { SignerOrProvider } from "../types";
+import { FetcherParams } from "./types";
 
-export interface GetCollateralLimitsParams {
-  signerOrProvider: SignerOrProvider;
-  deployment: Deployment;
+export interface GetCollateralLimitsParams extends FetcherParams {
   collectionAddress: string;
   tokenID: string;
   purchasePrice: BigNumberish;

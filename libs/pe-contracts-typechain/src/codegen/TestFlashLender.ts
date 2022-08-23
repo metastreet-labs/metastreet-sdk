@@ -13,9 +13,19 @@ import type {
   Signer,
   utils,
 } from "ethers";
-import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
+import type {
+  FunctionFragment,
+  Result,
+  EventFragment,
+} from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type {
+  TypedEventFilter,
+  TypedEvent,
+  TypedListener,
+  OnEvent,
+  PromiseOrValue,
+} from "./common";
 
 export interface TestFlashLenderInterface extends utils.Interface {
   functions: {
@@ -45,36 +55,80 @@ export interface TestFlashLenderInterface extends utils.Interface {
       | "withdrawERC20"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "currencyToken", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "currencyToken",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "flashFee",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "flashLoan",
-    values: [PromiseOrValue<string>, PromiseOrValue<string>, PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
-  encodeFunctionData(functionFragment: "flashLoanFeeBp", values?: undefined): string;
-  encodeFunctionData(functionFragment: "maxFlashLoan", values: [PromiseOrValue<string>]): string;
+  encodeFunctionData(
+    functionFragment: "flashLoanFeeBp",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "maxFlashLoan",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
-  encodeFunctionData(functionFragment: "renounceOwnership", values?: undefined): string;
-  encodeFunctionData(functionFragment: "setFlashLoanFee", values: [PromiseOrValue<BigNumberish>]): string;
-  encodeFunctionData(functionFragment: "transferOwnership", values: [PromiseOrValue<string>]): string;
+  encodeFunctionData(
+    functionFragment: "renounceOwnership",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setFlashLoanFee",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(
     functionFragment: "withdrawERC20",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
 
-  decodeFunctionResult(functionFragment: "currencyToken", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "currencyToken",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "flashFee", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "flashLoan", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "flashLoanFeeBp", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "maxFlashLoan", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "flashLoanFeeBp",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "maxFlashLoan",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "renounceOwnership", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setFlashLoanFee", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "withdrawERC20", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setFlashLoanFee",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawERC20",
+    data: BytesLike
+  ): Result;
 
   events: {
     "OwnershipTransferred(address,address)": EventFragment;
@@ -87,9 +141,13 @@ export interface OwnershipTransferredEventObject {
   previousOwner: string;
   newOwner: string;
 }
-export type OwnershipTransferredEvent = TypedEvent<[string, string], OwnershipTransferredEventObject>;
+export type OwnershipTransferredEvent = TypedEvent<
+  [string, string],
+  OwnershipTransferredEventObject
+>;
 
-export type OwnershipTransferredEventFilter = TypedEventFilter<OwnershipTransferredEvent>;
+export type OwnershipTransferredEventFilter =
+  TypedEventFilter<OwnershipTransferredEvent>;
 
 export interface TestFlashLender extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -104,9 +162,13 @@ export interface TestFlashLender extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TEvent>>;
 
-  listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+  listeners<TEvent extends TypedEvent>(
+    eventFilter?: TypedEventFilter<TEvent>
+  ): Array<TypedListener<TEvent>>;
   listeners(eventName?: string): Array<Listener>;
-  removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+  removeAllListeners<TEvent extends TypedEvent>(
+    eventFilter: TypedEventFilter<TEvent>
+  ): this;
   removeAllListeners(eventName?: string): this;
   off: OnEvent<this>;
   on: OnEvent<this>;
@@ -132,11 +194,16 @@ export interface TestFlashLender extends BaseContract {
 
     flashLoanFeeBp(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    maxFlashLoan(token: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
+    maxFlashLoan(
+      token: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
-    renounceOwnership(overrides?: Overrides & { from?: PromiseOrValue<string> }): Promise<ContractTransaction>;
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     setFlashLoanFee(
       feeBp: PromiseOrValue<BigNumberish>,
@@ -173,11 +240,16 @@ export interface TestFlashLender extends BaseContract {
 
   flashLoanFeeBp(overrides?: CallOverrides): Promise<BigNumber>;
 
-  maxFlashLoan(token: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+  maxFlashLoan(
+    token: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
-  renounceOwnership(overrides?: Overrides & { from?: PromiseOrValue<string> }): Promise<ContractTransaction>;
+  renounceOwnership(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   setFlashLoanFee(
     feeBp: PromiseOrValue<BigNumberish>,
@@ -214,15 +286,24 @@ export interface TestFlashLender extends BaseContract {
 
     flashLoanFeeBp(overrides?: CallOverrides): Promise<BigNumber>;
 
-    maxFlashLoan(token: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    maxFlashLoan(
+      token: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
-    setFlashLoanFee(feeBp: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    setFlashLoanFee(
+      feeBp: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    transferOwnership(newOwner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+    transferOwnership(
+      newOwner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     withdrawERC20(
       token: PromiseOrValue<string>,
@@ -261,11 +342,16 @@ export interface TestFlashLender extends BaseContract {
 
     flashLoanFeeBp(overrides?: CallOverrides): Promise<BigNumber>;
 
-    maxFlashLoan(token: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    maxFlashLoan(
+      token: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
-    renounceOwnership(overrides?: Overrides & { from?: PromiseOrValue<string> }): Promise<BigNumber>;
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     setFlashLoanFee(
       feeBp: PromiseOrValue<BigNumberish>,
@@ -303,11 +389,16 @@ export interface TestFlashLender extends BaseContract {
 
     flashLoanFeeBp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    maxFlashLoan(token: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    maxFlashLoan(
+      token: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    renounceOwnership(overrides?: Overrides & { from?: PromiseOrValue<string> }): Promise<PopulatedTransaction>;
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     setFlashLoanFee(
       feeBp: PromiseOrValue<BigNumberish>,

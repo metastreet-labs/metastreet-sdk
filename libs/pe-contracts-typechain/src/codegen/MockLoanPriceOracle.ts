@@ -15,7 +15,13 @@ import type {
 } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type {
+  TypedEventFilter,
+  TypedEvent,
+  TypedListener,
+  OnEvent,
+  PromiseOrValue,
+} from "./common";
 
 export declare namespace ILoanPriceOracleParameters {
   export type PiecewiseLinearModelStruct = {
@@ -26,7 +32,13 @@ export declare namespace ILoanPriceOracleParameters {
     max: PromiseOrValue<BigNumberish>;
   };
 
-  export type PiecewiseLinearModelStructOutput = [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
+  export type PiecewiseLinearModelStructOutput = [
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber
+  ] & {
     offset: BigNumber;
     slope1: BigNumber;
     slope2: BigNumber;
@@ -38,7 +50,11 @@ export declare namespace ILoanPriceOracleParameters {
     active: PromiseOrValue<boolean>;
     loanToValueRateComponent: ILoanPriceOracleParameters.PiecewiseLinearModelStruct;
     durationRateComponent: ILoanPriceOracleParameters.PiecewiseLinearModelStruct;
-    rateComponentWeights: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>];
+    rateComponentWeights: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ];
   };
 
   export type CollateralParametersStructOutput = [
@@ -82,14 +98,26 @@ export interface MockLoanPriceOracleInterface extends utils.Interface {
       | "setRepayment"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "collateralOracle", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "collateralOracle",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "collateralValue",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(functionFragment: "currencyToken", values?: undefined): string;
-  encodeFunctionData(functionFragment: "getCollateralParameters", values: [PromiseOrValue<string>]): string;
-  encodeFunctionData(functionFragment: "minimumLoanDuration", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "currencyToken",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getCollateralParameters",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "minimumLoanDuration",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "priceLoan",
     values: [
@@ -112,20 +140,50 @@ export interface MockLoanPriceOracleInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>
     ]
   ): string;
-  encodeFunctionData(functionFragment: "setError", values: [PromiseOrValue<BigNumberish>]): string;
-  encodeFunctionData(functionFragment: "setPrice", values: [PromiseOrValue<BigNumberish>]): string;
-  encodeFunctionData(functionFragment: "setRepayment", values: [PromiseOrValue<BigNumberish>]): string;
+  encodeFunctionData(
+    functionFragment: "setError",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setPrice",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setRepayment",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
 
-  decodeFunctionResult(functionFragment: "collateralOracle", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "collateralValue", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "currencyToken", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getCollateralParameters", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "minimumLoanDuration", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "collateralOracle",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "collateralValue",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "currencyToken",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getCollateralParameters",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "minimumLoanDuration",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "priceLoan", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "priceLoanRepayment", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "priceLoanRepayment",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "setError", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setPrice", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setRepayment", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setRepayment",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -143,9 +201,13 @@ export interface MockLoanPriceOracle extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TEvent>>;
 
-  listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+  listeners<TEvent extends TypedEvent>(
+    eventFilter?: TypedEventFilter<TEvent>
+  ): Array<TypedListener<TEvent>>;
   listeners(eventName?: string): Array<Listener>;
-  removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+  removeAllListeners<TEvent extends TypedEvent>(
+    eventFilter: TypedEventFilter<TEvent>
+  ): this;
   removeAllListeners(eventName?: string): this;
   off: OnEvent<this>;
   on: OnEvent<this>;
@@ -296,11 +358,20 @@ export interface MockLoanPriceOracle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    setError(error: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    setError(
+      error: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    setPrice(price: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    setPrice(
+      price: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    setRepayment(repayment: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    setRepayment(
+      repayment: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {};
@@ -316,7 +387,10 @@ export interface MockLoanPriceOracle extends BaseContract {
 
     currencyToken(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getCollateralParameters(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    getCollateralParameters(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     minimumLoanDuration(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -367,9 +441,14 @@ export interface MockLoanPriceOracle extends BaseContract {
 
     currencyToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    getCollateralParameters(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getCollateralParameters(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    minimumLoanDuration(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    minimumLoanDuration(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     priceLoan(
       collateralToken: PromiseOrValue<string>,

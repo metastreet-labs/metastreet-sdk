@@ -331,7 +331,10 @@ export class ILeverageBuy__factory {
   static createInterface(): ILeverageBuyInterface {
     return new utils.Interface(_abi) as ILeverageBuyInterface;
   }
-  static connect(address: string, signerOrProvider: Signer | Provider): ILeverageBuy {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): ILeverageBuy {
     return new Contract(address, _abi, signerOrProvider) as ILeverageBuy;
   }
 }

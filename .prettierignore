@@ -2,3 +2,5 @@
 
 /dist
 /coverage
+
+libs/pe-contracts-typechain

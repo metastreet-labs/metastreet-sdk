@@ -4,7 +4,10 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IPurchaseEscrow, IPurchaseEscrowInterface } from "../IPurchaseEscrow";
+import type {
+  IPurchaseEscrow,
+  IPurchaseEscrowInterface,
+} from "../IPurchaseEscrow";
 
 const _abi = [
   {
@@ -273,7 +276,10 @@ export class IPurchaseEscrow__factory {
   static createInterface(): IPurchaseEscrowInterface {
     return new utils.Interface(_abi) as IPurchaseEscrowInterface;
   }
-  static connect(address: string, signerOrProvider: Signer | Provider): IPurchaseEscrow {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): IPurchaseEscrow {
     return new Contract(address, _abi, signerOrProvider) as IPurchaseEscrow;
   }
 }

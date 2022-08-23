@@ -13,9 +13,19 @@ import type {
   Signer,
   utils,
 } from "ethers";
-import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
+import type {
+  FunctionFragment,
+  Result,
+  EventFragment,
+} from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type {
+  TypedEventFilter,
+  TypedEvent,
+  TypedListener,
+  OnEvent,
+  PromiseOrValue,
+} from "./common";
 
 export interface MockVaultInterface extends utils.Interface {
   functions: {
@@ -63,22 +73,43 @@ export interface MockVaultInterface extends utils.Interface {
       | "withdrawCollateral"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "currencyToken", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "currencyToken",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "deposit",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(functionFragment: "loanPriceOracle", values?: undefined): string;
-  encodeFunctionData(functionFragment: "lpToken", values: [PromiseOrValue<BigNumberish>]): string;
+  encodeFunctionData(
+    functionFragment: "loanPriceOracle",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "lpToken",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
-  encodeFunctionData(functionFragment: "noteAdapters", values: [PromiseOrValue<string>]): string;
+  encodeFunctionData(
+    functionFragment: "noteAdapters",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(
     functionFragment: "onCollateralLiquidated",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "onERC721Received",
-    values: [PromiseOrValue<string>, PromiseOrValue<string>, PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "onLoanExpired",
@@ -92,10 +123,17 @@ export interface MockVaultInterface extends utils.Interface {
     functionFragment: "redeem",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(functionFragment: "redemptionSharePrice", values: [PromiseOrValue<BigNumberish>]): string;
+  encodeFunctionData(
+    functionFragment: "redemptionSharePrice",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
   encodeFunctionData(
     functionFragment: "sellNote",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "sellNoteAndDeposit",
@@ -106,9 +144,18 @@ export interface MockVaultInterface extends utils.Interface {
       [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
     ]
   ): string;
-  encodeFunctionData(functionFragment: "sharePrice", values: [PromiseOrValue<BigNumberish>]): string;
-  encodeFunctionData(functionFragment: "supportedNoteTokens", values?: undefined): string;
-  encodeFunctionData(functionFragment: "utilization", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "sharePrice",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportedNoteTokens",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "utilization",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "withdraw",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
@@ -118,25 +165,61 @@ export interface MockVaultInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
 
-  decodeFunctionResult(functionFragment: "currencyToken", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "currencyToken",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "loanPriceOracle", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "loanPriceOracle",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "lpToken", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "noteAdapters", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "onCollateralLiquidated", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "onERC721Received", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "onLoanExpired", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "onLoanRepaid", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "noteAdapters",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onCollateralLiquidated",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC721Received",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onLoanExpired",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onLoanRepaid",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "redeem", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "redemptionSharePrice", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "redemptionSharePrice",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "sellNote", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "sellNoteAndDeposit", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "sellNoteAndDeposit",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "sharePrice", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "supportedNoteTokens", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "utilization", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "supportedNoteTokens",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "utilization",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "withdrawCollateral", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawCollateral",
+    data: BytesLike
+  ): Result;
 
   events: {
     "CollateralLiquidated(address,uint256,uint256[2])": EventFragment;
@@ -169,7 +252,8 @@ export type CollateralLiquidatedEvent = TypedEvent<
   CollateralLiquidatedEventObject
 >;
 
-export type CollateralLiquidatedEventFilter = TypedEventFilter<CollateralLiquidatedEvent>;
+export type CollateralLiquidatedEventFilter =
+  TypedEventFilter<CollateralLiquidatedEvent>;
 
 export interface CollateralWithdrawnEventObject {
   noteToken: string;
@@ -183,7 +267,8 @@ export type CollateralWithdrawnEvent = TypedEvent<
   CollateralWithdrawnEventObject
 >;
 
-export type CollateralWithdrawnEventFilter = TypedEventFilter<CollateralWithdrawnEvent>;
+export type CollateralWithdrawnEventFilter =
+  TypedEventFilter<CollateralWithdrawnEvent>;
 
 export interface DepositedEventObject {
   account: string;
@@ -191,7 +276,10 @@ export interface DepositedEventObject {
   amount: BigNumber;
   shares: BigNumber;
 }
-export type DepositedEvent = TypedEvent<[string, number, BigNumber, BigNumber], DepositedEventObject>;
+export type DepositedEvent = TypedEvent<
+  [string, number, BigNumber, BigNumber],
+  DepositedEventObject
+>;
 
 export type DepositedEventFilter = TypedEventFilter<DepositedEvent>;
 
@@ -200,7 +288,10 @@ export interface LoanLiquidatedEventObject {
   loanId: BigNumber;
   trancheLosses: [BigNumber, BigNumber];
 }
-export type LoanLiquidatedEvent = TypedEvent<[string, BigNumber, [BigNumber, BigNumber]], LoanLiquidatedEventObject>;
+export type LoanLiquidatedEvent = TypedEvent<
+  [string, BigNumber, [BigNumber, BigNumber]],
+  LoanLiquidatedEventObject
+>;
 
 export type LoanLiquidatedEventFilter = TypedEventFilter<LoanLiquidatedEvent>;
 
@@ -210,7 +301,10 @@ export interface LoanRepaidEventObject {
   adminFee: BigNumber;
   trancheReturns: [BigNumber, BigNumber];
 }
-export type LoanRepaidEvent = TypedEvent<[string, BigNumber, BigNumber, [BigNumber, BigNumber]], LoanRepaidEventObject>;
+export type LoanRepaidEvent = TypedEvent<
+  [string, BigNumber, BigNumber, [BigNumber, BigNumber]],
+  LoanRepaidEventObject
+>;
 
 export type LoanRepaidEventFilter = TypedEventFilter<LoanRepaidEvent>;
 
@@ -235,7 +329,10 @@ export interface RedeemedEventObject {
   shares: BigNumber;
   amount: BigNumber;
 }
-export type RedeemedEvent = TypedEvent<[string, number, BigNumber, BigNumber], RedeemedEventObject>;
+export type RedeemedEvent = TypedEvent<
+  [string, number, BigNumber, BigNumber],
+  RedeemedEventObject
+>;
 
 export type RedeemedEventFilter = TypedEventFilter<RedeemedEvent>;
 
@@ -244,7 +341,10 @@ export interface WithdrawnEventObject {
   trancheId: number;
   amount: BigNumber;
 }
-export type WithdrawnEvent = TypedEvent<[string, number, BigNumber], WithdrawnEventObject>;
+export type WithdrawnEvent = TypedEvent<
+  [string, number, BigNumber],
+  WithdrawnEventObject
+>;
 
 export type WithdrawnEventFilter = TypedEventFilter<WithdrawnEvent>;
 
@@ -261,9 +361,13 @@ export interface MockVault extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TEvent>>;
 
-  listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+  listeners<TEvent extends TypedEvent>(
+    eventFilter?: TypedEventFilter<TEvent>
+  ): Array<TypedListener<TEvent>>;
   listeners(eventName?: string): Array<Listener>;
-  removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+  removeAllListeners<TEvent extends TypedEvent>(
+    eventFilter: TypedEventFilter<TEvent>
+  ): this;
   removeAllListeners(eventName?: string): this;
   off: OnEvent<this>;
   on: OnEvent<this>;
@@ -281,11 +385,17 @@ export interface MockVault extends BaseContract {
 
     loanPriceOracle(overrides?: CallOverrides): Promise<[string]>;
 
-    lpToken(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[string]>;
+    lpToken(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     name(overrides?: CallOverrides): Promise<[string]>;
 
-    noteAdapters(noteToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[string]>;
+    noteAdapters(
+      noteToken: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     onCollateralLiquidated(
       arg0: PromiseOrValue<string>,
@@ -320,7 +430,10 @@ export interface MockVault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[void]>;
 
-    redemptionSharePrice(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
+    redemptionSharePrice(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     sellNote(
       noteToken: PromiseOrValue<string>,
@@ -337,7 +450,10 @@ export interface MockVault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[void]>;
 
-    sharePrice(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
+    sharePrice(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     supportedNoteTokens(overrides?: CallOverrides): Promise<[string[]]>;
 
@@ -366,11 +482,17 @@ export interface MockVault extends BaseContract {
 
   loanPriceOracle(overrides?: CallOverrides): Promise<string>;
 
-  lpToken(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
+  lpToken(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   name(overrides?: CallOverrides): Promise<string>;
 
-  noteAdapters(noteToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<string>;
+  noteAdapters(
+    noteToken: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   onCollateralLiquidated(
     arg0: PromiseOrValue<string>,
@@ -405,7 +527,10 @@ export interface MockVault extends BaseContract {
     overrides?: CallOverrides
   ): Promise<void>;
 
-  redemptionSharePrice(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+  redemptionSharePrice(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   sellNote(
     noteToken: PromiseOrValue<string>,
@@ -422,7 +547,10 @@ export interface MockVault extends BaseContract {
     overrides?: CallOverrides
   ): Promise<void>;
 
-  sharePrice(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+  sharePrice(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   supportedNoteTokens(overrides?: CallOverrides): Promise<string[]>;
 
@@ -451,11 +579,17 @@ export interface MockVault extends BaseContract {
 
     loanPriceOracle(overrides?: CallOverrides): Promise<string>;
 
-    lpToken(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
+    lpToken(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     name(overrides?: CallOverrides): Promise<string>;
 
-    noteAdapters(noteToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<string>;
+    noteAdapters(
+      noteToken: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     onCollateralLiquidated(
       arg0: PromiseOrValue<string>,
@@ -490,7 +624,10 @@ export interface MockVault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    redemptionSharePrice(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    redemptionSharePrice(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     sellNote(
       noteToken: PromiseOrValue<string>,
@@ -507,7 +644,10 @@ export interface MockVault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    sharePrice(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    sharePrice(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     supportedNoteTokens(overrides?: CallOverrides): Promise<string[]>;
 
@@ -643,11 +783,17 @@ export interface MockVault extends BaseContract {
 
     loanPriceOracle(overrides?: CallOverrides): Promise<BigNumber>;
 
-    lpToken(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    lpToken(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
-    noteAdapters(noteToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    noteAdapters(
+      noteToken: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     onCollateralLiquidated(
       arg0: PromiseOrValue<string>,
@@ -682,7 +828,10 @@ export interface MockVault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    redemptionSharePrice(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    redemptionSharePrice(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     sellNote(
       noteToken: PromiseOrValue<string>,
@@ -699,7 +848,10 @@ export interface MockVault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    sharePrice(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    sharePrice(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     supportedNoteTokens(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -729,11 +881,17 @@ export interface MockVault extends BaseContract {
 
     loanPriceOracle(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    lpToken(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    lpToken(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    noteAdapters(noteToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    noteAdapters(
+      noteToken: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     onCollateralLiquidated(
       arg0: PromiseOrValue<string>,
@@ -768,7 +926,10 @@ export interface MockVault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    redemptionSharePrice(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    redemptionSharePrice(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     sellNote(
       noteToken: PromiseOrValue<string>,
@@ -785,9 +946,14 @@ export interface MockVault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    sharePrice(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    sharePrice(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    supportedNoteTokens(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    supportedNoteTokens(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     utilization(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

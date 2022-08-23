@@ -299,7 +299,10 @@ export class IERC721__factory {
   static createInterface(): IERC721Interface {
     return new utils.Interface(_abi) as IERC721Interface;
   }
-  static connect(address: string, signerOrProvider: Signer | Provider): IERC721 {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): IERC721 {
     return new Contract(address, _abi, signerOrProvider) as IERC721;
   }
 }

@@ -13,7 +13,13 @@ import type {
 } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type {
+  TypedEventFilter,
+  TypedEvent,
+  TypedListener,
+  OnEvent,
+  PromiseOrValue,
+} from "./common";
 
 export interface ILoanPriceOracleInterface extends utils.Interface {
   functions: {
@@ -22,9 +28,14 @@ export interface ILoanPriceOracleInterface extends utils.Interface {
     "priceLoanRepayment(address,uint256,uint256,uint256,uint256)": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "currencyToken" | "priceLoan" | "priceLoanRepayment"): FunctionFragment;
+  getFunction(
+    nameOrSignatureOrTopic: "currencyToken" | "priceLoan" | "priceLoanRepayment"
+  ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "currencyToken", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "currencyToken",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "priceLoan",
     values: [
@@ -48,9 +59,15 @@ export interface ILoanPriceOracleInterface extends utils.Interface {
     ]
   ): string;
 
-  decodeFunctionResult(functionFragment: "currencyToken", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "currencyToken",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "priceLoan", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "priceLoanRepayment", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "priceLoanRepayment",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -68,9 +85,13 @@ export interface ILoanPriceOracle extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TEvent>>;
 
-  listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+  listeners<TEvent extends TypedEvent>(
+    eventFilter?: TypedEventFilter<TEvent>
+  ): Array<TypedListener<TEvent>>;
   listeners(eventName?: string): Array<Listener>;
-  removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+  removeAllListeners<TEvent extends TypedEvent>(
+    eventFilter: TypedEventFilter<TEvent>
+  ): this;
   removeAllListeners(eventName?: string): this;
   off: OnEvent<this>;
   on: OnEvent<this>;

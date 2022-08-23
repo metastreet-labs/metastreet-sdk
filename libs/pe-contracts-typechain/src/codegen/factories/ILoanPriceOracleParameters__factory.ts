@@ -4,7 +4,10 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { ILoanPriceOracleParameters, ILoanPriceOracleParametersInterface } from "../ILoanPriceOracleParameters";
+import type {
+  ILoanPriceOracleParameters,
+  ILoanPriceOracleParametersInterface,
+} from "../ILoanPriceOracleParameters";
 
 const _abi = [
   {
@@ -65,7 +68,8 @@ const _abi = [
                 type: "uint96",
               },
             ],
-            internalType: "struct ILoanPriceOracleParameters.PiecewiseLinearModel",
+            internalType:
+              "struct ILoanPriceOracleParameters.PiecewiseLinearModel",
             name: "loanToValueRateComponent",
             type: "tuple",
           },
@@ -97,7 +101,8 @@ const _abi = [
                 type: "uint96",
               },
             ],
-            internalType: "struct ILoanPriceOracleParameters.PiecewiseLinearModel",
+            internalType:
+              "struct ILoanPriceOracleParameters.PiecewiseLinearModel",
             name: "durationRateComponent",
             type: "tuple",
           },
@@ -135,7 +140,14 @@ export class ILoanPriceOracleParameters__factory {
   static createInterface(): ILoanPriceOracleParametersInterface {
     return new utils.Interface(_abi) as ILoanPriceOracleParametersInterface;
   }
-  static connect(address: string, signerOrProvider: Signer | Provider): ILoanPriceOracleParameters {
-    return new Contract(address, _abi, signerOrProvider) as ILoanPriceOracleParameters;
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): ILoanPriceOracleParameters {
+    return new Contract(
+      address,
+      _abi,
+      signerOrProvider
+    ) as ILoanPriceOracleParameters;
   }
 }

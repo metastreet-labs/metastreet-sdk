@@ -315,7 +315,10 @@ export class ERC20Burnable__factory {
   static createInterface(): ERC20BurnableInterface {
     return new utils.Interface(_abi) as ERC20BurnableInterface;
   }
-  static connect(address: string, signerOrProvider: Signer | Provider): ERC20Burnable {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): ERC20Burnable {
     return new Contract(address, _abi, signerOrProvider) as ERC20Burnable;
   }
 }
