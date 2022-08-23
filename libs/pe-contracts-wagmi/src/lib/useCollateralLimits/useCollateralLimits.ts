@@ -3,13 +3,13 @@ import {
   GetCollateralLimitsParams,
   GetCollateralLimitsResult,
 } from "@metastreet-sdk/pe-contracts-core";
-import { useQuery, UseQueryOptions } from "@tanstack/react-query";
+import { useQuery } from "wagmi";
 import useDeployment from "../useDeployment/useDeployment";
 
 type TokenIdentifier = Pick<GetCollateralLimitsParams, "collectionAddress" | "tokenID">;
 
 export interface UseCollateralLimitsParams extends Omit<GetCollateralLimitsParams, "deployment"> {
-  queryOptions: UseQueryOptions<GetCollateralLimitsResult>;
+  queryOptions: Parameters<typeof useQuery<GetCollateralLimitsResult, Error>>[2];
 }
 
 export function useCollateralLimits({
@@ -24,11 +24,11 @@ export function useCollateralLimits({
   const fetcher = () =>
     getCollateralLimits({ signerOrProvider, collectionAddress, tokenID, deployment, purchasePrice });
 
-  return useQuery({
-    queryKey: collateralLimitsQueryKeys.token({ collectionAddress, tokenID }),
-    queryFn: fetcher,
-    ...queryOptions,
-  });
+  return useQuery<GetCollateralLimitsResult, Error>(
+    collateralLimitsQueryKeys.token({ collectionAddress, tokenID }),
+    fetcher,
+    queryOptions
+  );
 }
 
 export const collateralLimitsQueryKeys = {
