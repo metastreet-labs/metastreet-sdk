@@ -13,9 +13,19 @@ import type {
   Signer,
   utils,
 } from "ethers";
-import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
+import type {
+  FunctionFragment,
+  Result,
+  EventFragment,
+} from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type {
+  TypedEventFilter,
+  TypedEvent,
+  TypedListener,
+  OnEvent,
+  PromiseOrValue,
+} from "./common";
 
 export declare namespace ILeverageBuy {
   export type CollateralLimitsStruct = {
@@ -26,7 +36,13 @@ export declare namespace ILeverageBuy {
     maxPrincipal: PromiseOrValue<BigNumberish>;
   };
 
-  export type CollateralLimitsStructOutput = [number, number, BigNumber, BigNumber, BigNumber] & {
+  export type CollateralLimitsStructOutput = [
+    number,
+    number,
+    BigNumber,
+    BigNumber,
+    BigNumber
+  ] & {
     minDuration: number;
     maxDuration: number;
     maxLoanToValue: BigNumber;
@@ -65,10 +81,17 @@ export interface ILeverageBuyInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>
     ]
   ): string;
-  encodeFunctionData(functionFragment: "currencyToken", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "currencyToken",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "getCollateralLimits",
-    values: [PromiseOrValue<string>, PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "quoteRefinance",
@@ -103,12 +126,30 @@ export interface ILeverageBuyInterface extends utils.Interface {
     ]
   ): string;
 
-  decodeFunctionResult(functionFragment: "buySingleERC721WithETH", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "currencyToken", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getCollateralLimits", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "quoteRefinance", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "quoteSingleERC721", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "refinanceETH", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "buySingleERC721WithETH",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "currencyToken",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getCollateralLimits",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "quoteRefinance",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "quoteSingleERC721",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "refinanceETH",
+    data: BytesLike
+  ): Result;
 
   events: {
     "Purchased(address,uint256,uint256,uint256,uint256)": EventFragment;
@@ -126,7 +167,10 @@ export interface PurchasedEventObject {
   fee: BigNumber;
   escrowId: BigNumber;
 }
-export type PurchasedEvent = TypedEvent<[string, BigNumber, BigNumber, BigNumber, BigNumber], PurchasedEventObject>;
+export type PurchasedEvent = TypedEvent<
+  [string, BigNumber, BigNumber, BigNumber, BigNumber],
+  PurchasedEventObject
+>;
 
 export type PurchasedEventFilter = TypedEventFilter<PurchasedEvent>;
 
@@ -137,7 +181,10 @@ export interface RefinancedEventObject {
   oldEscrowId: BigNumber;
   newEscrowId: BigNumber;
 }
-export type RefinancedEvent = TypedEvent<[string, BigNumber, BigNumber, BigNumber, BigNumber], RefinancedEventObject>;
+export type RefinancedEvent = TypedEvent<
+  [string, BigNumber, BigNumber, BigNumber, BigNumber],
+  RefinancedEventObject
+>;
 
 export type RefinancedEventFilter = TypedEventFilter<RefinancedEvent>;
 
@@ -154,9 +201,13 @@ export interface ILeverageBuy extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TEvent>>;
 
-  listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+  listeners<TEvent extends TypedEvent>(
+    eventFilter?: TypedEventFilter<TEvent>
+  ): Array<TypedListener<TEvent>>;
   listeners(eventName?: string): Array<Listener>;
-  removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+  removeAllListeners<TEvent extends TypedEvent>(
+    eventFilter: TypedEventFilter<TEvent>
+  ): this;
   removeAllListeners(eventName?: string): this;
   off: OnEvent<this>;
   on: OnEvent<this>;

@@ -46,10 +46,13 @@ const _abi = [
 const _bytecode =
   "0x608080604052346100165761011a908161001c8239f35b600080fdfe60806004361015600e57600080fd5b600090813560e01c63150b7a0214602457600080fd5b3460dc57608036600319011260dc576001600160a01b036004358181160360e0576024359081160360dc576064359067ffffffffffffffff9081831160c4573660238401121560c45782600401359180831160c857601f8301601f19908116603f011682019081118282101760c857604052818152366024838501011160c4578160246020940184830137010152604051630a85bd0160e11b8152602090f35b8380fd5b634e487b7160e01b85526041600452602485fd5b5080fd5b8280fdfea2646970667358221220c5efe140ce4fd39c90a13cfd9a5d860e609cf968c043e2051276da65b802bf8164736f6c634300080f0033";
 
-type ERC721HolderConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type ERC721HolderConstructorParams =
+  | [signer?: Signer]
+  | ConstructorParameters<typeof ContractFactory>;
 
-const isSuperArgs = (xs: ERC721HolderConstructorParams): xs is ConstructorParameters<typeof ContractFactory> =>
-  xs.length > 1;
+const isSuperArgs = (
+  xs: ERC721HolderConstructorParams
+): xs is ConstructorParameters<typeof ContractFactory> => xs.length > 1;
 
 export class ERC721Holder__factory extends ContractFactory {
   constructor(...args: ERC721HolderConstructorParams) {
@@ -60,10 +63,14 @@ export class ERC721Holder__factory extends ContractFactory {
     }
   }
 
-  override deploy(overrides?: Overrides & { from?: PromiseOrValue<string> }): Promise<ERC721Holder> {
+  override deploy(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ERC721Holder> {
     return super.deploy(overrides || {}) as Promise<ERC721Holder>;
   }
-  override getDeployTransaction(overrides?: Overrides & { from?: PromiseOrValue<string> }): TransactionRequest {
+  override getDeployTransaction(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): TransactionRequest {
     return super.getDeployTransaction(overrides || {});
   }
   override attach(address: string): ERC721Holder {
@@ -78,7 +85,10 @@ export class ERC721Holder__factory extends ContractFactory {
   static createInterface(): ERC721HolderInterface {
     return new utils.Interface(_abi) as ERC721HolderInterface;
   }
-  static connect(address: string, signerOrProvider: Signer | Provider): ERC721Holder {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): ERC721Holder {
     return new Contract(address, _abi, signerOrProvider) as ERC721Holder;
   }
 }

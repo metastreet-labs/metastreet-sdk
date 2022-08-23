@@ -13,9 +13,19 @@ import type {
   Signer,
   utils,
 } from "ethers";
-import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
+import type {
+  FunctionFragment,
+  Result,
+  EventFragment,
+} from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type {
+  TypedEventFilter,
+  TypedEvent,
+  TypedListener,
+  OnEvent,
+  PromiseOrValue,
+} from "./common";
 
 export declare namespace VaultStorageV1 {
   export type LoanStruct = {
@@ -28,7 +38,15 @@ export declare namespace VaultStorageV1 {
     seniorTrancheReturn: PromiseOrValue<BigNumberish>;
   };
 
-  export type LoanStructOutput = [number, BigNumber, string, BigNumber, BigNumber, BigNumber, BigNumber] & {
+  export type LoanStructOutput = [
+    number,
+    BigNumber,
+    string,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber
+  ] & {
     status: number;
     maturityTimeBucket: BigNumber;
     collateralToken: string;
@@ -147,27 +165,66 @@ export interface VaultInterface extends utils.Interface {
       | "withdrawCollateral"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "COLLATERAL_LIQUIDATOR_ROLE", values?: undefined): string;
-  encodeFunctionData(functionFragment: "DEFAULT_ADMIN_ROLE", values?: undefined): string;
-  encodeFunctionData(functionFragment: "EMERGENCY_ADMIN_ROLE", values?: undefined): string;
-  encodeFunctionData(functionFragment: "IMPLEMENTATION_VERSION", values?: undefined): string;
-  encodeFunctionData(functionFragment: "SHARE_PRICE_PRORATION_BUCKETS", values?: undefined): string;
-  encodeFunctionData(functionFragment: "TIME_BUCKET_DURATION", values?: undefined): string;
-  encodeFunctionData(functionFragment: "TOTAL_SHARE_PRICE_PRORATION_DURATION", values?: undefined): string;
-  encodeFunctionData(functionFragment: "adminFeeRate", values?: undefined): string;
-  encodeFunctionData(functionFragment: "balanceState", values?: undefined): string;
-  encodeFunctionData(functionFragment: "checkUpkeep", values: [PromiseOrValue<BytesLike>]): string;
-  encodeFunctionData(functionFragment: "currencyToken", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "COLLATERAL_LIQUIDATOR_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "EMERGENCY_ADMIN_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "IMPLEMENTATION_VERSION",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "SHARE_PRICE_PRORATION_BUCKETS",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "TIME_BUCKET_DURATION",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "TOTAL_SHARE_PRICE_PRORATION_DURATION",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "adminFeeRate",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "balanceState",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "checkUpkeep",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "currencyToken",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "deposit",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(functionFragment: "getRoleAdmin", values: [PromiseOrValue<BytesLike>]): string;
+  encodeFunctionData(
+    functionFragment: "getRoleAdmin",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
   encodeFunctionData(
     functionFragment: "grantRole",
     values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
   ): string;
-  encodeFunctionData(functionFragment: "hasRole", values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]): string;
+  encodeFunctionData(
+    functionFragment: "hasRole",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(
     functionFragment: "initialize",
     values: [
@@ -178,22 +235,43 @@ export interface VaultInterface extends utils.Interface {
       PromiseOrValue<string>
     ]
   ): string;
-  encodeFunctionData(functionFragment: "loanPriceOracle", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "loanPriceOracle",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "loanState",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(functionFragment: "lpToken", values: [PromiseOrValue<BigNumberish>]): string;
-  encodeFunctionData(functionFragment: "multicall", values: [PromiseOrValue<BytesLike>[]]): string;
+  encodeFunctionData(
+    functionFragment: "lpToken",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "multicall",
+    values: [PromiseOrValue<BytesLike>[]]
+  ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
-  encodeFunctionData(functionFragment: "noteAdapters", values: [PromiseOrValue<string>]): string;
+  encodeFunctionData(
+    functionFragment: "noteAdapters",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(
     functionFragment: "onCollateralLiquidated",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "onERC721Received",
-    values: [PromiseOrValue<string>, PromiseOrValue<string>, PromiseOrValue<BigNumberish>, PromiseOrValue<BytesLike>]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "onLoanExpired",
@@ -209,12 +287,18 @@ export interface VaultInterface extends utils.Interface {
     functionFragment: "pendingLoans",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
-  encodeFunctionData(functionFragment: "performUpkeep", values: [PromiseOrValue<BytesLike>]): string;
+  encodeFunctionData(
+    functionFragment: "performUpkeep",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
   encodeFunctionData(
     functionFragment: "redeem",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(functionFragment: "redemptionSharePrice", values: [PromiseOrValue<BigNumberish>]): string;
+  encodeFunctionData(
+    functionFragment: "redemptionSharePrice",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
   encodeFunctionData(
     functionFragment: "renounceRole",
     values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
@@ -225,7 +309,11 @@ export interface VaultInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "sellNote",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "sellNoteAndDeposit",
@@ -236,20 +324,47 @@ export interface VaultInterface extends utils.Interface {
       [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
     ]
   ): string;
-  encodeFunctionData(functionFragment: "seniorTrancheRate", values?: undefined): string;
-  encodeFunctionData(functionFragment: "setAdminFeeRate", values: [PromiseOrValue<BigNumberish>]): string;
-  encodeFunctionData(functionFragment: "setLoanPriceOracle", values: [PromiseOrValue<string>]): string;
+  encodeFunctionData(
+    functionFragment: "seniorTrancheRate",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setAdminFeeRate",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLoanPriceOracle",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(
     functionFragment: "setNoteAdapter",
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
-  encodeFunctionData(functionFragment: "setSeniorTrancheRate", values: [PromiseOrValue<BigNumberish>]): string;
-  encodeFunctionData(functionFragment: "sharePrice", values: [PromiseOrValue<BigNumberish>]): string;
-  encodeFunctionData(functionFragment: "supportedNoteTokens", values?: undefined): string;
-  encodeFunctionData(functionFragment: "supportsInterface", values: [PromiseOrValue<BytesLike>]): string;
-  encodeFunctionData(functionFragment: "trancheState", values: [PromiseOrValue<BigNumberish>]): string;
+  encodeFunctionData(
+    functionFragment: "setSeniorTrancheRate",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "sharePrice",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportedNoteTokens",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "trancheState",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
   encodeFunctionData(functionFragment: "unpause", values?: undefined): string;
-  encodeFunctionData(functionFragment: "utilization", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "utilization",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "withdraw",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
@@ -263,56 +378,158 @@ export interface VaultInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
 
-  decodeFunctionResult(functionFragment: "COLLATERAL_LIQUIDATOR_ROLE", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "DEFAULT_ADMIN_ROLE", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "EMERGENCY_ADMIN_ROLE", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "IMPLEMENTATION_VERSION", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "SHARE_PRICE_PRORATION_BUCKETS", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "TIME_BUCKET_DURATION", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "TOTAL_SHARE_PRICE_PRORATION_DURATION", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "adminFeeRate", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "balanceState", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "checkUpkeep", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "currencyToken", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "COLLATERAL_LIQUIDATOR_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "EMERGENCY_ADMIN_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "IMPLEMENTATION_VERSION",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "SHARE_PRICE_PRORATION_BUCKETS",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "TIME_BUCKET_DURATION",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "TOTAL_SHARE_PRICE_PRORATION_DURATION",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "adminFeeRate",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "balanceState",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "checkUpkeep",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "currencyToken",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getRoleAdmin", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getRoleAdmin",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "grantRole", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "hasRole", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "loanPriceOracle", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "loanPriceOracle",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "loanState", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "lpToken", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "multicall", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "noteAdapters", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "onCollateralLiquidated", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "onERC721Received", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "onLoanExpired", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "onLoanRepaid", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "noteAdapters",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onCollateralLiquidated",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC721Received",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onLoanExpired",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onLoanRepaid",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "pause", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "pendingLoans", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "performUpkeep", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "pendingLoans",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "performUpkeep",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "redeem", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "redemptionSharePrice", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "renounceRole", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "redemptionSharePrice",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceRole",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "sellNote", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "sellNoteAndDeposit", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "seniorTrancheRate", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setAdminFeeRate", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setLoanPriceOracle", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setNoteAdapter", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setSeniorTrancheRate", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "sellNoteAndDeposit",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "seniorTrancheRate",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setAdminFeeRate",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setLoanPriceOracle",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setNoteAdapter",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setSeniorTrancheRate",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "sharePrice", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "supportedNoteTokens", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "supportsInterface", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "trancheState", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "supportedNoteTokens",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "trancheState",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "unpause", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "utilization", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "utilization",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "withdrawAdminFees", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "withdrawCollateral", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawAdminFees",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawCollateral",
+    data: BytesLike
+  ): Result;
 
   events: {
     "AdminFeeRateUpdated(uint256)": EventFragment;
@@ -358,17 +575,25 @@ export interface VaultInterface extends utils.Interface {
 export interface AdminFeeRateUpdatedEventObject {
   rate: BigNumber;
 }
-export type AdminFeeRateUpdatedEvent = TypedEvent<[BigNumber], AdminFeeRateUpdatedEventObject>;
+export type AdminFeeRateUpdatedEvent = TypedEvent<
+  [BigNumber],
+  AdminFeeRateUpdatedEventObject
+>;
 
-export type AdminFeeRateUpdatedEventFilter = TypedEventFilter<AdminFeeRateUpdatedEvent>;
+export type AdminFeeRateUpdatedEventFilter =
+  TypedEventFilter<AdminFeeRateUpdatedEvent>;
 
 export interface AdminFeesWithdrawnEventObject {
   account: string;
   amount: BigNumber;
 }
-export type AdminFeesWithdrawnEvent = TypedEvent<[string, BigNumber], AdminFeesWithdrawnEventObject>;
+export type AdminFeesWithdrawnEvent = TypedEvent<
+  [string, BigNumber],
+  AdminFeesWithdrawnEventObject
+>;
 
-export type AdminFeesWithdrawnEventFilter = TypedEventFilter<AdminFeesWithdrawnEvent>;
+export type AdminFeesWithdrawnEventFilter =
+  TypedEventFilter<AdminFeesWithdrawnEvent>;
 
 export interface CollateralLiquidatedEventObject {
   noteToken: string;
@@ -380,7 +605,8 @@ export type CollateralLiquidatedEvent = TypedEvent<
   CollateralLiquidatedEventObject
 >;
 
-export type CollateralLiquidatedEventFilter = TypedEventFilter<CollateralLiquidatedEvent>;
+export type CollateralLiquidatedEventFilter =
+  TypedEventFilter<CollateralLiquidatedEvent>;
 
 export interface CollateralWithdrawnEventObject {
   noteToken: string;
@@ -394,7 +620,8 @@ export type CollateralWithdrawnEvent = TypedEvent<
   CollateralWithdrawnEventObject
 >;
 
-export type CollateralWithdrawnEventFilter = TypedEventFilter<CollateralWithdrawnEvent>;
+export type CollateralWithdrawnEventFilter =
+  TypedEventFilter<CollateralWithdrawnEvent>;
 
 export interface DepositedEventObject {
   account: string;
@@ -402,7 +629,10 @@ export interface DepositedEventObject {
   amount: BigNumber;
   shares: BigNumber;
 }
-export type DepositedEvent = TypedEvent<[string, number, BigNumber, BigNumber], DepositedEventObject>;
+export type DepositedEvent = TypedEvent<
+  [string, number, BigNumber, BigNumber],
+  DepositedEventObject
+>;
 
 export type DepositedEventFilter = TypedEventFilter<DepositedEvent>;
 
@@ -411,16 +641,23 @@ export interface LoanLiquidatedEventObject {
   loanId: BigNumber;
   trancheLosses: [BigNumber, BigNumber];
 }
-export type LoanLiquidatedEvent = TypedEvent<[string, BigNumber, [BigNumber, BigNumber]], LoanLiquidatedEventObject>;
+export type LoanLiquidatedEvent = TypedEvent<
+  [string, BigNumber, [BigNumber, BigNumber]],
+  LoanLiquidatedEventObject
+>;
 
 export type LoanLiquidatedEventFilter = TypedEventFilter<LoanLiquidatedEvent>;
 
 export interface LoanPriceOracleUpdatedEventObject {
   loanPriceOracle: string;
 }
-export type LoanPriceOracleUpdatedEvent = TypedEvent<[string], LoanPriceOracleUpdatedEventObject>;
+export type LoanPriceOracleUpdatedEvent = TypedEvent<
+  [string],
+  LoanPriceOracleUpdatedEventObject
+>;
 
-export type LoanPriceOracleUpdatedEventFilter = TypedEventFilter<LoanPriceOracleUpdatedEvent>;
+export type LoanPriceOracleUpdatedEventFilter =
+  TypedEventFilter<LoanPriceOracleUpdatedEvent>;
 
 export interface LoanRepaidEventObject {
   noteToken: string;
@@ -428,7 +665,10 @@ export interface LoanRepaidEventObject {
   adminFee: BigNumber;
   trancheReturns: [BigNumber, BigNumber];
 }
-export type LoanRepaidEvent = TypedEvent<[string, BigNumber, BigNumber, [BigNumber, BigNumber]], LoanRepaidEventObject>;
+export type LoanRepaidEvent = TypedEvent<
+  [string, BigNumber, BigNumber, [BigNumber, BigNumber]],
+  LoanRepaidEventObject
+>;
 
 export type LoanRepaidEventFilter = TypedEventFilter<LoanRepaidEvent>;
 
@@ -436,9 +676,13 @@ export interface NoteAdapterUpdatedEventObject {
   noteToken: string;
   noteAdapter: string;
 }
-export type NoteAdapterUpdatedEvent = TypedEvent<[string, string], NoteAdapterUpdatedEventObject>;
+export type NoteAdapterUpdatedEvent = TypedEvent<
+  [string, string],
+  NoteAdapterUpdatedEventObject
+>;
 
-export type NoteAdapterUpdatedEventFilter = TypedEventFilter<NoteAdapterUpdatedEvent>;
+export type NoteAdapterUpdatedEventFilter =
+  TypedEventFilter<NoteAdapterUpdatedEvent>;
 
 export interface NotePurchasedEventObject {
   account: string;
@@ -468,7 +712,10 @@ export interface RedeemedEventObject {
   shares: BigNumber;
   amount: BigNumber;
 }
-export type RedeemedEvent = TypedEvent<[string, number, BigNumber, BigNumber], RedeemedEventObject>;
+export type RedeemedEvent = TypedEvent<
+  [string, number, BigNumber, BigNumber],
+  RedeemedEventObject
+>;
 
 export type RedeemedEventFilter = TypedEventFilter<RedeemedEvent>;
 
@@ -477,16 +724,23 @@ export interface RoleAdminChangedEventObject {
   previousAdminRole: string;
   newAdminRole: string;
 }
-export type RoleAdminChangedEvent = TypedEvent<[string, string, string], RoleAdminChangedEventObject>;
+export type RoleAdminChangedEvent = TypedEvent<
+  [string, string, string],
+  RoleAdminChangedEventObject
+>;
 
-export type RoleAdminChangedEventFilter = TypedEventFilter<RoleAdminChangedEvent>;
+export type RoleAdminChangedEventFilter =
+  TypedEventFilter<RoleAdminChangedEvent>;
 
 export interface RoleGrantedEventObject {
   role: string;
   account: string;
   sender: string;
 }
-export type RoleGrantedEvent = TypedEvent<[string, string, string], RoleGrantedEventObject>;
+export type RoleGrantedEvent = TypedEvent<
+  [string, string, string],
+  RoleGrantedEventObject
+>;
 
 export type RoleGrantedEventFilter = TypedEventFilter<RoleGrantedEvent>;
 
@@ -495,16 +749,23 @@ export interface RoleRevokedEventObject {
   account: string;
   sender: string;
 }
-export type RoleRevokedEvent = TypedEvent<[string, string, string], RoleRevokedEventObject>;
+export type RoleRevokedEvent = TypedEvent<
+  [string, string, string],
+  RoleRevokedEventObject
+>;
 
 export type RoleRevokedEventFilter = TypedEventFilter<RoleRevokedEvent>;
 
 export interface SeniorTrancheRateUpdatedEventObject {
   rate: BigNumber;
 }
-export type SeniorTrancheRateUpdatedEvent = TypedEvent<[BigNumber], SeniorTrancheRateUpdatedEventObject>;
+export type SeniorTrancheRateUpdatedEvent = TypedEvent<
+  [BigNumber],
+  SeniorTrancheRateUpdatedEventObject
+>;
 
-export type SeniorTrancheRateUpdatedEventFilter = TypedEventFilter<SeniorTrancheRateUpdatedEvent>;
+export type SeniorTrancheRateUpdatedEventFilter =
+  TypedEventFilter<SeniorTrancheRateUpdatedEvent>;
 
 export interface UnpausedEventObject {
   account: string;
@@ -518,7 +779,10 @@ export interface WithdrawnEventObject {
   trancheId: number;
   amount: BigNumber;
 }
-export type WithdrawnEvent = TypedEvent<[string, number, BigNumber], WithdrawnEventObject>;
+export type WithdrawnEvent = TypedEvent<
+  [string, number, BigNumber],
+  WithdrawnEventObject
+>;
 
 export type WithdrawnEventFilter = TypedEventFilter<WithdrawnEvent>;
 
@@ -535,9 +799,13 @@ export interface Vault extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TEvent>>;
 
-  listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+  listeners<TEvent extends TypedEvent>(
+    eventFilter?: TypedEventFilter<TEvent>
+  ): Array<TypedListener<TEvent>>;
   listeners(eventName?: string): Array<Listener>;
-  removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+  removeAllListeners<TEvent extends TypedEvent>(
+    eventFilter: TypedEventFilter<TEvent>
+  ): this;
   removeAllListeners(eventName?: string): this;
   off: OnEvent<this>;
   on: OnEvent<this>;
@@ -553,15 +821,21 @@ export interface Vault extends BaseContract {
 
     IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<[string]>;
 
-    SHARE_PRICE_PRORATION_BUCKETS(overrides?: CallOverrides): Promise<[BigNumber]>;
+    SHARE_PRICE_PRORATION_BUCKETS(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     TIME_BUCKET_DURATION(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    TOTAL_SHARE_PRICE_PRORATION_DURATION(overrides?: CallOverrides): Promise<[BigNumber]>;
+    TOTAL_SHARE_PRICE_PRORATION_DURATION(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     adminFeeRate(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    balanceState(overrides?: CallOverrides): Promise<
+    balanceState(
+      overrides?: CallOverrides
+    ): Promise<
       [BigNumber, BigNumber, BigNumber, BigNumber] & {
         totalCashBalance: BigNumber;
         totalLoanBalance: BigNumber;
@@ -570,7 +844,10 @@ export interface Vault extends BaseContract {
       }
     >;
 
-    checkUpkeep(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean, string]>;
+    checkUpkeep(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean, string]>;
 
     currencyToken(overrides?: CallOverrides): Promise<[string]>;
 
@@ -580,7 +857,10 @@ export interface Vault extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    getRoleAdmin(role: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[string]>;
+    getRoleAdmin(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     grantRole(
       role: PromiseOrValue<BytesLike>,
@@ -611,7 +891,10 @@ export interface Vault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[VaultStorageV1.LoanStructOutput]>;
 
-    lpToken(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[string]>;
+    lpToken(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     multicall(
       data: PromiseOrValue<BytesLike>[],
@@ -620,7 +903,10 @@ export interface Vault extends BaseContract {
 
     name(overrides?: CallOverrides): Promise<[string]>;
 
-    noteAdapters(noteToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[string]>;
+    noteAdapters(
+      noteToken: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     onCollateralLiquidated(
       noteToken: PromiseOrValue<string>,
@@ -649,7 +935,9 @@ export interface Vault extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    pause(overrides?: Overrides & { from?: PromiseOrValue<string> }): Promise<ContractTransaction>;
+    pause(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     paused(overrides?: CallOverrides): Promise<[boolean]>;
 
@@ -670,7 +958,10 @@ export interface Vault extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    redemptionSharePrice(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
+    redemptionSharePrice(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     renounceRole(
       role: PromiseOrValue<BytesLike>,
@@ -722,17 +1013,31 @@ export interface Vault extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    sharePrice(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
+    sharePrice(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     supportedNoteTokens(overrides?: CallOverrides): Promise<[string[]]>;
 
-    supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean]>;
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
     trancheState(
       trancheId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
+      [
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        BigNumber
+      ] & {
         realizedValue: BigNumber;
         estimatedValue: BigNumber;
         pendingRedemptions: BigNumber;
@@ -743,7 +1048,9 @@ export interface Vault extends BaseContract {
       }
     >;
 
-    unpause(overrides?: Overrides & { from?: PromiseOrValue<string> }): Promise<ContractTransaction>;
+    unpause(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     utilization(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -778,11 +1085,15 @@ export interface Vault extends BaseContract {
 
   TIME_BUCKET_DURATION(overrides?: CallOverrides): Promise<BigNumber>;
 
-  TOTAL_SHARE_PRICE_PRORATION_DURATION(overrides?: CallOverrides): Promise<BigNumber>;
+  TOTAL_SHARE_PRICE_PRORATION_DURATION(
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   adminFeeRate(overrides?: CallOverrides): Promise<BigNumber>;
 
-  balanceState(overrides?: CallOverrides): Promise<
+  balanceState(
+    overrides?: CallOverrides
+  ): Promise<
     [BigNumber, BigNumber, BigNumber, BigNumber] & {
       totalCashBalance: BigNumber;
       totalLoanBalance: BigNumber;
@@ -791,7 +1102,10 @@ export interface Vault extends BaseContract {
     }
   >;
 
-  checkUpkeep(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean, string]>;
+  checkUpkeep(
+    arg0: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<[boolean, string]>;
 
   currencyToken(overrides?: CallOverrides): Promise<string>;
 
@@ -801,7 +1115,10 @@ export interface Vault extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  getRoleAdmin(role: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<string>;
+  getRoleAdmin(
+    role: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   grantRole(
     role: PromiseOrValue<BytesLike>,
@@ -832,7 +1149,10 @@ export interface Vault extends BaseContract {
     overrides?: CallOverrides
   ): Promise<VaultStorageV1.LoanStructOutput>;
 
-  lpToken(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
+  lpToken(
+    trancheId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   multicall(
     data: PromiseOrValue<BytesLike>[],
@@ -841,7 +1161,10 @@ export interface Vault extends BaseContract {
 
   name(overrides?: CallOverrides): Promise<string>;
 
-  noteAdapters(noteToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<string>;
+  noteAdapters(
+    noteToken: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   onCollateralLiquidated(
     noteToken: PromiseOrValue<string>,
@@ -870,7 +1193,9 @@ export interface Vault extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  pause(overrides?: Overrides & { from?: PromiseOrValue<string> }): Promise<ContractTransaction>;
+  pause(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   paused(overrides?: CallOverrides): Promise<boolean>;
 
@@ -891,7 +1216,10 @@ export interface Vault extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  redemptionSharePrice(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+  redemptionSharePrice(
+    trancheId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   renounceRole(
     role: PromiseOrValue<BytesLike>,
@@ -943,17 +1271,31 @@ export interface Vault extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  sharePrice(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+  sharePrice(
+    trancheId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   supportedNoteTokens(overrides?: CallOverrides): Promise<string[]>;
 
-  supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
+  supportsInterface(
+    interfaceId: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   trancheState(
     trancheId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<
-    [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
+    [
+      BigNumber,
+      BigNumber,
+      BigNumber,
+      BigNumber,
+      BigNumber,
+      BigNumber,
+      BigNumber
+    ] & {
       realizedValue: BigNumber;
       estimatedValue: BigNumber;
       pendingRedemptions: BigNumber;
@@ -964,7 +1306,9 @@ export interface Vault extends BaseContract {
     }
   >;
 
-  unpause(overrides?: Overrides & { from?: PromiseOrValue<string> }): Promise<ContractTransaction>;
+  unpause(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   utilization(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -995,15 +1339,21 @@ export interface Vault extends BaseContract {
 
     IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<string>;
 
-    SHARE_PRICE_PRORATION_BUCKETS(overrides?: CallOverrides): Promise<BigNumber>;
+    SHARE_PRICE_PRORATION_BUCKETS(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     TIME_BUCKET_DURATION(overrides?: CallOverrides): Promise<BigNumber>;
 
-    TOTAL_SHARE_PRICE_PRORATION_DURATION(overrides?: CallOverrides): Promise<BigNumber>;
+    TOTAL_SHARE_PRICE_PRORATION_DURATION(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     adminFeeRate(overrides?: CallOverrides): Promise<BigNumber>;
 
-    balanceState(overrides?: CallOverrides): Promise<
+    balanceState(
+      overrides?: CallOverrides
+    ): Promise<
       [BigNumber, BigNumber, BigNumber, BigNumber] & {
         totalCashBalance: BigNumber;
         totalLoanBalance: BigNumber;
@@ -1012,7 +1362,10 @@ export interface Vault extends BaseContract {
       }
     >;
 
-    checkUpkeep(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean, string]>;
+    checkUpkeep(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean, string]>;
 
     currencyToken(overrides?: CallOverrides): Promise<string>;
 
@@ -1022,7 +1375,10 @@ export interface Vault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    getRoleAdmin(role: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<string>;
+    getRoleAdmin(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     grantRole(
       role: PromiseOrValue<BytesLike>,
@@ -1053,13 +1409,22 @@ export interface Vault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<VaultStorageV1.LoanStructOutput>;
 
-    lpToken(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
+    lpToken(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    multicall(data: PromiseOrValue<BytesLike>[], overrides?: CallOverrides): Promise<string[]>;
+    multicall(
+      data: PromiseOrValue<BytesLike>[],
+      overrides?: CallOverrides
+    ): Promise<string[]>;
 
     name(overrides?: CallOverrides): Promise<string>;
 
-    noteAdapters(noteToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<string>;
+    noteAdapters(
+      noteToken: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     onCollateralLiquidated(
       noteToken: PromiseOrValue<string>,
@@ -1098,7 +1463,10 @@ export interface Vault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
 
-    performUpkeep(performData: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
+    performUpkeep(
+      performData: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     redeem(
       trancheId: PromiseOrValue<BigNumberish>,
@@ -1106,7 +1474,10 @@ export interface Vault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    redemptionSharePrice(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    redemptionSharePrice(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     renounceRole(
       role: PromiseOrValue<BytesLike>,
@@ -1137,9 +1508,15 @@ export interface Vault extends BaseContract {
 
     seniorTrancheRate(overrides?: CallOverrides): Promise<BigNumber>;
 
-    setAdminFeeRate(rate: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    setAdminFeeRate(
+      rate: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    setLoanPriceOracle(loanPriceOracle_: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+    setLoanPriceOracle(
+      loanPriceOracle_: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     setNoteAdapter(
       noteToken: PromiseOrValue<string>,
@@ -1147,19 +1524,36 @@ export interface Vault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setSeniorTrancheRate(rate: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    setSeniorTrancheRate(
+      rate: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    sharePrice(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    sharePrice(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     supportedNoteTokens(overrides?: CallOverrides): Promise<string[]>;
 
-    supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     trancheState(
       trancheId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
+      [
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        BigNumber
+      ] & {
         realizedValue: BigNumber;
         estimatedValue: BigNumber;
         pendingRedemptions: BigNumber;
@@ -1201,7 +1595,10 @@ export interface Vault extends BaseContract {
       account?: PromiseOrValue<string> | null,
       amount?: null
     ): AdminFeesWithdrawnEventFilter;
-    AdminFeesWithdrawn(account?: PromiseOrValue<string> | null, amount?: null): AdminFeesWithdrawnEventFilter;
+    AdminFeesWithdrawn(
+      account?: PromiseOrValue<string> | null,
+      amount?: null
+    ): AdminFeesWithdrawnEventFilter;
 
     "CollateralLiquidated(address,uint256,uint256[2])"(
       noteToken?: PromiseOrValue<string> | null,
@@ -1253,8 +1650,12 @@ export interface Vault extends BaseContract {
       trancheLosses?: null
     ): LoanLiquidatedEventFilter;
 
-    "LoanPriceOracleUpdated(address)"(loanPriceOracle?: null): LoanPriceOracleUpdatedEventFilter;
-    LoanPriceOracleUpdated(loanPriceOracle?: null): LoanPriceOracleUpdatedEventFilter;
+    "LoanPriceOracleUpdated(address)"(
+      loanPriceOracle?: null
+    ): LoanPriceOracleUpdatedEventFilter;
+    LoanPriceOracleUpdated(
+      loanPriceOracle?: null
+    ): LoanPriceOracleUpdatedEventFilter;
 
     "LoanRepaid(address,uint256,uint256,uint256[2])"(
       noteToken?: PromiseOrValue<string> | null,
@@ -1273,7 +1674,10 @@ export interface Vault extends BaseContract {
       noteToken?: PromiseOrValue<string> | null,
       noteAdapter?: null
     ): NoteAdapterUpdatedEventFilter;
-    NoteAdapterUpdated(noteToken?: PromiseOrValue<string> | null, noteAdapter?: null): NoteAdapterUpdatedEventFilter;
+    NoteAdapterUpdated(
+      noteToken?: PromiseOrValue<string> | null,
+      noteAdapter?: null
+    ): NoteAdapterUpdatedEventFilter;
 
     "NotePurchased(address,address,uint256,uint256,uint256,uint256[2])"(
       account?: PromiseOrValue<string> | null,
@@ -1341,7 +1745,9 @@ export interface Vault extends BaseContract {
       sender?: PromiseOrValue<string> | null
     ): RoleRevokedEventFilter;
 
-    "SeniorTrancheRateUpdated(uint256)"(rate?: null): SeniorTrancheRateUpdatedEventFilter;
+    "SeniorTrancheRateUpdated(uint256)"(
+      rate?: null
+    ): SeniorTrancheRateUpdatedEventFilter;
     SeniorTrancheRateUpdated(rate?: null): SeniorTrancheRateUpdatedEventFilter;
 
     "Unpaused(address)"(account?: null): UnpausedEventFilter;
@@ -1368,17 +1774,24 @@ export interface Vault extends BaseContract {
 
     IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<BigNumber>;
 
-    SHARE_PRICE_PRORATION_BUCKETS(overrides?: CallOverrides): Promise<BigNumber>;
+    SHARE_PRICE_PRORATION_BUCKETS(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     TIME_BUCKET_DURATION(overrides?: CallOverrides): Promise<BigNumber>;
 
-    TOTAL_SHARE_PRICE_PRORATION_DURATION(overrides?: CallOverrides): Promise<BigNumber>;
+    TOTAL_SHARE_PRICE_PRORATION_DURATION(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     adminFeeRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     balanceState(overrides?: CallOverrides): Promise<BigNumber>;
 
-    checkUpkeep(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
+    checkUpkeep(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     currencyToken(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1388,7 +1801,10 @@ export interface Vault extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    getRoleAdmin(role: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
+    getRoleAdmin(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     grantRole(
       role: PromiseOrValue<BytesLike>,
@@ -1419,7 +1835,10 @@ export interface Vault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    lpToken(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    lpToken(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     multicall(
       data: PromiseOrValue<BytesLike>[],
@@ -1428,7 +1847,10 @@ export interface Vault extends BaseContract {
 
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
-    noteAdapters(noteToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    noteAdapters(
+      noteToken: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     onCollateralLiquidated(
       noteToken: PromiseOrValue<string>,
@@ -1457,7 +1879,9 @@ export interface Vault extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    pause(overrides?: Overrides & { from?: PromiseOrValue<string> }): Promise<BigNumber>;
+    pause(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     paused(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1478,7 +1902,10 @@ export interface Vault extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    redemptionSharePrice(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    redemptionSharePrice(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     renounceRole(
       role: PromiseOrValue<BytesLike>,
@@ -1530,15 +1957,26 @@ export interface Vault extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    sharePrice(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    sharePrice(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     supportedNoteTokens(overrides?: CallOverrides): Promise<BigNumber>;
 
-    supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    trancheState(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    trancheState(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    unpause(overrides?: Overrides & { from?: PromiseOrValue<string> }): Promise<BigNumber>;
+    unpause(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     utilization(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1562,25 +2000,42 @@ export interface Vault extends BaseContract {
   };
 
   populateTransaction: {
-    COLLATERAL_LIQUIDATOR_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    COLLATERAL_LIQUIDATOR_ROLE(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    DEFAULT_ADMIN_ROLE(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    EMERGENCY_ADMIN_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    EMERGENCY_ADMIN_ROLE(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    IMPLEMENTATION_VERSION(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    SHARE_PRICE_PRORATION_BUCKETS(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    SHARE_PRICE_PRORATION_BUCKETS(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    TIME_BUCKET_DURATION(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    TIME_BUCKET_DURATION(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    TOTAL_SHARE_PRICE_PRORATION_DURATION(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    TOTAL_SHARE_PRICE_PRORATION_DURATION(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     adminFeeRate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     balanceState(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    checkUpkeep(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    checkUpkeep(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     currencyToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -1590,7 +2045,10 @@ export interface Vault extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    getRoleAdmin(role: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getRoleAdmin(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     grantRole(
       role: PromiseOrValue<BytesLike>,
@@ -1621,7 +2079,10 @@ export interface Vault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    lpToken(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    lpToken(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     multicall(
       data: PromiseOrValue<BytesLike>[],
@@ -1630,7 +2091,10 @@ export interface Vault extends BaseContract {
 
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    noteAdapters(noteToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    noteAdapters(
+      noteToken: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     onCollateralLiquidated(
       noteToken: PromiseOrValue<string>,
@@ -1659,7 +2123,9 @@ export interface Vault extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    pause(overrides?: Overrides & { from?: PromiseOrValue<string> }): Promise<PopulatedTransaction>;
+    pause(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     paused(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -1735,15 +2201,28 @@ export interface Vault extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    sharePrice(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    sharePrice(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    supportedNoteTokens(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    supportedNoteTokens(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    trancheState(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    trancheState(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    unpause(overrides?: Overrides & { from?: PromiseOrValue<string> }): Promise<PopulatedTransaction>;
+    unpause(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     utilization(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

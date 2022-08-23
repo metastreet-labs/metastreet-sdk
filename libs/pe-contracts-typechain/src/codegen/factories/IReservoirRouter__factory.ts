@@ -4,7 +4,10 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IReservoirRouter, IReservoirRouterInterface } from "../IReservoirRouter";
+import type {
+  IReservoirRouter,
+  IReservoirRouterInterface,
+} from "../IReservoirRouter";
 
 const _abi = [
   {
@@ -62,7 +65,10 @@ export class IReservoirRouter__factory {
   static createInterface(): IReservoirRouterInterface {
     return new utils.Interface(_abi) as IReservoirRouterInterface;
   }
-  static connect(address: string, signerOrProvider: Signer | Provider): IReservoirRouter {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): IReservoirRouter {
     return new Contract(address, _abi, signerOrProvider) as IReservoirRouter;
   }
 }

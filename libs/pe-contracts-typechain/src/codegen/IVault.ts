@@ -13,9 +13,19 @@ import type {
   Signer,
   utils,
 } from "ethers";
-import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
+import type {
+  FunctionFragment,
+  Result,
+  EventFragment,
+} from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type {
+  TypedEventFilter,
+  TypedEvent,
+  TypedListener,
+  OnEvent,
+  PromiseOrValue,
+} from "./common";
 
 export interface IVaultInterface extends utils.Interface {
   functions: {
@@ -61,18 +71,34 @@ export interface IVaultInterface extends utils.Interface {
       | "withdrawCollateral"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "currencyToken", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "currencyToken",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "deposit",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(functionFragment: "loanPriceOracle", values?: undefined): string;
-  encodeFunctionData(functionFragment: "lpToken", values: [PromiseOrValue<BigNumberish>]): string;
+  encodeFunctionData(
+    functionFragment: "loanPriceOracle",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "lpToken",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
-  encodeFunctionData(functionFragment: "noteAdapters", values: [PromiseOrValue<string>]): string;
+  encodeFunctionData(
+    functionFragment: "noteAdapters",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(
     functionFragment: "onCollateralLiquidated",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "onLoanExpired",
@@ -86,10 +112,17 @@ export interface IVaultInterface extends utils.Interface {
     functionFragment: "redeem",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(functionFragment: "redemptionSharePrice", values: [PromiseOrValue<BigNumberish>]): string;
+  encodeFunctionData(
+    functionFragment: "redemptionSharePrice",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
   encodeFunctionData(
     functionFragment: "sellNote",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "sellNoteAndDeposit",
@@ -100,9 +133,18 @@ export interface IVaultInterface extends utils.Interface {
       [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
     ]
   ): string;
-  encodeFunctionData(functionFragment: "sharePrice", values: [PromiseOrValue<BigNumberish>]): string;
-  encodeFunctionData(functionFragment: "supportedNoteTokens", values?: undefined): string;
-  encodeFunctionData(functionFragment: "utilization", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "sharePrice",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportedNoteTokens",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "utilization",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "withdraw",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
@@ -112,24 +154,57 @@ export interface IVaultInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
 
-  decodeFunctionResult(functionFragment: "currencyToken", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "currencyToken",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "loanPriceOracle", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "loanPriceOracle",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "lpToken", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "noteAdapters", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "onCollateralLiquidated", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "onLoanExpired", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "onLoanRepaid", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "noteAdapters",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onCollateralLiquidated",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onLoanExpired",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onLoanRepaid",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "redeem", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "redemptionSharePrice", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "redemptionSharePrice",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "sellNote", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "sellNoteAndDeposit", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "sellNoteAndDeposit",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "sharePrice", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "supportedNoteTokens", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "utilization", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "supportedNoteTokens",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "utilization",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "withdrawCollateral", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawCollateral",
+    data: BytesLike
+  ): Result;
 
   events: {
     "CollateralLiquidated(address,uint256,uint256[2])": EventFragment;
@@ -162,7 +237,8 @@ export type CollateralLiquidatedEvent = TypedEvent<
   CollateralLiquidatedEventObject
 >;
 
-export type CollateralLiquidatedEventFilter = TypedEventFilter<CollateralLiquidatedEvent>;
+export type CollateralLiquidatedEventFilter =
+  TypedEventFilter<CollateralLiquidatedEvent>;
 
 export interface CollateralWithdrawnEventObject {
   noteToken: string;
@@ -176,7 +252,8 @@ export type CollateralWithdrawnEvent = TypedEvent<
   CollateralWithdrawnEventObject
 >;
 
-export type CollateralWithdrawnEventFilter = TypedEventFilter<CollateralWithdrawnEvent>;
+export type CollateralWithdrawnEventFilter =
+  TypedEventFilter<CollateralWithdrawnEvent>;
 
 export interface DepositedEventObject {
   account: string;
@@ -184,7 +261,10 @@ export interface DepositedEventObject {
   amount: BigNumber;
   shares: BigNumber;
 }
-export type DepositedEvent = TypedEvent<[string, number, BigNumber, BigNumber], DepositedEventObject>;
+export type DepositedEvent = TypedEvent<
+  [string, number, BigNumber, BigNumber],
+  DepositedEventObject
+>;
 
 export type DepositedEventFilter = TypedEventFilter<DepositedEvent>;
 
@@ -193,7 +273,10 @@ export interface LoanLiquidatedEventObject {
   loanId: BigNumber;
   trancheLosses: [BigNumber, BigNumber];
 }
-export type LoanLiquidatedEvent = TypedEvent<[string, BigNumber, [BigNumber, BigNumber]], LoanLiquidatedEventObject>;
+export type LoanLiquidatedEvent = TypedEvent<
+  [string, BigNumber, [BigNumber, BigNumber]],
+  LoanLiquidatedEventObject
+>;
 
 export type LoanLiquidatedEventFilter = TypedEventFilter<LoanLiquidatedEvent>;
 
@@ -203,7 +286,10 @@ export interface LoanRepaidEventObject {
   adminFee: BigNumber;
   trancheReturns: [BigNumber, BigNumber];
 }
-export type LoanRepaidEvent = TypedEvent<[string, BigNumber, BigNumber, [BigNumber, BigNumber]], LoanRepaidEventObject>;
+export type LoanRepaidEvent = TypedEvent<
+  [string, BigNumber, BigNumber, [BigNumber, BigNumber]],
+  LoanRepaidEventObject
+>;
 
 export type LoanRepaidEventFilter = TypedEventFilter<LoanRepaidEvent>;
 
@@ -228,7 +314,10 @@ export interface RedeemedEventObject {
   shares: BigNumber;
   amount: BigNumber;
 }
-export type RedeemedEvent = TypedEvent<[string, number, BigNumber, BigNumber], RedeemedEventObject>;
+export type RedeemedEvent = TypedEvent<
+  [string, number, BigNumber, BigNumber],
+  RedeemedEventObject
+>;
 
 export type RedeemedEventFilter = TypedEventFilter<RedeemedEvent>;
 
@@ -237,7 +326,10 @@ export interface WithdrawnEventObject {
   trancheId: number;
   amount: BigNumber;
 }
-export type WithdrawnEvent = TypedEvent<[string, number, BigNumber], WithdrawnEventObject>;
+export type WithdrawnEvent = TypedEvent<
+  [string, number, BigNumber],
+  WithdrawnEventObject
+>;
 
 export type WithdrawnEventFilter = TypedEventFilter<WithdrawnEvent>;
 
@@ -254,9 +346,13 @@ export interface IVault extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TEvent>>;
 
-  listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+  listeners<TEvent extends TypedEvent>(
+    eventFilter?: TypedEventFilter<TEvent>
+  ): Array<TypedListener<TEvent>>;
   listeners(eventName?: string): Array<Listener>;
-  removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+  removeAllListeners<TEvent extends TypedEvent>(
+    eventFilter: TypedEventFilter<TEvent>
+  ): this;
   removeAllListeners(eventName?: string): this;
   off: OnEvent<this>;
   on: OnEvent<this>;
@@ -274,11 +370,17 @@ export interface IVault extends BaseContract {
 
     loanPriceOracle(overrides?: CallOverrides): Promise<[string]>;
 
-    lpToken(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[string]>;
+    lpToken(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     name(overrides?: CallOverrides): Promise<[string]>;
 
-    noteAdapters(noteToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[string]>;
+    noteAdapters(
+      noteToken: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     onCollateralLiquidated(
       noteToken: PromiseOrValue<string>,
@@ -305,7 +407,10 @@ export interface IVault extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    redemptionSharePrice(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
+    redemptionSharePrice(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     sellNote(
       noteToken: PromiseOrValue<string>,
@@ -322,7 +427,10 @@ export interface IVault extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    sharePrice(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
+    sharePrice(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     supportedNoteTokens(overrides?: CallOverrides): Promise<[string[]]>;
 
@@ -351,11 +459,17 @@ export interface IVault extends BaseContract {
 
   loanPriceOracle(overrides?: CallOverrides): Promise<string>;
 
-  lpToken(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
+  lpToken(
+    trancheId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   name(overrides?: CallOverrides): Promise<string>;
 
-  noteAdapters(noteToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<string>;
+  noteAdapters(
+    noteToken: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   onCollateralLiquidated(
     noteToken: PromiseOrValue<string>,
@@ -382,7 +496,10 @@ export interface IVault extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  redemptionSharePrice(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+  redemptionSharePrice(
+    trancheId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   sellNote(
     noteToken: PromiseOrValue<string>,
@@ -399,7 +516,10 @@ export interface IVault extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  sharePrice(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+  sharePrice(
+    trancheId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   supportedNoteTokens(overrides?: CallOverrides): Promise<string[]>;
 
@@ -428,11 +548,17 @@ export interface IVault extends BaseContract {
 
     loanPriceOracle(overrides?: CallOverrides): Promise<string>;
 
-    lpToken(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
+    lpToken(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     name(overrides?: CallOverrides): Promise<string>;
 
-    noteAdapters(noteToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<string>;
+    noteAdapters(
+      noteToken: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     onCollateralLiquidated(
       noteToken: PromiseOrValue<string>,
@@ -459,7 +585,10 @@ export interface IVault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    redemptionSharePrice(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    redemptionSharePrice(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     sellNote(
       noteToken: PromiseOrValue<string>,
@@ -476,7 +605,10 @@ export interface IVault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    sharePrice(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    sharePrice(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     supportedNoteTokens(overrides?: CallOverrides): Promise<string[]>;
 
@@ -612,11 +744,17 @@ export interface IVault extends BaseContract {
 
     loanPriceOracle(overrides?: CallOverrides): Promise<BigNumber>;
 
-    lpToken(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    lpToken(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
-    noteAdapters(noteToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    noteAdapters(
+      noteToken: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     onCollateralLiquidated(
       noteToken: PromiseOrValue<string>,
@@ -643,7 +781,10 @@ export interface IVault extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    redemptionSharePrice(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    redemptionSharePrice(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     sellNote(
       noteToken: PromiseOrValue<string>,
@@ -660,7 +801,10 @@ export interface IVault extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    sharePrice(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    sharePrice(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     supportedNoteTokens(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -690,11 +834,17 @@ export interface IVault extends BaseContract {
 
     loanPriceOracle(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    lpToken(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    lpToken(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    noteAdapters(noteToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    noteAdapters(
+      noteToken: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     onCollateralLiquidated(
       noteToken: PromiseOrValue<string>,
@@ -741,9 +891,14 @@ export interface IVault extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    sharePrice(trancheId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    sharePrice(
+      trancheId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    supportedNoteTokens(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    supportedNoteTokens(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     utilization(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

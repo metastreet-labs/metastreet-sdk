@@ -235,7 +235,10 @@ export class INoteAdapter__factory {
   static createInterface(): INoteAdapterInterface {
     return new utils.Interface(_abi) as INoteAdapterInterface;
   }
-  static connect(address: string, signerOrProvider: Signer | Provider): INoteAdapter {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): INoteAdapter {
     return new Contract(address, _abi, signerOrProvider) as INoteAdapter;
   }
 }

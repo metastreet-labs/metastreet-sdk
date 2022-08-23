@@ -13,7 +13,13 @@ import type {
 } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type {
+  TypedEventFilter,
+  TypedEvent,
+  TypedListener,
+  OnEvent,
+  PromiseOrValue,
+} from "./common";
 
 export declare namespace ILoanPriceOracleParameters {
   export type PiecewiseLinearModelStruct = {
@@ -24,7 +30,13 @@ export declare namespace ILoanPriceOracleParameters {
     max: PromiseOrValue<BigNumberish>;
   };
 
-  export type PiecewiseLinearModelStructOutput = [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
+  export type PiecewiseLinearModelStructOutput = [
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber
+  ] & {
     offset: BigNumber;
     slope1: BigNumber;
     slope2: BigNumber;
@@ -36,7 +48,11 @@ export declare namespace ILoanPriceOracleParameters {
     active: PromiseOrValue<boolean>;
     loanToValueRateComponent: ILoanPriceOracleParameters.PiecewiseLinearModelStruct;
     durationRateComponent: ILoanPriceOracleParameters.PiecewiseLinearModelStruct;
-    rateComponentWeights: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>];
+    rateComponentWeights: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ];
   };
 
   export type CollateralParametersStructOutput = [
@@ -60,16 +76,37 @@ export interface ILoanPriceOracleParametersInterface extends utils.Interface {
   };
 
   getFunction(
-    nameOrSignatureOrTopic: "collateralOracle" | "getCollateralParameters" | "minimumLoanDuration"
+    nameOrSignatureOrTopic:
+      | "collateralOracle"
+      | "getCollateralParameters"
+      | "minimumLoanDuration"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "collateralOracle", values?: undefined): string;
-  encodeFunctionData(functionFragment: "getCollateralParameters", values: [PromiseOrValue<string>]): string;
-  encodeFunctionData(functionFragment: "minimumLoanDuration", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "collateralOracle",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getCollateralParameters",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "minimumLoanDuration",
+    values?: undefined
+  ): string;
 
-  decodeFunctionResult(functionFragment: "collateralOracle", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getCollateralParameters", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "minimumLoanDuration", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "collateralOracle",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getCollateralParameters",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "minimumLoanDuration",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -87,9 +124,13 @@ export interface ILoanPriceOracleParameters extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TEvent>>;
 
-  listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+  listeners<TEvent extends TypedEvent>(
+    eventFilter?: TypedEventFilter<TEvent>
+  ): Array<TypedListener<TEvent>>;
   listeners(eventName?: string): Array<Listener>;
-  removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+  removeAllListeners<TEvent extends TypedEvent>(
+    eventFilter: TypedEventFilter<TEvent>
+  ): this;
   removeAllListeners(eventName?: string): this;
   off: OnEvent<this>;
   on: OnEvent<this>;
@@ -132,7 +173,10 @@ export interface ILoanPriceOracleParameters extends BaseContract {
   estimateGas: {
     collateralOracle(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getCollateralParameters(collateralToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    getCollateralParameters(
+      collateralToken: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     minimumLoanDuration(overrides?: CallOverrides): Promise<BigNumber>;
   };
@@ -145,6 +189,8 @@ export interface ILoanPriceOracleParameters extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    minimumLoanDuration(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    minimumLoanDuration(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
   };
 }

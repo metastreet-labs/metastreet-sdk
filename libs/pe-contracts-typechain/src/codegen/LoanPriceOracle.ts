@@ -13,9 +13,19 @@ import type {
   Signer,
   utils,
 } from "ethers";
-import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
+import type {
+  FunctionFragment,
+  Result,
+  EventFragment,
+} from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type {
+  TypedEventFilter,
+  TypedEvent,
+  TypedListener,
+  OnEvent,
+  PromiseOrValue,
+} from "./common";
 
 export declare namespace LoanPriceOracle {
   export type PiecewiseLinearModelStruct = {
@@ -26,7 +36,13 @@ export declare namespace LoanPriceOracle {
     max: PromiseOrValue<BigNumberish>;
   };
 
-  export type PiecewiseLinearModelStructOutput = [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
+  export type PiecewiseLinearModelStructOutput = [
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber
+  ] & {
     offset: BigNumber;
     slope1: BigNumber;
     slope2: BigNumber;
@@ -38,7 +54,11 @@ export declare namespace LoanPriceOracle {
     active: PromiseOrValue<boolean>;
     loanToValueRateComponent: LoanPriceOracle.PiecewiseLinearModelStruct;
     durationRateComponent: LoanPriceOracle.PiecewiseLinearModelStruct;
-    rateComponentWeights: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>];
+    rateComponentWeights: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ];
   };
 
   export type CollateralParametersStructOutput = [
@@ -102,20 +122,50 @@ export interface LoanPriceOracleInterface extends utils.Interface {
       | "supportsInterface"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "DEFAULT_ADMIN_ROLE", values?: undefined): string;
-  encodeFunctionData(functionFragment: "IMPLEMENTATION_VERSION", values?: undefined): string;
-  encodeFunctionData(functionFragment: "PARAMETER_ADMIN_ROLE", values?: undefined): string;
-  encodeFunctionData(functionFragment: "collateralOracle", values?: undefined): string;
-  encodeFunctionData(functionFragment: "currencyToken", values?: undefined): string;
-  encodeFunctionData(functionFragment: "getCollateralParameters", values: [PromiseOrValue<string>]): string;
-  encodeFunctionData(functionFragment: "getRoleAdmin", values: [PromiseOrValue<BytesLike>]): string;
-  encodeFunctionData(functionFragment: "getUtilizationParameters", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "IMPLEMENTATION_VERSION",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "PARAMETER_ADMIN_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "collateralOracle",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "currencyToken",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getCollateralParameters",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getRoleAdmin",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getUtilizationParameters",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "grantRole",
     values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
   ): string;
-  encodeFunctionData(functionFragment: "hasRole", values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]): string;
-  encodeFunctionData(functionFragment: "minimumLoanDuration", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "hasRole",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "minimumLoanDuration",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "priceLoan",
     values: [
@@ -136,36 +186,99 @@ export interface LoanPriceOracleInterface extends utils.Interface {
     functionFragment: "revokeRole",
     values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
   ): string;
-  encodeFunctionData(functionFragment: "setCollateralOracle", values: [PromiseOrValue<string>]): string;
+  encodeFunctionData(
+    functionFragment: "setCollateralOracle",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(
     functionFragment: "setCollateralParameters",
     values: [PromiseOrValue<string>, PromiseOrValue<BytesLike>]
   ): string;
-  encodeFunctionData(functionFragment: "setMinimumLoanDuration", values: [PromiseOrValue<BigNumberish>]): string;
-  encodeFunctionData(functionFragment: "setUtilizationParameters", values: [PromiseOrValue<BytesLike>]): string;
-  encodeFunctionData(functionFragment: "supportedCollateralTokens", values?: undefined): string;
-  encodeFunctionData(functionFragment: "supportsInterface", values: [PromiseOrValue<BytesLike>]): string;
+  encodeFunctionData(
+    functionFragment: "setMinimumLoanDuration",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setUtilizationParameters",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportedCollateralTokens",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
 
-  decodeFunctionResult(functionFragment: "DEFAULT_ADMIN_ROLE", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "IMPLEMENTATION_VERSION", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "PARAMETER_ADMIN_ROLE", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "collateralOracle", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "currencyToken", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getCollateralParameters", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getRoleAdmin", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getUtilizationParameters", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "IMPLEMENTATION_VERSION",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "PARAMETER_ADMIN_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "collateralOracle",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "currencyToken",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getCollateralParameters",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getRoleAdmin",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getUtilizationParameters",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "grantRole", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "hasRole", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "minimumLoanDuration", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "minimumLoanDuration",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "priceLoan", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "renounceRole", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceRole",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setCollateralOracle", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setCollateralParameters", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setMinimumLoanDuration", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setUtilizationParameters", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "supportedCollateralTokens", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "supportsInterface", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setCollateralOracle",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setCollateralParameters",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setMinimumLoanDuration",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setUtilizationParameters",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportedCollateralTokens",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
 
   events: {
     "CollateralOracleUpdated(address)": EventFragment;
@@ -178,50 +291,73 @@ export interface LoanPriceOracleInterface extends utils.Interface {
   };
 
   getEvent(nameOrSignatureOrTopic: "CollateralOracleUpdated"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "CollateralParametersUpdated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "CollateralParametersUpdated"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MinimumLoanDurationUpdated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleAdminChanged"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleGranted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleRevoked"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "UtilizationParametersUpdated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "UtilizationParametersUpdated"
+  ): EventFragment;
 }
 
 export interface CollateralOracleUpdatedEventObject {
   collateralOracle: string;
 }
-export type CollateralOracleUpdatedEvent = TypedEvent<[string], CollateralOracleUpdatedEventObject>;
+export type CollateralOracleUpdatedEvent = TypedEvent<
+  [string],
+  CollateralOracleUpdatedEventObject
+>;
 
-export type CollateralOracleUpdatedEventFilter = TypedEventFilter<CollateralOracleUpdatedEvent>;
+export type CollateralOracleUpdatedEventFilter =
+  TypedEventFilter<CollateralOracleUpdatedEvent>;
 
 export interface CollateralParametersUpdatedEventObject {
   collateralToken: string;
 }
-export type CollateralParametersUpdatedEvent = TypedEvent<[string], CollateralParametersUpdatedEventObject>;
+export type CollateralParametersUpdatedEvent = TypedEvent<
+  [string],
+  CollateralParametersUpdatedEventObject
+>;
 
-export type CollateralParametersUpdatedEventFilter = TypedEventFilter<CollateralParametersUpdatedEvent>;
+export type CollateralParametersUpdatedEventFilter =
+  TypedEventFilter<CollateralParametersUpdatedEvent>;
 
 export interface MinimumLoanDurationUpdatedEventObject {
   duration: BigNumber;
 }
-export type MinimumLoanDurationUpdatedEvent = TypedEvent<[BigNumber], MinimumLoanDurationUpdatedEventObject>;
+export type MinimumLoanDurationUpdatedEvent = TypedEvent<
+  [BigNumber],
+  MinimumLoanDurationUpdatedEventObject
+>;
 
-export type MinimumLoanDurationUpdatedEventFilter = TypedEventFilter<MinimumLoanDurationUpdatedEvent>;
+export type MinimumLoanDurationUpdatedEventFilter =
+  TypedEventFilter<MinimumLoanDurationUpdatedEvent>;
 
 export interface RoleAdminChangedEventObject {
   role: string;
   previousAdminRole: string;
   newAdminRole: string;
 }
-export type RoleAdminChangedEvent = TypedEvent<[string, string, string], RoleAdminChangedEventObject>;
+export type RoleAdminChangedEvent = TypedEvent<
+  [string, string, string],
+  RoleAdminChangedEventObject
+>;
 
-export type RoleAdminChangedEventFilter = TypedEventFilter<RoleAdminChangedEvent>;
+export type RoleAdminChangedEventFilter =
+  TypedEventFilter<RoleAdminChangedEvent>;
 
 export interface RoleGrantedEventObject {
   role: string;
   account: string;
   sender: string;
 }
-export type RoleGrantedEvent = TypedEvent<[string, string, string], RoleGrantedEventObject>;
+export type RoleGrantedEvent = TypedEvent<
+  [string, string, string],
+  RoleGrantedEventObject
+>;
 
 export type RoleGrantedEventFilter = TypedEventFilter<RoleGrantedEvent>;
 
@@ -230,14 +366,21 @@ export interface RoleRevokedEventObject {
   account: string;
   sender: string;
 }
-export type RoleRevokedEvent = TypedEvent<[string, string, string], RoleRevokedEventObject>;
+export type RoleRevokedEvent = TypedEvent<
+  [string, string, string],
+  RoleRevokedEventObject
+>;
 
 export type RoleRevokedEventFilter = TypedEventFilter<RoleRevokedEvent>;
 
 export interface UtilizationParametersUpdatedEventObject {}
-export type UtilizationParametersUpdatedEvent = TypedEvent<[], UtilizationParametersUpdatedEventObject>;
+export type UtilizationParametersUpdatedEvent = TypedEvent<
+  [],
+  UtilizationParametersUpdatedEventObject
+>;
 
-export type UtilizationParametersUpdatedEventFilter = TypedEventFilter<UtilizationParametersUpdatedEvent>;
+export type UtilizationParametersUpdatedEventFilter =
+  TypedEventFilter<UtilizationParametersUpdatedEvent>;
 
 export interface LoanPriceOracle extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -252,9 +395,13 @@ export interface LoanPriceOracle extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TEvent>>;
 
-  listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+  listeners<TEvent extends TypedEvent>(
+    eventFilter?: TypedEventFilter<TEvent>
+  ): Array<TypedListener<TEvent>>;
   listeners(eventName?: string): Array<Listener>;
-  removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+  removeAllListeners<TEvent extends TypedEvent>(
+    eventFilter: TypedEventFilter<TEvent>
+  ): this;
   removeAllListeners(eventName?: string): this;
   off: OnEvent<this>;
   on: OnEvent<this>;
@@ -277,9 +424,14 @@ export interface LoanPriceOracle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[LoanPriceOracle.CollateralParametersStructOutput]>;
 
-    getRoleAdmin(role: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[string]>;
+    getRoleAdmin(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
-    getUtilizationParameters(overrides?: CallOverrides): Promise<[LoanPriceOracle.PiecewiseLinearModelStructOutput]>;
+    getUtilizationParameters(
+      overrides?: CallOverrides
+    ): Promise<[LoanPriceOracle.PiecewiseLinearModelStructOutput]>;
 
     grantRole(
       role: PromiseOrValue<BytesLike>,
@@ -341,7 +493,10 @@ export interface LoanPriceOracle extends BaseContract {
 
     supportedCollateralTokens(overrides?: CallOverrides): Promise<[string[]]>;
 
-    supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean]>;
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
   };
 
   DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
@@ -359,9 +514,14 @@ export interface LoanPriceOracle extends BaseContract {
     overrides?: CallOverrides
   ): Promise<LoanPriceOracle.CollateralParametersStructOutput>;
 
-  getRoleAdmin(role: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<string>;
+  getRoleAdmin(
+    role: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  getUtilizationParameters(overrides?: CallOverrides): Promise<LoanPriceOracle.PiecewiseLinearModelStructOutput>;
+  getUtilizationParameters(
+    overrides?: CallOverrides
+  ): Promise<LoanPriceOracle.PiecewiseLinearModelStructOutput>;
 
   grantRole(
     role: PromiseOrValue<BytesLike>,
@@ -423,7 +583,10 @@ export interface LoanPriceOracle extends BaseContract {
 
   supportedCollateralTokens(overrides?: CallOverrides): Promise<string[]>;
 
-  supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
+  supportsInterface(
+    interfaceId: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   callStatic: {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
@@ -441,9 +604,14 @@ export interface LoanPriceOracle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<LoanPriceOracle.CollateralParametersStructOutput>;
 
-    getRoleAdmin(role: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<string>;
+    getRoleAdmin(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    getUtilizationParameters(overrides?: CallOverrides): Promise<LoanPriceOracle.PiecewiseLinearModelStructOutput>;
+    getUtilizationParameters(
+      overrides?: CallOverrides
+    ): Promise<LoanPriceOracle.PiecewiseLinearModelStructOutput>;
 
     grantRole(
       role: PromiseOrValue<BytesLike>,
@@ -482,7 +650,10 @@ export interface LoanPriceOracle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setCollateralOracle(collateralOracle_: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+    setCollateralOracle(
+      collateralOracle_: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     setCollateralParameters(
       collateralToken: PromiseOrValue<string>,
@@ -490,7 +661,10 @@ export interface LoanPriceOracle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setMinimumLoanDuration(duration: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    setMinimumLoanDuration(
+      duration: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     setUtilizationParameters(
       packedUtilizationParameters: PromiseOrValue<BytesLike>,
@@ -499,12 +673,19 @@ export interface LoanPriceOracle extends BaseContract {
 
     supportedCollateralTokens(overrides?: CallOverrides): Promise<string[]>;
 
-    supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
   };
 
   filters: {
-    "CollateralOracleUpdated(address)"(collateralOracle?: null): CollateralOracleUpdatedEventFilter;
-    CollateralOracleUpdated(collateralOracle?: null): CollateralOracleUpdatedEventFilter;
+    "CollateralOracleUpdated(address)"(
+      collateralOracle?: null
+    ): CollateralOracleUpdatedEventFilter;
+    CollateralOracleUpdated(
+      collateralOracle?: null
+    ): CollateralOracleUpdatedEventFilter;
 
     "CollateralParametersUpdated(address)"(
       collateralToken?: PromiseOrValue<string> | null
@@ -513,8 +694,12 @@ export interface LoanPriceOracle extends BaseContract {
       collateralToken?: PromiseOrValue<string> | null
     ): CollateralParametersUpdatedEventFilter;
 
-    "MinimumLoanDurationUpdated(uint256)"(duration?: null): MinimumLoanDurationUpdatedEventFilter;
-    MinimumLoanDurationUpdated(duration?: null): MinimumLoanDurationUpdatedEventFilter;
+    "MinimumLoanDurationUpdated(uint256)"(
+      duration?: null
+    ): MinimumLoanDurationUpdatedEventFilter;
+    MinimumLoanDurationUpdated(
+      duration?: null
+    ): MinimumLoanDurationUpdatedEventFilter;
 
     "RoleAdminChanged(bytes32,bytes32,bytes32)"(
       role?: PromiseOrValue<BytesLike> | null,
@@ -564,9 +749,15 @@ export interface LoanPriceOracle extends BaseContract {
 
     currencyToken(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getCollateralParameters(collateralToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    getCollateralParameters(
+      collateralToken: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    getRoleAdmin(role: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
+    getRoleAdmin(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     getUtilizationParameters(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -630,15 +821,24 @@ export interface LoanPriceOracle extends BaseContract {
 
     supportedCollateralTokens(overrides?: CallOverrides): Promise<BigNumber>;
 
-    supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    DEFAULT_ADMIN_ROLE(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    IMPLEMENTATION_VERSION(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    PARAMETER_ADMIN_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    PARAMETER_ADMIN_ROLE(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     collateralOracle(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -649,9 +849,14 @@ export interface LoanPriceOracle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    getRoleAdmin(role: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getRoleAdmin(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    getUtilizationParameters(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getUtilizationParameters(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     grantRole(
       role: PromiseOrValue<BytesLike>,
@@ -665,7 +870,9 @@ export interface LoanPriceOracle extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    minimumLoanDuration(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    minimumLoanDuration(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     priceLoan(
       collateralToken: PromiseOrValue<string>,
@@ -711,8 +918,13 @@ export interface LoanPriceOracle extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    supportedCollateralTokens(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    supportedCollateralTokens(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
   };
 }

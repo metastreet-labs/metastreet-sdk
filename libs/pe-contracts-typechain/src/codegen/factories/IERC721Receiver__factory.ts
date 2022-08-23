@@ -4,7 +4,10 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IERC721Receiver, IERC721ReceiverInterface } from "../IERC721Receiver";
+import type {
+  IERC721Receiver,
+  IERC721ReceiverInterface,
+} from "../IERC721Receiver";
 
 const _abi = [
   {
@@ -48,7 +51,10 @@ export class IERC721Receiver__factory {
   static createInterface(): IERC721ReceiverInterface {
     return new utils.Interface(_abi) as IERC721ReceiverInterface;
   }
-  static connect(address: string, signerOrProvider: Signer | Provider): IERC721Receiver {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): IERC721Receiver {
     return new Contract(address, _abi, signerOrProvider) as IERC721Receiver;
   }
 }

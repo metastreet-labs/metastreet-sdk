@@ -4,7 +4,10 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { ICollateralOracle, ICollateralOracleInterface } from "../ICollateralOracle";
+import type {
+  ICollateralOracle,
+  ICollateralOracleInterface,
+} from "../ICollateralOracle";
 
 const _abi = [
   {
@@ -56,7 +59,10 @@ export class ICollateralOracle__factory {
   static createInterface(): ICollateralOracleInterface {
     return new utils.Interface(_abi) as ICollateralOracleInterface;
   }
-  static connect(address: string, signerOrProvider: Signer | Provider): ICollateralOracle {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): ICollateralOracle {
     return new Contract(address, _abi, signerOrProvider) as ICollateralOracle;
   }
 }
