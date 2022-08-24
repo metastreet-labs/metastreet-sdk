@@ -5,6 +5,7 @@
     "margin-core": "libs/margin-core",
     "margin-wagmi": "libs/margin-wagmi",
     "pe-contracts-typechain": "libs/pe-contracts-typechain",
-    "test": "apps/test"
+    "test": "apps/test",
+    "test-e2e": "apps/test-e2e"
   }
 }
