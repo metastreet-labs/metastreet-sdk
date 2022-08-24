@@ -1,4 +1,4 @@
-import { IERC3156FlashLender__factory, LeverageBuyWrapperV1__factory } from "@metastreet-sdk/pe-contracts-typechain";
+import { IERC3156FlashLender__factory, LeverageBuyWrapperV1__factory } from "@metastreet-labs/pe-contracts-typechain";
 import { BigNumber, BigNumberish } from "ethers";
 import { FetcherParams } from "./types";
 
