@@ -16,7 +16,7 @@
     "publish": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "node tools/scripts/publish.mjs pe-contracts-fetchers {args.ver} {args.tag}"
+        "command": "node tools/scripts/publish.mjs margin-core {args.ver} {args.tag}"
       },
       "dependsOn": [
         {

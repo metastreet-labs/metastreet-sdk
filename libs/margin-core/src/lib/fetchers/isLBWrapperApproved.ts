@@ -2,7 +2,7 @@ import {
   ERC721__factory,
   LeverageBuyWrapperV1__factory,
   PurchaseEscrowPlatformV1__factory,
-} from "@metastreet-sdk/pe-contracts-typechain";
+} from "@metastreet-labs/pe-contracts-typechain";
 import { FetcherParams } from "./types";
 
 interface IsLBWrapperApprovedParams extends FetcherParams {

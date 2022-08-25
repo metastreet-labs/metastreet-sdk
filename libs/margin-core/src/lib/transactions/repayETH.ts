@@ -1,7 +1,7 @@
 import {
   LeverageBuyWrapperV1__factory,
   PurchaseEscrowPlatformV1__factory,
-} from "@metastreet-sdk/pe-contracts-typechain";
+} from "@metastreet-labs/pe-contracts-typechain";
 import { BigNumberish } from "ethers";
 import { TransactionParams } from "./types";
 

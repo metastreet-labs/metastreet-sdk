@@ -1,4 +1,4 @@
-import { LeverageBuyWrapperV1__factory } from "@metastreet-sdk/pe-contracts-typechain";
+import { LeverageBuyWrapperV1__factory } from "@metastreet-labs/pe-contracts-typechain";
 import { FetcherParams } from "./types";
 
 const getPayload = (id: string) => {

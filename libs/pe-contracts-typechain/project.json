@@ -16,7 +16,7 @@
     "publish": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "node tools/scripts/publish.mjs pe-contracts-lib {args.ver} {args.tag}"
+        "command": "node tools/scripts/publish.mjs pe-contracts-typechain {args.ver} {args.tag}"
       },
       "dependsOn": [
         {

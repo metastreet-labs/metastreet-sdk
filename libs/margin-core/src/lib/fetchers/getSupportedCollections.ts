@@ -1,4 +1,4 @@
-import { LoanPriceOracle__factory, Vault__factory } from "@metastreet-sdk/pe-contracts-typechain";
+import { LoanPriceOracle__factory, Vault__factory } from "@metastreet-labs/pe-contracts-typechain";
 import { FetcherParams } from "./types";
 
 export const getSupportedCollections = async (params: FetcherParams) => {
