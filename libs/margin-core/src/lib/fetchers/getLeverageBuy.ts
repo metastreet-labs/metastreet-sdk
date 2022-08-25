@@ -36,13 +36,16 @@ export const getLeverageBuy = async (params: GetLeverageBuyParams) => {
 
   const lbWrapper = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signerOrProvider);
   const pePlatformAddress = await lbWrapper.purchaseEscrow();
-  const id = `${deployment.lbWrapperAddress}-${pePlatformAddress}-${escrowID}`;
+  const id = `${deployment.lbWrapperAddress}-${pePlatformAddress}-${escrowID}`.toLowerCase();
 
   const response = await fetch(params.deployment.subgraphURI, {
     method: "POST",
     body: getPayload(id),
     headers: { "Content-Type": "application/json" },
   });
+  if (response.ok) {
+    const json = await response.json();
+    return json;
+  }
   // TODO: transform response into a LeverageBuyEntity
-  console.log(response);
 };

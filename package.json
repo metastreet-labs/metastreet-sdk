@@ -26,6 +26,7 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "ethers": "^5.7.0",
+    "next": "12.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.3.0",
@@ -39,6 +40,7 @@
     "@nrwl/eslint-plugin-nx": "14.5.8",
     "@nrwl/jest": "14.5.8",
     "@nrwl/linter": "14.5.8",
+    "@nrwl/next": "^14.5.10",
     "@nrwl/react": "14.5.8",
     "@nrwl/web": "14.5.8",
     "@nrwl/workspace": "14.5.8",
@@ -54,6 +56,7 @@
     "babel-jest": "27.5.1",
     "cypress": "^10.2.0",
     "eslint": "~8.15.0",
+    "eslint-config-next": "12.2.3",
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-cypress": "^2.10.3",
     "eslint-plugin-import": "2.26.0",
