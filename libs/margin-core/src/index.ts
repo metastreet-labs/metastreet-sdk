@@ -4,6 +4,7 @@ export * from "./lib/fetchers/getReservoirFillCalldata";
 export * from "./lib/fetchers/getSupportedCollections";
 export * from "./lib/fetchers/quoteSingleERC721";
 export * from "./lib/fetchers/subgraph/getLeverageBuy";
+export * from "./lib/fetchers/subgraph/getLeverageBuyEvents";
 export * from "./lib/fetchers/subgraph/types";
 export * from "./lib/fetchers/types";
 export * from "./lib/transactions/buySingleERC721WithETH";
