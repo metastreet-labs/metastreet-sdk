@@ -1,5 +1,6 @@
 import { Deployment } from "../../deployments";
 import { RawLeverageBuyEvent, transformRawLeverageBuyEvent } from "./transformers";
+import { LeverageBuyEvent } from "./types";
 
 interface GetPayloadVariables {
   owner: string;
@@ -60,7 +61,7 @@ const getPayload = (variables: GetPayloadVariables) => {
 
 type GetLeverageBuyEventsParams = { deployment: Deployment } & GetPayloadVariables;
 
-export const getLeverageBuyEvents = async (params: GetLeverageBuyEventsParams) => {
+export const getLeverageBuyEvents = async (params: GetLeverageBuyEventsParams): Promise<LeverageBuyEvent[]> => {
   const { deployment, ...variables } = params;
 
   const response = await fetch(deployment.subgraphURI, {

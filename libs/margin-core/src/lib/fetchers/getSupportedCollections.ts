@@ -2,7 +2,7 @@ import { LoanPriceOracle__factory, Vault__factory } from "@metastreet-labs/pe-co
 import { withReadableError } from "../errors";
 import { FetcherParams } from "./types";
 
-const _getSupportedCollections = async (params: FetcherParams) => {
+const _getSupportedCollections = async (params: FetcherParams): Promise<string[]> => {
   const { signerOrProvider, deployment } = params;
   const vault = Vault__factory.connect(deployment.vaultAddress, signerOrProvider);
   const loanPriceOracleAddress = await vault.loanPriceOracle();

@@ -10,7 +10,7 @@ interface IsLBWrapperApprovedParams extends FetcherParams {
   owner: string;
 }
 
-const _isLBWrapperApproved = async (params: IsLBWrapperApprovedParams) => {
+const _isLBWrapperApproved = async (params: IsLBWrapperApprovedParams): Promise<boolean> => {
   const { signerOrProvider, deployment } = params;
 
   const lbWrapper = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signerOrProvider);
