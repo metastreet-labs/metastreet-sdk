@@ -3,26 +3,23 @@ import {
   GetCollateralLimitsParams,
   GetCollateralLimitsResult,
 } from "@metastreet-labs/margin-core";
-import { useQuery } from "wagmi";
-import useDeployment from "../useDeployment/useDeployment";
+import { useProvider, useQuery } from "wagmi";
+import useDeployment from "../DeploymentContext/useDeployment";
 
 type TokenIdentifier = Pick<GetCollateralLimitsParams, "collectionAddress" | "tokenID">;
 
-export interface UseCollateralLimitsParams extends Omit<GetCollateralLimitsParams, "deployment"> {
+export interface UseCollateralLimitsParams extends Omit<GetCollateralLimitsParams, "deployment" | "signerOrProvider"> {
   queryOptions: Parameters<typeof useQuery<GetCollateralLimitsResult, Error>>[2];
 }
 
-export const useCollateralLimits = ({
-  collectionAddress,
-  tokenID,
-  signerOrProvider,
-  purchasePrice,
-  queryOptions,
-}: UseCollateralLimitsParams) => {
+export const useCollateralLimits = (params: UseCollateralLimitsParams) => {
+  const { collectionAddress, tokenID, purchasePrice, queryOptions } = params;
+
+  const provider = useProvider();
   const deployment = useDeployment();
 
   const fetcher = () =>
-    getCollateralLimits({ signerOrProvider, collectionAddress, tokenID, deployment, purchasePrice });
+    getCollateralLimits({ signerOrProvider: provider, collectionAddress, tokenID, deployment, purchasePrice });
 
   return useQuery<GetCollateralLimitsResult, Error>(
     collateralLimitsQueryKeys.token({ collectionAddress, tokenID }),
@@ -42,5 +39,3 @@ export const collateralLimitsQueryKeys = {
     tokenID,
   ],
 };
-
-export default useCollateralLimits;

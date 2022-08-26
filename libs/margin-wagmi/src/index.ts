@@ -1,3 +1,3 @@
-export * from "./lib/useDeployment/useDeployment";
-export * from "./lib/useCollateralLimits/useCollateralLimits";
-export * from "./lib/DeploymentProvider/DeploymentProvider";
+export * from "./lib/DeploymentContext/DeploymentProvider";
+export * from "./lib/DeploymentContext/useDeployment";
+export * from "./lib/queries/useCollateralLimits";
