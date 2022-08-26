@@ -1,5 +1,6 @@
 import { LeverageBuyWrapperV1__factory } from "@metastreet-labs/pe-contracts-typechain";
-import { FetcherParams } from "./types";
+import { FetcherParams } from "../types";
+import { transformRawLeverageBuy } from "./transformers";
 
 const getPayload = (id: string) => {
   const payload = {
@@ -45,7 +46,11 @@ export const getLeverageBuy = async (params: GetLeverageBuyParams) => {
   });
   if (response.ok) {
     const json = await response.json();
-    return json;
+    const raw = json.data.leverageBuy;
+    if (raw) return transformRawLeverageBuy(raw);
+    throw new Error("not found");
+  } else {
+    const text = await response.text();
+    throw new Error(text);
   }
-  // TODO: transform response into a LeverageBuyEntity
 };
