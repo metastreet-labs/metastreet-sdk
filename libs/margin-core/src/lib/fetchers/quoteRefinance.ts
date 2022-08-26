@@ -1,5 +1,6 @@
 import { LeverageBuyWrapperV1__factory } from "@metastreet-labs/pe-contracts-typechain";
 import { BigNumber, BigNumberish } from "ethers";
+import { withReadableError } from "../errors";
 import { FetcherParams } from "./types";
 
 interface QuoteRefinanceParams extends FetcherParams {
@@ -16,7 +17,7 @@ interface QuoteRefinanceResult {
   repayment: BigNumber;
 }
 
-const quoteRefinance = async (params: QuoteRefinanceParams): Promise<QuoteRefinanceResult> => {
+const _quoteRefinance = async (params: QuoteRefinanceParams): Promise<QuoteRefinanceResult> => {
   const { signerOrProvider, deployment } = params;
   const contract = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signerOrProvider);
   const quote = await contract.quoteRefinance(
@@ -34,4 +35,4 @@ const quoteRefinance = async (params: QuoteRefinanceParams): Promise<QuoteRefina
   };
 };
 
-export default quoteRefinance;
+export const quoteRefinance = withReadableError(_quoteRefinance);

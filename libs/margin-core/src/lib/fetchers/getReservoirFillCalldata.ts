@@ -1,4 +1,5 @@
 import { Deployment } from "../deployments";
+import { withReadableError } from "../errors";
 
 interface GetReservoirFillCalldataProps {
   deployment: Deployment;
@@ -7,7 +8,7 @@ interface GetReservoirFillCalldataProps {
   apiKey?: string;
 }
 
-export const getReservoirFillCalldata = async (props: GetReservoirFillCalldataProps): Promise<string> => {
+const _getReservoirFillCalldata = async (props: GetReservoirFillCalldataProps): Promise<string> => {
   const { deployment, collectionAddress, tokenID, apiKey } = props;
   // construct URL
   const params = new URLSearchParams();
@@ -33,3 +34,5 @@ export const getReservoirFillCalldata = async (props: GetReservoirFillCalldataPr
   }
   throw error;
 };
+
+export const getReservoirFillCalldata = withReadableError(_getReservoirFillCalldata);

@@ -1,5 +1,6 @@
 import { IERC3156FlashLender__factory, LeverageBuyWrapperV1__factory } from "@metastreet-labs/pe-contracts-typechain";
 import { BigNumber, BigNumberish } from "ethers";
+import { withReadableError } from "../errors";
 import { FetcherParams } from "./types";
 
 export interface GetCollateralLimitsParams extends FetcherParams {
@@ -16,15 +17,11 @@ export interface GetCollateralLimitsResult {
   maxLoanToValue: BigNumber;
 }
 
-export const getCollateralLimits = async ({
-  signerOrProvider,
-  collectionAddress,
-  tokenID,
-  purchasePrice,
-  deployment: { lbWrapperAddress, vaultAddress },
-}: GetCollateralLimitsParams): Promise<GetCollateralLimitsResult> => {
-  const lbWrapper = LeverageBuyWrapperV1__factory.connect(lbWrapperAddress, signerOrProvider);
-  const limits = await lbWrapper.getCollateralLimits(vaultAddress, collectionAddress, tokenID);
+const _getCollateralLimits = async (params: GetCollateralLimitsParams): Promise<GetCollateralLimitsResult> => {
+  const { signerOrProvider, deployment, collectionAddress, tokenID, purchasePrice } = params;
+
+  const lbWrapper = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signerOrProvider);
+  const limits = await lbWrapper.getCollateralLimits(deployment.vaultAddress, collectionAddress, tokenID);
 
   const flashLenderAddress = await lbWrapper.flashLender();
   const wethAddress = await lbWrapper.weth();
@@ -41,3 +38,5 @@ export const getCollateralLimits = async ({
     maxLoanToValue: limits.maxLoanToValue,
   };
 };
+
+export const getCollateralLimits = withReadableError(_getCollateralLimits);
