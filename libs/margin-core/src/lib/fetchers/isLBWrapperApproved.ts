@@ -3,13 +3,14 @@ import {
   LeverageBuyWrapperV1__factory,
   PurchaseEscrowPlatformV1__factory,
 } from "@metastreet-labs/pe-contracts-typechain";
+import { withReadableError } from "../errors";
 import { FetcherParams } from "./types";
 
 interface IsLBWrapperApprovedParams extends FetcherParams {
   owner: string;
 }
 
-const isLBWrapperApproved = async (params: IsLBWrapperApprovedParams) => {
+const _isLBWrapperApproved = async (params: IsLBWrapperApprovedParams): Promise<boolean> => {
   const { signerOrProvider, deployment } = params;
 
   const lbWrapper = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signerOrProvider);
@@ -22,4 +23,4 @@ const isLBWrapperApproved = async (params: IsLBWrapperApprovedParams) => {
   return buyerNoteToken.isApprovedForAll(params.owner, deployment.lbWrapperAddress);
 };
 
-export default isLBWrapperApproved;
+export const isLBWrapperApproved = withReadableError(_isLBWrapperApproved);

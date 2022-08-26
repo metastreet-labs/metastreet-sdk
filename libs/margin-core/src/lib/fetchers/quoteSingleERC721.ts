@@ -1,5 +1,6 @@
 import { LeverageBuyWrapperV1__factory } from "@metastreet-labs/pe-contracts-typechain";
 import { BigNumber, BigNumberish } from "ethers";
+import { withReadableError } from "../errors";
 import { FetcherParams } from "./types";
 
 export interface QuoteSingleERC721Params extends FetcherParams {
@@ -16,7 +17,7 @@ export interface QuoteSingleERC721Result {
   principal: BigNumber;
 }
 
-const quoteSingleERC721 = async (params: QuoteSingleERC721Params): Promise<QuoteSingleERC721Result> => {
+const _quoteSingleERC721 = async (params: QuoteSingleERC721Params): Promise<QuoteSingleERC721Result> => {
   const { signerOrProvider, deployment } = params;
   const leverageBuyWrapper = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signerOrProvider);
   const quote = await leverageBuyWrapper.quoteSingleERC721(
@@ -34,4 +35,4 @@ const quoteSingleERC721 = async (params: QuoteSingleERC721Params): Promise<Quote
   };
 };
 
-export default quoteSingleERC721;
+export const quoteSingleERC721 = withReadableError(_quoteSingleERC721);

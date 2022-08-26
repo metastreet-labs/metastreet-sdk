@@ -1,5 +1,5 @@
 import { LeverageBuyWrapperV1__factory } from "@metastreet-labs/pe-contracts-typechain";
-import { BigNumberish } from "ethers";
+import { BigNumberish, ContractTransaction } from "ethers";
 import { withReadableError } from "../errors";
 import { TransactionParams } from "./types";
 
@@ -11,7 +11,7 @@ export interface BuySingleERC721WithETHParams extends TransactionParams {
   duration: number;
 }
 
-const _buySingleERC721WithETH = (params: BuySingleERC721WithETHParams) => {
+const _buySingleERC721WithETH = (params: BuySingleERC721WithETHParams): Promise<ContractTransaction> => {
   const { signer, deployment } = params;
   const contract = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signer);
   return contract.buySingleERC721WithETH(

@@ -1,6 +1,7 @@
 import { LeverageBuyWrapperV1__factory } from "@metastreet-labs/pe-contracts-typechain";
 import { FetcherParams } from "../types";
 import { transformRawLeverageBuy } from "./transformers";
+import { LeverageBuy } from "./types";
 
 const getPayload = (id: string) => {
   const payload = {
@@ -32,7 +33,7 @@ interface GetLeverageBuyParams extends FetcherParams {
   escrowID: string;
 }
 
-export const getLeverageBuy = async (params: GetLeverageBuyParams) => {
+export const getLeverageBuy = async (params: GetLeverageBuyParams): Promise<LeverageBuy> => {
   const { signerOrProvider, deployment, escrowID } = params;
 
   const lbWrapper = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signerOrProvider);

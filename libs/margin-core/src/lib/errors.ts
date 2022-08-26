@@ -67,7 +67,7 @@ export const getReadableError = (e: any): ReadableError => {
   };
 };
 
-export const withReadableError = async <P, R>(fun: (params: P) => Promise<R>) => {
+export const withReadableError = <P, R>(fun: (params: P) => Promise<R>) => {
   return async (params: P) => {
     try {
       const result = await fun(params);

@@ -1,7 +1,8 @@
 import { LoanPriceOracle__factory, Vault__factory } from "@metastreet-labs/pe-contracts-typechain";
+import { withReadableError } from "../errors";
 import { FetcherParams } from "./types";
 
-export const getSupportedCollections = async (params: FetcherParams) => {
+const _getSupportedCollections = async (params: FetcherParams): Promise<string[]> => {
   const { signerOrProvider, deployment } = params;
   const vault = Vault__factory.connect(deployment.vaultAddress, signerOrProvider);
   const loanPriceOracleAddress = await vault.loanPriceOracle();
@@ -9,3 +10,5 @@ export const getSupportedCollections = async (params: FetcherParams) => {
   const addresses = await loanPriceOracle.supportedCollateralTokens();
   return addresses.map((a) => a.toLowerCase());
 };
+
+export const getSupportedCollections = withReadableError(_getSupportedCollections);
