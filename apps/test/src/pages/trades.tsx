@@ -2,11 +2,11 @@ import {
   DeploymentProvider,
   useCollateralLimits,
   UseCollateralLimitsParams,
+  useDeployment,
   useFlashFee,
   UseFlashFeeParams,
   useLeverageBuyEvents,
 } from "@metastreet-labs/margin-wagmi";
-import { useProvider } from "wagmi";
 
 const MaxDebt = ({
   collectionAddress,
@@ -69,16 +69,21 @@ const LeverageBuyEvents = () => {
   );
 };
 
+const CorrectNetworkChecker = () => {
+  const { chainId } = useDeployment();
+  if (chainId == 4) return null;
+  return <p>Switch to Rinkeby!</p>;
+};
+
 const Trades = () => {
-  const provider = useProvider();
   /*
    * Replace the elements below with your own.
    *
    * Note: The corresponding styles are in the ./index.css file.
    */
   return (
-    <DeploymentProvider chainId={provider.network.chainId}>
-      {provider.network.chainId !== 4 ? <p>Switch to Rinkeby!</p> : null}
+    <DeploymentProvider>
+      <CorrectNetworkChecker />
       <LeverageBuyEvents />
     </DeploymentProvider>
   );

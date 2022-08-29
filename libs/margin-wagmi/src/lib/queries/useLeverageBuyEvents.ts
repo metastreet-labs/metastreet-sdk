@@ -13,7 +13,7 @@ export interface UseLeverageBuyEventsParams extends Omit<GetLeverageBuyEventsPar
 export const useLeverageBuyEvents = (params: UseLeverageBuyEventsParams) => {
   const { first, owner, skip, queryOptions } = params;
 
-  const deployment = useDeployment();
+  const { deployment } = useDeployment();
 
   const fetcher = () => getLeverageBuyEvents({ deployment, first, owner, skip });
 

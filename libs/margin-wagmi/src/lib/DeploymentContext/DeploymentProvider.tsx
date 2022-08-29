@@ -1,18 +1,20 @@
 import { Deployment, DEPLOYMENTS } from "@metastreet-labs/margin-core";
-import React, { PropsWithChildren, useMemo } from "react";
+import React, { useMemo } from "react";
+import { useProvider } from "wagmi";
 
-export const DeploymentContext = React.createContext<Deployment | undefined>(undefined);
+export const DeploymentContext = React.createContext<{ chainId: number; deployment: Deployment } | undefined>(
+  undefined
+);
 
-export interface DeploymentProviderProps {
-  chainId: number;
-}
-
-export const DeploymentProvider = ({ chainId, children }: PropsWithChildren<DeploymentProviderProps>) => {
-  const deployment = useMemo(() => {
-    return DEPLOYMENTS[chainId];
+export const DeploymentProvider = ({ children }: { children: React.ReactNode }) => {
+  const provider = useProvider();
+  const chainId = provider.network.chainId;
+  const value = useMemo(() => {
+    const deployment = DEPLOYMENTS[chainId];
+    return { deployment, chainId };
   }, [chainId]);
 
-  return <DeploymentContext.Provider value={deployment}>{children}</DeploymentContext.Provider>;
+  return <DeploymentContext.Provider value={value}>{children}</DeploymentContext.Provider>;
 };
 
 export default DeploymentProvider;
