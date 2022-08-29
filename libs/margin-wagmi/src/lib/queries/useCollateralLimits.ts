@@ -16,7 +16,7 @@ export const useCollateralLimits = (params: UseCollateralLimitsParams) => {
   const { collectionAddress, tokenID, queryOptions } = params;
 
   const provider = useProvider();
-  const deployment = useDeployment();
+  const { deployment } = useDeployment();
 
   const fetcher = () => getCollateralLimits({ signerOrProvider: provider, collectionAddress, tokenID, deployment });
 

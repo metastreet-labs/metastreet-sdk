@@ -11,7 +11,7 @@ export const useFlashFee = (params: UseFlashFeeParams) => {
   const { loanAmount, queryOptions } = params;
 
   const provider = useProvider();
-  const deployment = useDeployment();
+  const { deployment } = useDeployment();
 
   const fetcher = () => getFlashFee({ signerOrProvider: provider, deployment, loanAmount });
 
