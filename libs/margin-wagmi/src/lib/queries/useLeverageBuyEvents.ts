@@ -7,7 +7,7 @@ import { useQuery } from "wagmi";
 import useDeployment from "../DeploymentContext/useDeployment";
 
 export interface UseLeverageBuyEventsParams extends Omit<GetLeverageBuyEventsParams, "deployment"> {
-  queryOptions: Parameters<typeof useQuery<GetLeverageBuyEventsResult, Error>>[2];
+  queryOptions?: Parameters<typeof useQuery<GetLeverageBuyEventsResult, Error>>[2];
 }
 
 export const useLeverageBuyEvents = (params: UseLeverageBuyEventsParams) => {

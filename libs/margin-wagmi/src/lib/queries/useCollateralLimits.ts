@@ -9,17 +9,16 @@ import useDeployment from "../DeploymentContext/useDeployment";
 type TokenIdentifier = Pick<GetCollateralLimitsParams, "collectionAddress" | "tokenID">;
 
 export interface UseCollateralLimitsParams extends Omit<GetCollateralLimitsParams, "deployment" | "signerOrProvider"> {
-  queryOptions: Parameters<typeof useQuery<GetCollateralLimitsResult, Error>>[2];
+  queryOptions?: Parameters<typeof useQuery<GetCollateralLimitsResult, Error>>[2];
 }
 
 export const useCollateralLimits = (params: UseCollateralLimitsParams) => {
-  const { collectionAddress, tokenID, purchasePrice, queryOptions } = params;
+  const { collectionAddress, tokenID, queryOptions } = params;
 
   const provider = useProvider();
   const deployment = useDeployment();
 
-  const fetcher = () =>
-    getCollateralLimits({ signerOrProvider: provider, collectionAddress, tokenID, deployment, purchasePrice });
+  const fetcher = () => getCollateralLimits({ signerOrProvider: provider, collectionAddress, tokenID, deployment });
 
   return useQuery<GetCollateralLimitsResult, Error>(
     collateralLimitsQueryKeys.token({ collectionAddress, tokenID }),
