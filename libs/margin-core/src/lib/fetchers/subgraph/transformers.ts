@@ -37,7 +37,7 @@ export const transformRawLeverageBuy = (raw: RawLeverageBuy): LeverageBuy => {
     principal: BigNumber.from(raw.principal),
     repayment: BigNumber.from(raw.repayment),
     duration: parseInt(raw.duration),
-    maturity: Date.now() / 1000 + parseInt(raw.duration),
+    maturity: parseInt(raw.maturity),
   };
 };
 
