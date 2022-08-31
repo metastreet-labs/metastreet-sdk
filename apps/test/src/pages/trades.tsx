@@ -6,6 +6,7 @@ import {
   useFlashFee,
   UseFlashFeeParams,
   useLeverageBuyEvents,
+  useLeverageBuys,
 } from "@metastreet-labs/margin-wagmi";
 
 const MaxDebt = ({
@@ -40,7 +41,41 @@ const MaxDebt = ({
   return <p>{`Max Debt: ${maxDebt}`}</p>;
 };
 
-const LeverageBuyEvents = () => {
+const LeverageBuys = () => {
+  // const { address } = useAccount();
+  const { data } = useLeverageBuys({
+    first: 1000,
+    // owner: address,
+    owner: "0x70d3Bc54ecAdB55c98AFEC3399bAB17e89F65F61",
+    skip: 0,
+  });
+
+  if (!data) {
+    return <p>Loading...</p>;
+  }
+
+  if (data.length <= 0) {
+    return <p>No transactions</p>;
+  }
+
+  return (
+    <>
+      {data.map(({ id, repayment, duration, maturity, collectionAddress, tokenID }) => {
+        const maturityDate = new Date(0);
+        console.log(maturityDate, maturity);
+        maturityDate.setUTCSeconds(maturity);
+
+        return (
+          <div key={id}>
+            <p>{`${repayment} wei due in ${duration / 60 / 60 / 24} days on ${maturityDate}`}</p>
+            <MaxDebt collectionAddress={collectionAddress} tokenID={tokenID} repayment={repayment} />
+          </div>
+        );
+      })}
+    </>
+  );
+};
+const PastTransactions = () => {
   // const { address } = useAccount();
   const { data } = useLeverageBuyEvents({
     first: 1000,
@@ -54,17 +89,20 @@ const LeverageBuyEvents = () => {
   }
 
   if (data.length <= 0) {
-    return <p>No positions</p>;
+    return <p>No transactions</p>;
   }
 
   return (
     <>
-      {data.map(({ id, leverageBuy: { collectionAddress, tokenID, duration, repayment } }) => (
-        <div key={id}>
-          <p>{`${repayment} wei due in ${duration / 60 / 60 / 24} days`}</p>
-          <MaxDebt collectionAddress={collectionAddress} tokenID={tokenID} repayment={repayment} />
-        </div>
-      ))}
+      {data.map(({ id, type, timestamp, leverageBuy: { duration } }) => {
+        const createdAt = new Date(0);
+        createdAt.setUTCSeconds(timestamp);
+        return (
+          <div key={id}>
+            <p>{`${type} transaction on ${createdAt}. Loan duration: ${duration / 60 / 60 / 24} days`}</p>
+          </div>
+        );
+      })}
     </>
   );
 };
@@ -84,7 +122,8 @@ const Trades = () => {
   return (
     <DeploymentProvider>
       <CorrectNetworkChecker />
-      <LeverageBuyEvents />
+      <LeverageBuys />
+      <PastTransactions />
     </DeploymentProvider>
   );
 };
