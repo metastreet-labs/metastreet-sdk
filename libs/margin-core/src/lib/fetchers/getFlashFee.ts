@@ -10,8 +10,7 @@ export interface GetFlashFeeParams extends FetcherParams {
 const _getFlashFee = async (params: GetFlashFeeParams): Promise<BigNumber> => {
   const { deployment, loanAmount, signerOrProvider } = params;
   const lbWrapper = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signerOrProvider);
-  const flashLenderAddress = await lbWrapper.flashLender();
-  const wethAddress = await lbWrapper.weth();
+  const [flashLenderAddress, wethAddress] = await Promise.all([lbWrapper.flashLender(), lbWrapper.weth()]);
 
   const flashLender = IERC3156FlashLender__factory.connect(flashLenderAddress, signerOrProvider);
   const flashFee = await flashLender.flashFee(wethAddress, loanAmount);
