@@ -59,9 +59,11 @@ const getPayload = (variables: GetPayloadVariables) => {
   return JSON.stringify(payload);
 };
 
-type GetLeverageBuyEventsParams = { deployment: Deployment } & GetPayloadVariables;
+export type GetLeverageBuyEventsParams = { deployment: Deployment } & GetPayloadVariables;
 
-export const getLeverageBuyEvents = async (params: GetLeverageBuyEventsParams): Promise<LeverageBuyEvent[]> => {
+export type GetLeverageBuyEventsResult = LeverageBuyEvent[];
+
+export const getLeverageBuyEvents = async (params: GetLeverageBuyEventsParams): Promise<GetLeverageBuyEventsResult> => {
   const { deployment, ...variables } = params;
 
   const response = await fetch(deployment.subgraphURI, {

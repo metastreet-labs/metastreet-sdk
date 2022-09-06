@@ -1,5 +1,5 @@
 import React from "react";
-import { DeploymentContext } from "../DeploymentProvider/DeploymentProvider";
+import { DeploymentContext } from "./DeploymentProvider";
 
 export const useDeployment = () => {
   const context = React.useContext(DeploymentContext);
