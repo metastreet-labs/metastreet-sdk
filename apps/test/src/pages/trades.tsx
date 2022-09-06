@@ -7,7 +7,10 @@ import {
   UseFlashFeeParams,
   useLeverageBuyEvents,
   useLeverageBuys,
+  useRepayETH,
 } from "@metastreet-labs/margin-wagmi";
+import { BigNumber, Signer } from "ethers";
+import { useSigner } from "wagmi";
 
 const MaxDebt = ({
   collectionAddress,
@@ -41,6 +44,19 @@ const MaxDebt = ({
   return <p>{`Max Debt: ${maxDebt}`}</p>;
 };
 
+const SignerProvider = ({ children }: { children: (params: { signer: Signer }) => JSX.Element }) => {
+  const { data } = useSigner();
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+  return children({ signer: data });
+};
+
+const Repay = ({ escrowID, repayment, signer }: { escrowID: string; repayment: BigNumber; signer: Signer }) => {
+  const repayETH = useRepayETH({ escrowID, repayment, signer });
+  return <button onClick={repayETH}>Repay</button>;
+};
+
 const LeverageBuys = () => {
   // const { address } = useAccount();
   const { data } = useLeverageBuys({
@@ -60,15 +76,17 @@ const LeverageBuys = () => {
 
   return (
     <>
-      {data.map(({ id, repayment, duration, maturity, collectionAddress, tokenID }) => {
+      {data.map(({ id, escrowID, repayment, duration, maturity, collectionAddress, tokenID }) => {
         const maturityDate = new Date(0);
-        console.log(maturityDate, maturity);
         maturityDate.setUTCSeconds(maturity);
 
         return (
           <div key={id}>
             <p>{`${repayment} wei due in ${duration / 60 / 60 / 24} days on ${maturityDate}`}</p>
             <MaxDebt collectionAddress={collectionAddress} tokenID={tokenID} repayment={repayment} />
+            <SignerProvider>
+              {({ signer }) => <Repay signer={signer} escrowID={escrowID} repayment={repayment} />}
+            </SignerProvider>
           </div>
         );
       })}

@@ -6,7 +6,7 @@ import { BigNumberish, ContractTransaction } from "ethers";
 import { withReadableError } from "../errors";
 import { TransactionParams } from "./types";
 
-interface RepayETHParams extends TransactionParams {
+export interface RepayETHParams extends TransactionParams {
   escrowID: string;
   repayment: BigNumberish;
 }

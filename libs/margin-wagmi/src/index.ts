@@ -1,5 +1,6 @@
 export * from "./lib/DeploymentContext/DeploymentProvider";
 export * from "./lib/DeploymentContext/useDeployment";
+export * from "./lib/mutations/useRepayETH";
 export * from "./lib/queries/useCollateralLimits";
 export * from "./lib/queries/useFlashFee";
 export * from "./lib/queries/useLeverageBuyEvents";
