@@ -6,12 +6,12 @@ import {
 import { withReadableError } from "../errors";
 import { FetcherParams } from "./types";
 
-interface IsLBWrapperApprovedParams extends FetcherParams {
+export interface IsLBWrapperApprovedParams extends FetcherParams {
   owner: string;
 }
 
 const _isLBWrapperApproved = async (params: IsLBWrapperApprovedParams): Promise<boolean> => {
-  const { signerOrProvider, deployment } = params;
+  const { signerOrProvider, deployment, owner } = params;
 
   const lbWrapper = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signerOrProvider);
   const pePlatformAddress = await lbWrapper.purchaseEscrow();
@@ -20,7 +20,7 @@ const _isLBWrapperApproved = async (params: IsLBWrapperApprovedParams): Promise<
   const buyerNoteTokenAddress = await pePlatform.buyerNoteToken();
 
   const buyerNoteToken = ERC721__factory.connect(buyerNoteTokenAddress, signerOrProvider);
-  return buyerNoteToken.isApprovedForAll(params.owner, deployment.lbWrapperAddress);
+  return buyerNoteToken.isApprovedForAll(owner, deployment.lbWrapperAddress);
 };
 
 export const isLBWrapperApproved = withReadableError(_isLBWrapperApproved);

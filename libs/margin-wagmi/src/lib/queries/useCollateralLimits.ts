@@ -7,9 +7,10 @@ import { useProvider, useQuery } from "wagmi";
 import useDeployment from "../DeploymentContext/useDeployment";
 
 type TokenIdentifier = Pick<GetCollateralLimitsParams, "collectionAddress" | "tokenID">;
+export type UseCollateralLimitsResult = GetCollateralLimitsResult;
 
 export interface UseCollateralLimitsParams extends Omit<GetCollateralLimitsParams, "deployment" | "signerOrProvider"> {
-  queryOptions?: Parameters<typeof useQuery<GetCollateralLimitsResult, Error>>[2];
+  queryOptions?: Parameters<typeof useQuery<UseCollateralLimitsResult, Error>>[2];
 }
 
 export const useCollateralLimits = (params: UseCollateralLimitsParams) => {
@@ -20,7 +21,7 @@ export const useCollateralLimits = (params: UseCollateralLimitsParams) => {
 
   const fetcher = () => getCollateralLimits({ signerOrProvider: provider, collectionAddress, tokenID, deployment });
 
-  return useQuery<GetCollateralLimitsResult, Error>(
+  return useQuery<UseCollateralLimitsResult, Error>(
     collateralLimitsQueryKeys.token({ collectionAddress, tokenID }),
     fetcher,
     queryOptions
