@@ -3,7 +3,7 @@ import { BigNumber, BigNumberish } from "ethers";
 import { withReadableError } from "../errors";
 import { FetcherParams } from "./types";
 
-interface QuoteRefinanceParams extends FetcherParams {
+export interface QuoteRefinanceParams extends FetcherParams {
   collectionAddress: string;
   tokenID: string;
   balance: BigNumberish;
@@ -11,7 +11,7 @@ interface QuoteRefinanceParams extends FetcherParams {
   duration: number;
 }
 
-interface QuoteRefinanceResult {
+export interface QuoteRefinanceResult {
   fee: BigNumber;
   principal: BigNumber;
   repayment: BigNumber;

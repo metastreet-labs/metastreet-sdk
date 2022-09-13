@@ -14,4 +14,5 @@ export * from "./lib/fetchers/types";
 export * from "./lib/transactions/buySingleERC721WithETH";
 export * from "./lib/transactions/refinanceETH";
 export * from "./lib/transactions/repayETH";
+export * from "./lib/transactions/setLBWrapperApprovalForAll";
 export * from "./lib/transactions/types";
