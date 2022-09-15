@@ -8,7 +8,7 @@ export const useRefinanceETH = (props: UseRefinanceETHParams) => {
   const { signer, escrowID, downPayment, duration, maxRepayment, ...sendTransactionOptions } = props;
   const { deployment } = useDeployment();
 
-  const fetcher = () => {
+  const transaction = () => {
     return sendTransaction(
       () => refinanceETH({ deployment, signer, escrowID, downPayment, duration, maxRepayment }),
       sendTransactionOptions
@@ -17,5 +17,5 @@ export const useRefinanceETH = (props: UseRefinanceETHParams) => {
 
   // TODO: Add mutation from react-query
 
-  return fetcher;
+  return transaction;
 };

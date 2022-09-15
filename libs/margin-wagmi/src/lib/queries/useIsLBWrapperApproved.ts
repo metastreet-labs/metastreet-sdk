@@ -15,10 +15,10 @@ export const useIsLBWrapperApproved = (params: UseIsLBWrapperApprovedParams) => 
 
   const fetcher = () => isLBWrapperApproved({ signerOrProvider: provider, deployment, owner });
 
-  return useQuery<boolean, Error>(isLBWrapperApprovedQueryKeys.owner({ owner }), fetcher, queryOptions);
+  return useQuery<boolean, Error>(isLBWrapperApprovedQueryKeys.owner(owner), fetcher, queryOptions);
 };
 
 export const isLBWrapperApprovedQueryKeys = {
   all: () => ["is-lb-wrapper-approved"],
-  owner: ({ owner }: Pick<IsLBWrapperApprovedParams, "owner">) => [...isLBWrapperApprovedQueryKeys.all(), owner],
+  owner: (owner: IsLBWrapperApprovedParams["owner"]) => [...isLBWrapperApprovedQueryKeys.all(), owner],
 };
