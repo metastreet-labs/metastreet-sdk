@@ -13,7 +13,7 @@ const getPayload = (variables: GetPayloadVariables) => {
     operationName: "LeverageBuys",
     query: `query LeverageBuys($owner: String!, $first: Int!, $skip: Int!) {
         leverageBuys(
-          where: {buyer: $owner}
+          where: {buyer: $owner, status: Active}
           orderBy: maturity
           orderDirection: asc
           first: $first

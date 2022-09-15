@@ -10,7 +10,7 @@ import {
   useRepayETH,
 } from "@metastreet-labs/margin-wagmi";
 import { BigNumber, Signer } from "ethers";
-import { useSigner } from "wagmi";
+import { useAccount, useSigner } from "wagmi";
 
 const MaxDebt = ({
   collectionAddress,
@@ -57,12 +57,19 @@ const Repay = ({ escrowID, repayment, signer }: { escrowID: string; repayment: B
   return <button onClick={repayETH}>Repay</button>;
 };
 
+// const Refinance = () => {
+//   return <>
+//     <button onClick={}>Refinance</button>
+//     <div>Modal</div>
+//   </>
+// }
+
 const LeverageBuys = () => {
-  // const { address } = useAccount();
+  const { address } = useAccount();
   const { data } = useLeverageBuys({
     first: 1000,
-    // owner: address,
-    owner: "0x70d3Bc54ecAdB55c98AFEC3399bAB17e89F65F61",
+    owner: address,
+    // owner: "0x70d3Bc54ecAdB55c98AFEC3399bAB17e89F65F61",
     skip: 0,
   });
 
@@ -94,11 +101,11 @@ const LeverageBuys = () => {
   );
 };
 const PastTransactions = () => {
-  // const { address } = useAccount();
+  const { address } = useAccount();
   const { data } = useLeverageBuyEvents({
     first: 1000,
-    // owner: address,
-    owner: "0xf2391397fa352cad37023731d37b8013c87592c1",
+    owner: address,
+    // owner: "0xf2391397fa352cad37023731d37b8013c87592c1",
     skip: 0,
   });
 

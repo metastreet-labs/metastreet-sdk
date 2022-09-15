@@ -1,13 +1,13 @@
 import { LeverageBuyWrapperV1__factory } from "@metastreet-labs/pe-contracts-typechain";
-import { BigNumber, ContractTransaction } from "ethers";
+import { BigNumber, BigNumberish, ContractTransaction } from "ethers";
 import { withReadableError } from "../errors";
 import { TransactionParams } from "./types";
 
-interface RefinanceETHParams extends TransactionParams {
+export interface RefinanceETHParams extends TransactionParams {
   escrowID: string;
   duration: number;
-  downPayment: string;
-  maxRepayment: string;
+  downPayment: BigNumberish;
+  maxRepayment: BigNumberish;
 }
 
 const _refinanceETH = (params: RefinanceETHParams): Promise<ContractTransaction> => {
