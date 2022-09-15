@@ -1,6 +1,7 @@
 export const CHAIN_IDS = {
   mainnet: 1,
   rinkeby: 4,
+  goerli: 5,
   hardhat: 31337,
 };
 
@@ -23,6 +24,12 @@ export const DEPLOYMENTS: Record<number, Deployment> = {
     lbWrapperAddress: "0xa4F3e9a7ee8100CA430CebAee04B1a998b7cFBe2",
     subgraphURI: "https://api.studio.thegraph.com/query/31830/metastreet-lb/5.9",
     reservoirURL: "https://api-rinkeby.reservoir.tools",
+  },
+  [CHAIN_IDS.goerli]: {
+    vaultAddress: "0x99156878c19c46c492d3ac40a3a8483c3740a9d5",
+    lbWrapperAddress: "0xD97F696217fd33fC5dE26B5905AD1759bC87fb5d",
+    subgraphURI: "https://api.studio.thegraph.com/query/31830/metastreet-lb-goerli/0.1",
+    reservoirURL: "https://api-goerli.reservoir.tools/",
   },
   [CHAIN_IDS.hardhat]: {
     vaultAddress: "",
