@@ -55,6 +55,7 @@ export declare namespace ILeverageBuy {
 export interface LeverageBuyWrapperV1Interface extends utils.Interface {
   functions: {
     "IMPLEMENTATION_VERSION()": FunctionFragment;
+    "buyMultipleERC721WithETH(uint256[],bytes[],address,uint64,uint256[],uint256[])": FunctionFragment;
     "buySingleERC721WithETH(uint256,bytes,address,uint64,uint256)": FunctionFragment;
     "currencyToken()": FunctionFragment;
     "flashLender()": FunctionFragment;
@@ -63,6 +64,7 @@ export interface LeverageBuyWrapperV1Interface extends utils.Interface {
     "onFlashLoan(address,address,uint256,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "purchaseEscrow()": FunctionFragment;
+    "quoteMultipleERC721(uint256[],uint256[],address[],uint256[],address,uint64)": FunctionFragment;
     "quoteRefinance(uint256,int256,address,uint256,address,uint64)": FunctionFragment;
     "quoteSingleERC721(uint256,uint256,address,uint256,address,uint64)": FunctionFragment;
     "refinanceETH(uint256,address,uint64,int256,uint256)": FunctionFragment;
@@ -79,6 +81,7 @@ export interface LeverageBuyWrapperV1Interface extends utils.Interface {
   getFunction(
     nameOrSignatureOrTopic:
       | "IMPLEMENTATION_VERSION"
+      | "buyMultipleERC721WithETH"
       | "buySingleERC721WithETH"
       | "currencyToken"
       | "flashLender"
@@ -87,6 +90,7 @@ export interface LeverageBuyWrapperV1Interface extends utils.Interface {
       | "onFlashLoan"
       | "owner"
       | "purchaseEscrow"
+      | "quoteMultipleERC721"
       | "quoteRefinance"
       | "quoteSingleERC721"
       | "refinanceETH"
@@ -103,6 +107,17 @@ export interface LeverageBuyWrapperV1Interface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "IMPLEMENTATION_VERSION",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "buyMultipleERC721WithETH",
+    values: [
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BytesLike>[],
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BigNumberish>[]
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "buySingleERC721WithETH",
@@ -153,6 +168,17 @@ export interface LeverageBuyWrapperV1Interface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "purchaseEscrow",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "quoteMultipleERC721",
+    values: [
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<string>[],
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "quoteRefinance",
@@ -221,6 +247,10 @@ export interface LeverageBuyWrapperV1Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "buyMultipleERC721WithETH",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "buySingleERC721WithETH",
     data: BytesLike
   ): Result;
@@ -247,6 +277,10 @@ export interface LeverageBuyWrapperV1Interface extends utils.Interface {
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "purchaseEscrow",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "quoteMultipleERC721",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -410,6 +444,16 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
   functions: {
     IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<[string]>;
 
+    buyMultipleERC721WithETH(
+      purchasePrices: PromiseOrValue<BigNumberish>[],
+      fillCalldatas: PromiseOrValue<BytesLike>[],
+      vault: PromiseOrValue<string>,
+      duration: PromiseOrValue<BigNumberish>,
+      downpayments: PromiseOrValue<BigNumberish>[],
+      maxRepayments: PromiseOrValue<BigNumberish>[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     buySingleERC721WithETH(
       purchasePrice: PromiseOrValue<BigNumberish>,
       fillCalldata: PromiseOrValue<BytesLike>,
@@ -450,6 +494,22 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     purchaseEscrow(overrides?: CallOverrides): Promise<[string]>;
+
+    quoteMultipleERC721(
+      purchasePrices: PromiseOrValue<BigNumberish>[],
+      downpayments: PromiseOrValue<BigNumberish>[],
+      tokens: PromiseOrValue<string>[],
+      tokenIds: PromiseOrValue<BigNumberish>[],
+      vault: PromiseOrValue<string>,
+      duration: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber[], BigNumber[]] & {
+        fee: BigNumber;
+        principals: BigNumber[];
+        repayments: BigNumber[];
+      }
+    >;
 
     quoteRefinance(
       balance: PromiseOrValue<BigNumberish>,
@@ -528,6 +588,16 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
 
   IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<string>;
 
+  buyMultipleERC721WithETH(
+    purchasePrices: PromiseOrValue<BigNumberish>[],
+    fillCalldatas: PromiseOrValue<BytesLike>[],
+    vault: PromiseOrValue<string>,
+    duration: PromiseOrValue<BigNumberish>,
+    downpayments: PromiseOrValue<BigNumberish>[],
+    maxRepayments: PromiseOrValue<BigNumberish>[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   buySingleERC721WithETH(
     purchasePrice: PromiseOrValue<BigNumberish>,
     fillCalldata: PromiseOrValue<BytesLike>,
@@ -568,6 +638,22 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
   owner(overrides?: CallOverrides): Promise<string>;
 
   purchaseEscrow(overrides?: CallOverrides): Promise<string>;
+
+  quoteMultipleERC721(
+    purchasePrices: PromiseOrValue<BigNumberish>[],
+    downpayments: PromiseOrValue<BigNumberish>[],
+    tokens: PromiseOrValue<string>[],
+    tokenIds: PromiseOrValue<BigNumberish>[],
+    vault: PromiseOrValue<string>,
+    duration: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber[], BigNumber[]] & {
+      fee: BigNumber;
+      principals: BigNumber[];
+      repayments: BigNumber[];
+    }
+  >;
 
   quoteRefinance(
     balance: PromiseOrValue<BigNumberish>,
@@ -646,6 +732,16 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
   callStatic: {
     IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<string>;
 
+    buyMultipleERC721WithETH(
+      purchasePrices: PromiseOrValue<BigNumberish>[],
+      fillCalldatas: PromiseOrValue<BytesLike>[],
+      vault: PromiseOrValue<string>,
+      duration: PromiseOrValue<BigNumberish>,
+      downpayments: PromiseOrValue<BigNumberish>[],
+      maxRepayments: PromiseOrValue<BigNumberish>[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     buySingleERC721WithETH(
       purchasePrice: PromiseOrValue<BigNumberish>,
       fillCalldata: PromiseOrValue<BytesLike>,
@@ -686,6 +782,22 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
     owner(overrides?: CallOverrides): Promise<string>;
 
     purchaseEscrow(overrides?: CallOverrides): Promise<string>;
+
+    quoteMultipleERC721(
+      purchasePrices: PromiseOrValue<BigNumberish>[],
+      downpayments: PromiseOrValue<BigNumberish>[],
+      tokens: PromiseOrValue<string>[],
+      tokenIds: PromiseOrValue<BigNumberish>[],
+      vault: PromiseOrValue<string>,
+      duration: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber[], BigNumber[]] & {
+        fee: BigNumber;
+        principals: BigNumber[];
+        repayments: BigNumber[];
+      }
+    >;
 
     quoteRefinance(
       balance: PromiseOrValue<BigNumberish>,
@@ -823,6 +935,16 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
   estimateGas: {
     IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<BigNumber>;
 
+    buyMultipleERC721WithETH(
+      purchasePrices: PromiseOrValue<BigNumberish>[],
+      fillCalldatas: PromiseOrValue<BytesLike>[],
+      vault: PromiseOrValue<string>,
+      duration: PromiseOrValue<BigNumberish>,
+      downpayments: PromiseOrValue<BigNumberish>[],
+      maxRepayments: PromiseOrValue<BigNumberish>[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     buySingleERC721WithETH(
       purchasePrice: PromiseOrValue<BigNumberish>,
       fillCalldata: PromiseOrValue<BytesLike>,
@@ -863,6 +985,16 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     purchaseEscrow(overrides?: CallOverrides): Promise<BigNumber>;
+
+    quoteMultipleERC721(
+      purchasePrices: PromiseOrValue<BigNumberish>[],
+      downpayments: PromiseOrValue<BigNumberish>[],
+      tokens: PromiseOrValue<string>[],
+      tokenIds: PromiseOrValue<BigNumberish>[],
+      vault: PromiseOrValue<string>,
+      duration: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     quoteRefinance(
       balance: PromiseOrValue<BigNumberish>,
@@ -932,6 +1064,16 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    buyMultipleERC721WithETH(
+      purchasePrices: PromiseOrValue<BigNumberish>[],
+      fillCalldatas: PromiseOrValue<BytesLike>[],
+      vault: PromiseOrValue<string>,
+      duration: PromiseOrValue<BigNumberish>,
+      downpayments: PromiseOrValue<BigNumberish>[],
+      maxRepayments: PromiseOrValue<BigNumberish>[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     buySingleERC721WithETH(
       purchasePrice: PromiseOrValue<BigNumberish>,
       fillCalldata: PromiseOrValue<BytesLike>,
@@ -972,6 +1114,16 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     purchaseEscrow(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    quoteMultipleERC721(
+      purchasePrices: PromiseOrValue<BigNumberish>[],
+      downpayments: PromiseOrValue<BigNumberish>[],
+      tokens: PromiseOrValue<string>[],
+      tokenIds: PromiseOrValue<BigNumberish>[],
+      vault: PromiseOrValue<string>,
+      duration: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     quoteRefinance(
       balance: PromiseOrValue<BigNumberish>,
