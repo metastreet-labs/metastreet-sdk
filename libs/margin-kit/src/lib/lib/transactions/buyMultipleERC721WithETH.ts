@@ -1,16 +1,16 @@
+import { LeverageBuyWrapperV1__factory } from "@metastreet-labs/pe-contracts-typechain";
 import { BigNumber, BigNumberish, Signer } from "ethers";
-import { LEVERAGE_BUY_WRAPPER_ADDRESS, VAULT_ADDRESS } from "meta-street/env";
-import { BWLToken } from "meta-street/types";
-import { LeverageBuyWrapperV1__factory } from "types/ethers-contracts";
+import { LEVERAGE_BUY_WRAPPER_ADDRESS, VAULT_ADDRESS } from "../../env";
+import { BWLToken } from "../../types";
 import getReservoirFillCalldata from "../fetchers/getReservoirFillCalldata";
 
-export type BuyMultipleERC721WithETHProps = {
+export interface BuyMultipleERC721WithETHProps {
   tokens: BWLToken[];
   purchasePrices: BigNumberish[];
   downPayments: BigNumberish[];
   maxRepayments: BigNumberish[];
   duration: number;
-};
+}
 
 const buyMultipleERC721WithETH = async (signer: Signer, props: BuyMultipleERC721WithETHProps) => {
   const totalDownPayment = props.downPayments.reduce((total, dp) => BigNumber.from(total).add(BigNumber.from(dp)), 0);
