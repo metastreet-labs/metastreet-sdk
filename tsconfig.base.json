@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@metastreet-labs/margin-core": ["libs/margin-core/src/index.ts"],
+      "@metastreet-labs/margin-kit": ["libs/margin-kit/src/index.ts"],
       "@metastreet-labs/margin-wagmi": ["libs/margin-wagmi/src/index.ts"],
       "@metastreet-labs/pe-contracts-typechain": ["libs/pe-contracts-typechain/src/index.ts"]
     }
