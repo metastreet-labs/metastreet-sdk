@@ -1,18 +1,18 @@
 import Decimal from "decimal.js";
-import { CollateralLimits } from "meta-street/lib/fetchers/getCollateralLimits";
-import { BWLToken } from "meta-street/types";
 import { ReactNode } from "react";
+import { CollateralLimits } from "../../../lib/fetchers/getCollateralLimits";
+import { BWLToken } from "../../../types";
 import { BuyWithLeverageContext, BuyWithLeverageContextType } from "./context";
 import useBuyWithLeverageForm from "./useBuyWithLeverageForm";
 import useBuyWithLeverageTransaction from "./useBuyWithLeverageTransaction";
 
-type BuyWithLeverageProviderProps = {
+interface BuyWithLeverageProviderProps {
   children: ReactNode;
   tokens: BWLToken[];
   limits: CollateralLimits;
   flashFee: Decimal;
   onBuySuccess?: () => void;
-};
+}
 
 const BuyWithLeverageProvider = (props: BuyWithLeverageProviderProps) => {
   const { tokens, children, limits, flashFee, onBuySuccess } = props;

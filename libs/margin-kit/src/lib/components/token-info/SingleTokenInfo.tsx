@@ -1,12 +1,12 @@
-import { BWLToken } from "meta-street/types";
+import { BWLToken } from "../../types";
 import Divider from "../Divider";
 import ETHPrice from "../ETHPrice";
 import { InfoRowLabel, InfoRowValue } from "../InfoRow";
 import TokenImage from "../TokenImage";
 
-type SingleTokenInfoProps = {
+interface SingleTokenInfoProps {
   token: BWLToken;
-};
+}
 
 const SingleTokenInfo = (props: SingleTokenInfoProps) => {
   const { token } = props;

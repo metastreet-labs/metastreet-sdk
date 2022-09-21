@@ -1,11 +1,11 @@
 import classNames from "classnames";
 import { ReactNode } from "react";
 
-export type InfoRowProps = {
+export interface InfoRowProps {
   children: ReactNode;
   className?: string;
   variant?: "normal" | "important";
-};
+}
 
 export const InfoRowLabel = (props: InfoRowProps) => {
   const { children, className, variant = "normal" } = props;

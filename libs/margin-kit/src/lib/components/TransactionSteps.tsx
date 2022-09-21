@@ -1,14 +1,14 @@
-import { ExclamationCircleIcon } from "@heroicons/react/outline";
-import { CheckIcon, XIcon } from "@heroicons/react/solid";
+import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
+import { CheckIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import classNames from "classnames";
-import { TransactionState, TransactionStep } from "meta-street/hooks/useTransactionState";
+import { TransactionState, TransactionStep } from "../hooks/useTransactionState";
 import MetaStreetButton from "./MetaStreetButton";
 import Spinner from "./Spinner";
 
-type TransactionStepsProps = {
+interface TransactionStepsProps {
   state: TransactionState;
   onClose: () => void;
-};
+}
 const TransactionSteps = (props: TransactionStepsProps) => {
   const { steps } = props.state;
 
@@ -23,7 +23,7 @@ const TransactionSteps = (props: TransactionStepsProps) => {
       <div className="flex justify-center px-6">
         {steps.map((step, idx) => (
           <>
-            {idx != 0 && <StepDivider className={classNames({ "opacity-50": step.status == "idle" })} />}
+            {idx != 0 ? <StepDivider className={classNames({ "opacity-50": step.status == "idle" })} /> : null}
             <StepCircle step={step} index={idx} key={idx} />
           </>
         ))}
@@ -48,10 +48,10 @@ const StepDivider = ({ className = "" }) => {
   return <div className={classNames("mx-2 mt-[1.2rem] h-[2px] max-w-[5rem] flex-grow bg-msPrimaryLight", className)} />;
 };
 
-type StepCircleProps = {
+interface StepCircleProps {
   step: TransactionStep;
   index: number;
-};
+}
 
 const StepCircle = (props: StepCircleProps) => {
   const { step, index } = props;
@@ -74,10 +74,10 @@ const StepCircle = (props: StepCircleProps) => {
           "bg-msPrimaryLight": status == "complete",
         })}
       >
-        {status == "idle" && <span>{index}</span>}
-        {status == "loading" && <Spinner />}
-        {status == "complete" && <CheckIcon className="h-5 w-5 text-white" />}
-        {status == "error" && <XIcon className="h-5 w-5 text-white" />}
+        {status == "idle" ? <span>{index}</span> : null}
+        {status == "loading" ? <Spinner /> : null}
+        {status == "complete" ? <CheckIcon className="h-5 w-5 text-white" /> : null}
+        {status == "error" ? <XMarkIcon className="h-5 w-5 text-white" /> : null}
       </div>
       <span className="absolute top-12 whitespace-nowrap text-xs font-semibold">{title}</span>
     </div>

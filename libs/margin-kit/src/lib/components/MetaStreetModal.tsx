@@ -1,12 +1,12 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { XIcon } from "@heroicons/react/solid";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 import classNames from "classnames";
 import { Fragment, ReactNode, useEffect, useState } from "react";
 
-export type ModalState = {
+export interface ModalState {
   isOpen: boolean;
   onClose: () => void;
-};
+}
 
 export const useModalStateWithKey = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,10 +22,10 @@ export const useModalStateWithKey = () => {
   return { isOpen, openModal, closeModal, key };
 };
 
-type ModalTitleProps = {
+interface ModalTitleProps {
   children: ReactNode;
   className?: string;
-};
+}
 
 const Title = (props: ModalTitleProps) => {
   const { className, children } = props;
@@ -36,12 +36,12 @@ const Title = (props: ModalTitleProps) => {
   );
 };
 
-type ModalBodyProps = {
+interface ModalBodyProps {
   children: ReactNode;
   className?: string;
   onClose: () => void;
   hideCloseButton?: boolean;
-};
+}
 
 const Body = (props: ModalBodyProps) => {
   const { className, children, onClose, hideCloseButton } = props;
@@ -52,11 +52,11 @@ const Body = (props: ModalBodyProps) => {
         className
       )}
     >
-      {!hideCloseButton && (
+      {!hideCloseButton ? (
         <button className="absolute top-4 right-4 p-2" onClick={onClose}>
-          <XIcon className="h-5 w-5 text-gray-500" />
+          <XMarkIcon className="h-5 w-5 text-gray-500" />
         </button>
-      )}
+      ) : null}
       {children}
     </Dialog.Panel>
   );

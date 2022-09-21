@@ -1,9 +1,9 @@
-type MetaStreetBadgeProps = {
+interface MetaStreetBadgeProps {
   className?: string;
   bgColor?: string;
   logoColor?: string;
   title?: string;
-};
+}
 
 const MetaStreetBadge = (props: MetaStreetBadgeProps) => {
   const {

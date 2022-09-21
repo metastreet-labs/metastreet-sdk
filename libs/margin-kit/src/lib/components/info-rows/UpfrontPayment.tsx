@@ -1,4 +1,4 @@
-import { prettyFormatNumber } from "meta-street/utils/numbers";
+import { prettyFormatNumber } from "../../utils/numbers";
 import useBuyWithLeverage from "../BuyWithLeverageModal/state/useBuyWithLeverage";
 import ETHPrice from "../ETHPrice";
 import { InfoRowValue } from "../InfoRow";

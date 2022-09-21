@@ -1,11 +1,11 @@
 import classNames from "classnames";
-import MetaStreetBadge from "meta-street/components/MetaStreetBadge";
+import MetaStreetBadge from "../MetaStreetBadge";
 
-type BaseBuyWithLeverageButtonProps = {
+interface BaseBuyWithLeverageButtonProps {
   onClick?: () => void;
   disabled?: boolean;
   className?: string;
-};
+}
 
 const BaseBuyWithLeverageButton = (props: BaseBuyWithLeverageButtonProps) => {
   const { className, ...rest } = props;

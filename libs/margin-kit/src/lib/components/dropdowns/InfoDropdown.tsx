@@ -1,15 +1,15 @@
 import { Disclosure, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/solid";
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import classNames from "classnames";
 import { ReactNode, useState } from "react";
 import { InfoRowLabel, InfoRowValue } from "../InfoRow";
 
-type InfoDropdownProps = {
+interface InfoDropdownProps {
   label: ReactNode;
   value: ReactNode;
   children: ReactNode;
   labelVariant?: "normal" | "important";
-};
+}
 
 const InfoDropdown = (props: InfoDropdownProps) => {
   const { label, value, children, labelVariant } = props;

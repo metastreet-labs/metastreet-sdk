@@ -1,12 +1,12 @@
 import { Range } from "react-range";
 
-export type SliderProps = {
+export interface SliderProps {
   min: number;
   max: number;
   step: number;
   value: number;
   onChange: (value: number) => void;
-};
+}
 
 const Slider = (props: SliderProps) => {
   const { value, onChange, ...rest } = props;

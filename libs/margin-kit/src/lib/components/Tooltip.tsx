@@ -1,11 +1,11 @@
 import * as ReactTooltip from "@radix-ui/react-tooltip";
 import { ReactNode } from "react";
 
-type TooltipProps = {
+interface TooltipProps {
   trigger: ReactNode;
   tooltipText: ReactNode;
   className?: string;
-};
+}
 
 const Tooltip = (props: TooltipProps) => {
   const { trigger, tooltipText, className } = props;

@@ -1,10 +1,10 @@
-import useIsCollectionSupported from "meta-street/lib/hooks/useIsCollectionSupported";
+import useIsCollectionSupported from "../lib/hooks/useIsCollectionSupported";
 import MetaStreetBadge from "./MetaStreetBadge";
 
-type SupportedCollectionBadgeProps = {
+interface SupportedCollectionBadgeProps {
   collectionAddress: string;
   className?: string;
-};
+}
 
 const SupportedCollectionBadge = (props: SupportedCollectionBadgeProps) => {
   const { collectionAddress, className } = props;

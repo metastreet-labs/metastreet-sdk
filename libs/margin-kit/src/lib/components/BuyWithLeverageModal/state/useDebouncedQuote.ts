@@ -1,5 +1,5 @@
-import useQuoteMultipleERC721, { UseQuoteMultipleERC721Props } from "meta-street/lib/hooks/useQuoteMultipleERC721";
 import { useEffect, useState } from "react";
+import useQuoteMultipleERC721, { UseQuoteMultipleERC721Props } from "../../../lib/hooks/useQuoteMultipleERC721";
 
 const useDebouncedQuote = (props: UseQuoteMultipleERC721Props) => {
   const [dp, setDP] = useState(props);
@@ -14,7 +14,7 @@ const useDebouncedQuote = (props: UseQuoteMultipleERC721Props) => {
     return () => {
       clearTimeout(timeout);
     };
-  }, [props.downPayments, props.duration]);
+  }, [props, props.downPayments, props.duration]);
 
   const { quote, quoteError } = useQuoteMultipleERC721(dp);
 

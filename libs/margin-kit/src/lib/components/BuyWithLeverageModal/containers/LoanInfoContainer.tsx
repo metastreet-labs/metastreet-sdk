@@ -1,20 +1,20 @@
 import Decimal from "decimal.js";
-import Spinner from "meta-street/components/Spinner";
-import { CollateralLimits } from "meta-street/lib/fetchers/getCollateralLimits";
-import useCollateralLimits from "meta-street/lib/hooks/useCollateralLimits";
-import useFlashFee from "meta-street/lib/hooks/useFlashFee";
-import { BWLToken } from "meta-street/types";
-import { toUnits } from "meta-street/utils/numbers";
+import { CollateralLimits } from "../../../lib/fetchers/getCollateralLimits";
+import useCollateralLimits from "../../../lib/hooks/useCollateralLimits";
+import useFlashFee from "../../../lib/hooks/useFlashFee";
+import { BWLToken } from "../../../types";
+import { toUnits } from "../../../utils/numbers";
+import Spinner from "../../Spinner";
 
-type LoanInfo = {
+interface LoanInfo {
   limits: CollateralLimits;
   flashFee: Decimal;
-};
+}
 
-type LoanInfoContainerProps = {
+interface LoanInfoContainerProps {
   children: (info: LoanInfo) => JSX.Element;
   tokens: BWLToken[];
-};
+}
 
 const LoanInfoContainer = (props: LoanInfoContainerProps) => {
   const { tokens, children } = props;

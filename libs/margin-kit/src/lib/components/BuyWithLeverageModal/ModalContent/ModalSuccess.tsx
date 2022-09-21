@@ -1,9 +1,9 @@
-import MetaStreetButton from "meta-street/components/MetaStreetButton";
+import MetaStreetButton from "../../MetaStreetButton";
 import useBuyWithLeverage from "../state/useBuyWithLeverage";
 
-type ModalSuccessProps = {
+interface ModalSuccessProps {
   onClose: () => void;
-};
+}
 
 const dashboardURL = "https://trades.metastreet.xyz";
 
@@ -24,7 +24,7 @@ const ModalSuccess = (props: ModalSuccessProps) => {
         You bought{" "}
         <span className="font-bold">{count == 1 ? `${collectionName} #${tokenID}` : `${count} ${collectionName}`}</span>{" "}
         with leverage. You can now track this loan in{" "}
-        <a href="" className="font-bold" rel="noreferrer noopener" target="_blank">
+        <a href={dashboardURL} className="font-bold" rel="noreferrer noopener" target="_blank">
           trades.metastreet.xyz
         </a>
         , the dashboard that centralizes all positions.

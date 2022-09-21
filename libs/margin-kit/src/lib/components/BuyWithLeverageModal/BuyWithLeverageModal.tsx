@@ -1,5 +1,5 @@
-import { BWLToken } from "meta-street/types";
 import { ReactNode, useState } from "react";
+import { BWLToken } from "../../types";
 import MetaStreetModal, { ModalState } from "../MetaStreetModal";
 import LoanInfoContainer from "./containers/LoanInfoContainer";
 import ModalContent from "./ModalContent";

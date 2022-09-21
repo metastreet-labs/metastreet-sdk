@@ -1,15 +1,15 @@
-import useIsCollectionSupported from "meta-street/lib/hooks/useIsCollectionSupported";
-import { BWLToken } from "meta-street/types";
 import { useNetwork, useSigner } from "wagmi";
+import useIsCollectionSupported from "../../lib/hooks/useIsCollectionSupported";
+import { BWLToken } from "../../types";
 import BaseBuyWithLeverageButton from "./BaseBuyWithLeverageButton";
 import ErrorButton from "./placeholders/ErrorButton";
 import LoadingButton from "./placeholders/LoadingButton";
 
-type BuyWithLeverageButtonProps = {
+interface BuyWithLeverageButtonProps {
   tokens: BWLToken[];
   onClick: () => void;
   className?: string;
-};
+}
 
 // TODO: replace with deployments
 const supportedChainIDs = [1, 4, 5];
@@ -38,7 +38,7 @@ const BuyWithLeverageButton = (props: BuyWithLeverageButtonProps) => {
   if (!isWalletConnected) error = "Wallet not connected";
   else if (!isNetworkSupported) error = "Unsupported network";
   else if (!isSingleCollection) error = "Cannot buy tokens from different collections at the same time";
-  else if (isCollectionSupported == false) "Unsupported collection";
+  else if (isCollectionSupported == false) error = "Unsupported collection";
   else if (isCollectionSupportedError) error = isCollectionSupportedError;
   if (error) return <ErrorButton error={error} className={className} />;
 

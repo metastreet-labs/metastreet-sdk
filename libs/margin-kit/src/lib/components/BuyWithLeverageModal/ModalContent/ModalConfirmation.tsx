@@ -1,9 +1,9 @@
-import TransactionSteps from "meta-street/components/TransactionSteps";
+import TransactionSteps from "../../TransactionSteps";
 import useBuyWithLeverage from "../state/useBuyWithLeverage";
 
-type ModalConfirmationProps = {
+interface ModalConfirmationProps {
   onClose: () => void;
-};
+}
 
 const ModalConfirmation = (props: ModalConfirmationProps) => {
   const { onClose } = props;

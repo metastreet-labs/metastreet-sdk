@@ -1,9 +1,9 @@
 import { Menu, Transition } from "@headlessui/react";
 import classNames from "classnames";
-import { ReservoirCollection } from "meta-street/lib/fetchers/getReservoirCollections";
-import useSupportedReservoirCollections from "meta-street/lib/hooks/useSupportedReservoirCollections";
 import Link from "next/link";
 import { forwardRef, Fragment } from "react";
+import { ReservoirCollection } from "../lib/fetchers/getReservoirCollections";
+import useSupportedReservoirCollections from "../lib/hooks/useSupportedReservoirCollections";
 import MetaStreetBadge from "./MetaStreetBadge";
 import Spinner from "./Spinner";
 
@@ -28,15 +28,15 @@ const SupportedCollectionsDropdown = () => {
           as="ul"
           className="absolute right-1/2 top-10 flex w-72 translate-x-1/2 flex-col divide-y overflow-hidden rounded-xl border shadow-lg"
         >
-          {collections &&
+          {collections ? (
             collections.map((c, idx) => (
               <Menu.Item key={idx}>{({ active }) => <DropdownItem collection={c} active={active} />}</Menu.Item>
-            ))}
-          {!collections && (
+            ))
+          ) : (
             <Menu.Item>
-              <a className="flex items-center justify-center bg-white py-4">
+              <button className="flex items-center justify-center bg-white py-4">
                 <Spinner className="h-6 w-6" />
-              </a>
+              </button>
             </Menu.Item>
           )}
         </Menu.Items>
@@ -45,10 +45,10 @@ const SupportedCollectionsDropdown = () => {
   );
 };
 
-type DropdownItemProps = {
+interface DropdownItemProps {
   active: boolean;
   collection: ReservoirCollection;
-};
+}
 
 type DropdownItemRef = HTMLAnchorElement;
 

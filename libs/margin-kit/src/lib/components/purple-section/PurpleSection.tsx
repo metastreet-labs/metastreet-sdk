@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 
-type PurpleSectionProps = {
+interface PurpleSectionProps {
   children: ReactNode;
-};
+}
 
 const PurpleSection = (props: PurpleSectionProps) => {
   const { children } = props;

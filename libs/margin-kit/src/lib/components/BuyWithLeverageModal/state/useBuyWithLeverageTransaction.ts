@@ -1,12 +1,12 @@
 import { ContractTransaction } from "ethers";
-import { CONFIRMATIONS } from "meta-street/env";
-import useTransactionSteps, { TransactionStatus, TransactionStep } from "meta-street/hooks/useTransactionState";
-import buyMultipleERC721WithETH from "meta-street/lib/transactions/buyMultipleERC721WithETH";
-import buySingleERC721WithETH from "meta-street/lib/transactions/buySingleERC721WithETH";
-import { BWLToken } from "meta-street/types";
-import { getReadableError } from "meta-street/utils/errors";
-import { toUnits } from "meta-street/utils/numbers";
 import { useSigner } from "wagmi";
+import { CONFIRMATIONS } from "../../../env";
+import useTransactionSteps, { TransactionStatus, TransactionStep } from "../../../hooks/useTransactionState";
+import buyMultipleERC721WithETH from "../../../lib/transactions/buyMultipleERC721WithETH";
+import buySingleERC721WithETH from "../../../lib/transactions/buySingleERC721WithETH";
+import { BWLToken } from "../../../types";
+import { getReadableError } from "../../../utils/errors";
+import { toUnits } from "../../../utils/numbers";
 import { BuyWithLeverageFormState } from "./useBuyWithLeverageForm";
 
 const getSteps = (): TransactionStep[] => [
@@ -22,11 +22,11 @@ const getSteps = (): TransactionStep[] => [
   },
 ];
 
-type UseBuyWithLeverageTransactionProps = {
+interface UseBuyWithLeverageTransactionProps {
   tokens: BWLToken[];
   formState: BuyWithLeverageFormState;
   onBuySuccess?: () => void;
-};
+}
 
 const useBuyWithLeverageTransaction = (props: UseBuyWithLeverageTransactionProps) => {
   const { tokens, formState, onBuySuccess } = props;

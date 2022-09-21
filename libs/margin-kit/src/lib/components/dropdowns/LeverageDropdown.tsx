@@ -1,10 +1,10 @@
-import { QuestionMarkCircleIcon } from "@heroicons/react/outline";
+import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
 import Decimal from "decimal.js";
-import Tooltip from "meta-street/components/Tooltip";
-import { fromUnits, prettyFormatNumber } from "meta-street/utils/numbers";
+import { fromUnits, prettyFormatNumber } from "../../utils/numbers";
 import useBuyWithLeverage from "../BuyWithLeverageModal/state/useBuyWithLeverage";
 import ETHPrice from "../ETHPrice";
 import { InfoRowLabel, InfoRowValue } from "../InfoRow";
+import Tooltip from "../Tooltip";
 import InfoDropdown from "./InfoDropdown";
 
 const LeverageDropdown = () => {

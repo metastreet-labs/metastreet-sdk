@@ -1,10 +1,10 @@
 import Decimal from "decimal.js";
-import ETHPrice from "meta-street/components/ETHPrice";
-import { InfoRowValue } from "meta-street/components/InfoRow";
-import LoadingText from "meta-street/components/LoadingText";
-import { prettyFormatNumber } from "meta-street/utils/numbers";
 import { ReactNode } from "react";
+import { prettyFormatNumber } from "../../utils/numbers";
 import useBuyWithLeverage from "../BuyWithLeverageModal/state/useBuyWithLeverage";
+import ETHPrice from "../ETHPrice";
+import { InfoRowValue } from "../InfoRow";
+import LoadingText from "../LoadingText";
 import PurpleSectionLabel from "../purple-section/PurpleSectionLabel";
 import InfoDropdown from "./InfoDropdown";
 

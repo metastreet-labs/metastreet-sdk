@@ -1,12 +1,12 @@
-import { ExclamationCircleIcon } from "@heroicons/react/outline";
+import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import classNames from "classnames";
 import Tooltip from "./Tooltip";
 
-type ReportedTokensProps = {
+interface ReportedTokensProps {
   className?: string;
   total: number;
   flagged: number;
-};
+}
 
 const ReportedTokens = (props: ReportedTokensProps) => {
   const { className, total, flagged } = props;

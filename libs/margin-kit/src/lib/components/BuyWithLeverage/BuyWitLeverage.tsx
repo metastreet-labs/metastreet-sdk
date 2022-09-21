@@ -1,5 +1,5 @@
-import { BWLToken } from "meta-street/types";
 import { ReactNode } from "react";
+import { BWLToken } from "../../types";
 import BuyWithLeverageButton from "../BuyWithLeverageButton";
 import BuyWithLeverageModal from "../BuyWithLeverageModal";
 import { useModalStateWithKey } from "../MetaStreetModal";

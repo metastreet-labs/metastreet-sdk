@@ -1,14 +1,14 @@
-import LeverageDropdown from "meta-street/components/dropdowns/LeverageDropdown";
-import RepaymentDropdown from "meta-street/components/dropdowns/RepaymentDropdown";
-import FloorBreakeven from "meta-street/components/info-rows/FloorBreakeven";
-import RepaymentDate from "meta-street/components/info-rows/RepaymentDate";
-import UpfrontPayment from "meta-street/components/info-rows/UpfrontPayment";
-import MetaStreetButton from "meta-street/components/MetaStreetButton";
-import PurpleSection from "meta-street/components/purple-section/PurpleSection";
-import { DebtSlider } from "meta-street/components/sliders/DebtSlider";
-import DurationSlider from "meta-street/components/sliders/DurationSlider";
-import useETHBalance from "meta-street/lib/hooks/useETHBalance";
-import { toUnits } from "meta-street/utils/numbers";
+import useETHBalance from "../../../lib/hooks/useETHBalance";
+import { toUnits } from "../../../utils/numbers";
+import LeverageDropdown from "../../dropdowns/LeverageDropdown";
+import RepaymentDropdown from "../../dropdowns/RepaymentDropdown";
+import FloorBreakeven from "../../info-rows/FloorBreakeven";
+import RepaymentDate from "../../info-rows/RepaymentDate";
+import UpfrontPayment from "../../info-rows/UpfrontPayment";
+import MetaStreetButton from "../../MetaStreetButton";
+import PurpleSection from "../../purple-section/PurpleSection";
+import { DebtSlider } from "../../sliders/DebtSlider";
+import DurationSlider from "../../sliders/DurationSlider";
 import useBuyWithLeverage from "../state/useBuyWithLeverage";
 
 const ModalForm = () => {

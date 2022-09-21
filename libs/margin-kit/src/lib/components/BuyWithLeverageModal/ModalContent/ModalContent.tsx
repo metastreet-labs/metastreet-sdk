@@ -1,17 +1,17 @@
-import Divider from "meta-street/components/Divider";
-import MetaStreetModal from "meta-street/components/MetaStreetModal";
-import MultiTokenInfo from "meta-street/components/token-info/MultiTokenInfo";
-import SingleTokenInfo from "meta-street/components/token-info/SingleTokenInfo";
 import { ReactNode } from "react";
+import Divider from "../../Divider";
+import MetaStreetModal from "../../MetaStreetModal";
+import MultiTokenInfo from "../../token-info/MultiTokenInfo";
+import SingleTokenInfo from "../../token-info/SingleTokenInfo";
 import useBuyWithLeverage from "../state/useBuyWithLeverage";
 import ModalConfirmation from "./ModalConfirmation";
 import ModalForm from "./ModalForm";
 import ModalSuccess from "./ModalSuccess";
 
-type ModalContentProps = {
+interface ModalContentProps {
   onClose: () => void;
   title: ReactNode;
-};
+}
 
 const ModalContent = (props: ModalContentProps) => {
   const { onClose, title } = props;
@@ -23,11 +23,11 @@ const ModalContent = (props: ModalContentProps) => {
   const initialTitle = (
     <>
       {title ?? "Buy with Leverage"}
-      {multi && (
+      {multi ? (
         <span className="ml-1 rounded bg-msPrimaryBackground/20 px-2 py-1 text-xs text-msPrimaryDark">
           {tokens.length} tokens
         </span>
-      )}
+      ) : null}
     </>
   );
   const successTitle = <>Congrats!</>;
@@ -41,9 +41,9 @@ const ModalContent = (props: ModalContentProps) => {
       <MetaStreetModal.Title className="mb-6">{success ? successTitle : initialTitle}</MetaStreetModal.Title>
       {success ? successAnimation : tokenInfo}
       <Divider className="my-4" />
-      {status == "idle" && <ModalForm />}
-      {(status == "loading" || status == "error") && <ModalConfirmation onClose={onClose} />}
-      {status == "complete" && <ModalSuccess onClose={onClose} />}
+      {status == "idle" ? <ModalForm /> : null}
+      {status == "loading" || status == "error" ? <ModalConfirmation onClose={onClose} /> : null}
+      {status == "complete" ? <ModalSuccess onClose={onClose} /> : null}
     </div>
   );
 };

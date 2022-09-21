@@ -1,12 +1,12 @@
 import Decimal from "decimal.js";
-import { CollateralLimits } from "meta-street/lib/fetchers/getCollateralLimits";
-import { QuoteMultipleERC721Result } from "meta-street/lib/fetchers/quoteMultipleERC721";
-import { BWLToken } from "meta-street/types";
-import { fromUnits, toUnits } from "meta-street/utils/numbers";
 import { useMemo, useState } from "react";
+import { CollateralLimits } from "../../../lib/fetchers/getCollateralLimits";
+import { QuoteMultipleERC721Result } from "../../../lib/fetchers/quoteMultipleERC721";
+import { BWLToken } from "../../../types";
+import { fromUnits, toUnits } from "../../../utils/numbers";
 import useDebouncedQuote from "./useDebouncedQuote";
 
-export type BuyWithLeverageFormState = {
+export interface BuyWithLeverageFormState {
   debtFactor: number;
   debtAmount: number;
   downPayments: Decimal[];
@@ -14,13 +14,13 @@ export type BuyWithLeverageFormState = {
   duration: number;
   quote?: QuoteMultipleERC721Result;
   totalRepayment?: number;
-};
+}
 
-type UseBuyWithLeverageFormProps = {
+interface UseBuyWithLeverageFormProps {
   tokens: BWLToken[];
   limits: CollateralLimits;
   flashFee: Decimal;
-};
+}
 
 const useBuyWithLeverageForm = (props: UseBuyWithLeverageFormProps) => {
   const { tokens, limits, flashFee } = props;
@@ -40,7 +40,7 @@ const useBuyWithLeverageForm = (props: UseBuyWithLeverageFormProps) => {
 
     let debtAmount = new Decimal(0);
     for (let i = 0; i < purchasePrices.length; i++) {
-      let tokenDebt = purchasePrices[i].sub(downPayments[i]);
+      const tokenDebt = purchasePrices[i].sub(downPayments[i]);
       debtAmount = debtAmount.add(tokenDebt);
     }
 
@@ -49,7 +49,7 @@ const useBuyWithLeverageForm = (props: UseBuyWithLeverageFormProps) => {
     ).toNumber();
 
     return { debtAmount, downPayments, totalDownPayment };
-  }, [debtFactor, duration]);
+  }, [debtFactor, flashFee, limits.maxPrincipal, tokens]);
 
   const { quote } = useDebouncedQuote({
     tokens: props.tokens,

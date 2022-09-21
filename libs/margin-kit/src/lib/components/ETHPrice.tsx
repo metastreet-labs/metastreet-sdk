@@ -2,10 +2,10 @@ import classNames from "classnames";
 import { ReactNode } from "react";
 import ETHLogo from "./ETHLogo";
 
-type ETHPriceProps = {
+interface ETHPriceProps {
   price: ReactNode;
   className?: string;
-};
+}
 
 const ETHPrice = (props: ETHPriceProps) => {
   const { price, className = "font-semibold" } = props;

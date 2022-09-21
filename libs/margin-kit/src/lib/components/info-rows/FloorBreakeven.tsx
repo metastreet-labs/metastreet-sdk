@@ -1,9 +1,9 @@
-import ETHPrice from "meta-street/components/ETHPrice";
-import { InfoRowLabel, InfoRowValue } from "meta-street/components/InfoRow";
-import LoadingText from "meta-street/components/LoadingText";
-import { prettyFormatNumber } from "meta-street/utils/numbers";
 import { ReactNode } from "react";
+import { prettyFormatNumber } from "../../utils/numbers";
 import useBuyWithLeverage from "../BuyWithLeverageModal/state/useBuyWithLeverage";
+import ETHPrice from "../ETHPrice";
+import { InfoRowLabel, InfoRowValue } from "../InfoRow";
+import LoadingText from "../LoadingText";
 
 const FloorBreakeven = () => {
   const { formState } = useBuyWithLeverage();

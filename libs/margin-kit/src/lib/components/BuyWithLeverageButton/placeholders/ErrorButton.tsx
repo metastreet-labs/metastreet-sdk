@@ -1,8 +1,11 @@
 import classNames from "classnames";
-import Tooltip from "meta-street/components/Tooltip";
+import Tooltip from "../../Tooltip";
 import BaseBuyWithLeverageButton from "../BaseBuyWithLeverageButton";
 
-type ErrorButtonProps = { error: string; className?: string };
+interface ErrorButtonProps {
+  error: string;
+  className?: string;
+}
 
 const ErrorButton = (props: ErrorButtonProps) => {
   return (

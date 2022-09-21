@@ -1,11 +1,11 @@
 import Decimal from "decimal.js";
-import { TransactionState } from "meta-street/hooks/useTransactionState";
-import { CollateralLimits } from "meta-street/lib/fetchers/getCollateralLimits";
-import { BWLToken } from "meta-street/types";
 import { createContext } from "react";
+import { TransactionState } from "../../../hooks/useTransactionState";
+import { CollateralLimits } from "../../../lib/fetchers/getCollateralLimits";
+import { BWLToken } from "../../../types";
 import { BuyWithLeverageFormState } from "./useBuyWithLeverageForm";
 
-export type BuyWithLeverageContextType = {
+export interface BuyWithLeverageContextType {
   formState: BuyWithLeverageFormState;
   transactionState: TransactionState;
   actions: {
@@ -16,6 +16,6 @@ export type BuyWithLeverageContextType = {
   tokens: BWLToken[];
   limits: CollateralLimits;
   flashFee: Decimal;
-};
+}
 
 export const BuyWithLeverageContext = createContext<BuyWithLeverageContextType | undefined>(undefined);

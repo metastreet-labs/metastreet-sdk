@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import BaseBuyWithLeverageButton from "../BaseBuyWithLeverageButton";
 
-type LoadingButtonProps = {
+interface LoadingButtonProps {
   className?: string;
-};
+}
 
 const LoadingButton = (props: LoadingButtonProps) => {
   return <BaseBuyWithLeverageButton className={classNames("disabled:cursor-wait", props.className)} disabled />;

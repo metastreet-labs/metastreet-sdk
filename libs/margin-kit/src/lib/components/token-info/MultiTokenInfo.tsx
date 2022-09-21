@@ -1,18 +1,18 @@
-import { BWLToken } from "meta-street/types";
+import { BWLToken } from "../../types";
 import ETHPrice from "../ETHPrice";
 import { InfoRowLabel, InfoRowValue } from "../InfoRow";
 import TokenImage from "../TokenImage";
 
-type MultiTokenInfoProps = {
+interface MultiTokenInfoProps {
   tokens: BWLToken[];
-};
+}
 
 const MultiTokenInfo = (props: MultiTokenInfoProps) => {
   const { tokens } = props;
   const totalPrice = tokens.reduce((s, t) => s + t.tokenPrice, 0);
 
   return (
-    <div>
+    <div className="flex flex-col">
       <div className="flex max-h-[10rem] flex-col space-y-2 overflow-y-auto">
         {tokens.map((token) => (
           <TokenRow token={token} key={token.tokenID} />
@@ -28,9 +28,9 @@ const MultiTokenInfo = (props: MultiTokenInfoProps) => {
   );
 };
 
-type TokenRowProps = {
+interface TokenRowProps {
   token: BWLToken;
-};
+}
 
 const TokenRow = (props: TokenRowProps) => {
   const { token } = props;
