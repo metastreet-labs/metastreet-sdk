@@ -1,6 +1,6 @@
-import { BWLToken } from "meta-street/types";
-import { getReadableError } from "meta-street/utils/errors";
 import { useProvider, useQuery } from "wagmi";
+import { BWLToken } from "../../types";
+import { getReadableError } from "../../utils/errors";
 import getCollateralLimits, { CollateralLimits } from "../fetchers/getCollateralLimits";
 
 const useCollateralLimits = (tokens: BWLToken[]) => {

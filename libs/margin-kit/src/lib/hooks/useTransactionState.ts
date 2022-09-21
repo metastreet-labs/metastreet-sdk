@@ -1,17 +1,17 @@
 import { useState } from "react";
 
-export type TransactionState = {
+export interface TransactionState {
   steps: TransactionStep[];
   status: TransactionStatus;
-};
+}
 
 export type TransactionStatus = "idle" | "loading" | "complete" | "error";
 
-export type TransactionStep = {
+export interface TransactionStep {
   title: string;
   description: string;
   status: TransactionStatus;
-};
+}
 
 type UpdateStep = (index: number, updates: Partial<Pick<TransactionStep, "status" | "description">>) => void;
 

@@ -1,16 +1,16 @@
 import Decimal from "decimal.js";
 import { BigNumberish } from "ethers";
-import { BWLToken } from "meta-street/types";
-import { getReadableError } from "meta-street/utils/errors";
-import { toUnits } from "meta-street/utils/numbers";
 import { useProvider, useQuery } from "wagmi";
+import { BWLToken } from "../../types";
+import { getReadableError } from "../../utils/errors";
+import { toUnits } from "../../utils/numbers";
 import quoteMultipleERC721, { QuoteMultipleERC721Result } from "../fetchers/quoteMultipleERC721";
 
-export type UseQuoteMultipleERC721Props = {
+export interface UseQuoteMultipleERC721Props {
   tokens: BWLToken[];
   downPayments: Decimal[];
   duration: number;
-};
+}
 
 const useQuoteMultipleERC721 = (props: UseQuoteMultipleERC721Props) => {
   const provider = useProvider();

@@ -1,5 +1,5 @@
-import { getReadableError } from "meta-street/utils/errors";
 import { useProvider, useQuery } from "wagmi";
+import { getReadableError } from "../../utils/errors";
 import getSupportedCollections from "../fetchers/getSupportedCollections";
 
 const useSupportedCollections = () => {

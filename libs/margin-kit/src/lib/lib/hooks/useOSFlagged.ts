@@ -1,11 +1,11 @@
-import { getReadableError } from "meta-street/utils/errors";
 import { useNetwork, useQuery } from "wagmi";
+import { getReadableError } from "../../utils/errors";
 import getOSFlagged, { BaseToken, GetOSFlaggedResult } from "../fetchers/getOSFlagged";
 
-type UseOSFlaggedResult<T extends BaseToken> = {
+interface UseOSFlaggedResult<T extends BaseToken> {
   tokens: GetOSFlaggedResult<T> | undefined;
   tokensError: string | null;
-};
+}
 
 const useOSFlagged = <T extends BaseToken>(
   tokens: T[],

@@ -1,7 +1,7 @@
 import Decimal from "decimal.js";
 import { BigNumberish } from "ethers";
-import { getReadableError } from "meta-street/utils/errors";
 import { useProvider, useQuery } from "wagmi";
+import { getReadableError } from "../../utils/errors";
 import getFlashFee from "../fetchers/getFlashFee";
 
 const useFlashFee = (loanAmount: BigNumberish) => {
