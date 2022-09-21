@@ -1,20 +1,20 @@
+import { LeverageBuyWrapperV1__factory } from "@metastreet-labs/pe-contracts-typechain";
 import Decimal from "decimal.js";
-import { LEVERAGE_BUY_WRAPPER_ADDRESS, VAULT_ADDRESS } from "meta-street/env";
-import { LeverageBuyWrapperV1__factory } from "types/ethers-contracts";
+import { LEVERAGE_BUY_WRAPPER_ADDRESS, VAULT_ADDRESS } from "../../env";
 import { SignerOrProvider } from "./interfaces";
 
-type GetCollateralLimitsProps = {
+interface GetCollateralLimitsProps {
   collectionAddress: string;
   tokenID: string;
-};
+}
 
-export type CollateralLimits = {
+export interface CollateralLimits {
   minDuration: number;
   maxDuration: number;
   maxPrincipal: Decimal;
   collateralValue: Decimal;
   maxLoanToValue: Decimal;
-};
+}
 
 const getCollateralLimits = async (
   sop: SignerOrProvider,
@@ -27,8 +27,8 @@ const getCollateralLimits = async (
   const limits = await leverageBuyWrapper.getCollateralLimits(VAULT_ADDRESS, collectionAddress, tokenID);
 
   return {
-    minDuration: Math.ceil(limits.minDuration.toNumber() / 86400),
-    maxDuration: Math.floor(limits.maxDuration.toNumber() / 86400),
+    minDuration: Math.ceil(limits.minDuration / 86400),
+    maxDuration: Math.floor(limits.maxDuration / 86400),
     maxPrincipal: new Decimal(limits.maxPrincipal.toString()),
     collateralValue: new Decimal(limits.collateralValue.toString()),
     maxLoanToValue: new Decimal(limits.maxLoanToValue.toString()),

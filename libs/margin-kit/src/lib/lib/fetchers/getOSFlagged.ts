@@ -1,16 +1,16 @@
-import { BWLToken } from "meta-street/types";
+import { BWLToken } from "../../types";
 
 export type BaseToken = Pick<BWLToken, "collectionAddress" | "tokenID">;
 
-export type GetOSFlaggedResult<T extends BaseToken = BaseToken> = {
+export interface GetOSFlaggedResult<T extends BaseToken = BaseToken> {
   unflagged: T[];
   flagged: T[];
-};
+}
 
-type OpenSeaAsset = {
+interface OpenSeaAsset {
   token_id: string;
   supports_wyvern: boolean;
-};
+}
 
 const getOSFlagged = async <T extends BaseToken>(tokens: T[]): Promise<GetOSFlaggedResult<T>> => {
   const urlParams = new URLSearchParams();

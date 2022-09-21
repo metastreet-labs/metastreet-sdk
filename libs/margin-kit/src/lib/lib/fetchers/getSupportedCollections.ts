@@ -1,7 +1,7 @@
 import { Provider } from "@ethersproject/providers";
+import { LoanPriceOracle__factory, Vault__factory } from "@metastreet-labs/pe-contracts-typechain";
 import { Signer } from "ethers";
-import { VAULT_ADDRESS } from "meta-street/env";
-import { LoanPriceOracle__factory, Vault__factory } from "types/ethers-contracts";
+import { VAULT_ADDRESS } from "../../env";
 
 const getSupportedCollections = async (sop: Signer | Provider) => {
   const vault = Vault__factory.connect(VAULT_ADDRESS, sop);

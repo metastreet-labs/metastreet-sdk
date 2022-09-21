@@ -1,22 +1,22 @@
+import { LeverageBuyWrapperV1__factory } from "@metastreet-labs/pe-contracts-typechain";
 import Decimal from "decimal.js";
 import { BigNumberish } from "ethers";
-import { LEVERAGE_BUY_WRAPPER_ADDRESS, VAULT_ADDRESS } from "meta-street/env";
-import { LeverageBuyWrapperV1__factory } from "types/ethers-contracts";
+import { LEVERAGE_BUY_WRAPPER_ADDRESS, VAULT_ADDRESS } from "../../env";
 import { SignerOrProvider } from "./interfaces";
 
-export type QuoteMultipleERC721Props = {
+export interface QuoteMultipleERC721Props {
   purchasePrices: BigNumberish[];
   downPayments: BigNumberish[];
   collectionAddresses: string[];
   tokenIDs: string[];
   duration: number;
-};
+}
 
-export type QuoteMultipleERC721Result = {
+export interface QuoteMultipleERC721Result {
   fee: Decimal;
   principals: Decimal[];
   repayments: Decimal[];
-};
+}
 
 const quoteMultipleERC721 = async (
   sop: SignerOrProvider,

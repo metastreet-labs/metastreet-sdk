@@ -1,7 +1,7 @@
+import { IERC3156FlashLender__factory, LeverageBuyWrapperV1__factory } from "@metastreet-labs/pe-contracts-typechain";
 import Decimal from "decimal.js";
 import { BigNumberish } from "ethers";
-import { LEVERAGE_BUY_WRAPPER_ADDRESS } from "meta-street/env";
-import { IERC3156FlashLender__factory, LeverageBuyWrapperV1__factory } from "types/ethers-contracts";
+import { LEVERAGE_BUY_WRAPPER_ADDRESS } from "../../env";
 import { SignerOrProvider } from "./interfaces";
 
 const getFlashFee = async (sop: SignerOrProvider, amount: BigNumberish) => {

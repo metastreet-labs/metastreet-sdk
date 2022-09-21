@@ -1,9 +1,9 @@
-import { BASE_PROXY_URL, LEVERAGE_BUY_WRAPPER_ADDRESS } from "meta-street/env";
+import { BASE_PROXY_URL, LEVERAGE_BUY_WRAPPER_ADDRESS } from "../../env";
 
-type GetReservoirFillCalldataProps = {
+interface GetReservoirFillCalldataProps {
   collectionAddress: string;
   tokenID: string;
-};
+}
 
 const getReservoirFillCalldata = async (props: GetReservoirFillCalldataProps): Promise<string> => {
   const params = new URLSearchParams();
