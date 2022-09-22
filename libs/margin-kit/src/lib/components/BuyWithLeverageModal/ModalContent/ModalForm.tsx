@@ -1,5 +1,5 @@
 import useETHBalance from "../../../lib/hooks/useETHBalance";
-import { toUnits } from "../../../utils/numbers";
+import { toUnitsBigNum } from "../../../utils/numbers";
 import LeverageDropdown from "../../dropdowns/LeverageDropdown";
 import RepaymentDropdown from "../../dropdowns/RepaymentDropdown";
 import FloorBreakeven from "../../info-rows/FloorBreakeven";
@@ -12,11 +12,11 @@ import DurationSlider from "../../sliders/DurationSlider";
 import useBuyWithLeverage from "../state/useBuyWithLeverage";
 
 const ModalForm = () => {
-  const { balance } = useETHBalance();
+  const { data: balance } = useETHBalance();
   const { formState, actions } = useBuyWithLeverage();
   const { quote, totalDownPayment } = formState;
 
-  const insufficientFunds = balance && balance.lessThan(toUnits(totalDownPayment));
+  const insufficientFunds = balance && balance.lt(toUnitsBigNum(totalDownPayment));
   const buttonDisabled = !quote || !balance || insufficientFunds;
 
   return (

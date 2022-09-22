@@ -8,8 +8,8 @@ export const DurationSlider = () => {
 
   return (
     <BuyWithLeverageSlider
-      min={minDuration}
-      max={maxDuration}
+      min={Math.ceil(minDuration / 86400)}
+      max={Math.floor(maxDuration / 86400)}
       step={1}
       value={duration}
       onChange={actions.setDuration}

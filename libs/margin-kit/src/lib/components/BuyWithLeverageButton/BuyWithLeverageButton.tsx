@@ -39,7 +39,7 @@ const BuyWithLeverageButton = (props: BuyWithLeverageButtonProps) => {
   else if (!isNetworkSupported) error = "Unsupported network";
   else if (!isSingleCollection) error = "Cannot buy tokens from different collections at the same time";
   else if (isCollectionSupported == false) error = "Unsupported collection";
-  else if (isCollectionSupportedError) error = isCollectionSupportedError;
+  else if (isCollectionSupportedError) error = isCollectionSupportedError.message;
   if (error) return <ErrorButton error={error} className={className} />;
 
   return <LoadingButton className={className} />;
