@@ -1,6 +1,5 @@
 import { DEPLOYMENTS } from "@metastreet-labs/margin-core";
-import { BWLToken } from "@metastreet-labs/margin-kit";
-import BuyWithLeverage from "libs/margin-kit/src/lib/components/BuyWithLeverage";
+import { BuyWithLeverage, BWLToken } from "@metastreet-labs/margin-kit";
 import { NextPage } from "next";
 import { useState } from "react";
 import { useProvider } from "wagmi";
