@@ -24,6 +24,12 @@
         ]
       }
     },
+    "post-build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx tailwindcss -c libs/margin-kit/tailwind.config.js -i libs/margin-kit/src/lib/styles.css -o dist/libs/margin-kit/styles/default.css"
+      }
+    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],

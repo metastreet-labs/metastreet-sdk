@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bwl-button {
+  @apply flex items-center justify-center space-x-2 bg-ms-purple rounded-md text-lg text-white py-2 px-1.5;
+  @apply disabled:opacity-60;
+}
+
+.metastreet-badge {
+  @apply w-6 h-6;
+}
+
+.bwl-modal-dialog {
+  @apply relative z-[9999999999];
+}
+
+.bwl-modal-overlay {
+  @apply fixed inset-0 bg-ms-overlay/60;
+}
+
+.bwl-modal-overlay-transition-enter {
+  @apply ease-out duration-300;
+}
+.bwl-modal-overlay-transition-enter-from {
+  @apply opacity-0;
+}
+.bwl-modal-overlay-transition-enter-to {
+  @apply opacity-100;
+}
+.bwl-modal-overlay-transition-leave {
+  @apply ease-in duration-200;
+}
+.bwl-modal-overlay-transition-leave-from {
+  @apply opacity-100;
+}
+.bwl-modal-overlay-transition-leave-to {
+  @apply opacity-0;
+}

@@ -46,13 +46,13 @@ export interface ReadableError {
 
 export const getReadableError = (e: any): ReadableError => {
   let message: string;
-  let code: string | number;
+  let code: string | number | undefined;
 
   // try to get the error code
   if (typeof e.data == "string") code = e.data?.slice(0, 10);
-  else code = e.code;
   if (!code) code = e.error?.data?.originalError?.data?.slice(0, 10);
   if (!code) code = e.transaction?.data?.slice(0, 10);
+  if (!code) code = e.code;
 
   // if code is string, it should be a sighash
   if (typeof code == "string") message = contractErrors[code] ?? code;
