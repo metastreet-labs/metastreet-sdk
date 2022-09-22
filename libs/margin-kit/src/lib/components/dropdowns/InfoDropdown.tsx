@@ -9,15 +9,16 @@ interface InfoDropdownProps {
   value: ReactNode;
   children: ReactNode;
   labelVariant?: "normal" | "important";
+  className?: string;
 }
 
 const InfoDropdown = (props: InfoDropdownProps) => {
-  const { label, value, children, labelVariant } = props;
+  const { label, value, children, labelVariant, className } = props;
   const [open, setOpen] = useState(false);
 
   return (
     <Disclosure>
-      <div className="flex flex-col">
+      <div className={classNames("flex flex-col", className)}>
         <div className="flex items-center">
           <InfoRowLabel variant={labelVariant}>
             <Disclosure.Button className="space-x- flex items-center" type="button" onClick={() => setOpen((o) => !o)}>

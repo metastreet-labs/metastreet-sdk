@@ -1,5 +1,6 @@
 import useETHBalance from "../../../lib/hooks/useETHBalance";
 import { toUnitsBigNum } from "../../../utils/numbers";
+import Divider from "../../Divider";
 import LeverageDropdown from "../../dropdowns/LeverageDropdown";
 import RepaymentDropdown from "../../dropdowns/RepaymentDropdown";
 import FloorBreakeven from "../../info-rows/FloorBreakeven";
@@ -20,15 +21,12 @@ const ModalForm = () => {
   const buttonDisabled = !quote || !balance || insufficientFunds;
 
   return (
-    <div className="flex flex-col">
-      <div className="space-y-2">
-        <DebtSlider />
-        <DurationSlider />
-      </div>
-      <div className="mt-4 space-y-1">
-        <LeverageDropdown />
-        <FloorBreakeven />
-      </div>
+    <div className="bwl-modal-form">
+      <DebtSlider />
+      <DurationSlider />
+      <Divider className="bwl-modal-content-divider" />
+      <LeverageDropdown />
+      <FloorBreakeven />
       <PurpleSection>
         <UpfrontPayment />
         <RepaymentDropdown />

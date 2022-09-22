@@ -3,7 +3,7 @@ import Decimal from "decimal.js";
 import { fromUnits, prettyFormatNumber } from "../../utils/numbers";
 import useBuyWithLeverage from "../BuyWithLeverageModal/state/useBuyWithLeverage";
 import ETHPrice from "../ETHPrice";
-import { InfoRowLabel, InfoRowValue } from "../InfoRow";
+import { InfoRow, InfoRowLabel, InfoRowValue } from "../InfoRow";
 import Tooltip from "../Tooltip";
 import InfoDropdown from "./InfoDropdown";
 
@@ -28,18 +28,18 @@ const LeverageDropdown = () => {
   const ltvStr = `${ltv}%`;
 
   return (
-    <InfoDropdown label="Leverage" value={leverageStr}>
-      <div className="flex items-center">
+    <InfoDropdown label="Leverage" value={leverageStr} className="bwl-modal-form-leverage-dropdown">
+      <InfoRow>
         <InfoRowLabel>MetaStreet Collateral Value</InfoRowLabel>
         <InfoRowValue>
           <ETHPrice price={collateralValueStr} />
         </InfoRowValue>
-      </div>
-      <div className="flex items-center">
-        <InfoRowLabel className="space-x-1 text-gray-500">
+      </InfoRow>
+      <InfoRow>
+        <InfoRowLabel>
           <span>MetaStreet LTV</span>
           <Tooltip
-            trigger={<QuestionMarkCircleIcon className="h-4 w-4 cursor-help" />}
+            trigger={<QuestionMarkCircleIcon className="bwl-modal-form-leverage-dropdown-ltv-tooltip-icon" />}
             tooltipText={
               <>
                 Collateral Value may differ from the purchase price you are paying today, visit the MetaStreet docs page
@@ -49,12 +49,12 @@ const LeverageDropdown = () => {
           />
         </InfoRowLabel>
         <InfoRowValue>
-          <span className="font-medium">
+          <span className="important-text">
             {ltvStr}
-            <span className="text-gray-400"> {maxLTVStr}</span>
+            <span className="bwl-modal-form-leverage-dropdown-ltv-max"> {maxLTVStr}</span>
           </span>
         </InfoRowValue>
-      </div>
+      </InfoRow>
     </InfoDropdown>
   );
 };

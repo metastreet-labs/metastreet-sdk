@@ -7,6 +7,11 @@ export interface InfoRowProps {
   variant?: "normal" | "important";
 }
 
+export const InfoRow = (props: InfoRowProps) => {
+  const { children, className } = props;
+  return <div className={classNames("info-row", className)}>{children}</div>;
+};
+
 export const InfoRowLabel = (props: InfoRowProps) => {
   const { children, className, variant = "normal" } = props;
   return (

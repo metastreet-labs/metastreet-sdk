@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { prettyFormatNumber } from "../../utils/numbers";
 import useBuyWithLeverage from "../BuyWithLeverageModal/state/useBuyWithLeverage";
 import ETHPrice from "../ETHPrice";
-import { InfoRowValue } from "../InfoRow";
+import { InfoRow, InfoRowValue } from "../InfoRow";
 import LoadingText from "../LoadingText";
 import PurpleSectionLabel from "../purple-section/PurpleSectionLabel";
 import InfoDropdown from "./InfoDropdown";
@@ -29,24 +29,25 @@ const RepaymentDropdown = () => {
 
   return (
     <InfoDropdown
-      label={<span className="font-medium">Total Repayment</span>}
+      label={<span className="bwl-modal-form-purple-section-label">Total Repayment</span>}
       labelVariant="important"
       value={repayment}
+      className="bwl-modal-form-repayment-dropdown"
     >
-      <div className="flex items-center">
+      <InfoRow>
         <PurpleSectionLabel>Principal</PurpleSectionLabel>
         <InfoRowValue>
           <ETHPrice price={principal} />
         </InfoRowValue>
-      </div>
-      <div className="flex items-center">
+      </InfoRow>
+      <InfoRow>
         <PurpleSectionLabel>Total Interest Amount</PurpleSectionLabel>
         <InfoRowValue>{totalInterest}</InfoRowValue>
-      </div>
-      <div className="flex items-center">
+      </InfoRow>
+      <InfoRow>
         <PurpleSectionLabel>Daily Interest</PurpleSectionLabel>
-        <InfoRowValue className="font-semibold">{dailyInterest}</InfoRowValue>
-      </div>
+        <InfoRowValue className="important-text">{dailyInterest}</InfoRowValue>
+      </InfoRow>
     </InfoDropdown>
   );
 };

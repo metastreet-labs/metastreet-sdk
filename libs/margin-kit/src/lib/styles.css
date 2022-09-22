@@ -103,5 +103,78 @@
 /**************************************************************************/
 
 .bwl-modal-title {
-  @apply text-center text-2xl font-bold text-ms-purple-dark;
+  @apply text-center text-2xl font-bold text-ms-text-important mb-6;
+}
+
+/**************************************************************************/
+/* BWL modal content*/
+/**************************************************************************/
+.bwl-modal-content {
+  @apply flex flex-col;
+}
+
+.bwl-modal-content-token-count-badge {
+  @apply ml-1 rounded bg-ms-primary-background/20 px-2 py-1 text-xs text-ms-primary-dark;
+}
+
+.bwl-modal-content-divider {
+  @apply my-4;
+}
+
+/**************************************************************************/
+/* BWL modal form*/
+/**************************************************************************/
+.bwl-modal-form {
+  @apply flex flex-col;
+}
+
+.bwl-modal-form-debt-slider {
+  @apply mb-2;
+}
+
+.bwl-modal-form-leverage-dropdown {
+  @apply mb-1;
+}
+
+.bwl-modal-form-leverage-dropdown-ltv-tooltip-icon {
+  @apply h-4 w-4 cursor-help ml-1;
+}
+
+.bwl-modal-form-leverage-dropdown-ltv-max {
+  @apply text-gray-400 font-normal;
+}
+
+.bwl-modal-form-purple-section {
+  @apply mt-4 flex flex-col rounded-lg bg-ms-primary-background/30 px-4 py-2;
+}
+
+.bwl-modal-form-purple-section-label {
+  @apply font-medium;
+}
+
+.bwl-modal-form-upfront-payment {
+  @apply mb-1;
+}
+
+.bwl-modal-form-repayment-dropdown {
+  @apply mb-1;
+}
+
+.bwl-modal-from-repayment-date-calendar-icon {
+  @apply h-5 w-5 mr-1;
+}
+
+/**************************************************************************/
+/* other */
+/**************************************************************************/
+.info-row {
+  @apply flex items-center;
+}
+
+.important-text {
+  @apply text-ms-text-important font-semibold;
+}
+
+.metastreet-button {
+  @apply mt-4 flex items-center justify-center rounded-lg  bg-ms-primary-dark py-4 text-xl font-semibold text-white disabled:opacity-40;
 }
