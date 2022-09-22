@@ -47,10 +47,11 @@ const useBuyWithLeverageTransaction = (props: UseBuyWithLeverageTransactionProps
     const purchasePrices = tokens.map((token) => toUnits(token.tokenPrice).toString());
     const downPayments = formState.downPayments.map((downPayment) => downPayment.toString());
     const maxRepayments = formState.quote.repayments.map((repayment) => repayment.mul(105).div(100).toString());
-    const fillCallDatas = await Promise.all(tokens.map((t) => getReservoirFillCalldata({ ...t, deployment })));
 
     /* send transaction based on the number of tokens */
-    const sendTransaction = () => {
+    const sendTransaction = async () => {
+      const fillCallDatas = await Promise.all(tokens.map((t) => getReservoirFillCalldata({ ...t, deployment })));
+
       if (tokens.length > 1) {
         return buyMultipleERC721WithETH({
           signer,
