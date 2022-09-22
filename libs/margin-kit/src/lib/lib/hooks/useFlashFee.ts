@@ -1,20 +1,18 @@
-import Decimal from "decimal.js";
-import { BigNumberish } from "ethers";
-import { useProvider, useQuery } from "wagmi";
-import { getReadableError } from "../../utils/errors";
-import getFlashFee from "../fetchers/getFlashFee";
+import { getFlashFee, ReadableError } from "@metastreet-labs/margin-core";
+import { BigNumber, BigNumberish } from "ethers";
+import { useQuery } from "wagmi";
+import useDeployment from "./ useDeployment";
 
 const useFlashFee = (loanAmount: BigNumberish) => {
-  const provider = useProvider();
+  const { provider, deployment } = useDeployment();
 
-  const { data, error } = useQuery<Decimal, Error>(flashFeeQueryKeys.loanAmount(loanAmount), () =>
-    getFlashFee(provider, loanAmount)
+  return useQuery<BigNumber, ReadableError>(flashFeeQueryKeys.loanAmount(loanAmount), () =>
+    getFlashFee({
+      signerOrProvider: provider,
+      deployment,
+      loanAmount,
+    })
   );
-
-  const flashFee = data;
-  const flashFeeError = error && getReadableError(error);
-
-  return { flashFee, flashFeeError };
 };
 
 const flashFeeQueryKeys = {

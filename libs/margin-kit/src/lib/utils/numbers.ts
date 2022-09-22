@@ -16,6 +16,10 @@ export const toUnits = (value: number) => {
   return new Decimal(`${bigNum}`);
 };
 
+export const toUnitsBigNum = (value: number) => {
+  return ethers.utils.parseUnits(`${value}`, decimals);
+};
+
 /**************************************************************************/
 /* Pretty formatting 
 /**************************************************************************/

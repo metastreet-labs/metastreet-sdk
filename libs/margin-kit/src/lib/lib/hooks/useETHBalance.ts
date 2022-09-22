@@ -1,16 +1,18 @@
-import { useAccount, useProvider, useQuery } from "wagmi";
-import getETHBalance from "../fetchers/getETHBalance";
+import { useAccount, useQuery } from "wagmi";
+import useDeployment from "./ useDeployment";
 
 const useETHBalance = () => {
-  const { address } = useAccount();
-  const provider = useProvider();
+  const { address = "" } = useAccount();
+  const { provider } = useDeployment();
 
-  const queryKey = ["eth-balance", address];
-  const { data, error } = useQuery(queryKey, () => getETHBalance(provider, address ?? ""), {
+  return useQuery(ethBalanceQueryKeys.address(address), () => provider.getBalance(address), {
     enabled: Boolean(address),
   });
+};
 
-  return { balance: data, balanceError: error };
+const ethBalanceQueryKeys = {
+  all: () => ["eth-balance"],
+  address: (address: string) => [...ethBalanceQueryKeys.all(), address],
 };
 
 export default useETHBalance;
