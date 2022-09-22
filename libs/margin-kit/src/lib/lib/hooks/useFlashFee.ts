@@ -1,7 +1,7 @@
 import { getFlashFee, ReadableError } from "@metastreet-labs/margin-core";
 import { BigNumber, BigNumberish } from "ethers";
 import { useQuery } from "wagmi";
-import useDeployment from "./ useDeployment";
+import useDeployment from "./useDeployment";
 
 const useFlashFee = (loanAmount: BigNumberish) => {
   const { provider, deployment } = useDeployment();

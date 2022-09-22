@@ -3,7 +3,7 @@ import { BigNumberish } from "ethers";
 import { useQuery } from "wagmi";
 import { BWLToken } from "../../types";
 import { toUnits } from "../../utils/numbers";
-import useDeployment from "./ useDeployment";
+import useDeployment from "./useDeployment";
 
 export interface UseQuoteMultipleERC721Props {
   tokens: BWLToken[];

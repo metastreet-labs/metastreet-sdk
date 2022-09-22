@@ -1,5 +1,5 @@
 import { useAccount, useQuery } from "wagmi";
-import useDeployment from "./ useDeployment";
+import useDeployment from "./useDeployment";
 
 const useETHBalance = () => {
   const { address = "" } = useAccount();

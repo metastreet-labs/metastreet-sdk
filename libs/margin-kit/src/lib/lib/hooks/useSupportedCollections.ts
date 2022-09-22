@@ -1,6 +1,6 @@
 import { getSupportedCollections, ReadableError } from "@metastreet-labs/margin-core";
 import { useQuery } from "wagmi";
-import useDeployment from "./ useDeployment";
+import useDeployment from "./useDeployment";
 
 const useSupportedCollections = () => {
   const { provider, deployment } = useDeployment();
