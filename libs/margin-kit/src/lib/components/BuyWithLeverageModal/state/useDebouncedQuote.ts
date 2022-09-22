@@ -14,13 +14,14 @@ const useDebouncedQuote = (props: UseQuoteMultipleERC721Props) => {
     return () => {
       clearTimeout(timeout);
     };
-  }, [props, props.downPayments, props.duration]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.downPayments, props.duration]);
 
-  const { quote, quoteError } = useQuoteMultipleERC721(dp);
+  const { data, error } = useQuoteMultipleERC721(dp);
 
   return {
-    quote: debouncing ? undefined : quote,
-    quoteError: debouncing ? undefined : quoteError,
+    quote: debouncing ? undefined : data,
+    quoteError: debouncing ? undefined : error,
   };
 };
 

@@ -1,6 +1,6 @@
-import Decimal from "decimal.js";
+import { GetCollateralLimitsResult } from "@metastreet-labs/margin-core";
+import { BigNumber } from "ethers";
 import { ReactNode } from "react";
-import { CollateralLimits } from "../../../lib/fetchers/getCollateralLimits";
 import { BWLToken } from "../../../types";
 import { BuyWithLeverageContext, BuyWithLeverageContextType } from "./context";
 import useBuyWithLeverageForm from "./useBuyWithLeverageForm";
@@ -9,8 +9,8 @@ import useBuyWithLeverageTransaction from "./useBuyWithLeverageTransaction";
 interface BuyWithLeverageProviderProps {
   children: ReactNode;
   tokens: BWLToken[];
-  limits: CollateralLimits;
-  flashFee: Decimal;
+  limits: GetCollateralLimitsResult;
+  flashFee: BigNumber;
   onBuySuccess?: () => void;
 }
 
