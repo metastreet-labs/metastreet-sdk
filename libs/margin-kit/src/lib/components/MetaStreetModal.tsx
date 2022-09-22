@@ -29,11 +29,7 @@ interface ModalTitleProps {
 
 const Title = (props: ModalTitleProps) => {
   const { className, children } = props;
-  return (
-    <Dialog.Title className={classNames("text-center text-2xl font-bold text-msPrimaryDark", className)}>
-      {children}
-    </Dialog.Title>
-  );
+  return <Dialog.Title className={classNames("bwl-modal-title", className)}>{children}</Dialog.Title>;
 };
 
 interface ModalBodyProps {
@@ -46,15 +42,10 @@ interface ModalBodyProps {
 const Body = (props: ModalBodyProps) => {
   const { className, children, onClose, hideCloseButton } = props;
   return (
-    <Dialog.Panel
-      className={classNames(
-        "relative flex max-h-full w-[26rem] max-w-full flex-col overflow-hidden rounded-xl bg-white p-8 transition-all",
-        className
-      )}
-    >
+    <Dialog.Panel className={classNames("bwl-modal-panel", className)}>
       {!hideCloseButton ? (
-        <button className="absolute top-4 right-4 p-2" onClick={onClose}>
-          <XMarkIcon className="h-5 w-5 text-gray-500" />
+        <button className="bwl-modal-panel-close-button" onClick={onClose}>
+          <XMarkIcon className="bwl-modal-panel-close-button-icon" />
         </button>
       ) : null}
       {children}
@@ -71,28 +62,28 @@ export const Modal = (props: ModalProps) => {
 
   return (
     <Transition show={isOpen} as={Fragment}>
-      <Dialog onClose={onClose} className="relative z-[2147483648]">
+      <Dialog onClose={onClose} className="bwl-modal-dialog">
         <Transition.Child
           as={Fragment}
-          enter="ease-out duration-300"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
+          enter="bwl-modal-overlay-transition-enter"
+          enterFrom="bwl-modal-overlay-transition-enter-from"
+          enterTo="bwl-modal-overlay-transition-enter-to"
+          leave="bwl-modal-overlay-transition-leave"
+          leaveFrom="bwl-modal-overlay-transition-leave-from"
+          leaveTo="bwl-modal-overlay-transition-leave-to"
         >
-          <div className="fixed inset-0 bg-msOverlay/60" area-hidden="true" />
+          <div className="bwl-modal-overlay" area-hidden="true" />
         </Transition.Child>
         <Transition.Child
           as={Fragment}
-          enter="ease-out duration-300"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
+          enter="bwl-modal-body-transition-enter"
+          enterFrom="bwl-modal-body-transition-enter-from"
+          enterTo="bwl-modal-body-transition-enter-to"
+          leave="bwl-modal-body-transition-leave"
+          leaveFrom="bwl-modal-body-transition-leave-from"
+          leaveTo="bwl-modal-body-transition-leave-to"
         >
-          <div className="fixed inset-0 flex items-center justify-center">{children}</div>
+          <div className="bwl-modal-body">{children}</div>
         </Transition.Child>
       </Dialog>
     </Transition>
