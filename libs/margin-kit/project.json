@@ -1,0 +1,50 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/margin-kit/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/margin-kit",
+        "tsConfig": "libs/margin-kit/tsconfig.lib.json",
+        "project": "libs/margin-kit/package.json",
+        "entryFile": "libs/margin-kit/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "libs/margin-kit/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/margin-kit/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/margin-kit"],
+      "options": {
+        "jestConfig": "libs/margin-kit/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "type-check": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "color": true,
+        "command": "npx tsc -p libs/margin-kit/tsconfig.lib.json --noEmit --incremental"
+      }
+    }
+  }
+}

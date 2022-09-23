@@ -1,0 +1,15 @@
+[
+  {
+    "inputs": [],
+    "name": "loanPriceOracle",
+    "outputs": [
+      {
+        "internalType": "contract ILoanPriceOracle",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

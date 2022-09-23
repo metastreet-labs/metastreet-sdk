@@ -3,6 +3,7 @@
   "version": 2,
   "projects": {
     "margin-core": "libs/margin-core",
+    "margin-kit": "libs/margin-kit",
     "margin-wagmi": "libs/margin-wagmi",
     "pe-contracts-typechain": "libs/pe-contracts-typechain",
     "test": "apps/test"
