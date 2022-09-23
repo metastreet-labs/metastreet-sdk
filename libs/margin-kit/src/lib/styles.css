@@ -103,7 +103,7 @@
 /**************************************************************************/
 
 .bwl-modal-title {
-  @apply text-center text-2xl font-bold text-ms-text-important mb-6;
+  @apply text-center text-2xl font-bold text-ms-primary-dark mb-6;
 }
 
 /**************************************************************************/
@@ -119,6 +119,41 @@
 
 .bwl-modal-content-divider {
   @apply my-4;
+}
+
+/**************************************************************************/
+/* BWL modal token info*/
+/**************************************************************************/
+.bwl-modal-content-token-info-multi {
+  @apply flex flex-col;
+}
+
+.bwl-modal-content-token-info-multi-container {
+  @apply flex max-h-[10rem] flex-col space-y-2 overflow-y-auto;
+}
+
+.bwl-modal-content-token-info-multi-price {
+  @apply mt-4;
+}
+
+.bwl-modal-content-token-info-multi-row {
+  @apply flex items-center space-x-3;
+}
+
+.bwl-modal-content-token-info-multi-row-image {
+  @apply h-12 w-12;
+}
+
+.bwl-modal-content-token-info-multi-row-text-container {
+  @apply flex flex-col text-sm;
+}
+
+.bwl-modal-content-token-info-multi-row-text {
+  @apply font-semibold text-ms-primary-light;
+}
+
+.bwl-modal-content-token-info-multi-row-text-secondary {
+  @apply text-xs font-normal text-gray-500;
 }
 
 /**************************************************************************/

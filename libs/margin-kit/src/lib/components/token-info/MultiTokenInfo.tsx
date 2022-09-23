@@ -1,6 +1,6 @@
 import { BWLToken } from "../../types";
 import ETHPrice from "../ETHPrice";
-import { InfoRowLabel, InfoRowValue } from "../InfoRow";
+import { InfoRow, InfoRowLabel, InfoRowValue } from "../InfoRow";
 import TokenImage from "../TokenImage";
 
 interface MultiTokenInfoProps {
@@ -12,18 +12,18 @@ const MultiTokenInfo = (props: MultiTokenInfoProps) => {
   const totalPrice = tokens.reduce((s, t) => s + t.tokenPrice, 0);
 
   return (
-    <div className="flex flex-col">
-      <div className="flex max-h-[10rem] flex-col space-y-2 overflow-y-auto">
+    <div className="bwl-modal-content-token-info-multi">
+      <div className="bwl-modal-content-token-info-multi-container">
         {tokens.map((token) => (
           <TokenRow token={token} key={token.tokenID} />
         ))}
       </div>
-      <div className="mt-4 flex">
+      <InfoRow className="bwl-modal-content-token-info-multi-price">
         <InfoRowLabel>Total Price</InfoRowLabel>
         <InfoRowValue>
           <ETHPrice price={totalPrice} />
         </InfoRowValue>
-      </div>
+      </InfoRow>
     </div>
   );
 };
@@ -36,12 +36,12 @@ const TokenRow = (props: TokenRowProps) => {
   const { token } = props;
 
   return (
-    <div className="flex items-center space-x-3">
-      <TokenImage className="h-12 w-12" src={token.tokenImage} />
-      <div className="flex flex-col text-sm">
-        <span className="font-semibold text-msPrimaryLight">
+    <div className="bwl-modal-content-token-info-multi-row">
+      <TokenImage className="bwl-modal-content-token-info-multi-row-image" src={token.tokenImage} />
+      <div className="bwl-modal-content-token-info-multi-row-text-container">
+        <span className="bwl-modal-content-token-info-multi-row-text">
           {token.collectionName}
-          <span className="text-xs font-normal text-gray-500"> #{token.tokenID}</span>
+          <span className="bwl-modal-content-token-info-multi-row-text-secondary"> #{token.tokenID}</span>
         </span>
         <ETHPrice price={token.tokenPrice} />
       </div>
