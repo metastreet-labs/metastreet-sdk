@@ -122,7 +122,7 @@
 }
 
 /**************************************************************************/
-/* BWL modal token info*/
+/* BWL modal multi token info*/
 /**************************************************************************/
 .bwl-modal-content-token-info-multi {
   @apply flex flex-col;
@@ -154,6 +154,29 @@
 
 .bwl-modal-content-token-info-multi-row-text-secondary {
   @apply text-xs font-normal text-gray-500;
+}
+
+/**************************************************************************/
+/* BWL modal single token info*/
+/**************************************************************************/
+.bwl-modal-content-token-info-single {
+  @apply flex space-x-4;
+}
+
+.bwl-modal-content-token-info-single-image {
+  @apply h-28 w-28;
+}
+
+.bwl-modal-content-token-info-single-rows {
+  @apply flex flex-grow flex-col justify-center space-y-2;
+}
+
+.bwl-modal-content-token-info-single-collection-name {
+  @apply font-semibold;
+}
+
+.bwl-modal-content-token-info-single-token-id {
+  @apply font-semibold text-ms-primary-dark;
 }
 
 /**************************************************************************/

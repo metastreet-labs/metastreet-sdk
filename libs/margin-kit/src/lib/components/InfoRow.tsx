@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 export interface InfoRowProps {
   children: ReactNode;
   className?: string;
-  variant?: "normal" | "important";
+  variant?: "normal" | "important" | "primary";
 }
 
 export const InfoRow = (props: InfoRowProps) => {
@@ -21,6 +21,7 @@ export const InfoRowLabel = (props: InfoRowProps) => {
         {
           "text-gray-500": variant == "normal",
           "text-msTextImportant": variant == "important",
+          "text-ms-primary-light": variant == "primary",
         },
         className
       )}

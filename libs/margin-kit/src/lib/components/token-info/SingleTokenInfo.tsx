@@ -1,7 +1,7 @@
 import { BWLToken } from "../../types";
 import Divider from "../Divider";
 import ETHPrice from "../ETHPrice";
-import { InfoRowLabel, InfoRowValue } from "../InfoRow";
+import { InfoRow, InfoRowLabel, InfoRowValue } from "../InfoRow";
 import TokenImage from "../TokenImage";
 
 interface SingleTokenInfoProps {
@@ -12,20 +12,22 @@ const SingleTokenInfo = (props: SingleTokenInfoProps) => {
   const { token } = props;
 
   return (
-    <div className="flex space-x-4">
-      <TokenImage className="h-28 w-28" src={token.tokenImage} />
-      <div className="flex flex-grow flex-col justify-center space-y-2">
-        <div className="flex">
-          <InfoRowLabel className="font-semibold text-msPrimaryLight">{token.collectionName}</InfoRowLabel>
-          <InfoRowValue className="font-medium">#{token.tokenID}</InfoRowValue>
-        </div>
+    <div className="bwl-modal-content-token-info-single">
+      <TokenImage className="bwl-modal-content-token-info-single-image" src={token.tokenImage} />
+      <div className="bwl-modal-content-token-info-single-rows">
+        <InfoRow>
+          <InfoRowLabel variant="primary" className="bwl-modal-content-token-info-single-collection-name">
+            {token.collectionName}
+          </InfoRowLabel>
+          <InfoRowValue className="bwl-modal-content-token-info-single-token-id">#{token.tokenID}</InfoRowValue>
+        </InfoRow>
         <Divider />
-        <div className="flex">
+        <InfoRow>
           <InfoRowLabel>Purchase Price</InfoRowLabel>
           <InfoRowValue>
             <ETHPrice price={token.tokenPrice} />
           </InfoRowValue>
-        </div>
+        </InfoRow>
       </div>
     </div>
   );
