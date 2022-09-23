@@ -6,6 +6,7 @@
     "margin-kit": "libs/margin-kit",
     "margin-wagmi": "libs/margin-wagmi",
     "pe-contracts-typechain": "libs/pe-contracts-typechain",
+    "tailwind-config": "libs/tailwind-config",
     "test": "apps/test"
   }
 }
