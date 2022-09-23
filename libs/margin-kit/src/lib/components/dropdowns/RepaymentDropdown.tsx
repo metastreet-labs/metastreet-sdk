@@ -24,7 +24,7 @@ const RepaymentDropdown = () => {
     const dailyInterestPercent = interestAmount.div(duration).mul(100).div(debtAmount).toDecimalPlaces(2);
     dailyInterest = `${dailyInterestPercent}%`;
   } else {
-    repayment = totalInterest = dailyInterest = <LoadingText className="bg-msPrimaryDark/50" />;
+    repayment = totalInterest = dailyInterest = <LoadingText className="loading-text-purple" />;
   }
 
   return (

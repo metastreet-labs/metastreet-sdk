@@ -2,7 +2,7 @@ import { Disclosure, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import classNames from "classnames";
 import { ReactNode, useState } from "react";
-import { InfoRowLabel, InfoRowValue } from "../InfoRow";
+import { InfoRow, InfoRowLabel, InfoRowValue } from "../InfoRow";
 
 interface InfoDropdownProps {
   label: ReactNode;
@@ -18,33 +18,27 @@ const InfoDropdown = (props: InfoDropdownProps) => {
 
   return (
     <Disclosure>
-      <div className={classNames("flex flex-col", className)}>
-        <div className="flex items-center">
+      <div className={classNames("dropdown-wrapper", className)}>
+        <InfoRow>
           <InfoRowLabel variant={labelVariant}>
-            <Disclosure.Button className="space-x- flex items-center" type="button" onClick={() => setOpen((o) => !o)}>
+            <Disclosure.Button className="dropdown-button" type="button" onClick={() => setOpen((o) => !o)}>
               {label}
-              <ChevronDownIcon
-                className={classNames("h-5 w-5 transition-all", {
-                  "rotate-180": open,
-                })}
-              />
+              <ChevronDownIcon className={classNames("dropdown-button-icon", { "dropdown-button-icon-open": open })} />
             </Disclosure.Button>
           </InfoRowLabel>
-          <InfoRowValue className="font-semibold">{value}</InfoRowValue>
-        </div>
+          <InfoRowValue className="important-text">{value}</InfoRowValue>
+        </InfoRow>
         <Transition
           as="div"
-          className="mt-1 overflow-hidden"
-          enter="transition-all duration-300 ease-out"
-          enterFrom="max-h-[0px]"
-          enterTo="max-h-[5rem]"
-          leave="transition-all duration-300 ease-out"
-          leaveFrom="max-h-[5rem]"
-          leaveTo="max-h-[0px]"
+          className="dropdown-transition"
+          enter="dropdown-transition-enter"
+          enterFrom="dropdown-transition-enter-from"
+          enterTo="dropdown-transition-enter-to"
+          leave="dropdown-transition-leave"
+          leaveFrom="dropdown-transition-leave-from"
+          leaveTo="dropdown-transition-leave-to"
         >
-          <Disclosure.Panel className={classNames("ml-4 flex flex-col space-y-2 overflow-hidden transition-all")}>
-            {children}
-          </Disclosure.Panel>
+          <Disclosure.Panel className="dropdown-panel">{children}</Disclosure.Panel>
         </Transition>
       </div>
     </Disclosure>

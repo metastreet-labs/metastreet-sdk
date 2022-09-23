@@ -246,6 +246,75 @@
 }
 
 /**************************************************************************/
+/* dropdown */
+/**************************************************************************/
+.dropdown-wrapper {
+  @apply flex flex-col;
+}
+
+.dropdown-button {
+  @apply flex items-center;
+}
+
+.dropdown-button-icon {
+  @apply h-4 w-4 transition-all duration-300 ease-out ml-1;
+}
+
+.dropdown-button-icon-open {
+  @apply rotate-180;
+}
+
+.dropdown-panel {
+  @apply ml-4 flex flex-col space-y-2 overflow-hidden;
+}
+
+/**************************************************************************/
+/* dropdown transition*/
+/**************************************************************************/
+.dropdown-transition {
+  @apply mt-1 overflow-hidden;
+}
+
+.dropdown-transition-enter {
+  @apply transition-all duration-300 ease-out;
+}
+
+.dropdown-transition-enter-from {
+  @apply max-h-[0px];
+}
+
+.dropdown-transition-enter-to {
+  @apply max-h-[5rem];
+}
+
+.dropdown-transition-leave {
+  @apply transition-all duration-300 ease-out;
+}
+
+.dropdown-transition-leave-from {
+  @apply max-h-[5rem];
+}
+
+.dropdown-transition-leave-to {
+  @apply max-h-[0px];
+}
+
+/**************************************************************************/
+/* loading text */
+/**************************************************************************/
+.loading-text {
+  @apply inline h-[1.25rem] w-20 animate-pulse rounded;
+}
+
+.loading-text-gray {
+  @apply bg-gray-200;
+}
+
+.loading-text-purple {
+  @apply bg-ms-primary-dark/30;
+}
+
+/**************************************************************************/
 /* other */
 /**************************************************************************/
 .info-row {
