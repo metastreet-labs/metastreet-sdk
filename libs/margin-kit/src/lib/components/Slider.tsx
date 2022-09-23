@@ -11,7 +11,10 @@ export interface SliderProps {
 const Slider = (props: SliderProps) => {
   const { value, onChange, ...rest } = props;
 
-  const filled = ((value - rest.min) * 100) / (rest.max - rest.min);
+  const total = rest.max - rest.min;
+  const current = value - rest.min;
+  const filledPercent = (current * 100) / total;
+  const unfilledPercent = 100 - filledPercent;
 
   return (
     <Range
@@ -19,24 +22,14 @@ const Slider = (props: SliderProps) => {
       values={[value]}
       onChange={(values) => onChange(values[0])}
       renderTrack={({ props, children }) => (
-        <div {...props} className="flex h-5 w-full flex-col justify-center rounded-full bg-transparent">
-          <div className="flex h-[0.375rem] rounded-full bg-gradient-to-r from-[#976CFF] to-[#F99808]">
-            {/* Filled Progress */}
-            <div
-              className="h-full rounded-full"
-              style={{
-                width: `${filled}%`,
-              }}
-            />
-            <div className="flex-grow bg-gray-200" />
+        <div {...props} className="bwl-slider-track-wrapper">
+          <div className="bwl-slider-track-gradient">
+            <div className="bwl-slider-track-unfilled" style={{ width: `${unfilledPercent}%` }} />
           </div>
           {children}
         </div>
       )}
-      // Drag Handle
-      renderThumb={({ props }) => (
-        <div {...props} className="h-5 w-5 rounded-md border-2 border-msPrimaryDark bg-msCardBackground" />
-      )}
+      renderThumb={({ props }) => <div {...props} className="bwl-slider-track-thumb" />}
     />
   );
 };

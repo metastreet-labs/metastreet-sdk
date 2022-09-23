@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { ReactNode } from "react";
-import { InfoRowLabel, InfoRowValue } from "../InfoRow";
+import { InfoRow, InfoRowLabel, InfoRowValue } from "../InfoRow";
 import Slider, { SliderProps } from "../Slider";
 
 type BuyWithLeverageSliderProps = SliderProps & {
@@ -13,11 +13,11 @@ const BuyWithLeverageSlider = (props: BuyWithLeverageSliderProps) => {
   const { label, valueDisplay, className, ...rest } = props;
 
   return (
-    <div className={classNames("flex flex-col", className)}>
-      <div className="flex items-center">
+    <div className={classNames("bwl-slider-wrapper", className)}>
+      <InfoRow>
         <InfoRowLabel>{label}</InfoRowLabel>
         <InfoRowValue>{valueDisplay}</InfoRowValue>
-      </div>
+      </InfoRow>
       <Slider {...rest} />
     </div>
   );

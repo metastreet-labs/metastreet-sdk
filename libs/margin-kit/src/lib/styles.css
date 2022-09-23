@@ -223,6 +223,29 @@
 }
 
 /**************************************************************************/
+/* BWL slider */
+/**************************************************************************/
+.bwl-slider-wrapper {
+  @apply flex flex-col;
+}
+
+.bwl-slider-track-wrapper {
+  @apply flex h-5 w-full flex-col justify-center rounded-full;
+}
+
+.bwl-slider-track-gradient {
+  @apply flex h-[0.375rem] rounded-full bg-gradient-to-r from-[#976CFF] to-[#F99808] justify-end;
+}
+
+.bwl-slider-track-unfilled {
+  @apply bg-gray-200;
+}
+
+.bwl-slider-track-thumb {
+  @apply h-5 w-5 rounded-md border-2 border-ms-primary-dark bg-ms-card-background;
+}
+
+/**************************************************************************/
 /* other */
 /**************************************************************************/
 .info-row {

@@ -9,6 +9,7 @@ module.exports = {
         "ms-primary-background": "#976CFF",
         "ms-text-important": "#261452",
         "ms-overlay": "rgba(38, 20, 82, 1)",
+        "ms-card-background": "rgba(255, 255, 255, 1)",
       },
     },
   },
