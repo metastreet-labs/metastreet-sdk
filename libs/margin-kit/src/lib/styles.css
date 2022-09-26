@@ -380,6 +380,85 @@
 }
 
 /**************************************************************************/
+/* transaction steps */
+/**************************************************************************/
+.transaction-steps {
+  @apply flex flex-col space-y-5;
+}
+
+.transaction-steps-wrapper {
+  @apply flex justify-center px-6;
+}
+
+.transaction-steps-divider {
+  @apply mx-2 mt-[1.2rem] h-[2px] max-w-[5rem] flex-grow bg-ms-primary-light;
+}
+
+.transaction-steps-divider-inactive {
+  @apply opacity-50;
+}
+
+.transaction-steps-description {
+  @apply flex items-center justify-center space-x-1;
+}
+
+.transaction-steps-description-error {
+  @apply text-red-500;
+}
+
+.transaction-steps-description-normal {
+  @apply text-ms-primary-dark;
+}
+
+.transaction-steps-icon {
+  @apply h-5 w-5;
+}
+
+.transaction-steps-text {
+  @apply text-sm;
+}
+
+.transaction-steps-circle {
+  @apply relative flex flex-col items-center pb-6;
+}
+
+.transaction-steps-circle-normal {
+  @apply text-ms-primary-light;
+}
+
+.transaction-steps-circle-error {
+  @apply text-red-500;
+}
+
+.transaction-steps-circle-inactive {
+  @apply opacity-50;
+}
+
+.transaction-steps-circle-border {
+  @apply flex h-10 w-10 items-center justify-center rounded-full border-2 font-semibold;
+}
+
+.transaction-steps-circle-border-error {
+  @apply border-red-500 bg-red-500;
+}
+
+.transaction-steps-circle-border-normal {
+  @apply border-ms-primary-light;
+}
+
+.transaction-steps-circle-border-complete {
+  @apply bg-ms-primary-light;
+}
+
+.transaction-steps-circle-icon {
+  @apply h-5 w-5 text-white;
+}
+
+.transaction-steps-circle-title {
+  @apply absolute top-12 whitespace-nowrap text-xs font-semibold;
+}
+
+/**************************************************************************/
 /* other */
 /**************************************************************************/
 .important-text {
