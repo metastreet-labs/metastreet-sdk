@@ -1,4 +1,4 @@
-const ETHLogo = ({ className = "w-2" }) => {
+const ETHLogo = ({ className = "default-eth-logo" }) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 417" preserveAspectRatio="xMidYMid" className={className}>
       <path fill="#343434" d="M127.9611 0L125.1661 9.5 125.1661 285.168 127.9611 287.958 255.9231 212.32z" />

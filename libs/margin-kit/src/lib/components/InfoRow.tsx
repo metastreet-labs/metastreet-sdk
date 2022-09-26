@@ -17,11 +17,11 @@ export const InfoRowLabel = (props: InfoRowProps) => {
   return (
     <div
       className={classNames(
-        "flex w-0 flex-grow items-center truncate text-left text-sm",
+        "info-row-label",
         {
-          "text-gray-500": variant == "normal",
-          "text-msTextImportant": variant == "important",
-          "text-ms-primary-light": variant == "primary",
+          "info-row-label-normal": variant == "normal",
+          "info-row-label-important": variant == "important",
+          "info-row-label-primary": variant == "primary",
         },
         className
       )}

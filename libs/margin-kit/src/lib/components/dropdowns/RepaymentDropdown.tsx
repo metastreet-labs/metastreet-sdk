@@ -29,7 +29,7 @@ const RepaymentDropdown = () => {
 
   return (
     <InfoDropdown
-      label={<span className="bwl-modal-form-purple-section-label">Total Repayment</span>}
+      label={<span className="important-text">Total Repayment</span>}
       labelVariant="important"
       value={repayment}
       className="bwl-modal-form-repayment-dropdown"

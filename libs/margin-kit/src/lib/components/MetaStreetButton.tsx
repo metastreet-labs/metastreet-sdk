@@ -11,7 +11,7 @@ const MetaStreetButton = (props: MetaStreetButtonProps) => {
 
   return (
     <button className={classNames("metastreet-button", className)} disabled={disabled || loading} {...rest}>
-      {loading ? <Spinner className="mr-2 h-6 w-6" /> : null}
+      {loading ? <Spinner className="metastreet-button-spinner" /> : null}
       {children}
     </button>
   );

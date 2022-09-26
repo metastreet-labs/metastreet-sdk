@@ -206,10 +206,6 @@
   @apply mt-4 flex flex-col rounded-lg bg-ms-primary-background/30 px-4 py-2;
 }
 
-.bwl-modal-form-purple-section-label {
-  @apply font-medium;
-}
-
 .bwl-modal-form-upfront-payment {
   @apply mb-1;
 }
@@ -315,16 +311,94 @@
 }
 
 /**************************************************************************/
-/* other */
+/* info row */
 /**************************************************************************/
 .info-row {
   @apply flex items-center;
 }
 
+.info-row-label {
+  @apply flex w-0 flex-grow items-center truncate text-left text-sm;
+}
+
+.info-row-label-normal {
+  @apply text-gray-500;
+}
+
+.info-row-label-important {
+  @apply text-ms-text-important;
+}
+
+.info-row-label-primary {
+  @apply text-ms-primary-light;
+}
+
+/**************************************************************************/
+/* eth logo */
+/**************************************************************************/
+.default-eth-logo {
+  @apply w-2;
+}
+
+.eth-price-wrapper {
+  @apply flex items-center space-x-1;
+}
+
+.eth-price-default {
+  @apply font-semibold;
+}
+
+/**************************************************************************/
+/* bwl tooltip */
+/**************************************************************************/
+.bwl-tooltip-span {
+  @apply flex flex-grow;
+}
+
+.bwl-tooltip-content {
+  @apply w-44 whitespace-pre-wrap rounded-lg bg-white p-3 text-center text-xs text-gray-500;
+  filter: drop-shadow(4.4625px 4.4625px 4.4625px rgba(0, 0, 0, 0.25));
+}
+
+.bwl-tooltip-arrow {
+  @apply fill-white;
+}
+
+/**************************************************************************/
+/* bwl spinner*/
+/**************************************************************************/
+.bwl-spinner {
+  @apply animate-spin;
+}
+
+.bwl-spinner-circle {
+  @apply opacity-25;
+}
+
+.bwl-spinner-path {
+  @apply opacity-75;
+}
+
+/**************************************************************************/
+/* other */
+/**************************************************************************/
 .important-text {
   @apply text-ms-text-important font-semibold;
 }
 
 .metastreet-button {
   @apply mt-4 flex items-center justify-center rounded-lg  bg-ms-primary-dark py-4 text-xl font-semibold text-white disabled:opacity-40;
+}
+
+.metastreet-button-spinner {
+  @apply mr-2 h-6 w-6;
+}
+
+.bwl-divider {
+  @apply h-[1px] bg-gray-200;
+}
+
+.bwl-token-image {
+  @apply rounded-lg object-cover;
+  filter: drop-shadow(4.4625px 4.4625px 4.4625px rgba(0, 0, 0, 0.25));
 }
