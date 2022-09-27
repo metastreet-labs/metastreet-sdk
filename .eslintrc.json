@@ -66,6 +66,7 @@
     }
   ],
   "rules": {
-    "eqeqeq": "off"
+    "eqeqeq": "off",
+    "react/jsx-no-useless-fragment": ["warn", { "allowExpressions": true }]
   }
 }

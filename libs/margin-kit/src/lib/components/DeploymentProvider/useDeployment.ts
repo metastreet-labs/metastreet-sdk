@@ -1,12 +1,10 @@
-import { Deployment, DEPLOYMENTS } from "@metastreet-labs/margin-core";
-import { useProvider } from "wagmi";
+import { useContext } from "react";
+import { MetaStreetDeploymentContext } from "./DeploymentProvider";
 
 const useDeployment = () => {
-  const provider = useProvider();
-  const chainID = provider.network.chainId;
-  const deployment = DEPLOYMENTS[chainID] ?? ({} as Deployment);
-
-  return { provider, chainID, deployment };
+  const deployment = useContext(MetaStreetDeploymentContext);
+  if (!deployment) throw new Error("useDeployment was used outside of DeploymentProvider");
+  return deployment;
 };
 
 export default useDeployment;
