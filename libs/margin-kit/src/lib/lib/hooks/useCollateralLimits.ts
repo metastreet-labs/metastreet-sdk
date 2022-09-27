@@ -5,7 +5,7 @@ import {
   ReadableError,
 } from "@metastreet-labs/margin-core";
 import { useQuery } from "wagmi";
-import useDeployment from "./useDeployment";
+import useDeployment from "../../components/DeploymentProvider/useDeployment";
 
 type UseCollateralLimitsParams = Pick<GetCollateralLimitsParams, "collectionAddress" | "tokenID">;
 

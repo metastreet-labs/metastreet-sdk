@@ -7,10 +7,10 @@ import { ContractTransaction } from "ethers";
 import { useSigner } from "wagmi";
 import { CONFIRMATIONS } from "../../../env";
 import useTransactionSteps, { TransactionStatus, TransactionStep } from "../../../hooks/useTransactionState";
-import useDeployment from "../../../lib/hooks/useDeployment";
 import { BWLToken } from "../../../types";
 import { getReadableError } from "../../../utils/errors";
 import { toUnits } from "../../../utils/numbers";
+import useDeployment from "../../DeploymentProvider/useDeployment";
 import { BuyWithLeverageFormState } from "./useBuyWithLeverageForm";
 
 const getSteps = (): TransactionStep[] => [

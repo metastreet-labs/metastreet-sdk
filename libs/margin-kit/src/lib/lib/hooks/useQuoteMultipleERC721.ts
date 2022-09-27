@@ -1,9 +1,9 @@
 import { quoteMultipleERC721, QuoteMultipleERC721Result, ReadableError } from "@metastreet-labs/margin-core";
 import { BigNumberish } from "ethers";
 import { useQuery } from "wagmi";
+import useDeployment from "../../components/DeploymentProvider/useDeployment";
 import { BWLToken } from "../../types";
 import { toUnits } from "../../utils/numbers";
-import useDeployment from "./useDeployment";
 
 export interface UseQuoteMultipleERC721Props {
   tokens: BWLToken[];
