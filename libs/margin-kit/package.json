@@ -1,6 +1,6 @@
 {
   "name": "@metastreet-labs/margin-kit",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "peerDependencies": {
     "react": "18.2.0",
     "wagmi": "^0.6.4",
