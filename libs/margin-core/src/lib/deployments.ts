@@ -27,7 +27,7 @@ export const DEPLOYMENTS: Record<number, Deployment> = {
   },
   [CHAIN_IDS.goerli]: {
     vaultAddress: "0x99156878c19c46c492d3ac40a3a8483c3740a9d5",
-    lbWrapperAddress: "0xD97F696217fd33fC5dE26B5905AD1759bC87fb5d",
+    lbWrapperAddress: "0xe0b85b502E93EF78a93B8753AfF2fdCAb98334B0",
     subgraphURI: "https://api.studio.thegraph.com/query/31830/metastreet-lb-goerli/0.1",
     reservoirURL: "https://api-goerli.reservoir.tools",
   },
