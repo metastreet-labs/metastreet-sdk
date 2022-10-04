@@ -14,7 +14,7 @@ export interface RawLeverageBuy {
   repayment: string;
   duration: string;
   maturity: string;
-  listingData: string;
+  listingData?: string;
 }
 
 export interface RawLeverageBuyEvent {
