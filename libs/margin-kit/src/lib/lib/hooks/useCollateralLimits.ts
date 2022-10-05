@@ -5,12 +5,12 @@ import {
   ReadableError,
 } from "@metastreet-labs/margin-core";
 import { useQuery } from "wagmi";
-import useDeployment from "../../components/DeploymentProvider/useDeployment";
+import useMetaStreetDeployment from "../../components/MetaStreetDeploymentProvider/useMetaStreetDeployment";
 
 type UseCollateralLimitsParams = Pick<GetCollateralLimitsParams, "collectionAddress" | "tokenID">;
 
 const useCollateralLimits = (params: UseCollateralLimitsParams) => {
-  const { provider, deployment } = useDeployment();
+  const { provider, deployment } = useMetaStreetDeployment();
 
   return useQuery<GetCollateralLimitsResult, ReadableError>(collateralLimitsQueryKeys.token(params), () => {
     return getCollateralLimits({ signerOrProvider: provider, deployment, ...params });

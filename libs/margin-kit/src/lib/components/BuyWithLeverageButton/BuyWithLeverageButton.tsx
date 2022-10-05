@@ -1,7 +1,7 @@
 import { useSigner } from "wagmi";
 import useIsCollectionSupported from "../../lib/hooks/useIsCollectionSupported";
 import { BWLToken } from "../../types";
-import DeploymentProvider from "../DeploymentProvider/DeploymentProvider";
+import MetaStreetDeploymentProvider from "../MetaStreetDeploymentProvider/DeploymentProvider";
 import BaseBuyWithLeverageButton from "./BaseBuyWithLeverageButton";
 import ErrorButton from "./placeholders/ErrorButton";
 import LoadingButton from "./placeholders/LoadingButton";
@@ -42,9 +42,9 @@ const ActualBuyWithLeverageButton = (props: BuyWithLeverageButtonProps) => {
 
 const BuyWithLeverageButton = (props: BuyWithLeverageButtonProps) => {
   return (
-    <DeploymentProvider errorComponent={<ErrorButton error="Unsupported chain" />}>
+    <MetaStreetDeploymentProvider errorComponent={<ErrorButton error="Unsupported chain" />}>
       <ActualBuyWithLeverageButton {...props} />
-    </DeploymentProvider>
+    </MetaStreetDeploymentProvider>
   );
 };
 

@@ -10,7 +10,7 @@ import useTransactionSteps, { TransactionStatus, TransactionStep } from "../../.
 import { BWLToken } from "../../../types";
 import { getReadableError } from "../../../utils/errors";
 import { toUnits } from "../../../utils/numbers";
-import useDeployment from "../../DeploymentProvider/useDeployment";
+import useMetaStreetDeployment from "../../MetaStreetDeploymentProvider/useMetaStreetDeployment";
 import { BuyWithLeverageFormState } from "./useBuyWithLeverageForm";
 
 const getSteps = (): TransactionStep[] => [
@@ -35,7 +35,7 @@ interface UseBuyWithLeverageTransactionProps {
 const useBuyWithLeverageTransaction = (props: UseBuyWithLeverageTransactionProps) => {
   const { tokens, formState, onBuySuccess } = props;
   const { data: signer } = useSigner();
-  const { deployment } = useDeployment();
+  const { deployment } = useMetaStreetDeployment();
   const [steps, updateStep, resetSteps] = useTransactionSteps(getSteps());
 
   const buy = async (): Promise<void> => {

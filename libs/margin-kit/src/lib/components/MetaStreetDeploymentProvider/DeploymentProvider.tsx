@@ -11,12 +11,12 @@ export interface MetaStreetDeployment {
 
 export const MetaStreetDeploymentContext = createContext<MetaStreetDeployment | undefined>(undefined);
 
-interface DeploymentProviderProps {
+interface MetaStreetDeploymentProviderProps {
   children: ReactNode;
   errorComponent: ReactNode;
 }
 
-const DeploymentProvider = (props: DeploymentProviderProps) => {
+const MetaStreetDeploymentProvider = (props: MetaStreetDeploymentProviderProps) => {
   const { children, errorComponent } = props;
   const provider = useProvider();
   const chainID = provider.network.chainId;
@@ -28,4 +28,4 @@ const DeploymentProvider = (props: DeploymentProviderProps) => {
   return <MetaStreetDeploymentContext.Provider value={value}>{children}</MetaStreetDeploymentContext.Provider>;
 };
 
-export default DeploymentProvider;
+export default MetaStreetDeploymentProvider;

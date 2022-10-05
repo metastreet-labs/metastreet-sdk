@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 import { BWLToken } from "../../types";
-import DeploymentProvider from "../DeploymentProvider/DeploymentProvider";
+import MetaStreetDeploymentProvider from "../MetaStreetDeploymentProvider/DeploymentProvider";
 import MetaStreetModal, { ModalState } from "../MetaStreetModal";
 import LoanInfoContainer from "./containers/LoanInfoContainer";
 import ModalContent from "./ModalContent";
@@ -23,7 +23,7 @@ const BuyWithLeverageModal = (props: BuyWithLeverageModalProps) => {
   return (
     <MetaStreetModal isOpen={isOpen} onClose={onClose}>
       <MetaStreetModal.Body onClose={onClose} hideCloseButton={preventClose}>
-        <DeploymentProvider
+        <MetaStreetDeploymentProvider
           errorComponent={
             <div className="flex h-56 items-center justify-center">
               <span>Unsupported chain</span>
@@ -37,7 +37,7 @@ const BuyWithLeverageModal = (props: BuyWithLeverageModalProps) => {
               </BuyWithLeverageProvider>
             )}
           </LoanInfoContainer>
-        </DeploymentProvider>
+        </MetaStreetDeploymentProvider>
       </MetaStreetModal.Body>
     </MetaStreetModal>
   );
