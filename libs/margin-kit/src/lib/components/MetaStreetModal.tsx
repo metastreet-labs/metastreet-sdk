@@ -1,7 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/solid";
 import classNames from "classnames";
 import { Fragment, ReactNode, useEffect, useState } from "react";
+import XMarkIcon from "./icons/XMarkIcons";
 
 export interface ModalState {
   isOpen: boolean;

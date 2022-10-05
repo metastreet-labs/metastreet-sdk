@@ -1,5 +1,6 @@
 import { ReactNode, useState } from "react";
 import { BWLToken } from "../../types";
+import MetaStreetDeploymentProvider from "../MetaStreetDeploymentProvider/MetaStreetDeploymentProvider";
 import MetaStreetModal, { ModalState } from "../MetaStreetModal";
 import LoanInfoContainer from "./containers/LoanInfoContainer";
 import ModalContent from "./ModalContent";
@@ -19,17 +20,24 @@ const BuyWithLeverageModal = (props: BuyWithLeverageModalProps) => {
   const [tokens] = useState(props.tokens);
 
   if (!tokens.length) return null;
-
   return (
     <MetaStreetModal isOpen={isOpen} onClose={onClose}>
       <MetaStreetModal.Body onClose={onClose} hideCloseButton={preventClose}>
-        <LoanInfoContainer tokens={tokens}>
-          {({ limits, flashFee }) => (
-            <BuyWithLeverageProvider tokens={tokens} limits={limits} flashFee={flashFee} onBuySuccess={onBuySuccess}>
-              <ModalContent title={title} onClose={onClose} />
-            </BuyWithLeverageProvider>
-          )}
-        </LoanInfoContainer>
+        <MetaStreetDeploymentProvider
+          errorComponent={
+            <div className="flex h-56 items-center justify-center">
+              <span>Unsupported chain</span>
+            </div>
+          }
+        >
+          <LoanInfoContainer tokens={tokens}>
+            {({ limits, flashFee }) => (
+              <BuyWithLeverageProvider tokens={tokens} limits={limits} flashFee={flashFee} onBuySuccess={onBuySuccess}>
+                <ModalContent title={title} onClose={onClose} />
+              </BuyWithLeverageProvider>
+            )}
+          </LoanInfoContainer>
+        </MetaStreetDeploymentProvider>
       </MetaStreetModal.Body>
     </MetaStreetModal>
   );

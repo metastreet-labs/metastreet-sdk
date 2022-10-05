@@ -8,12 +8,15 @@
       "executor": "@nrwl/web:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "updateBuildableProjectDepsInPackageJson": true,
+        "buildableProjectDepsInPackageJsonType": "dependencies",
         "outputPath": "dist/libs/margin-kit",
         "tsConfig": "libs/margin-kit/tsconfig.lib.json",
         "project": "libs/margin-kit/package.json",
         "entryFile": "libs/margin-kit/src/index.ts",
         "external": ["react/jsx-runtime"],
         "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "format": ["cjs", "esm"],
         "compiler": "babel",
         "assets": [
           {
