@@ -7,10 +7,10 @@ import { ContractTransaction } from "ethers";
 import { useSigner } from "wagmi";
 import { CONFIRMATIONS } from "../../../env";
 import useTransactionSteps, { TransactionStatus, TransactionStep } from "../../../hooks/useTransactionState";
-import useDeployment from "../../../lib/hooks/useDeployment";
 import { BWLToken } from "../../../types";
 import { getReadableError } from "../../../utils/errors";
 import { toUnits } from "../../../utils/numbers";
+import useDefinedMetaStreetDeployment from "../../MetaStreetDeploymentProvider/useDefinedMetaStreetDeployment";
 import { BuyWithLeverageFormState } from "./useBuyWithLeverageForm";
 
 const getSteps = (): TransactionStep[] => [
@@ -35,7 +35,7 @@ interface UseBuyWithLeverageTransactionProps {
 const useBuyWithLeverageTransaction = (props: UseBuyWithLeverageTransactionProps) => {
   const { tokens, formState, onBuySuccess } = props;
   const { data: signer } = useSigner();
-  const { deployment } = useDeployment();
+  const { deployment } = useDefinedMetaStreetDeployment();
   const [steps, updateStep, resetSteps] = useTransactionSteps(getSteps());
 
   const buy = async (): Promise<void> => {

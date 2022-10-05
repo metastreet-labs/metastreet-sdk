@@ -44,7 +44,8 @@
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nrwl/nx/typescript"],
       "rules": {
-        "@typescript-eslint/consistent-type-definitions": ["warn", "interface"]
+        "@typescript-eslint/consistent-type-definitions": ["warn", "interface"],
+        "eqeqeq": "off"
       }
     },
     {
@@ -61,11 +62,9 @@
             "namedComponents": "arrow-function",
             "unnamedComponents": "arrow-function"
           }
-        ]
+        ],
+        "react/jsx-no-useless-fragment": ["warn", { "allowExpressions": true }]
       }
     }
-  ],
-  "rules": {
-    "eqeqeq": "off"
-  }
+  ]
 }

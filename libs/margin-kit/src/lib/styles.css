@@ -261,14 +261,14 @@
 }
 
 .dropdown-panel {
-  @apply ml-4 flex flex-col space-y-1 overflow-hidden;
+  @apply ml-4 flex flex-col space-y-1 mt-1 overflow-hidden;
 }
 
 /**************************************************************************/
 /* dropdown transition*/
 /**************************************************************************/
 .dropdown-transition {
-  @apply mt-1 overflow-hidden;
+  @apply overflow-hidden;
 }
 
 .dropdown-transition-enter {

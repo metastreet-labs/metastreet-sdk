@@ -16,6 +16,7 @@
         "entryFile": "libs/margin-kit/src/index.ts",
         "external": ["react/jsx-runtime"],
         "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "format": ["cjs", "esm"],
         "compiler": "babel",
         "assets": [
           {

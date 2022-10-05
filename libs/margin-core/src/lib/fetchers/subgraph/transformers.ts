@@ -14,6 +14,7 @@ export interface RawLeverageBuy {
   repayment: string;
   duration: string;
   maturity: string;
+  listingData?: string;
 }
 
 export interface RawLeverageBuyEvent {
@@ -38,6 +39,7 @@ export const transformRawLeverageBuy = (raw: RawLeverageBuy): LeverageBuy => {
     repayment: BigNumber.from(raw.repayment),
     duration: parseInt(raw.duration),
     maturity: parseInt(raw.maturity),
+    listingData: raw.listingData,
   };
 };
 
@@ -47,6 +49,6 @@ export const transformRawLeverageBuyEvent = (raw: RawLeverageBuyEvent): Leverage
     type: raw.type as LeverageBuyEventType,
     timestamp: parseInt(raw.timestamp),
     leverageBuy: transformRawLeverageBuy(raw.leverageBuy),
-    previousLeverageBuy: raw.leverageBuy && transformRawLeverageBuy(raw.leverageBuy),
+    previousLeverageBuy: raw.previousLeverageBuy && transformRawLeverageBuy(raw.previousLeverageBuy),
   };
 };
