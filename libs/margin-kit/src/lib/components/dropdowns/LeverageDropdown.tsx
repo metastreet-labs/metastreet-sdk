@@ -1,8 +1,8 @@
-import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
 import Decimal from "decimal.js";
 import { fromUnits, prettyFormatNumber } from "../../utils/numbers";
 import useBuyWithLeverage from "../BuyWithLeverageModal/state/useBuyWithLeverage";
 import ETHPrice from "../ETHPrice";
+import QuestionMarkCircleIcon from "../icons/QuestionMarkCircleIcon";
 import { InfoRow, InfoRowLabel, InfoRowValue } from "../InfoRow";
 import Tooltip from "../Tooltip";
 import InfoDropdown from "./InfoDropdown";

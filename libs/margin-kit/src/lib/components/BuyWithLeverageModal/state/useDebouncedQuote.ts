@@ -1,23 +1,10 @@
-import { useEffect, useState } from "react";
+import useDebouncedProps from "../../../hooks/useDebouncedProps";
 import useQuoteMultipleERC721, { UseQuoteMultipleERC721Props } from "../../../lib/hooks/useQuoteMultipleERC721";
 
 const useDebouncedQuote = (props: UseQuoteMultipleERC721Props) => {
-  const [dp, setDP] = useState(props);
-  const [debouncing, setDebouncing] = useState(false);
+  const [debouncedProps, debouncing] = useDebouncedProps(props, [props.duration, props.downPayments]);
 
-  useEffect(() => {
-    setDebouncing(true);
-    const timeout = setTimeout(() => {
-      setDebouncing(false);
-      setDP(props);
-    }, 500);
-    return () => {
-      clearTimeout(timeout);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.downPayments, props.duration]);
-
-  const { data, error } = useQuoteMultipleERC721(dp);
+  const { data, error } = useQuoteMultipleERC721(debouncedProps);
 
   return {
     quote: debouncing ? undefined : data,

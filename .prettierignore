@@ -3,4 +3,4 @@
 /dist
 /coverage
 
-libs/pe-contracts-typechain
+libs/pe-contracts-typechain/src

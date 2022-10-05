@@ -21,6 +21,7 @@ const getPayload = (id: string) => {
           repayment
           duration
           maturity 
+          listingData
         }
       }
     `,

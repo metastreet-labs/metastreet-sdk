@@ -1,4 +1,4 @@
-import * as Add2Calendar from "add2calendar";
+import Add2Calendar from "add2calendar";
 import useBuyWithLeverage from "../BuyWithLeverageModal/state/useBuyWithLeverage";
 import { InfoRow, InfoRowValue } from "../InfoRow";
 import PurpleSectionLabel from "../purple-section/PurpleSectionLabel";
