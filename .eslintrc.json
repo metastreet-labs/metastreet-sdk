@@ -63,10 +63,13 @@
           }
         ]
       }
+    },
+    { "files": "*", "rules": { "eqeqeq": "off" } },
+    {
+      "files": "*.tsx",
+      "rules": {
+        "react/jsx-no-useless-fragment": ["warn", { "allowExpressions": true }]
+      }
     }
-  ],
-  "rules": {
-    "eqeqeq": "off",
-    "react/jsx-no-useless-fragment": ["warn", { "allowExpressions": true }]
-  }
+  ]
 }

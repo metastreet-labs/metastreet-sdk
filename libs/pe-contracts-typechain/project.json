@@ -4,13 +4,23 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nrwl/web:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "format": ["cjs", "esm"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "project": "libs/pe-contracts-typechain/package.json",
+        "entryFile": "libs/pe-contracts-typechain/src/index.ts",
         "outputPath": "dist/libs/pe-contracts-typechain",
         "main": "libs/pe-contracts-typechain/src/index.ts",
         "tsConfig": "libs/pe-contracts-typechain/tsconfig.lib.json",
-        "assets": ["libs/pe-contracts-typechain/*.md"]
+        "assets": [
+          {
+            "glob": "libs/pe-contracts-typechain/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
       }
     },
     "publish": {
