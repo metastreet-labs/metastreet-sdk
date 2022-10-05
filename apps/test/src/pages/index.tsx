@@ -1,9 +1,4 @@
-import {
-  DEPLOYMENTS,
-  getLeverageBuy,
-  getLeverageBuyEvents,
-  getSupportedCollections,
-} from "@metastreet-labs/margin-core";
+import { DEPLOYMENTS, getLeverageBuy, getLeverageBuyEvents } from "@metastreet-labs/margin-core";
 import { useEffect } from "react";
 import { useAccount, useProvider } from "wagmi";
 
@@ -14,9 +9,12 @@ const Index = () => {
   useEffect(() => {
     const deployment = DEPLOYMENTS[provider.network.chainId];
     const params = { signerOrProvider: provider, deployment };
-    getSupportedCollections(params).then((sc) => console.log(sc));
-    getLeverageBuy({ escrowID: "50", ...params }).then((json) => console.log({ json }));
-    getLeverageBuyEvents({ ...params, owner: address, skip: 0, first: 5 }).then((events) => console.log({ events }));
+    getLeverageBuy({ escrowID: "0", ...params })
+      .then((json) => console.log({ json }))
+      .catch((e) => console.log(e));
+    getLeverageBuyEvents({ ...params, owner: address, skip: 0, first: 5 })
+      .then((events) => console.log({ events }))
+      .catch((e) => console.log(e));
   }, [provider, address]);
   /*
    * Replace the elements below with your own.

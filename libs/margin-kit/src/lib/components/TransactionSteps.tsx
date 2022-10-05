@@ -1,7 +1,8 @@
-import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import { CheckIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import classNames from "classnames";
 import { TransactionState, TransactionStep } from "../hooks/useTransactionState";
+import CheckIcon from "./icons/CheckIcon";
+import ExclamationCircleIcon from "./icons/ExclamationCircleIcon";
+import XMarkIcon from "./icons/XMarkIcons";
 import MetaStreetButton from "./MetaStreetButton";
 import Spinner from "./Spinner";
 

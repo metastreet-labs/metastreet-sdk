@@ -66,9 +66,53 @@
           "internalType": "uint256",
           "name": "escrowId",
           "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "enum IPurchaseEscrow.Marketplace",
+          "name": "marketplace",
+          "type": "uint8"
+        }
+      ],
+      "name": "PurchaseEscrowDelisted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "escrowId",
+          "type": "uint256"
         }
       ],
       "name": "PurchaseEscrowLiquidated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "escrowId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "enum IPurchaseEscrow.Marketplace",
+          "name": "marketplace",
+          "type": "uint8"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "listingData",
+          "type": "bytes"
+        }
+      ],
+      "name": "PurchaseEscrowListed",
       "type": "event"
     },
     {
@@ -85,16 +129,45 @@
       "type": "event"
     },
     {
-      "inputs": [],
-      "name": "buyerNoteToken",
-      "outputs": [
+      "anonymous": false,
+      "inputs": [
         {
-          "internalType": "contract IERC721",
-          "name": "",
-          "type": "address"
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "escrowId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "enum IPurchaseEscrow.Marketplace",
+          "name": "marketplace",
+          "type": "uint8"
         }
       ],
-      "stateMutability": "view",
+      "name": "PurchaseEscrowSold",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "escrowId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "enum IPurchaseEscrow.Marketplace",
+          "name": "marketplace",
+          "type": "uint8"
+        },
+        {
+          "internalType": "bytes",
+          "name": "listingData",
+          "type": "bytes"
+        }
+      ],
+      "name": "cancelListing",
+      "outputs": [],
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -142,6 +215,44 @@
       "type": "function"
     },
     {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "escrowId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "enum IPurchaseEscrow.Marketplace",
+          "name": "marketplace",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "consideration",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "expiration",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "salt",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "signature",
+          "type": "bytes"
+        }
+      ],
+      "name": "createListing",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
       "inputs": [],
       "name": "currencyToken",
       "outputs": [
@@ -149,6 +260,45 @@
           "internalType": "contract IERC20",
           "name": "",
           "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "escrowId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "enum IPurchaseEscrow.Marketplace",
+          "name": "marketplace",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "consideration",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "expiration",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "salt",
+          "type": "uint256"
+        }
+      ],
+      "name": "generateListing",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
         }
       ],
       "stateMutability": "view",
@@ -186,6 +336,24 @@
           "internalType": "uint256",
           "name": "escrowId",
           "type": "uint256"
+        },
+        {
+          "internalType": "enum IPurchaseEscrow.Marketplace",
+          "name": "marketplace",
+          "type": "uint8"
+        }
+      ],
+      "name": "processSale",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "escrowId",
+          "type": "uint256"
         }
       ],
       "name": "purchaseEscrows",
@@ -200,6 +368,11 @@
             {
               "internalType": "contract IERC721",
               "name": "token",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "buyer",
               "type": "address"
             },
             {
@@ -226,6 +399,11 @@
               "internalType": "uint64",
               "name": "duration",
               "type": "uint64"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "orderHash",
+              "type": "bytes32"
             }
           ],
           "internalType": "struct IPurchaseEscrow.PurchaseEscrowTerms",

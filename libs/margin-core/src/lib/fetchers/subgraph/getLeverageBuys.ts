@@ -31,6 +31,7 @@ const getPayload = (variables: GetPayloadVariables) => {
           repayment
           duration
           maturity
+          listingData
         }
       }`,
     variables,

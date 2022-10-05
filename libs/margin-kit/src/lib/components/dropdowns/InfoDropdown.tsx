@@ -1,7 +1,7 @@
 import { Disclosure, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import classNames from "classnames";
 import { ReactNode, useState } from "react";
+import ChevronDownIcon from "../icons/ChevronDownIcon";
 import { InfoRow, InfoRowLabel, InfoRowValue } from "../InfoRow";
 
 interface InfoDropdownProps {
