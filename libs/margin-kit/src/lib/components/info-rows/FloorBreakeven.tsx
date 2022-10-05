@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { prettyFormatNumber } from "../../utils/numbers";
 import useBuyWithLeverage from "../BuyWithLeverageModal/state/useBuyWithLeverage";
 import ETHPrice from "../ETHPrice";
-import { InfoRowLabel, InfoRowValue } from "../InfoRow";
+import { InfoRow, InfoRowLabel, InfoRowValue } from "../InfoRow";
 import LoadingText from "../LoadingText";
 
 const FloorBreakeven = () => {
@@ -18,10 +18,10 @@ const FloorBreakeven = () => {
   }
 
   return (
-    <div className="flex items-center">
+    <InfoRow className="bwl-modal-form-floor-breakeven">
       <InfoRowLabel>Floor Breakeven</InfoRowLabel>
       <InfoRowValue>{floorBreakeven}</InfoRowValue>
-    </div>
+    </InfoRow>
   );
 };
 

@@ -10,13 +10,9 @@ interface BaseBuyWithLeverageButtonProps {
 const BaseBuyWithLeverageButton = (props: BaseBuyWithLeverageButtonProps) => {
   const { className, ...rest } = props;
   return (
-    <button {...rest} className={classNames("btn-slate-fill flex-grow", className)}>
-      Buy with Leverage
-      <MetaStreetBadge
-        className={classNames("h-6 w-6")}
-        bgColor={props.disabled ? "#d1d5db" : "white"}
-        logoColor={props.disabled ? "#9ca3af" : "#334155"}
-      />
+    <button {...rest} className={classNames("bwl-button", className)}>
+      <span>Buy with Leverage</span>
+      <MetaStreetBadge className="metastreet-badge" bgColor="white" logoColor="#7159AD" />
     </button>
   );
 };

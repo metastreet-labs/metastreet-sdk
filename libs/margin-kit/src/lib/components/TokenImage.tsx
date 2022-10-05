@@ -8,7 +8,7 @@ interface TokenImageProps {
 const TokenImage = (props: TokenImageProps) => {
   const { src, className } = props;
 
-  return <img className={classNames("rounded-lg object-cover drop-shadow-msTokenImage", className)} src={src} alt="" />;
+  return <img className={classNames("bwl-token-image", className)} src={src} alt="" />;
 };
 
 export default TokenImage;

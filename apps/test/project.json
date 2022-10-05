@@ -54,7 +54,8 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/test/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/test/**/*.{ts,tsx,js,jsx}"],
+        "ignorePath": "apps/test/.eslintignore"
       }
     },
     "type-check": {

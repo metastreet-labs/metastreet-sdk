@@ -16,6 +16,7 @@ export const DebtSlider = () => {
       onChange={setDebtFactor}
       label="Total Debt Amount"
       valueDisplay={<ETHPrice price={debtAmount} />}
+      className="bwl-modal-form-debt-slider"
     />
   );
 };

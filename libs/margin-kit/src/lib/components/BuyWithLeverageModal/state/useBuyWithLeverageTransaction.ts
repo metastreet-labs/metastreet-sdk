@@ -1,12 +1,16 @@
+import {
+  buyMultipleERC721WithETH,
+  buySingleERC721WithETH,
+  getReservoirFillCalldata,
+} from "@metastreet-labs/margin-core";
 import { ContractTransaction } from "ethers";
 import { useSigner } from "wagmi";
 import { CONFIRMATIONS } from "../../../env";
 import useTransactionSteps, { TransactionStatus, TransactionStep } from "../../../hooks/useTransactionState";
-import buyMultipleERC721WithETH from "../../../lib/transactions/buyMultipleERC721WithETH";
-import buySingleERC721WithETH from "../../../lib/transactions/buySingleERC721WithETH";
 import { BWLToken } from "../../../types";
 import { getReadableError } from "../../../utils/errors";
 import { toUnits } from "../../../utils/numbers";
+import useDefinedMetaStreetDeployment from "../../MetaStreetDeploymentProvider/useDefinedMetaStreetDeployment";
 import { BuyWithLeverageFormState } from "./useBuyWithLeverageForm";
 
 const getSteps = (): TransactionStep[] => [
@@ -31,6 +35,7 @@ interface UseBuyWithLeverageTransactionProps {
 const useBuyWithLeverageTransaction = (props: UseBuyWithLeverageTransactionProps) => {
   const { tokens, formState, onBuySuccess } = props;
   const { data: signer } = useSigner();
+  const { deployment } = useDefinedMetaStreetDeployment();
   const [steps, updateStep, resetSteps] = useTransactionSteps(getSteps());
 
   const buy = async (): Promise<void> => {
@@ -41,25 +46,31 @@ const useBuyWithLeverageTransaction = (props: UseBuyWithLeverageTransactionProps
     const duration = formState.duration * 86400;
     const purchasePrices = tokens.map((token) => toUnits(token.tokenPrice).toString());
     const downPayments = formState.downPayments.map((downPayment) => downPayment.toString());
-    const maxRepayments = formState.quote.repayments.map((repayment) => repayment.mul(1.05).ceil().toString());
+    const maxRepayments = formState.quote.repayments.map((repayment) => repayment.mul(105).div(100).toString());
 
     /* send transaction based on the number of tokens */
-    const sendTransaction = () => {
+    const sendTransaction = async () => {
+      const fillCallDatas = await Promise.all(tokens.map((t) => getReservoirFillCalldata({ ...t, deployment })));
+
       if (tokens.length > 1) {
-        return buyMultipleERC721WithETH(signer, {
-          tokens,
+        return buyMultipleERC721WithETH({
+          signer,
+          deployment,
           purchasePrices,
           downPayments,
           maxRepayments,
           duration,
+          fillCallDatas,
         });
       } else {
-        return buySingleERC721WithETH(signer, {
-          token: tokens[0],
+        return buySingleERC721WithETH({
+          signer,
+          deployment,
           purchasePrice: purchasePrices[0],
           downPayment: downPayments[0],
           maxRepayment: maxRepayments[0],
           duration,
+          fillCallData: fillCallDatas[0],
         });
       }
     };

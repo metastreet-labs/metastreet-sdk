@@ -1,32 +1,25 @@
-import { useProvider, useQuery } from "wagmi";
-import { BWLToken } from "../../types";
-import { getReadableError } from "../../utils/errors";
-import getCollateralLimits, { CollateralLimits } from "../fetchers/getCollateralLimits";
+import {
+  getCollateralLimits,
+  GetCollateralLimitsParams,
+  GetCollateralLimitsResult,
+  ReadableError,
+} from "@metastreet-labs/margin-core";
+import { useQuery } from "wagmi";
+import useDefinedMetaStreetDeployment from "../../components/MetaStreetDeploymentProvider/useDefinedMetaStreetDeployment";
 
-const useCollateralLimits = (tokens: BWLToken[]) => {
-  const provider = useProvider();
-  const { collectionAddress, tokenID } = tokens[0];
+type UseCollateralLimitsParams = Pick<GetCollateralLimitsParams, "collectionAddress" | "tokenID">;
 
-  const { data, error } = useQuery<CollateralLimits, Error>(
-    collateralLimitsQueryKeys.tokens(collectionAddress, tokens),
-    () => {
-      return getCollateralLimits(provider, {
-        collectionAddress,
-        tokenID,
-      });
-    }
-  );
+const useCollateralLimits = (params: UseCollateralLimitsParams) => {
+  const { provider, deployment } = useDefinedMetaStreetDeployment();
 
-  return { limits: data, limitsError: error && getReadableError(error) };
+  return useQuery<GetCollateralLimitsResult, ReadableError>(collateralLimitsQueryKeys.token(params), () => {
+    return getCollateralLimits({ signerOrProvider: provider, deployment, ...params });
+  });
 };
 
 const collateralLimitsQueryKeys = {
-  all: () => ["bulk-collateral-limits"],
-  collection: (address: string) => [...collateralLimitsQueryKeys.all(), address],
-  tokens: (collectionAddress: string, tokens: BWLToken[]) => [
-    ...collateralLimitsQueryKeys.collection(collectionAddress),
-    tokens.map((token) => token).join("-"),
-  ],
+  all: () => ["collateral-limits"],
+  token: (params: UseCollateralLimitsParams) => [...collateralLimitsQueryKeys.all(), params],
 };
 
 export default useCollateralLimits;

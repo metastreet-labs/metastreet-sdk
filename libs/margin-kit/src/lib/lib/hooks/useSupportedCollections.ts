@@ -1,15 +1,16 @@
-import { useProvider, useQuery } from "wagmi";
-import { getReadableError } from "../../utils/errors";
-import getSupportedCollections from "../fetchers/getSupportedCollections";
+import { getSupportedCollections, ReadableError } from "@metastreet-labs/margin-core";
+import { useQuery } from "wagmi";
+import useDefinedMetaStreetDeployment from "../../components/MetaStreetDeploymentProvider/useDefinedMetaStreetDeployment";
 
 const useSupportedCollections = () => {
-  const provider = useProvider();
-  const queryKey = ["supported-collections"];
-  const { data, error } = useQuery<string[], Error>(queryKey, () => getSupportedCollections(provider));
+  const { provider, deployment } = useDefinedMetaStreetDeployment();
+  return useQuery<string[], ReadableError>(supportedCollectionsQueryKeys.all(), () =>
+    getSupportedCollections({ signerOrProvider: provider, deployment })
+  );
+};
 
-  const supportedCollections = data;
-  const supportedCollectionsError = error && getReadableError(error);
-  return { supportedCollections, supportedCollectionsError };
+const supportedCollectionsQueryKeys = {
+  all: () => ["supported-collections"],
 };
 
 export default useSupportedCollections;

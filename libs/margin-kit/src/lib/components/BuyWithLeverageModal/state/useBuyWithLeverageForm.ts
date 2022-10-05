@@ -1,15 +1,14 @@
-import Decimal from "decimal.js";
+import { GetCollateralLimitsResult, QuoteMultipleERC721Result } from "@metastreet-labs/margin-core";
+import { BigNumber } from "ethers";
 import { useMemo, useState } from "react";
-import { CollateralLimits } from "../../../lib/fetchers/getCollateralLimits";
-import { QuoteMultipleERC721Result } from "../../../lib/fetchers/quoteMultipleERC721";
 import { BWLToken } from "../../../types";
-import { fromUnits, toUnits } from "../../../utils/numbers";
+import { fromUnits, toUnitsBigNum } from "../../../utils/numbers";
 import useDebouncedQuote from "./useDebouncedQuote";
 
 export interface BuyWithLeverageFormState {
   debtFactor: number;
   debtAmount: number;
-  downPayments: Decimal[];
+  downPayments: BigNumber[];
   totalDownPayment: number;
   duration: number;
   quote?: QuoteMultipleERC721Result;
@@ -18,34 +17,41 @@ export interface BuyWithLeverageFormState {
 
 interface UseBuyWithLeverageFormProps {
   tokens: BWLToken[];
-  limits: CollateralLimits;
-  flashFee: Decimal;
+  limits: GetCollateralLimitsResult;
+  flashFee: BigNumber;
 }
 
-const useBuyWithLeverageForm = (props: UseBuyWithLeverageFormProps) => {
+interface UseBuyWithLeverageFormResult {
+  formState: BuyWithLeverageFormState;
+  setDebtFactor: (debtFactor: number) => void;
+  setDuration: (duration: number) => void;
+}
+
+const useBuyWithLeverageForm = (props: UseBuyWithLeverageFormProps): UseBuyWithLeverageFormResult => {
   const { tokens, limits, flashFee } = props;
   // state
   const [debtFactor, setDebtFactor] = useState(0.05);
-  const [duration, setDuration] = useState(limits.minDuration);
+  const [duration, setDuration] = useState(Math.ceil(limits.minDuration / 86400));
 
   // derived state
   const { debtAmount, downPayments, totalDownPayment } = useMemo(() => {
-    const purchasePrices = tokens.map((token) => toUnits(token.tokenPrice));
+    const purchasePrices = tokens.map((token) => toUnitsBigNum(token.tokenPrice));
 
     const downPayments = purchasePrices.map((price, idx) => {
-      let downPayment = price.sub(limits.maxPrincipal.mul(debtFactor));
+      const debtFactorPercent = Math.ceil(debtFactor * 100);
+      let downPayment = price.sub(limits.maxPrincipal.mul(debtFactorPercent).div(100));
       if (idx == 0) downPayment = downPayment.add(flashFee);
-      return Decimal.max(downPayment, 0);
+      return downPayment.isNegative() ? BigNumber.from(0) : downPayment;
     });
 
-    let debtAmount = new Decimal(0);
+    let debtAmount = BigNumber.from(0);
     for (let i = 0; i < purchasePrices.length; i++) {
       const tokenDebt = purchasePrices[i].sub(downPayments[i]);
       debtAmount = debtAmount.add(tokenDebt);
     }
 
     const totalDownPayment = fromUnits(
-      downPayments.reduce((total, downPayment) => total.add(downPayment), new Decimal(0))
+      downPayments.reduce((total, downPayment) => total.add(downPayment), BigNumber.from(0))
     ).toNumber();
 
     return { debtAmount, downPayments, totalDownPayment };
@@ -61,7 +67,7 @@ const useBuyWithLeverageForm = (props: UseBuyWithLeverageFormProps) => {
   const totalRepayment = useMemo(() => {
     const repayments = quote?.repayments;
     if (!repayments) return undefined;
-    return fromUnits(repayments.reduce((total, repayment) => total.add(repayment), new Decimal(0))).toNumber();
+    return fromUnits(repayments.reduce((total, repayment) => total.add(repayment), BigNumber.from(0))).toNumber();
   }, [quote]);
 
   return {

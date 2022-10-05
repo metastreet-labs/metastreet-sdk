@@ -1,6 +1,6 @@
-import * as Add2Calendar from "add2calendar";
+import Add2Calendar from "add2calendar";
 import useBuyWithLeverage from "../BuyWithLeverageModal/state/useBuyWithLeverage";
-import { InfoRowValue } from "../InfoRow";
+import { InfoRow, InfoRowValue } from "../InfoRow";
 import PurpleSectionLabel from "../purple-section/PurpleSectionLabel";
 
 const RepaymentDate = () => {
@@ -22,15 +22,20 @@ const RepaymentDate = () => {
   const addToCalendarLink = calendarEvent.getGoogleUrl();
 
   return (
-    <div className="flex items-center">
+    <InfoRow className="bwl-modal-form-repayment-date">
       <PurpleSectionLabel>Repayment Date</PurpleSectionLabel>
-      <InfoRowValue className="space-x-1 font-semibold">
-        <a href={addToCalendarLink} target="_blank" rel="noreferrer noopener">
-          <CalendarIcon className="h-5 w-5" />
+      <InfoRowValue className="important-text">
+        <a
+          href={addToCalendarLink}
+          target="_blank"
+          rel="noreferrer noopener"
+          className="bwl-modal-form-repayment-date-calendar-a"
+        >
+          <CalendarIcon className="bwl-modal-from-repayment-date-calendar-icon" />
         </a>
         <span>{localeDateString}</span>
       </InfoRowValue>
-    </div>
+    </InfoRow>
   );
 };
 

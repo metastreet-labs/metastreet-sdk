@@ -1,5 +1,5 @@
-import Decimal from "decimal.js";
-import { CollateralLimits } from "../../../lib/fetchers/getCollateralLimits";
+import { GetCollateralLimitsResult } from "@metastreet-labs/margin-core";
+import { BigNumber } from "ethers";
 import useCollateralLimits from "../../../lib/hooks/useCollateralLimits";
 import useFlashFee from "../../../lib/hooks/useFlashFee";
 import { BWLToken } from "../../../types";
@@ -7,8 +7,8 @@ import { toUnits } from "../../../utils/numbers";
 import Spinner from "../../Spinner";
 
 interface LoanInfo {
-  limits: CollateralLimits;
-  flashFee: Decimal;
+  limits: GetCollateralLimitsResult;
+  flashFee: BigNumber;
 }
 
 interface LoanInfoContainerProps {
@@ -21,8 +21,8 @@ const LoanInfoContainer = (props: LoanInfoContainerProps) => {
   const totalPrice = tokens.reduce((s, t) => s + t.tokenPrice, 0);
   const totalPriceUnits = toUnits(totalPrice).toString();
 
-  const { limits, limitsError } = useCollateralLimits(tokens);
-  const { flashFee, flashFeeError } = useFlashFee(totalPriceUnits);
+  const { data: limits, error: limitsError } = useCollateralLimits(tokens[0]);
+  const { data: flashFee, error: flashFeeError } = useFlashFee(totalPriceUnits);
 
   const loadingOrError = (error?: string) => {
     return (
@@ -35,7 +35,7 @@ const LoanInfoContainer = (props: LoanInfoContainerProps) => {
   if (limits && flashFee) return children({ limits, flashFee });
 
   const error = limitsError || flashFeeError;
-  if (error) return loadingOrError(error);
+  if (error) return loadingOrError(error.message);
 
   return loadingOrError();
 };

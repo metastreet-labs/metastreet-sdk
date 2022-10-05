@@ -4,13 +4,23 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nrwl/web:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "format": ["cjs", "esm"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "project": "libs/margin-core/package.json",
+        "entryFile": "libs/margin-core/src/index.ts",
         "outputPath": "dist/libs/margin-core",
         "main": "libs/margin-core/src/index.ts",
         "tsConfig": "libs/margin-core/tsconfig.lib.json",
-        "assets": ["libs/margin-core/*.md"]
+        "assets": [
+          {
+            "glob": "libs/margin-core/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
       }
     },
     "publish": {

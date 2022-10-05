@@ -33,6 +33,16 @@ const contractErrors: { [sighash: string]: string } = {
   "0x545c1c78": "LeverageBuyWrapperV1: InvalidDownpayment()",
   "0x04691ec2": "LeverageBuyWrapperV1: InvalidPurchaseEscrow()",
   "0xc4e94f29": "LeverageBuyWrapperV1: RepaymentTooHigh()",
+  "0x5f6f132c": "LeverageBuyWrapperV1: InvalidArguments()",
+  "0x7a6e3589": "PurchaseEscrowPlatformV1: InvalidOrderConduit()",
+  "0x12a900d1": "PurchaseEscrowPlatformV1: InvalidOrderExpiration()",
+  "0xac34823a": "PurchaseEscrowPlatformV1: InvalidOrderHash()",
+  "0x78fc1748": "PurchaseEscrowPlatformV1: InvalidOwnership()",
+  "0x8baa579f": "PurchaseEscrowPlatformV1: InvalidSignature()",
+  "0x7892dcf3": "PurchaseEscrowPlatformV1: ListingIsPaused()",
+  "0xd1b57211": "PurchaseEscrowPlatformV1: OrderCancellationFailed()",
+  "0x9c76b642": "PurchaseEscrowPlatformV1: PanicOrderNotFulfilled()",
+  "0x630c4ca1": "PurchaseEscrowPlatformV1: RoyaltyRoundingError()",
 };
 
 const ethersErrors: { [code: number]: string } = {
@@ -46,13 +56,13 @@ export interface ReadableError {
 
 export const getReadableError = (e: any): ReadableError => {
   let message: string;
-  let code: string | number;
+  let code: string | number | undefined;
 
   // try to get the error code
   if (typeof e.data == "string") code = e.data?.slice(0, 10);
-  else code = e.code;
   if (!code) code = e.error?.data?.originalError?.data?.slice(0, 10);
   if (!code) code = e.transaction?.data?.slice(0, 10);
+  if (!code) code = e.code;
 
   // if code is string, it should be a sighash
   if (typeof code == "string") message = contractErrors[code] ?? code;

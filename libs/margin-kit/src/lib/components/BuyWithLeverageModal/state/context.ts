@@ -1,7 +1,7 @@
-import Decimal from "decimal.js";
+import { GetCollateralLimitsResult } from "@metastreet-labs/margin-core";
+import { BigNumber } from "ethers";
 import { createContext } from "react";
 import { TransactionState } from "../../../hooks/useTransactionState";
-import { CollateralLimits } from "../../../lib/fetchers/getCollateralLimits";
 import { BWLToken } from "../../../types";
 import { BuyWithLeverageFormState } from "./useBuyWithLeverageForm";
 
@@ -14,8 +14,8 @@ export interface BuyWithLeverageContextType {
     buy: () => void;
   };
   tokens: BWLToken[];
-  limits: CollateralLimits;
-  flashFee: Decimal;
+  limits: GetCollateralLimitsResult;
+  flashFee: BigNumber;
 }
 
 export const BuyWithLeverageContext = createContext<BuyWithLeverageContextType | undefined>(undefined);
