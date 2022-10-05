@@ -1,7 +1,8 @@
-import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import { CheckIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import classNames from "classnames";
 import { TransactionState, TransactionStep } from "../hooks/useTransactionState";
+import CheckIcon from "./icons/CheckIcon";
+import ExclamationCircleIcon from "./icons/ExclamationCircleIcon";
+import XMarkIcon from "./icons/XMarkIcons";
 import MetaStreetButton from "./MetaStreetButton";
 import Spinner from "./Spinner";
 
@@ -19,23 +20,25 @@ const TransactionSteps = (props: TransactionStepsProps) => {
   const errored = status == "error";
 
   return (
-    <div className="flex flex-col space-y-5">
-      <div className="flex justify-center px-6">
+    <div className="transaction-steps">
+      <div className="transaction-steps-wrapper">
         {steps.map((step, idx) => (
           <>
-            {idx != 0 ? <StepDivider className={classNames({ "opacity-50": step.status == "idle" })} /> : null}
+            {idx != 0 ? (
+              <StepDivider className={classNames({ "transaction-steps-divider-inactive": step.status == "idle" })} />
+            ) : null}
             <StepCircle step={step} index={idx} key={idx} />
           </>
         ))}
       </div>
       <div
-        className={classNames("flex items-center justify-center space-x-1", {
-          "text-red-500": errored,
-          "text-msPrimaryDark": !errored,
+        className={classNames("transaction-steps-description", {
+          "transaction-steps-description-error": errored,
+          "transaction-steps-description-normal": !errored,
         })}
       >
-        {<ExclamationCircleIcon className="h-5 w-5" />}
-        <span className="text-sm">{description}</span>
+        {<ExclamationCircleIcon className="transaction-steps-icon" />}
+        <span className="transaction-steps-text">{description}</span>
       </div>
       <MetaStreetButton loading={!errored} onClick={props.onClose}>
         {errored ? "Close" : title}
@@ -45,7 +48,7 @@ const TransactionSteps = (props: TransactionStepsProps) => {
 };
 
 const StepDivider = ({ className = "" }) => {
-  return <div className={classNames("mx-2 mt-[1.2rem] h-[2px] max-w-[5rem] flex-grow bg-msPrimaryLight", className)} />;
+  return <div className={classNames("transaction-steps-divider", className)} />;
 };
 
 interface StepCircleProps {
@@ -60,26 +63,25 @@ const StepCircle = (props: StepCircleProps) => {
 
   return (
     <div
-      className={classNames("relative flex flex-col items-center pb-6", {
-        "text-msPrimaryLight": !errored,
-        "text-red-500": errored,
-        "opacity-50": status == "idle",
+      className={classNames("transaction-steps-circle", {
+        "transaction-steps-circle-normal": !errored,
+        "transaction-steps-circle-error": errored,
+        "transaction-steps-circle-inactive": status == "idle",
       })}
     >
       <div
-        className={classNames("flex h-10 w-10 items-center justify-center rounded-full border-2 font-semibold", {
-          "border-red-500": errored,
-          "bg-red-500": errored,
-          "border-msPrimaryLight": !errored,
-          "bg-msPrimaryLight": status == "complete",
+        className={classNames("transaction-steps-circle-border", {
+          "transaction-steps-circle-border-error": errored,
+          "transaction-steps-circle-border-normal": !errored,
+          "transaction-steps-circle-border-complete": status == "complete",
         })}
       >
         {status == "idle" ? <span>{index}</span> : null}
         {status == "loading" ? <Spinner /> : null}
-        {status == "complete" ? <CheckIcon className="h-5 w-5 text-white" /> : null}
-        {status == "error" ? <XMarkIcon className="h-5 w-5 text-white" /> : null}
+        {status == "complete" ? <CheckIcon className="transaction-steps-circle-icon" /> : null}
+        {status == "error" ? <XMarkIcon className="transaction-steps-circle-icon" /> : null}
       </div>
-      <span className="absolute top-12 whitespace-nowrap text-xs font-semibold">{title}</span>
+      <span className="transaction-steps-circle-title">{title}</span>
     </div>
   );
 };

@@ -32,49 +32,62 @@ export declare namespace IPurchaseEscrow {
   export type PurchaseEscrowTermsStruct = {
     status: PromiseOrValue<BigNumberish>;
     token: PromiseOrValue<string>;
+    buyer: PromiseOrValue<string>;
     tokenId: PromiseOrValue<BigNumberish>;
     principal: PromiseOrValue<BigNumberish>;
     repayment: PromiseOrValue<BigNumberish>;
     startTime: PromiseOrValue<BigNumberish>;
     duration: PromiseOrValue<BigNumberish>;
+    orderHash: PromiseOrValue<BytesLike>;
   };
 
   export type PurchaseEscrowTermsStructOutput = [
     number,
     string,
+    string,
     BigNumber,
     BigNumber,
     BigNumber,
     BigNumber,
-    BigNumber
+    BigNumber,
+    string
   ] & {
     status: number;
     token: string;
+    buyer: string;
     tokenId: BigNumber;
     principal: BigNumber;
     repayment: BigNumber;
     startTime: BigNumber;
     duration: BigNumber;
+    orderHash: string;
   };
 }
 
 export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
   functions: {
     "IMPLEMENTATION_VERSION()": FunctionFragment;
-    "buyerNoteToken()": FunctionFragment;
+    "cancelAllListings()": FunctionFragment;
+    "cancelListing(uint256,uint8,bytes)": FunctionFragment;
     "create(address,address,uint256,uint256,uint256,uint64)": FunctionFragment;
+    "createListing(uint256,uint8,uint256,uint256,uint256,bytes)": FunctionFragment;
     "currencyToken()": FunctionFragment;
+    "generateListing(uint256,uint8,uint256,uint256,uint256)": FunctionFragment;
+    "isValidSignature(bytes32,bytes)": FunctionFragment;
     "lenderNoteToken()": FunctionFragment;
     "liquidate(uint256)": FunctionFragment;
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
+    "processSale(uint256,uint8)": FunctionFragment;
     "purchaseEscrows(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "repay(uint256)": FunctionFragment;
     "repayETH(uint256)": FunctionFragment;
-    "setBuyerNoteTokenBaseURI(string)": FunctionFragment;
+    "seaport()": FunctionFragment;
+    "setDefaultOrder(bytes)": FunctionFragment;
     "setLenderNoteTokenBaseURI(string)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
+    "togglePause()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "withdrawERC20(address,uint256)": FunctionFragment;
     "withdrawETH(uint256)": FunctionFragment;
@@ -83,20 +96,27 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
   getFunction(
     nameOrSignatureOrTopic:
       | "IMPLEMENTATION_VERSION"
-      | "buyerNoteToken"
+      | "cancelAllListings"
+      | "cancelListing"
       | "create"
+      | "createListing"
       | "currencyToken"
+      | "generateListing"
+      | "isValidSignature"
       | "lenderNoteToken"
       | "liquidate"
       | "onERC721Received"
       | "owner"
+      | "processSale"
       | "purchaseEscrows"
       | "renounceOwnership"
       | "repay"
       | "repayETH"
-      | "setBuyerNoteTokenBaseURI"
+      | "seaport"
+      | "setDefaultOrder"
       | "setLenderNoteTokenBaseURI"
       | "supportsInterface"
+      | "togglePause"
       | "transferOwnership"
       | "withdrawERC20"
       | "withdrawETH"
@@ -107,8 +127,16 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "buyerNoteToken",
+    functionFragment: "cancelAllListings",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "cancelListing",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "create",
@@ -122,8 +150,33 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "createListing",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "currencyToken",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "generateListing",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isValidSignature",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "lenderNoteToken",
@@ -144,6 +197,10 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "processSale",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "purchaseEscrows",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
@@ -159,9 +216,10 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
     functionFragment: "repayETH",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
+  encodeFunctionData(functionFragment: "seaport", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "setBuyerNoteTokenBaseURI",
-    values: [PromiseOrValue<string>]
+    functionFragment: "setDefaultOrder",
+    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "setLenderNoteTokenBaseURI",
@@ -170,6 +228,10 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "supportsInterface",
     values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "togglePause",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
@@ -189,12 +251,28 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "buyerNoteToken",
+    functionFragment: "cancelAllListings",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "cancelListing",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "create", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "createListing",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "currencyToken",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "generateListing",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isValidSignature",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -208,6 +286,10 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "processSale",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "purchaseEscrows",
     data: BytesLike
   ): Result;
@@ -217,8 +299,9 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "repay", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "repayETH", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "seaport", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "setBuyerNoteTokenBaseURI",
+    functionFragment: "setDefaultOrder",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -227,6 +310,10 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "togglePause",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -245,14 +332,20 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
   events: {
     "OwnershipTransferred(address,address)": EventFragment;
     "PurchaseEscrowCreated(uint256,address,address,address,uint256,uint256,uint256,uint64)": EventFragment;
+    "PurchaseEscrowDelisted(uint256,uint8)": EventFragment;
     "PurchaseEscrowLiquidated(uint256)": EventFragment;
+    "PurchaseEscrowListed(uint256,uint8,bytes)": EventFragment;
     "PurchaseEscrowRepaid(uint256)": EventFragment;
+    "PurchaseEscrowSold(uint256,uint8)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "PurchaseEscrowCreated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "PurchaseEscrowDelisted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "PurchaseEscrowLiquidated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "PurchaseEscrowListed"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "PurchaseEscrowRepaid"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "PurchaseEscrowSold"): EventFragment;
 }
 
 export interface OwnershipTransferredEventObject {
@@ -294,6 +387,18 @@ export type PurchaseEscrowCreatedEvent = TypedEvent<
 export type PurchaseEscrowCreatedEventFilter =
   TypedEventFilter<PurchaseEscrowCreatedEvent>;
 
+export interface PurchaseEscrowDelistedEventObject {
+  escrowId: BigNumber;
+  marketplace: number;
+}
+export type PurchaseEscrowDelistedEvent = TypedEvent<
+  [BigNumber, number],
+  PurchaseEscrowDelistedEventObject
+>;
+
+export type PurchaseEscrowDelistedEventFilter =
+  TypedEventFilter<PurchaseEscrowDelistedEvent>;
+
 export interface PurchaseEscrowLiquidatedEventObject {
   escrowId: BigNumber;
 }
@@ -305,6 +410,19 @@ export type PurchaseEscrowLiquidatedEvent = TypedEvent<
 export type PurchaseEscrowLiquidatedEventFilter =
   TypedEventFilter<PurchaseEscrowLiquidatedEvent>;
 
+export interface PurchaseEscrowListedEventObject {
+  escrowId: BigNumber;
+  marketplace: number;
+  listingData: string;
+}
+export type PurchaseEscrowListedEvent = TypedEvent<
+  [BigNumber, number, string],
+  PurchaseEscrowListedEventObject
+>;
+
+export type PurchaseEscrowListedEventFilter =
+  TypedEventFilter<PurchaseEscrowListedEvent>;
+
 export interface PurchaseEscrowRepaidEventObject {
   escrowId: BigNumber;
 }
@@ -315,6 +433,18 @@ export type PurchaseEscrowRepaidEvent = TypedEvent<
 
 export type PurchaseEscrowRepaidEventFilter =
   TypedEventFilter<PurchaseEscrowRepaidEvent>;
+
+export interface PurchaseEscrowSoldEventObject {
+  escrowId: BigNumber;
+  marketplace: number;
+}
+export type PurchaseEscrowSoldEvent = TypedEvent<
+  [BigNumber, number],
+  PurchaseEscrowSoldEventObject
+>;
+
+export type PurchaseEscrowSoldEventFilter =
+  TypedEventFilter<PurchaseEscrowSoldEvent>;
 
 export interface PurchaseEscrowPlatformV1 extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -345,7 +475,16 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
   functions: {
     IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<[string]>;
 
-    buyerNoteToken(overrides?: CallOverrides): Promise<[string]>;
+    cancelAllListings(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    cancelListing(
+      escrowId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      listingData: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     create(
       buyer: PromiseOrValue<string>,
@@ -357,7 +496,32 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    createListing(
+      escrowId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      consideration: PromiseOrValue<BigNumberish>,
+      expiration: PromiseOrValue<BigNumberish>,
+      salt: PromiseOrValue<BigNumberish>,
+      signature: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     currencyToken(overrides?: CallOverrides): Promise<[string]>;
+
+    generateListing(
+      escrowId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      consideration: PromiseOrValue<BigNumberish>,
+      expiration: PromiseOrValue<BigNumberish>,
+      salt: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    isValidSignature(
+      digest: PromiseOrValue<BytesLike>,
+      signature: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     lenderNoteToken(overrides?: CallOverrides): Promise<[string]>;
 
@@ -375,6 +539,12 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
     ): Promise<ContractTransaction>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
+
+    processSale(
+      escrowId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     purchaseEscrows(
       escrowId: PromiseOrValue<BigNumberish>,
@@ -395,8 +565,10 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    setBuyerNoteTokenBaseURI(
-      baseURI: PromiseOrValue<string>,
+    seaport(overrides?: CallOverrides): Promise<[string]>;
+
+    setDefaultOrder(
+      orderComponents: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -409,6 +581,10 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
+
+    togglePause(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
@@ -429,7 +605,16 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
 
   IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<string>;
 
-  buyerNoteToken(overrides?: CallOverrides): Promise<string>;
+  cancelAllListings(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  cancelListing(
+    escrowId: PromiseOrValue<BigNumberish>,
+    arg1: PromiseOrValue<BigNumberish>,
+    listingData: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   create(
     buyer: PromiseOrValue<string>,
@@ -441,7 +626,32 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  createListing(
+    escrowId: PromiseOrValue<BigNumberish>,
+    arg1: PromiseOrValue<BigNumberish>,
+    consideration: PromiseOrValue<BigNumberish>,
+    expiration: PromiseOrValue<BigNumberish>,
+    salt: PromiseOrValue<BigNumberish>,
+    signature: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   currencyToken(overrides?: CallOverrides): Promise<string>;
+
+  generateListing(
+    escrowId: PromiseOrValue<BigNumberish>,
+    arg1: PromiseOrValue<BigNumberish>,
+    consideration: PromiseOrValue<BigNumberish>,
+    expiration: PromiseOrValue<BigNumberish>,
+    salt: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  isValidSignature(
+    digest: PromiseOrValue<BytesLike>,
+    signature: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   lenderNoteToken(overrides?: CallOverrides): Promise<string>;
 
@@ -459,6 +669,12 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
   ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
+
+  processSale(
+    escrowId: PromiseOrValue<BigNumberish>,
+    arg1: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   purchaseEscrows(
     escrowId: PromiseOrValue<BigNumberish>,
@@ -479,8 +695,10 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  setBuyerNoteTokenBaseURI(
-    baseURI: PromiseOrValue<string>,
+  seaport(overrides?: CallOverrides): Promise<string>;
+
+  setDefaultOrder(
+    orderComponents: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -493,6 +711,10 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
     interfaceId: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<boolean>;
+
+  togglePause(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   transferOwnership(
     newOwner: PromiseOrValue<string>,
@@ -513,7 +735,14 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
   callStatic: {
     IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<string>;
 
-    buyerNoteToken(overrides?: CallOverrides): Promise<string>;
+    cancelAllListings(overrides?: CallOverrides): Promise<void>;
+
+    cancelListing(
+      escrowId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      listingData: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     create(
       buyer: PromiseOrValue<string>,
@@ -525,7 +754,32 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    createListing(
+      escrowId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      consideration: PromiseOrValue<BigNumberish>,
+      expiration: PromiseOrValue<BigNumberish>,
+      salt: PromiseOrValue<BigNumberish>,
+      signature: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     currencyToken(overrides?: CallOverrides): Promise<string>;
+
+    generateListing(
+      escrowId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      consideration: PromiseOrValue<BigNumberish>,
+      expiration: PromiseOrValue<BigNumberish>,
+      salt: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    isValidSignature(
+      digest: PromiseOrValue<BytesLike>,
+      signature: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     lenderNoteToken(overrides?: CallOverrides): Promise<string>;
 
@@ -544,6 +798,12 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<string>;
 
+    processSale(
+      escrowId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     purchaseEscrows(
       escrowId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -561,8 +821,10 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setBuyerNoteTokenBaseURI(
-      baseURI: PromiseOrValue<string>,
+    seaport(overrides?: CallOverrides): Promise<string>;
+
+    setDefaultOrder(
+      orderComponents: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -575,6 +837,8 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<boolean>;
+
+    togglePause(overrides?: CallOverrides): Promise<void>;
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
@@ -624,6 +888,15 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       duration?: null
     ): PurchaseEscrowCreatedEventFilter;
 
+    "PurchaseEscrowDelisted(uint256,uint8)"(
+      escrowId?: PromiseOrValue<BigNumberish> | null,
+      marketplace?: null
+    ): PurchaseEscrowDelistedEventFilter;
+    PurchaseEscrowDelisted(
+      escrowId?: PromiseOrValue<BigNumberish> | null,
+      marketplace?: null
+    ): PurchaseEscrowDelistedEventFilter;
+
     "PurchaseEscrowLiquidated(uint256)"(
       escrowId?: PromiseOrValue<BigNumberish> | null
     ): PurchaseEscrowLiquidatedEventFilter;
@@ -631,18 +904,47 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       escrowId?: PromiseOrValue<BigNumberish> | null
     ): PurchaseEscrowLiquidatedEventFilter;
 
+    "PurchaseEscrowListed(uint256,uint8,bytes)"(
+      escrowId?: PromiseOrValue<BigNumberish> | null,
+      marketplace?: null,
+      listingData?: null
+    ): PurchaseEscrowListedEventFilter;
+    PurchaseEscrowListed(
+      escrowId?: PromiseOrValue<BigNumberish> | null,
+      marketplace?: null,
+      listingData?: null
+    ): PurchaseEscrowListedEventFilter;
+
     "PurchaseEscrowRepaid(uint256)"(
       escrowId?: PromiseOrValue<BigNumberish> | null
     ): PurchaseEscrowRepaidEventFilter;
     PurchaseEscrowRepaid(
       escrowId?: PromiseOrValue<BigNumberish> | null
     ): PurchaseEscrowRepaidEventFilter;
+
+    "PurchaseEscrowSold(uint256,uint8)"(
+      escrowId?: PromiseOrValue<BigNumberish> | null,
+      marketplace?: null
+    ): PurchaseEscrowSoldEventFilter;
+    PurchaseEscrowSold(
+      escrowId?: PromiseOrValue<BigNumberish> | null,
+      marketplace?: null
+    ): PurchaseEscrowSoldEventFilter;
   };
 
   estimateGas: {
     IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<BigNumber>;
 
-    buyerNoteToken(overrides?: CallOverrides): Promise<BigNumber>;
+    cancelAllListings(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    cancelListing(
+      escrowId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      listingData: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     create(
       buyer: PromiseOrValue<string>,
@@ -654,7 +956,32 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    createListing(
+      escrowId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      consideration: PromiseOrValue<BigNumberish>,
+      expiration: PromiseOrValue<BigNumberish>,
+      salt: PromiseOrValue<BigNumberish>,
+      signature: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     currencyToken(overrides?: CallOverrides): Promise<BigNumber>;
+
+    generateListing(
+      escrowId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      consideration: PromiseOrValue<BigNumberish>,
+      expiration: PromiseOrValue<BigNumberish>,
+      salt: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    isValidSignature(
+      digest: PromiseOrValue<BytesLike>,
+      signature: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     lenderNoteToken(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -672,6 +999,12 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
+
+    processSale(
+      escrowId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     purchaseEscrows(
       escrowId: PromiseOrValue<BigNumberish>,
@@ -692,8 +1025,10 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    setBuyerNoteTokenBaseURI(
-      baseURI: PromiseOrValue<string>,
+    seaport(overrides?: CallOverrides): Promise<BigNumber>;
+
+    setDefaultOrder(
+      orderComponents: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -705,6 +1040,10 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    togglePause(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     transferOwnership(
@@ -729,7 +1068,16 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    buyerNoteToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    cancelAllListings(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    cancelListing(
+      escrowId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      listingData: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     create(
       buyer: PromiseOrValue<string>,
@@ -741,7 +1089,32 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    createListing(
+      escrowId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      consideration: PromiseOrValue<BigNumberish>,
+      expiration: PromiseOrValue<BigNumberish>,
+      salt: PromiseOrValue<BigNumberish>,
+      signature: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     currencyToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    generateListing(
+      escrowId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      consideration: PromiseOrValue<BigNumberish>,
+      expiration: PromiseOrValue<BigNumberish>,
+      salt: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    isValidSignature(
+      digest: PromiseOrValue<BytesLike>,
+      signature: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     lenderNoteToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -759,6 +1132,12 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    processSale(
+      escrowId: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     purchaseEscrows(
       escrowId: PromiseOrValue<BigNumberish>,
@@ -779,8 +1158,10 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    setBuyerNoteTokenBaseURI(
-      baseURI: PromiseOrValue<string>,
+    seaport(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    setDefaultOrder(
+      orderComponents: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -792,6 +1173,10 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    togglePause(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     transferOwnership(

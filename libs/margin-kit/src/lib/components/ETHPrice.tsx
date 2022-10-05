@@ -8,10 +8,10 @@ interface ETHPriceProps {
 }
 
 const ETHPrice = (props: ETHPriceProps) => {
-  const { price, className = "font-semibold" } = props;
+  const { price, className = "eth-price-default" } = props;
 
   return (
-    <div className={classNames("flex items-center space-x-1", className)}>
+    <div className={classNames("eth-price-wrapper", className)}>
       <ETHLogo />
       <span>{price}</span>
     </div>

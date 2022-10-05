@@ -9,7 +9,6 @@ const BWLPage: NextPage = () => {
   const deployment = DEPLOYMENTS[provider.network.chainId];
   const [collectionAddress, setCollectionAddress] = useState("0xf5de760f2e916647fd766b4ad9e85ff943ce3a2b");
   const [tokenID, setTokenID] = useState("940282");
-  console.log({ deployment, chianID: provider.network.chainId });
 
   const [token, setToken] = useState<BWLToken>();
   const [fetchStatus, setFetchStatus] = useState<"idle" | "loading" | "error">("idle");

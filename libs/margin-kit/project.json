@@ -8,12 +8,15 @@
       "executor": "@nrwl/web:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "updateBuildableProjectDepsInPackageJson": true,
+        "buildableProjectDepsInPackageJsonType": "dependencies",
         "outputPath": "dist/libs/margin-kit",
         "tsConfig": "libs/margin-kit/tsconfig.lib.json",
         "project": "libs/margin-kit/package.json",
         "entryFile": "libs/margin-kit/src/index.ts",
         "external": ["react/jsx-runtime"],
         "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "format": ["cjs", "esm"],
         "compiler": "babel",
         "assets": [
           {
@@ -28,7 +31,25 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "npx tailwindcss -c libs/margin-kit/tailwind.config.js -i libs/margin-kit/src/lib/styles.css -o dist/libs/margin-kit/styles/default.css"
-      }
+      },
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "build"
+        }
+      ]
+    },
+    "publish": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "node tools/scripts/publish.mjs margin-kit {args.ver} {args.tag}"
+      },
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "post-build"
+        }
+      ]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",

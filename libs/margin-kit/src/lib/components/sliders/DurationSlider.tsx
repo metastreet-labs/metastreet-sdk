@@ -15,6 +15,7 @@ export const DurationSlider = () => {
       onChange={actions.setDuration}
       label="Duration"
       valueDisplay={<span className="font-semibold">{duration} days</span>}
+      className="bwl-modal-form-duration-slider"
     />
   );
 };

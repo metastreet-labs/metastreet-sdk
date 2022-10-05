@@ -4,18 +4,24 @@ import { ReactNode } from "react";
 export interface InfoRowProps {
   children: ReactNode;
   className?: string;
-  variant?: "normal" | "important";
+  variant?: "normal" | "important" | "primary";
 }
+
+export const InfoRow = (props: InfoRowProps) => {
+  const { children, className } = props;
+  return <div className={classNames("info-row", className)}>{children}</div>;
+};
 
 export const InfoRowLabel = (props: InfoRowProps) => {
   const { children, className, variant = "normal" } = props;
   return (
     <div
       className={classNames(
-        "flex w-0 flex-grow items-center truncate text-left text-sm",
+        "info-row-label",
         {
-          "text-gray-500": variant == "normal",
-          "text-msTextImportant": variant == "important",
+          "info-row-label-normal": variant == "normal",
+          "info-row-label-important": variant == "important",
+          "info-row-label-primary": variant == "primary",
         },
         className
       )}

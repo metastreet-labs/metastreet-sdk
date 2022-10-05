@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/**************************************************************************/
+/* BWL button*/
+/**************************************************************************/
 .bwl-button {
   @apply flex items-center justify-center space-x-2 bg-ms-purple rounded-md text-lg text-white py-2 px-1.5;
   @apply disabled:opacity-60;
@@ -11,10 +14,47 @@
   @apply w-6 h-6;
 }
 
+/**************************************************************************/
+/* BWL modal dialog*/
+/**************************************************************************/
 .bwl-modal-dialog {
   @apply relative z-[9999999999];
 }
 
+/**************************************************************************/
+/* BWL modal body */
+/**************************************************************************/
+.bwl-modal-body {
+  @apply fixed inset-0 flex items-center justify-center;
+}
+
+.bwl-modal-body-transition-enter {
+  @apply ease-out duration-300;
+}
+
+.bwl-modal-body-transition-enter-from {
+  @apply opacity-0 scale-95;
+}
+
+.bwl-modal-body-transition-enter-to {
+  @apply opacity-100 scale-100;
+}
+
+.bwl-modal-body-transition-leave {
+  @apply ease-in duration-200;
+}
+
+.bwl-modal-body-transition-leave-from {
+  @apply opacity-100 scale-100;
+}
+
+.bwl-modal-body-transition-leave-to {
+  @apply opacity-0 scale-95;
+}
+
+/**************************************************************************/
+/* BWL modal overlay */
+/**************************************************************************/
 .bwl-modal-overlay {
   @apply fixed inset-0 bg-ms-overlay/60;
 }
@@ -22,18 +62,422 @@
 .bwl-modal-overlay-transition-enter {
   @apply ease-out duration-300;
 }
+
 .bwl-modal-overlay-transition-enter-from {
   @apply opacity-0;
 }
+
 .bwl-modal-overlay-transition-enter-to {
   @apply opacity-100;
 }
+
 .bwl-modal-overlay-transition-leave {
   @apply ease-in duration-200;
 }
+
 .bwl-modal-overlay-transition-leave-from {
   @apply opacity-100;
 }
+
 .bwl-modal-overlay-transition-leave-to {
   @apply opacity-0;
+}
+
+/**************************************************************************/
+/* BWL modal panel*/
+/**************************************************************************/
+.bwl-modal-panel {
+  @apply relative flex max-h-full w-[26rem] max-w-full flex-col overflow-hidden rounded-xl bg-white p-8 transition-all;
+}
+
+.bwl-modal-panel-close-button {
+  @apply absolute top-4 right-4 p-2;
+}
+
+.bwl-modal-panel-close-button-icon {
+  @apply h-5 w-5 text-gray-500;
+}
+
+/**************************************************************************/
+/* BWL modal title*/
+/**************************************************************************/
+
+.bwl-modal-title {
+  @apply text-center text-2xl font-bold text-ms-primary-dark mb-6;
+}
+
+/**************************************************************************/
+/* BWL modal content*/
+/**************************************************************************/
+.bwl-modal-content {
+  @apply flex flex-col;
+}
+
+.bwl-modal-content-token-count-badge {
+  @apply ml-1 rounded bg-ms-primary-background/20 px-2 py-1 text-xs text-ms-primary-dark;
+}
+
+.bwl-modal-content-divider {
+  @apply my-4;
+}
+
+/**************************************************************************/
+/* BWL modal multi token info*/
+/**************************************************************************/
+.bwl-modal-content-token-info-multi {
+  @apply flex flex-col;
+}
+
+.bwl-modal-content-token-info-multi-container {
+  @apply flex max-h-[10rem] flex-col space-y-2 overflow-y-auto;
+}
+
+.bwl-modal-content-token-info-multi-price {
+  @apply mt-4;
+}
+
+.bwl-modal-content-token-info-multi-row {
+  @apply flex items-center space-x-3;
+}
+
+.bwl-modal-content-token-info-multi-row-image {
+  @apply h-12 w-12;
+}
+
+.bwl-modal-content-token-info-multi-row-text-container {
+  @apply flex flex-col text-sm;
+}
+
+.bwl-modal-content-token-info-multi-row-text {
+  @apply font-semibold text-ms-primary-light;
+}
+
+.bwl-modal-content-token-info-multi-row-text-secondary {
+  @apply text-xs font-normal text-gray-500;
+}
+
+/**************************************************************************/
+/* BWL modal single token info*/
+/**************************************************************************/
+.bwl-modal-content-token-info-single {
+  @apply flex space-x-4;
+}
+
+.bwl-modal-content-token-info-single-image {
+  @apply h-28 w-28;
+}
+
+.bwl-modal-content-token-info-single-rows {
+  @apply flex flex-grow flex-col justify-center space-y-2;
+}
+
+.bwl-modal-content-token-info-single-collection-name {
+  @apply font-semibold;
+}
+
+.bwl-modal-content-token-info-single-token-id {
+  @apply font-semibold text-ms-primary-dark;
+}
+
+/**************************************************************************/
+/* BWL modal form*/
+/**************************************************************************/
+.bwl-modal-form {
+  @apply flex flex-col;
+}
+
+.bwl-modal-form-debt-slider {
+  @apply mb-2;
+}
+
+.bwl-modal-form-leverage-dropdown {
+  @apply mb-1;
+}
+
+.bwl-modal-form-leverage-dropdown-ltv-tooltip-icon {
+  @apply h-4 w-4 cursor-help ml-1;
+}
+
+.bwl-modal-form-leverage-dropdown-ltv-max {
+  @apply text-gray-400 font-normal;
+}
+
+.bwl-modal-form-purple-section {
+  @apply mt-4 flex flex-col rounded-lg bg-ms-primary-background/30 px-4 py-2;
+}
+
+.bwl-modal-form-upfront-payment {
+  @apply mb-1;
+}
+
+.bwl-modal-form-repayment-dropdown {
+  @apply mb-1;
+}
+
+.bwl-modal-from-repayment-date-calendar-icon {
+  @apply h-5 w-5 mr-1;
+}
+
+/**************************************************************************/
+/* BWL slider */
+/**************************************************************************/
+.bwl-slider-wrapper {
+  @apply flex flex-col;
+}
+
+.bwl-slider-track-wrapper {
+  @apply flex h-5 w-full flex-col justify-center rounded-full;
+}
+
+.bwl-slider-track-gradient {
+  @apply flex h-[0.375rem] rounded-full bg-gradient-to-r from-[#976CFF] to-[#F99808] justify-end;
+}
+
+.bwl-slider-track-unfilled {
+  @apply bg-gray-200;
+}
+
+.bwl-slider-track-thumb {
+  @apply h-5 w-5 rounded-md border-2 border-ms-primary-dark bg-ms-card-background;
+}
+
+/**************************************************************************/
+/* dropdown */
+/**************************************************************************/
+.dropdown-wrapper {
+  @apply flex flex-col;
+}
+
+.dropdown-button {
+  @apply flex items-center;
+}
+
+.dropdown-button-icon {
+  @apply h-4 w-4 transition-all duration-300 ease-out ml-1;
+}
+
+.dropdown-button-icon-open {
+  @apply rotate-180;
+}
+
+.dropdown-panel {
+  @apply ml-4 flex flex-col space-y-1 mt-1 overflow-hidden;
+}
+
+/**************************************************************************/
+/* dropdown transition*/
+/**************************************************************************/
+.dropdown-transition {
+  @apply overflow-hidden;
+}
+
+.dropdown-transition-enter {
+  @apply transition-all duration-300 ease-out;
+}
+
+.dropdown-transition-enter-from {
+  @apply max-h-[0px];
+}
+
+.dropdown-transition-enter-to {
+  @apply max-h-[5rem];
+}
+
+.dropdown-transition-leave {
+  @apply transition-all duration-300 ease-out;
+}
+
+.dropdown-transition-leave-from {
+  @apply max-h-[5rem];
+}
+
+.dropdown-transition-leave-to {
+  @apply max-h-[0px];
+}
+
+/**************************************************************************/
+/* loading text */
+/**************************************************************************/
+.loading-text {
+  @apply inline h-[1.25rem] w-20 animate-pulse rounded;
+}
+
+.loading-text-gray {
+  @apply bg-gray-200;
+}
+
+.loading-text-purple {
+  @apply bg-ms-primary-dark/30;
+}
+
+/**************************************************************************/
+/* info row */
+/**************************************************************************/
+.info-row {
+  @apply flex items-center;
+}
+
+.info-row-label {
+  @apply flex w-0 flex-grow items-center truncate text-left text-sm;
+}
+
+.info-row-label-normal {
+  @apply text-gray-500;
+}
+
+.info-row-label-important {
+  @apply text-ms-text-important;
+}
+
+.info-row-label-primary {
+  @apply text-ms-primary-light;
+}
+
+/**************************************************************************/
+/* eth logo */
+/**************************************************************************/
+.default-eth-logo {
+  @apply w-2;
+}
+
+.eth-price-wrapper {
+  @apply flex items-center space-x-1;
+}
+
+.eth-price-default {
+  @apply font-semibold;
+}
+
+/**************************************************************************/
+/* bwl tooltip */
+/**************************************************************************/
+.bwl-tooltip-span {
+  @apply flex flex-grow;
+}
+
+.bwl-tooltip-content {
+  @apply w-44 whitespace-pre-wrap rounded-lg bg-white p-3 text-center text-xs text-gray-500;
+  filter: drop-shadow(4.4625px 4.4625px 4.4625px rgba(0, 0, 0, 0.25));
+}
+
+.bwl-tooltip-arrow {
+  @apply fill-white;
+}
+
+/**************************************************************************/
+/* bwl spinner*/
+/**************************************************************************/
+.bwl-spinner {
+  @apply animate-spin;
+}
+
+.bwl-spinner-circle {
+  @apply opacity-25;
+}
+
+.bwl-spinner-path {
+  @apply opacity-75;
+}
+
+/**************************************************************************/
+/* transaction steps */
+/**************************************************************************/
+.transaction-steps {
+  @apply flex flex-col space-y-5;
+}
+
+.transaction-steps-wrapper {
+  @apply flex justify-center px-6;
+}
+
+.transaction-steps-divider {
+  @apply mx-2 mt-[1.2rem] h-[2px] max-w-[5rem] flex-grow bg-ms-primary-light;
+}
+
+.transaction-steps-divider-inactive {
+  @apply opacity-50;
+}
+
+.transaction-steps-description {
+  @apply flex items-center justify-center space-x-1;
+}
+
+.transaction-steps-description-error {
+  @apply text-red-500;
+}
+
+.transaction-steps-description-normal {
+  @apply text-ms-primary-dark;
+}
+
+.transaction-steps-icon {
+  @apply h-5 w-5;
+}
+
+.transaction-steps-text {
+  @apply text-sm;
+}
+
+.transaction-steps-circle {
+  @apply relative flex flex-col items-center pb-6;
+}
+
+.transaction-steps-circle-normal {
+  @apply text-ms-primary-light;
+}
+
+.transaction-steps-circle-error {
+  @apply text-red-500;
+}
+
+.transaction-steps-circle-inactive {
+  @apply opacity-50;
+}
+
+.transaction-steps-circle-border {
+  @apply flex h-10 w-10 items-center justify-center rounded-full border-2 font-semibold;
+}
+
+.transaction-steps-circle-border-error {
+  @apply border-red-500 bg-red-500;
+}
+
+.transaction-steps-circle-border-normal {
+  @apply border-ms-primary-light;
+}
+
+.transaction-steps-circle-border-complete {
+  @apply bg-ms-primary-light;
+}
+
+.transaction-steps-circle-icon {
+  @apply h-5 w-5 text-white;
+}
+
+.transaction-steps-circle-title {
+  @apply absolute top-12 whitespace-nowrap text-xs font-semibold;
+}
+
+/**************************************************************************/
+/* other */
+/**************************************************************************/
+.important-text {
+  @apply text-ms-text-important font-semibold;
+}
+
+.metastreet-button {
+  @apply mt-4 flex items-center justify-center rounded-lg  bg-ms-primary-dark py-4 text-xl font-semibold text-white disabled:opacity-40;
+}
+
+.metastreet-button-spinner {
+  @apply mr-2 h-6 w-6;
+}
+
+.bwl-divider {
+  @apply h-[1px] bg-gray-200;
+}
+
+.bwl-token-image {
+  @apply rounded-lg object-cover;
+  filter: drop-shadow(4.4625px 4.4625px 4.4625px rgba(0, 0, 0, 0.25));
 }

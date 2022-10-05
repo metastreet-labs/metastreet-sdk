@@ -14,15 +14,12 @@ const Tooltip = (props: TooltipProps) => {
     <ReactTooltip.Provider>
       <ReactTooltip.Root delayDuration={1}>
         <ReactTooltip.Trigger className={className}>
-          <span className="flex flex-grow" tabIndex={0}>
+          <span className="bwl-tooltip-span" tabIndex={0}>
             {trigger}
           </span>
         </ReactTooltip.Trigger>
-        <ReactTooltip.Content
-          sideOffset={5}
-          className="w-44 whitespace-pre-wrap rounded-lg bg-white p-3 text-center text-xs text-gray-500 drop-shadow-msTokenImage"
-        >
-          <ReactTooltip.Arrow className="fill-white" />
+        <ReactTooltip.Content sideOffset={5} className="bwl-tooltip-content">
+          <ReactTooltip.Arrow className="bwl-tooltip-arrow" />
           {tooltipText}
         </ReactTooltip.Content>
       </ReactTooltip.Root>

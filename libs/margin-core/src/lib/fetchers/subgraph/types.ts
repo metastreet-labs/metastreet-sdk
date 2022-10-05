@@ -20,6 +20,7 @@ export interface LeverageBuy {
   repayment: BigNumber;
   duration: number;
   maturity: number;
+  listingData?: string;
 }
 
 export enum LeverageBuyEventType {
@@ -27,6 +28,9 @@ export enum LeverageBuyEventType {
   Refinanced = "Refinanced",
   Repaid = "Repaid",
   Liquidated = "Liquidated",
+  Listed = "Listed",
+  Delisted = "Delisted",
+  Sold = "Sold",
 }
 
 export interface LeverageBuyEvent {
