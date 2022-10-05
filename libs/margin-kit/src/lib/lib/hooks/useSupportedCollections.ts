@@ -1,9 +1,9 @@
 import { getSupportedCollections, ReadableError } from "@metastreet-labs/margin-core";
 import { useQuery } from "wagmi";
-import useMetaStreetDeployment from "../../components/MetaStreetDeploymentProvider/useMetaStreetDeployment";
+import useDefinedMetaStreetDeployment from "../../components/MetaStreetDeploymentProvider/useDefinedMetaStreetDeployment";
 
 const useSupportedCollections = () => {
-  const { provider, deployment } = useMetaStreetDeployment();
+  const { provider, deployment } = useDefinedMetaStreetDeployment();
   return useQuery<string[], ReadableError>(supportedCollectionsQueryKeys.all(), () =>
     getSupportedCollections({ signerOrProvider: provider, deployment })
   );

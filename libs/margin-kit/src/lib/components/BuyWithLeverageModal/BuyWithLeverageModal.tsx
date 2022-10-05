@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 import { BWLToken } from "../../types";
-import MetaStreetDeploymentProvider from "../MetaStreetDeploymentProvider/DeploymentProvider";
+import MetaStreetDeploymentProvider from "../MetaStreetDeploymentProvider/MetaStreetDeploymentProvider";
 import MetaStreetModal, { ModalState } from "../MetaStreetModal";
 import LoanInfoContainer from "./containers/LoanInfoContainer";
 import ModalContent from "./ModalContent";

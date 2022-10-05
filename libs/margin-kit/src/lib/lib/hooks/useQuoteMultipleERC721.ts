@@ -1,7 +1,7 @@
 import { quoteMultipleERC721, QuoteMultipleERC721Result, ReadableError } from "@metastreet-labs/margin-core";
 import { BigNumberish } from "ethers";
 import { useQuery } from "wagmi";
-import useMetaStreetDeployment from "../../components/MetaStreetDeploymentProvider/useMetaStreetDeployment";
+import useDefinedMetaStreetDeployment from "../../components/MetaStreetDeploymentProvider/useDefinedMetaStreetDeployment";
 import { BWLToken } from "../../types";
 import { toUnits } from "../../utils/numbers";
 
@@ -12,7 +12,7 @@ export interface UseQuoteMultipleERC721Props {
 }
 
 const useQuoteMultipleERC721 = (props: UseQuoteMultipleERC721Props) => {
-  const { provider, deployment } = useMetaStreetDeployment();
+  const { provider, deployment } = useDefinedMetaStreetDeployment();
 
   const fetcher = () => {
     const collectionAddresses = new Array<string>();

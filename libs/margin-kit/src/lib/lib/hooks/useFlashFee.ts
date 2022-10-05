@@ -1,10 +1,10 @@
 import { getFlashFee, ReadableError } from "@metastreet-labs/margin-core";
 import { BigNumber, BigNumberish } from "ethers";
 import { useQuery } from "wagmi";
-import useMetaStreetDeployment from "../../components/MetaStreetDeploymentProvider/useMetaStreetDeployment";
+import useDefinedMetaStreetDeployment from "../../components/MetaStreetDeploymentProvider/useDefinedMetaStreetDeployment";
 
 const useFlashFee = (loanAmount: BigNumberish) => {
-  const { provider, deployment } = useMetaStreetDeployment();
+  const { provider, deployment } = useDefinedMetaStreetDeployment();
 
   return useQuery<BigNumber, ReadableError>(flashFeeQueryKeys.loanAmount(loanAmount), () =>
     getFlashFee({

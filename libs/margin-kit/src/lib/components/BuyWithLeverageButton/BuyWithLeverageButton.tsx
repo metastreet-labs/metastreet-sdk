@@ -1,7 +1,7 @@
 import { useSigner } from "wagmi";
 import useIsCollectionSupported from "../../lib/hooks/useIsCollectionSupported";
 import { BWLToken } from "../../types";
-import MetaStreetDeploymentProvider from "../MetaStreetDeploymentProvider/DeploymentProvider";
+import MetaStreetDeploymentProvider from "../MetaStreetDeploymentProvider/MetaStreetDeploymentProvider";
 import BaseBuyWithLeverageButton from "./BaseBuyWithLeverageButton";
 import ErrorButton from "./placeholders/ErrorButton";
 import LoadingButton from "./placeholders/LoadingButton";

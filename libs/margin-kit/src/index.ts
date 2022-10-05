@@ -4,6 +4,7 @@ export { default as BuyWithLeverageButton } from "./lib/components/BuyWithLevera
 export { default as BuyWithLeverageModal } from "./lib/components/BuyWithLeverageModal";
 // Other hooks
 export { default as useDebouncedProps } from "./lib/hooks/useDebouncedProps";
+export { default as useMetaStreetDeployment, MetaStreetDeployment } from "./lib/hooks/useMetaStreetDeployment";
 // Data fetching hooks
 export { default as useCollateralLimits } from "./lib/lib/hooks/useCollateralLimits";
 export { default as useFlashFee } from "./lib/lib/hooks/useFlashFee";
