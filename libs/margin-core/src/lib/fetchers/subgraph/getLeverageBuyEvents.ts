@@ -36,6 +36,7 @@ const getPayload = (variables: GetPayloadVariables) => {
             repayment
             duration
             maturity
+            listingData
           }
           previousLeverageBuy {
             id
@@ -50,6 +51,7 @@ const getPayload = (variables: GetPayloadVariables) => {
             repayment
             duration
             maturity
+            listingData
           }
         }
       }
