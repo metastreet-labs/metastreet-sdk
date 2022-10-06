@@ -1,5 +1,5 @@
 import { useAccount, useQuery } from "wagmi";
-import useDefinedMetaStreetDeployment from "../../components/MetaStreetDeploymentProvider/useDefinedMetaStreetDeployment";
+import useDefinedMetaStreetDeployment from "../../hooks/useDefinedMetaStreetDeployment";
 
 const useETHBalance = () => {
   const { address = "" } = useAccount();

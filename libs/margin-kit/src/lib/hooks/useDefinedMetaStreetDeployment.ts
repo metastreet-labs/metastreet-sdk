@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { MetaStreetDeploymentContext } from "./MetaStreetDeploymentProvider";
+import { MetaStreetDeploymentContext } from "../components/MetaStreetDeploymentProvider/MetaStreetDeploymentProvider";
 
 const useDefinedMetaStreetDeployment = () => {
   const deployment = useContext(MetaStreetDeploymentContext);

@@ -1,7 +1,7 @@
 import { quoteMultipleERC721, QuoteMultipleERC721Result, ReadableError } from "@metastreet-labs/margin-core";
 import { BigNumberish } from "ethers";
 import { useQuery } from "wagmi";
-import useDefinedMetaStreetDeployment from "../../components/MetaStreetDeploymentProvider/useDefinedMetaStreetDeployment";
+import useDefinedMetaStreetDeployment from "../../hooks/useDefinedMetaStreetDeployment";
 import { BWLToken } from "../../types";
 import { toUnits } from "../../utils/numbers";
 
