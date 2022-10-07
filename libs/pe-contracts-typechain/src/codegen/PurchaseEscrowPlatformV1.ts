@@ -66,6 +66,8 @@ export declare namespace IPurchaseEscrow {
 
 export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
   functions: {
+    "DEFAULT_ADMIN_ROLE()": FunctionFragment;
+    "EMERGENCY_ADMIN_ROLE()": FunctionFragment;
     "IMPLEMENTATION_VERSION()": FunctionFragment;
     "cancelAllListings()": FunctionFragment;
     "cancelListing(uint256,uint8,bytes)": FunctionFragment;
@@ -75,31 +77,38 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
     "createListing(uint256,uint8,uint256,uint256,uint256,bytes)": FunctionFragment;
     "currencyToken()": FunctionFragment;
     "generateListing(uint256,uint8,uint256,uint256,uint256)": FunctionFragment;
+    "getRoleAdmin(bytes32)": FunctionFragment;
+    "grantRole(bytes32,address)": FunctionFragment;
+    "hasRole(bytes32,address)": FunctionFragment;
+    "initialize(address,address,address)": FunctionFragment;
     "isValidSignature(bytes32,bytes)": FunctionFragment;
     "lenderNoteToken()": FunctionFragment;
     "liquidate(uint256)": FunctionFragment;
-    "listingPaused()": FunctionFragment;
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
-    "owner()": FunctionFragment;
+    "pause()": FunctionFragment;
+    "paused()": FunctionFragment;
     "performUpkeep(bytes)": FunctionFragment;
     "processSale(uint256,uint8)": FunctionFragment;
     "purchaseEscrows(uint256)": FunctionFragment;
-    "renounceOwnership()": FunctionFragment;
+    "renounceRole(bytes32,address)": FunctionFragment;
     "repay(uint256)": FunctionFragment;
     "repayETH(uint256)": FunctionFragment;
-    "seaport()": FunctionFragment;
+    "revokeRole(bytes32,address)": FunctionFragment;
+    "seaportLister()": FunctionFragment;
     "setLenderNoteTokenBaseURI(string)": FunctionFragment;
-    "setListingPaused(bool)": FunctionFragment;
     "setOrderConstants(bytes)": FunctionFragment;
+    "setSeaportLister(address)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "transferAndCall(uint256,address,bytes)": FunctionFragment;
-    "transferOwnership(address)": FunctionFragment;
+    "unpause()": FunctionFragment;
     "withdrawERC20(address,uint256)": FunctionFragment;
     "withdrawETH(uint256)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "DEFAULT_ADMIN_ROLE"
+      | "EMERGENCY_ADMIN_ROLE"
       | "IMPLEMENTATION_VERSION"
       | "cancelAllListings"
       | "cancelListing"
@@ -109,29 +118,42 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
       | "createListing"
       | "currencyToken"
       | "generateListing"
+      | "getRoleAdmin"
+      | "grantRole"
+      | "hasRole"
+      | "initialize"
       | "isValidSignature"
       | "lenderNoteToken"
       | "liquidate"
-      | "listingPaused"
       | "onERC721Received"
-      | "owner"
+      | "pause"
+      | "paused"
       | "performUpkeep"
       | "processSale"
       | "purchaseEscrows"
-      | "renounceOwnership"
+      | "renounceRole"
       | "repay"
       | "repayETH"
-      | "seaport"
+      | "revokeRole"
+      | "seaportLister"
       | "setLenderNoteTokenBaseURI"
-      | "setListingPaused"
       | "setOrderConstants"
+      | "setSeaportLister"
       | "supportsInterface"
       | "transferAndCall"
-      | "transferOwnership"
+      | "unpause"
       | "withdrawERC20"
       | "withdrawETH"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "EMERGENCY_ADMIN_ROLE",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "IMPLEMENTATION_VERSION",
     values?: undefined
@@ -193,6 +215,26 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "getRoleAdmin",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantRole",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "hasRole",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "initialize",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "isValidSignature",
     values: [PromiseOrValue<BytesLike>, PromiseOrValue<BytesLike>]
   ): string;
@@ -205,10 +247,6 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "listingPaused",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "onERC721Received",
     values: [
       PromiseOrValue<string>,
@@ -217,7 +255,8 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
       PromiseOrValue<BytesLike>
     ]
   ): string;
-  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "pause", values?: undefined): string;
+  encodeFunctionData(functionFragment: "paused", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "performUpkeep",
     values: [PromiseOrValue<BytesLike>]
@@ -231,8 +270,8 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "renounceOwnership",
-    values?: undefined
+    functionFragment: "renounceRole",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "repay",
@@ -242,18 +281,25 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
     functionFragment: "repayETH",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(functionFragment: "seaport", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "revokeRole",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "seaportLister",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "setLenderNoteTokenBaseURI",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "setListingPaused",
-    values: [PromiseOrValue<boolean>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "setOrderConstants",
     values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setSeaportLister",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "supportsInterface",
@@ -267,10 +313,7 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
       PromiseOrValue<BytesLike>
     ]
   ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
-    values: [PromiseOrValue<string>]
-  ): string;
+  encodeFunctionData(functionFragment: "unpause", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "withdrawERC20",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
@@ -280,6 +323,14 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "EMERGENCY_ADMIN_ROLE",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "IMPLEMENTATION_VERSION",
     data: BytesLike
@@ -314,6 +365,13 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "getRoleAdmin",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "grantRole", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "hasRole", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
+  decodeFunctionResult(
     functionFragment: "isValidSignature",
     data: BytesLike
   ): Result;
@@ -323,14 +381,11 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "liquidate", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "listingPaused",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "onERC721Received",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "pause", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "performUpkeep",
     data: BytesLike
@@ -344,22 +399,26 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "renounceOwnership",
+    functionFragment: "renounceRole",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "repay", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "repayETH", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "seaport", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "seaportLister",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "setLenderNoteTokenBaseURI",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setListingPaused",
+    functionFragment: "setOrderConstants",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setOrderConstants",
+    functionFragment: "setSeaportLister",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -370,10 +429,7 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
     functionFragment: "transferAndCall",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "unpause", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "withdrawERC20",
     data: BytesLike
@@ -384,7 +440,8 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
   ): Result;
 
   events: {
-    "OwnershipTransferred(address,address)": EventFragment;
+    "Initialized(uint8)": EventFragment;
+    "Paused(address)": EventFragment;
     "PurchaseEscrowCreated(uint256,address,address,address,uint256,uint256,uint256,uint64)": EventFragment;
     "PurchaseEscrowDelisted(uint256,uint8)": EventFragment;
     "PurchaseEscrowLiquidated(uint256)": EventFragment;
@@ -392,9 +449,14 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
     "PurchaseEscrowRepaid(uint256)": EventFragment;
     "PurchaseEscrowSold(uint256,uint8)": EventFragment;
     "PurchaseEscrowTransferred(uint256,address,address)": EventFragment;
+    "RoleAdminChanged(bytes32,bytes32,bytes32)": EventFragment;
+    "RoleGranted(bytes32,address,address)": EventFragment;
+    "RoleRevoked(bytes32,address,address)": EventFragment;
+    "Unpaused(address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Initialized"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Paused"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "PurchaseEscrowCreated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "PurchaseEscrowDelisted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "PurchaseEscrowLiquidated"): EventFragment;
@@ -402,19 +464,25 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "PurchaseEscrowRepaid"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "PurchaseEscrowSold"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "PurchaseEscrowTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RoleAdminChanged"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RoleGranted"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RoleRevoked"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Unpaused"): EventFragment;
 }
 
-export interface OwnershipTransferredEventObject {
-  previousOwner: string;
-  newOwner: string;
+export interface InitializedEventObject {
+  version: number;
 }
-export type OwnershipTransferredEvent = TypedEvent<
-  [string, string],
-  OwnershipTransferredEventObject
->;
+export type InitializedEvent = TypedEvent<[number], InitializedEventObject>;
 
-export type OwnershipTransferredEventFilter =
-  TypedEventFilter<OwnershipTransferredEvent>;
+export type InitializedEventFilter = TypedEventFilter<InitializedEvent>;
+
+export interface PausedEventObject {
+  account: string;
+}
+export type PausedEvent = TypedEvent<[string], PausedEventObject>;
+
+export type PausedEventFilter = TypedEventFilter<PausedEvent>;
 
 export interface PurchaseEscrowCreatedEventObject {
   escrowId: BigNumber;
@@ -515,6 +583,50 @@ export type PurchaseEscrowTransferredEvent = TypedEvent<
 export type PurchaseEscrowTransferredEventFilter =
   TypedEventFilter<PurchaseEscrowTransferredEvent>;
 
+export interface RoleAdminChangedEventObject {
+  role: string;
+  previousAdminRole: string;
+  newAdminRole: string;
+}
+export type RoleAdminChangedEvent = TypedEvent<
+  [string, string, string],
+  RoleAdminChangedEventObject
+>;
+
+export type RoleAdminChangedEventFilter =
+  TypedEventFilter<RoleAdminChangedEvent>;
+
+export interface RoleGrantedEventObject {
+  role: string;
+  account: string;
+  sender: string;
+}
+export type RoleGrantedEvent = TypedEvent<
+  [string, string, string],
+  RoleGrantedEventObject
+>;
+
+export type RoleGrantedEventFilter = TypedEventFilter<RoleGrantedEvent>;
+
+export interface RoleRevokedEventObject {
+  role: string;
+  account: string;
+  sender: string;
+}
+export type RoleRevokedEvent = TypedEvent<
+  [string, string, string],
+  RoleRevokedEventObject
+>;
+
+export type RoleRevokedEventFilter = TypedEventFilter<RoleRevokedEvent>;
+
+export interface UnpausedEventObject {
+  account: string;
+}
+export type UnpausedEvent = TypedEvent<[string], UnpausedEventObject>;
+
+export type UnpausedEventFilter = TypedEventFilter<UnpausedEvent>;
+
 export interface PurchaseEscrowPlatformV1 extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
@@ -542,6 +654,10 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<[string]>;
+
+    EMERGENCY_ADMIN_ROLE(overrides?: CallOverrides): Promise<[string]>;
+
     IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<[string]>;
 
     cancelAllListings(
@@ -597,6 +713,30 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
+    getRoleAdmin(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    grantRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    hasRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    initialize(
+      currencyToken_: PromiseOrValue<string>,
+      lenderNoteToken_: PromiseOrValue<string>,
+      seaportLister_: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     isValidSignature(
       digest: PromiseOrValue<BytesLike>,
       signature: PromiseOrValue<BytesLike>,
@@ -610,8 +750,6 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    listingPaused(overrides?: CallOverrides): Promise<[boolean]>;
-
     onERC721Received(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
@@ -620,7 +758,11 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    owner(overrides?: CallOverrides): Promise<[string]>;
+    pause(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    paused(overrides?: CallOverrides): Promise<[boolean]>;
 
     performUpkeep(
       performData: PromiseOrValue<BytesLike>,
@@ -638,7 +780,9 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[IPurchaseEscrow.PurchaseEscrowTermsStructOutput]>;
 
-    renounceOwnership(
+    renounceRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -652,20 +796,26 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    seaport(overrides?: CallOverrides): Promise<[string]>;
+    revokeRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    seaportLister(overrides?: CallOverrides): Promise<[string]>;
 
     setLenderNoteTokenBaseURI(
       baseURI: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    setListingPaused(
-      paused: PromiseOrValue<boolean>,
+    setOrderConstants(
+      orderConstants: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    setOrderConstants(
-      orderConstants: PromiseOrValue<BytesLike>,
+    setSeaportLister(
+      seaportLister_: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -681,8 +831,7 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    transferOwnership(
-      newOwner: PromiseOrValue<string>,
+    unpause(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -697,6 +846,10 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
+
+  DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
+
+  EMERGENCY_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
 
   IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<string>;
 
@@ -753,6 +906,30 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
+  getRoleAdmin(
+    role: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
+  grantRole(
+    role: PromiseOrValue<BytesLike>,
+    account: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  hasRole(
+    role: PromiseOrValue<BytesLike>,
+    account: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  initialize(
+    currencyToken_: PromiseOrValue<string>,
+    lenderNoteToken_: PromiseOrValue<string>,
+    seaportLister_: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   isValidSignature(
     digest: PromiseOrValue<BytesLike>,
     signature: PromiseOrValue<BytesLike>,
@@ -766,8 +943,6 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  listingPaused(overrides?: CallOverrides): Promise<boolean>;
-
   onERC721Received(
     arg0: PromiseOrValue<string>,
     arg1: PromiseOrValue<string>,
@@ -776,7 +951,11 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  owner(overrides?: CallOverrides): Promise<string>;
+  pause(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  paused(overrides?: CallOverrides): Promise<boolean>;
 
   performUpkeep(
     performData: PromiseOrValue<BytesLike>,
@@ -794,7 +973,9 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
     overrides?: CallOverrides
   ): Promise<IPurchaseEscrow.PurchaseEscrowTermsStructOutput>;
 
-  renounceOwnership(
+  renounceRole(
+    role: PromiseOrValue<BytesLike>,
+    account: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -808,20 +989,26 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  seaport(overrides?: CallOverrides): Promise<string>;
+  revokeRole(
+    role: PromiseOrValue<BytesLike>,
+    account: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  seaportLister(overrides?: CallOverrides): Promise<string>;
 
   setLenderNoteTokenBaseURI(
     baseURI: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  setListingPaused(
-    paused: PromiseOrValue<boolean>,
+  setOrderConstants(
+    orderConstants: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  setOrderConstants(
-    orderConstants: PromiseOrValue<BytesLike>,
+  setSeaportLister(
+    seaportLister_: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -837,8 +1024,7 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  transferOwnership(
-    newOwner: PromiseOrValue<string>,
+  unpause(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -854,6 +1040,10 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
+
+    EMERGENCY_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
+
     IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<string>;
 
     cancelAllListings(overrides?: CallOverrides): Promise<void>;
@@ -907,6 +1097,30 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
+    getRoleAdmin(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    grantRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    hasRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    initialize(
+      currencyToken_: PromiseOrValue<string>,
+      lenderNoteToken_: PromiseOrValue<string>,
+      seaportLister_: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     isValidSignature(
       digest: PromiseOrValue<BytesLike>,
       signature: PromiseOrValue<BytesLike>,
@@ -920,8 +1134,6 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    listingPaused(overrides?: CallOverrides): Promise<boolean>;
-
     onERC721Received(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
@@ -930,7 +1142,9 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    owner(overrides?: CallOverrides): Promise<string>;
+    pause(overrides?: CallOverrides): Promise<void>;
+
+    paused(overrides?: CallOverrides): Promise<boolean>;
 
     performUpkeep(
       performData: PromiseOrValue<BytesLike>,
@@ -948,7 +1162,11 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<IPurchaseEscrow.PurchaseEscrowTermsStructOutput>;
 
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
+    renounceRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     repay(
       escrowId: PromiseOrValue<BigNumberish>,
@@ -960,20 +1178,26 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    seaport(overrides?: CallOverrides): Promise<string>;
+    revokeRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    seaportLister(overrides?: CallOverrides): Promise<string>;
 
     setLenderNoteTokenBaseURI(
       baseURI: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setListingPaused(
-      paused: PromiseOrValue<boolean>,
+    setOrderConstants(
+      orderConstants: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setOrderConstants(
-      orderConstants: PromiseOrValue<BytesLike>,
+    setSeaportLister(
+      seaportLister_: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -989,10 +1213,7 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    transferOwnership(
-      newOwner: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    unpause(overrides?: CallOverrides): Promise<void>;
 
     withdrawERC20(
       token: PromiseOrValue<string>,
@@ -1007,14 +1228,11 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
   };
 
   filters: {
-    "OwnershipTransferred(address,address)"(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null
-    ): OwnershipTransferredEventFilter;
-    OwnershipTransferred(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null
-    ): OwnershipTransferredEventFilter;
+    "Initialized(uint8)"(version?: null): InitializedEventFilter;
+    Initialized(version?: null): InitializedEventFilter;
+
+    "Paused(address)"(account?: null): PausedEventFilter;
+    Paused(account?: null): PausedEventFilter;
 
     "PurchaseEscrowCreated(uint256,address,address,address,uint256,uint256,uint256,uint64)"(
       escrowId?: PromiseOrValue<BigNumberish> | null,
@@ -1090,9 +1308,49 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       from?: null,
       to?: null
     ): PurchaseEscrowTransferredEventFilter;
+
+    "RoleAdminChanged(bytes32,bytes32,bytes32)"(
+      role?: PromiseOrValue<BytesLike> | null,
+      previousAdminRole?: PromiseOrValue<BytesLike> | null,
+      newAdminRole?: PromiseOrValue<BytesLike> | null
+    ): RoleAdminChangedEventFilter;
+    RoleAdminChanged(
+      role?: PromiseOrValue<BytesLike> | null,
+      previousAdminRole?: PromiseOrValue<BytesLike> | null,
+      newAdminRole?: PromiseOrValue<BytesLike> | null
+    ): RoleAdminChangedEventFilter;
+
+    "RoleGranted(bytes32,address,address)"(
+      role?: PromiseOrValue<BytesLike> | null,
+      account?: PromiseOrValue<string> | null,
+      sender?: PromiseOrValue<string> | null
+    ): RoleGrantedEventFilter;
+    RoleGranted(
+      role?: PromiseOrValue<BytesLike> | null,
+      account?: PromiseOrValue<string> | null,
+      sender?: PromiseOrValue<string> | null
+    ): RoleGrantedEventFilter;
+
+    "RoleRevoked(bytes32,address,address)"(
+      role?: PromiseOrValue<BytesLike> | null,
+      account?: PromiseOrValue<string> | null,
+      sender?: PromiseOrValue<string> | null
+    ): RoleRevokedEventFilter;
+    RoleRevoked(
+      role?: PromiseOrValue<BytesLike> | null,
+      account?: PromiseOrValue<string> | null,
+      sender?: PromiseOrValue<string> | null
+    ): RoleRevokedEventFilter;
+
+    "Unpaused(address)"(account?: null): UnpausedEventFilter;
+    Unpaused(account?: null): UnpausedEventFilter;
   };
 
   estimateGas: {
+    DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
+
+    EMERGENCY_ADMIN_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
+
     IMPLEMENTATION_VERSION(overrides?: CallOverrides): Promise<BigNumber>;
 
     cancelAllListings(
@@ -1148,6 +1406,30 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    getRoleAdmin(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    grantRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    hasRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    initialize(
+      currencyToken_: PromiseOrValue<string>,
+      lenderNoteToken_: PromiseOrValue<string>,
+      seaportLister_: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     isValidSignature(
       digest: PromiseOrValue<BytesLike>,
       signature: PromiseOrValue<BytesLike>,
@@ -1161,8 +1443,6 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    listingPaused(overrides?: CallOverrides): Promise<BigNumber>;
-
     onERC721Received(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
@@ -1171,7 +1451,11 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    owner(overrides?: CallOverrides): Promise<BigNumber>;
+    pause(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    paused(overrides?: CallOverrides): Promise<BigNumber>;
 
     performUpkeep(
       performData: PromiseOrValue<BytesLike>,
@@ -1189,7 +1473,9 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    renounceOwnership(
+    renounceRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1203,20 +1489,26 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    seaport(overrides?: CallOverrides): Promise<BigNumber>;
+    revokeRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    seaportLister(overrides?: CallOverrides): Promise<BigNumber>;
 
     setLenderNoteTokenBaseURI(
       baseURI: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    setListingPaused(
-      paused: PromiseOrValue<boolean>,
+    setOrderConstants(
+      orderConstants: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    setOrderConstants(
-      orderConstants: PromiseOrValue<BytesLike>,
+    setSeaportLister(
+      seaportLister_: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1232,8 +1524,7 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    transferOwnership(
-      newOwner: PromiseOrValue<string>,
+    unpause(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1250,6 +1541,14 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
   };
 
   populateTransaction: {
+    DEFAULT_ADMIN_ROLE(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    EMERGENCY_ADMIN_ROLE(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     IMPLEMENTATION_VERSION(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1307,6 +1606,30 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    getRoleAdmin(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    grantRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    hasRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    initialize(
+      currencyToken_: PromiseOrValue<string>,
+      lenderNoteToken_: PromiseOrValue<string>,
+      seaportLister_: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     isValidSignature(
       digest: PromiseOrValue<BytesLike>,
       signature: PromiseOrValue<BytesLike>,
@@ -1320,8 +1643,6 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    listingPaused(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     onERC721Received(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
@@ -1330,7 +1651,11 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    pause(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    paused(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     performUpkeep(
       performData: PromiseOrValue<BytesLike>,
@@ -1348,7 +1673,9 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    renounceOwnership(
+    renounceRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1362,20 +1689,26 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    seaport(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    revokeRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    seaportLister(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     setLenderNoteTokenBaseURI(
       baseURI: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    setListingPaused(
-      paused: PromiseOrValue<boolean>,
+    setOrderConstants(
+      orderConstants: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    setOrderConstants(
-      orderConstants: PromiseOrValue<BytesLike>,
+    setSeaportLister(
+      seaportLister_: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1391,8 +1724,7 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    transferOwnership(
-      newOwner: PromiseOrValue<string>,
+    unpause(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

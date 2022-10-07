@@ -61,13 +61,13 @@ export interface LeverageBuyWrapperV1Interface extends utils.Interface {
     "flashLender()": FunctionFragment;
     "getCollateralLimits(address,address,uint256)": FunctionFragment;
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
+    "onEscrowTransfer(address,uint256,bytes)": FunctionFragment;
     "onFlashLoan(address,address,uint256,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "purchaseEscrow()": FunctionFragment;
     "quoteMultipleERC721(uint256[],uint256[],address[],uint256[],address,uint64)": FunctionFragment;
     "quoteRefinance(uint256,int256,address,uint256,address,uint64)": FunctionFragment;
     "quoteSingleERC721(uint256,uint256,address,uint256,address,uint64)": FunctionFragment;
-    "refinanceETH(uint256,address,uint64,int256,uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "reservoirRouter()": FunctionFragment;
     "setFlashLender(address)": FunctionFragment;
@@ -87,13 +87,13 @@ export interface LeverageBuyWrapperV1Interface extends utils.Interface {
       | "flashLender"
       | "getCollateralLimits"
       | "onERC721Received"
+      | "onEscrowTransfer"
       | "onFlashLoan"
       | "owner"
       | "purchaseEscrow"
       | "quoteMultipleERC721"
       | "quoteRefinance"
       | "quoteSingleERC721"
-      | "refinanceETH"
       | "renounceOwnership"
       | "reservoirRouter"
       | "setFlashLender"
@@ -155,6 +155,14 @@ export interface LeverageBuyWrapperV1Interface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "onEscrowTransfer",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "onFlashLoan",
     values: [
       PromiseOrValue<string>,
@@ -199,16 +207,6 @@ export interface LeverageBuyWrapperV1Interface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "refinanceETH",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>
     ]
   ): string;
@@ -271,6 +269,10 @@ export interface LeverageBuyWrapperV1Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "onEscrowTransfer",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "onFlashLoan",
     data: BytesLike
   ): Result;
@@ -289,10 +291,6 @@ export interface LeverageBuyWrapperV1Interface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "quoteSingleERC721",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "refinanceETH",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -482,6 +480,13 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    onEscrowTransfer(
+      from: PromiseOrValue<string>,
+      escrowId: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     onFlashLoan(
       initiator: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
@@ -542,15 +547,6 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
         repayment: BigNumber;
       }
     >;
-
-    refinanceETH(
-      escrowId: PromiseOrValue<BigNumberish>,
-      vault: PromiseOrValue<string>,
-      duration: PromiseOrValue<BigNumberish>,
-      downpayment: PromiseOrValue<BigNumberish>,
-      maxRepayment: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
 
     renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -626,6 +622,13 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  onEscrowTransfer(
+    from: PromiseOrValue<string>,
+    escrowId: PromiseOrValue<BigNumberish>,
+    data: PromiseOrValue<BytesLike>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   onFlashLoan(
     initiator: PromiseOrValue<string>,
     arg1: PromiseOrValue<string>,
@@ -686,15 +689,6 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
       repayment: BigNumber;
     }
   >;
-
-  refinanceETH(
-    escrowId: PromiseOrValue<BigNumberish>,
-    vault: PromiseOrValue<string>,
-    duration: PromiseOrValue<BigNumberish>,
-    downpayment: PromiseOrValue<BigNumberish>,
-    maxRepayment: PromiseOrValue<BigNumberish>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
 
   renounceOwnership(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -770,6 +764,13 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
+    onEscrowTransfer(
+      from: PromiseOrValue<string>,
+      escrowId: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     onFlashLoan(
       initiator: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
@@ -830,15 +831,6 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
         repayment: BigNumber;
       }
     >;
-
-    refinanceETH(
-      escrowId: PromiseOrValue<BigNumberish>,
-      vault: PromiseOrValue<string>,
-      duration: PromiseOrValue<BigNumberish>,
-      downpayment: PromiseOrValue<BigNumberish>,
-      maxRepayment: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
@@ -973,6 +965,13 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    onEscrowTransfer(
+      from: PromiseOrValue<string>,
+      escrowId: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     onFlashLoan(
       initiator: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
@@ -1014,15 +1013,6 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
       vault: PromiseOrValue<string>,
       duration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    refinanceETH(
-      escrowId: PromiseOrValue<BigNumberish>,
-      vault: PromiseOrValue<string>,
-      duration: PromiseOrValue<BigNumberish>,
-      downpayment: PromiseOrValue<BigNumberish>,
-      maxRepayment: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     renounceOwnership(
@@ -1102,6 +1092,13 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    onEscrowTransfer(
+      from: PromiseOrValue<string>,
+      escrowId: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     onFlashLoan(
       initiator: PromiseOrValue<string>,
       arg1: PromiseOrValue<string>,
@@ -1143,15 +1140,6 @@ export interface LeverageBuyWrapperV1 extends BaseContract {
       vault: PromiseOrValue<string>,
       duration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    refinanceETH(
-      escrowId: PromiseOrValue<BigNumberish>,
-      vault: PromiseOrValue<string>,
-      duration: PromiseOrValue<BigNumberish>,
-      downpayment: PromiseOrValue<BigNumberish>,
-      maxRepayment: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     renounceOwnership(
