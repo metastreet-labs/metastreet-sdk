@@ -1,6 +1,6 @@
 {
   "name": "@metastreet-labs/pe-contracts-typechain",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "type": "module",
   "sideEffects": false,
   "scripts": {
