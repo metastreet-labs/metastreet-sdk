@@ -10,6 +10,7 @@ type GenerateListingParams = TransactionParams & {
   escrowID: string;
   marketplace: Marketplace;
   consideration: BigNumberish;
+  startTime: BigNumberish;
   expiration: BigNumberish;
   salt: BigNumberish;
 };
@@ -23,6 +24,7 @@ const _generateListing = async (params: GenerateListingParams) => {
     params.escrowID,
     params.marketplace,
     params.consideration,
+    params.startTime,
     params.expiration,
     params.salt
   );

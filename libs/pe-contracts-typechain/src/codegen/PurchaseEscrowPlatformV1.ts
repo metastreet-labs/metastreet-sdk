@@ -74,9 +74,9 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
     "checkListingStatus(uint256,uint8)": FunctionFragment;
     "checkUpkeep(bytes)": FunctionFragment;
     "create(address,address,uint256,uint256,uint256,uint64)": FunctionFragment;
-    "createListing(uint256,uint8,uint256,uint256,uint256,bytes)": FunctionFragment;
+    "createListing(uint256,uint8,uint256,uint256,uint256,uint256,bytes)": FunctionFragment;
     "currencyToken()": FunctionFragment;
-    "generateListing(uint256,uint8,uint256,uint256,uint256)": FunctionFragment;
+    "generateListing(uint256,uint8,uint256,uint256,uint256,uint256)": FunctionFragment;
     "getRoleAdmin(bytes32)": FunctionFragment;
     "grantRole(bytes32,address)": FunctionFragment;
     "hasRole(bytes32,address)": FunctionFragment;
@@ -197,6 +197,7 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
@@ -207,6 +208,7 @@ export interface PurchaseEscrowPlatformV1Interface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "generateListing",
     values: [
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
@@ -696,6 +698,7 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       escrowId: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
       consideration: PromiseOrValue<BigNumberish>,
+      startTime: PromiseOrValue<BigNumberish>,
       expiration: PromiseOrValue<BigNumberish>,
       salt: PromiseOrValue<BigNumberish>,
       signature: PromiseOrValue<BytesLike>,
@@ -708,6 +711,7 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       escrowId: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
       consideration: PromiseOrValue<BigNumberish>,
+      startTime: PromiseOrValue<BigNumberish>,
       expiration: PromiseOrValue<BigNumberish>,
       salt: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -889,6 +893,7 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
     escrowId: PromiseOrValue<BigNumberish>,
     arg1: PromiseOrValue<BigNumberish>,
     consideration: PromiseOrValue<BigNumberish>,
+    startTime: PromiseOrValue<BigNumberish>,
     expiration: PromiseOrValue<BigNumberish>,
     salt: PromiseOrValue<BigNumberish>,
     signature: PromiseOrValue<BytesLike>,
@@ -901,6 +906,7 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
     escrowId: PromiseOrValue<BigNumberish>,
     arg1: PromiseOrValue<BigNumberish>,
     consideration: PromiseOrValue<BigNumberish>,
+    startTime: PromiseOrValue<BigNumberish>,
     expiration: PromiseOrValue<BigNumberish>,
     salt: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -1080,6 +1086,7 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       escrowId: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
       consideration: PromiseOrValue<BigNumberish>,
+      startTime: PromiseOrValue<BigNumberish>,
       expiration: PromiseOrValue<BigNumberish>,
       salt: PromiseOrValue<BigNumberish>,
       signature: PromiseOrValue<BytesLike>,
@@ -1092,6 +1099,7 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       escrowId: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
       consideration: PromiseOrValue<BigNumberish>,
+      startTime: PromiseOrValue<BigNumberish>,
       expiration: PromiseOrValue<BigNumberish>,
       salt: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -1389,6 +1397,7 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       escrowId: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
       consideration: PromiseOrValue<BigNumberish>,
+      startTime: PromiseOrValue<BigNumberish>,
       expiration: PromiseOrValue<BigNumberish>,
       salt: PromiseOrValue<BigNumberish>,
       signature: PromiseOrValue<BytesLike>,
@@ -1401,6 +1410,7 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       escrowId: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
       consideration: PromiseOrValue<BigNumberish>,
+      startTime: PromiseOrValue<BigNumberish>,
       expiration: PromiseOrValue<BigNumberish>,
       salt: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -1589,6 +1599,7 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       escrowId: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
       consideration: PromiseOrValue<BigNumberish>,
+      startTime: PromiseOrValue<BigNumberish>,
       expiration: PromiseOrValue<BigNumberish>,
       salt: PromiseOrValue<BigNumberish>,
       signature: PromiseOrValue<BytesLike>,
@@ -1601,6 +1612,7 @@ export interface PurchaseEscrowPlatformV1 extends BaseContract {
       escrowId: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
       consideration: PromiseOrValue<BigNumberish>,
+      startTime: PromiseOrValue<BigNumberish>,
       expiration: PromiseOrValue<BigNumberish>,
       salt: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
