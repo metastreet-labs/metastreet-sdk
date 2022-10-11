@@ -7,6 +7,7 @@ import useBuyWithLeverage from "../state/useBuyWithLeverage";
 import ModalConfirmation from "./ModalConfirmation";
 import ModalForm from "./ModalForm";
 import ModalSuccess from "./ModalSuccess";
+import SuccessAnimation from "./SuccessAnimation";
 
 interface ModalContentProps {
   onClose: () => void;
@@ -30,12 +31,10 @@ const ModalContent = (props: ModalContentProps) => {
 
   const tokenInfo = multi ? <MultiTokenInfo tokens={tokens} /> : <SingleTokenInfo token={tokens[0]} />;
 
-  const successAnimation = null;
-
   return (
     <div className="bwl-modal-content">
       <MetaStreetModal.Title>{success ? successTitle : initialTitle}</MetaStreetModal.Title>
-      {success ? successAnimation : tokenInfo}
+      {success ? <SuccessAnimation /> : tokenInfo}
       <Divider className="bwl-modal-content-divider" />
       {status == "idle" ? <ModalForm /> : null}
       {status == "loading" || status == "error" ? <ModalConfirmation onClose={onClose} /> : null}
