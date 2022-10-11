@@ -11,7 +11,7 @@ const ErrorButton = (props: ErrorButtonProps) => {
   return (
     <Tooltip
       className={classNames("flex cursor-not-allowed", props.className)}
-      trigger={<BaseBuyWithLeverageButton disabled className="pointer-events-none" />}
+      trigger={<BaseBuyWithLeverageButton disabled className="pointer-events-none w-full" />}
       tooltipText={props.error}
     />
   );

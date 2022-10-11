@@ -2,8 +2,10 @@
 export { default as BuyWithLeverage } from "./lib/components/BuyWithLeverage";
 export { default as BuyWithLeverageButton } from "./lib/components/BuyWithLeverageButton";
 export { default as BuyWithLeverageModal } from "./lib/components/BuyWithLeverageModal";
+export { default as MetaStreetDeploymentProvider } from "./lib/components/MetaStreetDeploymentProvider";
 // Other hooks
 export { default as useDebouncedProps } from "./lib/hooks/useDebouncedProps";
+export { default as useDefinedMetaStreetDeployment } from "./lib/hooks/useDefinedMetaStreetDeployment";
 export { default as useMetaStreetDeployment } from "./lib/hooks/useMetaStreetDeployment";
 export type { MetaStreetDeployment } from "./lib/hooks/useMetaStreetDeployment";
 // Data fetching hooks

@@ -1,7 +1,7 @@
 import { getFlashFee, ReadableError } from "@metastreet-labs/margin-core";
 import { BigNumber, BigNumberish } from "ethers";
 import { useQuery } from "wagmi";
-import useDefinedMetaStreetDeployment from "../../components/MetaStreetDeploymentProvider/useDefinedMetaStreetDeployment";
+import useDefinedMetaStreetDeployment from "../../hooks/useDefinedMetaStreetDeployment";
 
 const useFlashFee = (loanAmount: BigNumberish) => {
   const { provider, deployment } = useDefinedMetaStreetDeployment();
