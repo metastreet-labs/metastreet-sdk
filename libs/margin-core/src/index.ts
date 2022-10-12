@@ -14,8 +14,6 @@ export * from "./lib/fetchers/subgraph/types";
 export * from "./lib/fetchers/types";
 export * from "./lib/transactions/buyMultipleERC721WithETH";
 export * from "./lib/transactions/buySingleERC721WithETH";
-export * from "./lib/transactions/createListing";
-export * from "./lib/transactions/generateListing";
 export * from "./lib/transactions/refinanceETH";
 export * from "./lib/transactions/repayETH";
 export * from "./lib/transactions/types";

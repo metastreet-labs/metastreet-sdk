@@ -33,7 +33,7 @@ export { MockVault__factory } from "./MockVault__factory";
 export { Ownable__factory } from "./Ownable__factory";
 export { PurchaseEscrowNoteAdapter__factory } from "./PurchaseEscrowNoteAdapter__factory";
 export { PurchaseEscrowNoteToken__factory } from "./PurchaseEscrowNoteToken__factory";
-export { PurchaseEscrowPlatformV1__factory } from "./PurchaseEscrowPlatformV1__factory";
+export { PurchaseEscrowPlatform__factory } from "./PurchaseEscrowPlatform__factory";
 export { TestERC20__factory } from "./TestERC20__factory";
 export { TestERC721__factory } from "./TestERC721__factory";
 export { TestFlashLender__factory } from "./TestFlashLender__factory";

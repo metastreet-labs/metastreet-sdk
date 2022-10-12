@@ -1,6 +1,6 @@
 import {
   LeverageBuyWrapperV1__factory,
-  PurchaseEscrowPlatformV1__factory,
+  PurchaseEscrowPlatform__factory,
 } from "@metastreet-labs/pe-contracts-typechain";
 import { BigNumberish, ContractTransaction } from "ethers";
 import { withReadableError } from "../errors";
@@ -17,7 +17,7 @@ const _repayETH = async (params: RepayETHParams): Promise<ContractTransaction> =
   const lbWrapper = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signer);
   const pePlatformAddress = await lbWrapper.purchaseEscrow();
 
-  const pePlatform = PurchaseEscrowPlatformV1__factory.connect(pePlatformAddress, signer);
+  const pePlatform = PurchaseEscrowPlatform__factory.connect(pePlatformAddress, signer);
   return pePlatform.repayETH(params.escrowID, { value: params.repayment });
 };
 
