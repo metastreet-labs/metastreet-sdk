@@ -1,5 +1,5 @@
+import { getReadableError } from "@metastreet-labs/margin-core";
 import { useNetwork, useQuery } from "wagmi";
-import { getReadableError } from "../../utils/errors";
 import getOSFlagged, { BaseToken, GetOSFlaggedResult } from "../fetchers/getOSFlagged";
 
 interface UseOSFlaggedResult<T extends BaseToken> {
@@ -23,7 +23,7 @@ const useOSFlagged = <T extends BaseToken>(
   if (!isMainnet) {
     return { tokens: { unflagged: tokens, flagged: [] }, tokensError: null };
   }
-  return { tokens: data, tokensError: error && getReadableError(error) };
+  return { tokens: data, tokensError: error && getReadableError(error).message };
 };
 
 const osfQueryKeys = {
