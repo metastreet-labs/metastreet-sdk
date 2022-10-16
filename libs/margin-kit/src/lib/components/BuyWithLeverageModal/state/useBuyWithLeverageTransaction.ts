@@ -6,7 +6,6 @@ import {
 } from "@metastreet-labs/margin-core";
 import { ContractTransaction } from "ethers";
 import { useSigner } from "wagmi";
-import { CONFIRMATIONS } from "../../../env";
 import useDefinedMetaStreetDeployment from "../../../hooks/useDefinedMetaStreetDeployment";
 import useTransactionSteps, { TransactionStatus, TransactionStep } from "../../../hooks/useTransactionState";
 import { BWLToken } from "../../../types";
@@ -94,7 +93,7 @@ const useBuyWithLeverageTransaction = (props: UseBuyWithLeverageTransactionProps
     updateStep(1, { status: "loading" });
     // wait for block confirmation
     try {
-      await tx.wait(CONFIRMATIONS);
+      await tx.wait(2);
       // if transaction was confirmed, set second step as complete
       updateStep(1, { status: "complete" });
       // call on success callback
