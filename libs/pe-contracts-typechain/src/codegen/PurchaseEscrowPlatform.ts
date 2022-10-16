@@ -74,16 +74,15 @@ export interface PurchaseEscrowPlatformInterface extends utils.Interface {
     "IMPLEMENTATION_VERSION()": FunctionFragment;
     "cancelAllListings()": FunctionFragment;
     "cancelListing(uint256,uint8,bytes)": FunctionFragment;
-    "checkListingStatus(uint256,uint8)": FunctionFragment;
     "checkUpkeep(bytes)": FunctionFragment;
     "create(address,address,uint256,uint256,uint256,uint64)": FunctionFragment;
-    "createListing(uint256,uint8,uint256,uint256,address,uint256,uint256,uint256,bytes)": FunctionFragment;
+    "createListing(uint256,uint8,uint256,uint256,address,uint256,address,uint256,uint256,uint256)": FunctionFragment;
     "currencyToken()": FunctionFragment;
-    "generateListing(uint256,uint8,uint256,uint256,address,uint256,uint256,uint256)": FunctionFragment;
     "getRoleAdmin(bytes32)": FunctionFragment;
     "grantRole(bytes32,address)": FunctionFragment;
     "hasRole(bytes32,address)": FunctionFragment;
-    "initialize(address,address,address)": FunctionFragment;
+    "initialize(address,address)": FunctionFragment;
+    "isListingFilled(uint256)": FunctionFragment;
     "isValidSignature(bytes32,bytes)": FunctionFragment;
     "lenderNoteToken()": FunctionFragment;
     "liquidate(uint256)": FunctionFragment;
@@ -115,16 +114,15 @@ export interface PurchaseEscrowPlatformInterface extends utils.Interface {
       | "IMPLEMENTATION_VERSION"
       | "cancelAllListings"
       | "cancelListing"
-      | "checkListingStatus"
       | "checkUpkeep"
       | "create"
       | "createListing"
       | "currencyToken"
-      | "generateListing"
       | "getRoleAdmin"
       | "grantRole"
       | "hasRole"
       | "initialize"
+      | "isListingFilled"
       | "isValidSignature"
       | "lenderNoteToken"
       | "liquidate"
@@ -174,10 +172,6 @@ export interface PurchaseEscrowPlatformInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "checkListingStatus",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "checkUpkeep",
     values: [PromiseOrValue<BytesLike>]
   ): string;
@@ -201,27 +195,15 @@ export interface PurchaseEscrowPlatformInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "currencyToken",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "generateListing",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "currencyToken",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "getRoleAdmin",
@@ -237,11 +219,11 @@ export interface PurchaseEscrowPlatformInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "initialize",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>
-    ]
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isListingFilled",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "isValidSignature",
@@ -353,10 +335,6 @@ export interface PurchaseEscrowPlatformInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "checkListingStatus",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "checkUpkeep",
     data: BytesLike
   ): Result;
@@ -370,16 +348,16 @@ export interface PurchaseEscrowPlatformInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "generateListing",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "getRoleAdmin",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "grantRole", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "hasRole", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "isListingFilled",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "isValidSignature",
     data: BytesLike
@@ -680,12 +658,6 @@ export interface PurchaseEscrowPlatform extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    checkListingStatus(
-      escrowId: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { filled: boolean }>;
-
     checkUpkeep(
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -705,28 +677,17 @@ export interface PurchaseEscrowPlatform extends BaseContract {
       escrowId: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
       listingPrice: PromiseOrValue<BigNumberish>,
+      feeBasisPoints: PromiseOrValue<BigNumberish>,
+      feeRecipient: PromiseOrValue<string>,
       royaltyBasisPoints: PromiseOrValue<BigNumberish>,
       royaltyRecipient: PromiseOrValue<string>,
-      startTime: PromiseOrValue<BigNumberish>,
-      expiration: PromiseOrValue<BigNumberish>,
+      startTimestamp: PromiseOrValue<BigNumberish>,
+      endTimestamp: PromiseOrValue<BigNumberish>,
       salt: PromiseOrValue<BigNumberish>,
-      signature: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     currencyToken(overrides?: CallOverrides): Promise<[string]>;
-
-    generateListing(
-      escrowId: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      listingPrice: PromiseOrValue<BigNumberish>,
-      royaltyBasisPoints: PromiseOrValue<BigNumberish>,
-      royaltyRecipient: PromiseOrValue<string>,
-      startTime: PromiseOrValue<BigNumberish>,
-      expiration: PromiseOrValue<BigNumberish>,
-      salt: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
 
     getRoleAdmin(
       role: PromiseOrValue<BytesLike>,
@@ -748,9 +709,13 @@ export interface PurchaseEscrowPlatform extends BaseContract {
     initialize(
       currencyToken_: PromiseOrValue<string>,
       lenderNoteToken_: PromiseOrValue<string>,
-      seaportLister_: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    isListingFilled(
+      escrowId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
     isValidSignature(
       digest: PromiseOrValue<BytesLike>,
@@ -883,12 +848,6 @@ export interface PurchaseEscrowPlatform extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  checkListingStatus(
-    escrowId: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
   checkUpkeep(
     data: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
@@ -908,28 +867,17 @@ export interface PurchaseEscrowPlatform extends BaseContract {
     escrowId: PromiseOrValue<BigNumberish>,
     arg1: PromiseOrValue<BigNumberish>,
     listingPrice: PromiseOrValue<BigNumberish>,
+    feeBasisPoints: PromiseOrValue<BigNumberish>,
+    feeRecipient: PromiseOrValue<string>,
     royaltyBasisPoints: PromiseOrValue<BigNumberish>,
     royaltyRecipient: PromiseOrValue<string>,
-    startTime: PromiseOrValue<BigNumberish>,
-    expiration: PromiseOrValue<BigNumberish>,
+    startTimestamp: PromiseOrValue<BigNumberish>,
+    endTimestamp: PromiseOrValue<BigNumberish>,
     salt: PromiseOrValue<BigNumberish>,
-    signature: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   currencyToken(overrides?: CallOverrides): Promise<string>;
-
-  generateListing(
-    escrowId: PromiseOrValue<BigNumberish>,
-    arg1: PromiseOrValue<BigNumberish>,
-    listingPrice: PromiseOrValue<BigNumberish>,
-    royaltyBasisPoints: PromiseOrValue<BigNumberish>,
-    royaltyRecipient: PromiseOrValue<string>,
-    startTime: PromiseOrValue<BigNumberish>,
-    expiration: PromiseOrValue<BigNumberish>,
-    salt: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<string>;
 
   getRoleAdmin(
     role: PromiseOrValue<BytesLike>,
@@ -951,9 +899,13 @@ export interface PurchaseEscrowPlatform extends BaseContract {
   initialize(
     currencyToken_: PromiseOrValue<string>,
     lenderNoteToken_: PromiseOrValue<string>,
-    seaportLister_: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  isListingFilled(
+    escrowId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   isValidSignature(
     digest: PromiseOrValue<BytesLike>,
@@ -1084,12 +1036,6 @@ export interface PurchaseEscrowPlatform extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    checkListingStatus(
-      escrowId: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     checkUpkeep(
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -1109,28 +1055,17 @@ export interface PurchaseEscrowPlatform extends BaseContract {
       escrowId: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
       listingPrice: PromiseOrValue<BigNumberish>,
+      feeBasisPoints: PromiseOrValue<BigNumberish>,
+      feeRecipient: PromiseOrValue<string>,
       royaltyBasisPoints: PromiseOrValue<BigNumberish>,
       royaltyRecipient: PromiseOrValue<string>,
-      startTime: PromiseOrValue<BigNumberish>,
-      expiration: PromiseOrValue<BigNumberish>,
+      startTimestamp: PromiseOrValue<BigNumberish>,
+      endTimestamp: PromiseOrValue<BigNumberish>,
       salt: PromiseOrValue<BigNumberish>,
-      signature: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     currencyToken(overrides?: CallOverrides): Promise<string>;
-
-    generateListing(
-      escrowId: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      listingPrice: PromiseOrValue<BigNumberish>,
-      royaltyBasisPoints: PromiseOrValue<BigNumberish>,
-      royaltyRecipient: PromiseOrValue<string>,
-      startTime: PromiseOrValue<BigNumberish>,
-      expiration: PromiseOrValue<BigNumberish>,
-      salt: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<string>;
 
     getRoleAdmin(
       role: PromiseOrValue<BytesLike>,
@@ -1152,9 +1087,13 @@ export interface PurchaseEscrowPlatform extends BaseContract {
     initialize(
       currencyToken_: PromiseOrValue<string>,
       lenderNoteToken_: PromiseOrValue<string>,
-      seaportLister_: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    isListingFilled(
+      escrowId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     isValidSignature(
       digest: PromiseOrValue<BytesLike>,
@@ -1403,12 +1342,6 @@ export interface PurchaseEscrowPlatform extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    checkListingStatus(
-      escrowId: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     checkUpkeep(
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -1428,28 +1361,17 @@ export interface PurchaseEscrowPlatform extends BaseContract {
       escrowId: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
       listingPrice: PromiseOrValue<BigNumberish>,
+      feeBasisPoints: PromiseOrValue<BigNumberish>,
+      feeRecipient: PromiseOrValue<string>,
       royaltyBasisPoints: PromiseOrValue<BigNumberish>,
       royaltyRecipient: PromiseOrValue<string>,
-      startTime: PromiseOrValue<BigNumberish>,
-      expiration: PromiseOrValue<BigNumberish>,
+      startTimestamp: PromiseOrValue<BigNumberish>,
+      endTimestamp: PromiseOrValue<BigNumberish>,
       salt: PromiseOrValue<BigNumberish>,
-      signature: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     currencyToken(overrides?: CallOverrides): Promise<BigNumber>;
-
-    generateListing(
-      escrowId: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      listingPrice: PromiseOrValue<BigNumberish>,
-      royaltyBasisPoints: PromiseOrValue<BigNumberish>,
-      royaltyRecipient: PromiseOrValue<string>,
-      startTime: PromiseOrValue<BigNumberish>,
-      expiration: PromiseOrValue<BigNumberish>,
-      salt: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
 
     getRoleAdmin(
       role: PromiseOrValue<BytesLike>,
@@ -1471,8 +1393,12 @@ export interface PurchaseEscrowPlatform extends BaseContract {
     initialize(
       currencyToken_: PromiseOrValue<string>,
       lenderNoteToken_: PromiseOrValue<string>,
-      seaportLister_: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    isListingFilled(
+      escrowId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     isValidSignature(
@@ -1613,12 +1539,6 @@ export interface PurchaseEscrowPlatform extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    checkListingStatus(
-      escrowId: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     checkUpkeep(
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -1638,28 +1558,17 @@ export interface PurchaseEscrowPlatform extends BaseContract {
       escrowId: PromiseOrValue<BigNumberish>,
       arg1: PromiseOrValue<BigNumberish>,
       listingPrice: PromiseOrValue<BigNumberish>,
+      feeBasisPoints: PromiseOrValue<BigNumberish>,
+      feeRecipient: PromiseOrValue<string>,
       royaltyBasisPoints: PromiseOrValue<BigNumberish>,
       royaltyRecipient: PromiseOrValue<string>,
-      startTime: PromiseOrValue<BigNumberish>,
-      expiration: PromiseOrValue<BigNumberish>,
+      startTimestamp: PromiseOrValue<BigNumberish>,
+      endTimestamp: PromiseOrValue<BigNumberish>,
       salt: PromiseOrValue<BigNumberish>,
-      signature: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     currencyToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    generateListing(
-      escrowId: PromiseOrValue<BigNumberish>,
-      arg1: PromiseOrValue<BigNumberish>,
-      listingPrice: PromiseOrValue<BigNumberish>,
-      royaltyBasisPoints: PromiseOrValue<BigNumberish>,
-      royaltyRecipient: PromiseOrValue<string>,
-      startTime: PromiseOrValue<BigNumberish>,
-      expiration: PromiseOrValue<BigNumberish>,
-      salt: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
 
     getRoleAdmin(
       role: PromiseOrValue<BytesLike>,
@@ -1681,8 +1590,12 @@ export interface PurchaseEscrowPlatform extends BaseContract {
     initialize(
       currencyToken_: PromiseOrValue<string>,
       lenderNoteToken_: PromiseOrValue<string>,
-      seaportLister_: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    isListingFilled(
+      escrowId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     isValidSignature(
