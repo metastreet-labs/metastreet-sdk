@@ -53,6 +53,25 @@
 }
 
 /**************************************************************************/
+/* BWL modal body */
+/**************************************************************************/
+.bwl-modal-success {
+  @apply flex flex-col;
+}
+
+.bwl-modal-success-paragraph {
+  @apply text-center text-ms-text-important;
+}
+
+.bwl-modal-success-paragraph-strong {
+  @apply font-bold;
+}
+
+.bwl-modal-success-paragraph-link {
+  @apply underline hover:text-ms-primary-dark;
+}
+
+/**************************************************************************/
 /* BWL modal overlay */
 /**************************************************************************/
 .bwl-modal-overlay {
