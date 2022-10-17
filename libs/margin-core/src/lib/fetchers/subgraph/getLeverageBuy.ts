@@ -21,7 +21,13 @@ const getPayload = (id: string) => {
           repayment
           duration
           maturity 
-          listingData
+          listingData {
+            listingPrice
+            consideration
+            totalFees
+            marketplace
+            raw
+          }
         }
       }
     `,

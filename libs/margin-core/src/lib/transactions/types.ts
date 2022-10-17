@@ -5,7 +5,3 @@ export interface TransactionParams {
   signer: Signer;
   deployment: Deployment;
 }
-
-export enum Marketplace {
-  Seaport,
-}

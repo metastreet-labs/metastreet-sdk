@@ -4,9 +4,9 @@ import { useQuery } from "wagmi";
 import useDefinedMetaStreetDeployment from "../../hooks/useDefinedMetaStreetDeployment";
 
 const useFlashFee = (loanAmount: BigNumberish) => {
-  const { provider, deployment } = useDefinedMetaStreetDeployment();
+  const { provider, deployment, chainID } = useDefinedMetaStreetDeployment();
 
-  return useQuery<BigNumber, ReadableError>(flashFeeQueryKeys.loanAmount(loanAmount), () =>
+  return useQuery<BigNumber, ReadableError>(flashFeeQueryKeys.loanAmount(chainID, loanAmount), () =>
     getFlashFee({
       signerOrProvider: provider,
       deployment,
@@ -16,8 +16,8 @@ const useFlashFee = (loanAmount: BigNumberish) => {
 };
 
 const flashFeeQueryKeys = {
-  all: () => ["flash-fee"],
-  loanAmount: (loanAmount: BigNumberish) => [...flashFeeQueryKeys.all(), loanAmount.toString()],
+  all: (chainID: number) => ["flash-fee", chainID],
+  loanAmount: (chainID: number, loanAmount: BigNumberish) => [...flashFeeQueryKeys.all(chainID), loanAmount.toString()],
 };
 
 export default useFlashFee;

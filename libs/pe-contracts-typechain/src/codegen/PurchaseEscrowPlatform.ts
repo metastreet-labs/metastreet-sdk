@@ -432,7 +432,7 @@ export interface PurchaseEscrowPlatformInterface extends utils.Interface {
     "PurchaseEscrowCreated(uint256,address,address,address,uint256,uint256,uint256,uint64)": EventFragment;
     "PurchaseEscrowDelisted(uint256,uint8)": EventFragment;
     "PurchaseEscrowLiquidated(uint256)": EventFragment;
-    "PurchaseEscrowListed(uint256,uint8,bytes)": EventFragment;
+    "PurchaseEscrowListed(uint256,uint8,uint256,uint256,uint256,bytes)": EventFragment;
     "PurchaseEscrowRepaid(uint256)": EventFragment;
     "PurchaseEscrowSold(uint256,uint8)": EventFragment;
     "PurchaseEscrowTransferred(uint256,address,address)": EventFragment;
@@ -524,10 +524,13 @@ export type PurchaseEscrowLiquidatedEventFilter =
 export interface PurchaseEscrowListedEventObject {
   escrowId: BigNumber;
   marketplace: number;
+  listingPrice: BigNumber;
+  consideration: BigNumber;
+  totalFees: BigNumber;
   listingData: string;
 }
 export type PurchaseEscrowListedEvent = TypedEvent<
-  [BigNumber, number, string],
+  [BigNumber, number, BigNumber, BigNumber, BigNumber, string],
   PurchaseEscrowListedEventObject
 >;
 
@@ -1249,14 +1252,20 @@ export interface PurchaseEscrowPlatform extends BaseContract {
       escrowId?: PromiseOrValue<BigNumberish> | null
     ): PurchaseEscrowLiquidatedEventFilter;
 
-    "PurchaseEscrowListed(uint256,uint8,bytes)"(
+    "PurchaseEscrowListed(uint256,uint8,uint256,uint256,uint256,bytes)"(
       escrowId?: PromiseOrValue<BigNumberish> | null,
       marketplace?: null,
+      listingPrice?: null,
+      consideration?: null,
+      totalFees?: null,
       listingData?: null
     ): PurchaseEscrowListedEventFilter;
     PurchaseEscrowListed(
       escrowId?: PromiseOrValue<BigNumberish> | null,
       marketplace?: null,
+      listingPrice?: null,
+      consideration?: null,
+      totalFees?: null,
       listingData?: null
     ): PurchaseEscrowListedEventFilter;
 

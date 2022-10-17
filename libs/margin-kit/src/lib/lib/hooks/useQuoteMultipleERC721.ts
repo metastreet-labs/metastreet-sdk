@@ -12,7 +12,7 @@ export interface UseQuoteMultipleERC721Props {
 }
 
 const useQuoteMultipleERC721 = (props: UseQuoteMultipleERC721Props) => {
-  const { provider, deployment } = useDefinedMetaStreetDeployment();
+  const { provider, deployment, chainID } = useDefinedMetaStreetDeployment();
 
   const fetcher = () => {
     const collectionAddresses = new Array<string>();
@@ -39,18 +39,21 @@ const useQuoteMultipleERC721 = (props: UseQuoteMultipleERC721Props) => {
     });
   };
 
-  return useQuery<QuoteMultipleERC721Result, ReadableError>(quoteMultipleERC721QueryKeys.withParams(props), fetcher);
+  return useQuery<QuoteMultipleERC721Result, ReadableError>(
+    quoteMultipleERC721QueryKeys.withParams(chainID, props),
+    fetcher
+  );
 };
 
 export const quoteMultipleERC721QueryKeys = {
-  all: () => ["quote-multiple-erc721"],
-  tokens: (tokens: BWLToken[]) => {
+  all: (chainID: number) => ["quote-multiple-erc721", chainID],
+  tokens: (chainID: number, tokens: BWLToken[]) => {
     const id = tokens.map((token) => token.tokenID).join("-");
-    return [...quoteMultipleERC721QueryKeys.all(), id];
+    return [...quoteMultipleERC721QueryKeys.all(chainID), id];
   },
-  withParams: (params: { tokens: BWLToken[]; downPayments: BigNumberish[]; duration: number }) => {
+  withParams: (chainID: number, params: { tokens: BWLToken[]; downPayments: BigNumberish[]; duration: number }) => {
     const id = `${params.downPayments.join("-")}-${params.duration}`;
-    return [...quoteMultipleERC721QueryKeys.tokens(params.tokens), id];
+    return [...quoteMultipleERC721QueryKeys.tokens(chainID, params.tokens), id];
   },
 };
 

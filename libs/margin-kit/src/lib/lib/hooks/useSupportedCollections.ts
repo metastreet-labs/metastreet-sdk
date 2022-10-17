@@ -3,14 +3,14 @@ import { useQuery } from "wagmi";
 import useDefinedMetaStreetDeployment from "../../hooks/useDefinedMetaStreetDeployment";
 
 const useSupportedCollections = () => {
-  const { provider, deployment } = useDefinedMetaStreetDeployment();
-  return useQuery<string[], ReadableError>(supportedCollectionsQueryKeys.all(), () =>
+  const { provider, deployment, chainID } = useDefinedMetaStreetDeployment();
+  return useQuery<string[], ReadableError>(supportedCollectionsQueryKeys.all(chainID), () =>
     getSupportedCollections({ signerOrProvider: provider, deployment })
   );
 };
 
 const supportedCollectionsQueryKeys = {
-  all: () => ["supported-collections"],
+  all: (chainID: number) => ["supported-collections", chainID],
 };
 
 export default useSupportedCollections;

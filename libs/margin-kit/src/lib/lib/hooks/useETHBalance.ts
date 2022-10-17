@@ -3,16 +3,16 @@ import useDefinedMetaStreetDeployment from "../../hooks/useDefinedMetaStreetDepl
 
 const useETHBalance = () => {
   const { address = "" } = useAccount();
-  const { provider } = useDefinedMetaStreetDeployment();
+  const { provider, chainID } = useDefinedMetaStreetDeployment();
 
-  return useQuery(ethBalanceQueryKeys.address(address), () => provider.getBalance(address), {
+  return useQuery(ethBalanceQueryKeys.address(chainID, address), () => provider.getBalance(address), {
     enabled: Boolean(address),
   });
 };
 
 const ethBalanceQueryKeys = {
-  all: () => ["eth-balance"],
-  address: (address: string) => [...ethBalanceQueryKeys.all(), address],
+  all: (chainID: number) => ["eth-balance", chainID],
+  address: (chainID: number, address: string) => [...ethBalanceQueryKeys.all(chainID), address],
 };
 
 export default useETHBalance;

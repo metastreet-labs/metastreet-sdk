@@ -10,16 +10,16 @@ import useDefinedMetaStreetDeployment from "../../hooks/useDefinedMetaStreetDepl
 type UseCollateralLimitsParams = Pick<GetCollateralLimitsParams, "collectionAddress" | "tokenID">;
 
 const useCollateralLimits = (params: UseCollateralLimitsParams) => {
-  const { provider, deployment } = useDefinedMetaStreetDeployment();
+  const { provider, deployment, chainID } = useDefinedMetaStreetDeployment();
 
-  return useQuery<GetCollateralLimitsResult, ReadableError>(collateralLimitsQueryKeys.token(params), () => {
+  return useQuery<GetCollateralLimitsResult, ReadableError>(collateralLimitsQueryKeys.token(chainID, params), () => {
     return getCollateralLimits({ signerOrProvider: provider, deployment, ...params });
   });
 };
 
 const collateralLimitsQueryKeys = {
-  all: () => ["collateral-limits"],
-  token: (params: UseCollateralLimitsParams) => [...collateralLimitsQueryKeys.all(), params],
+  all: (chainID: number) => ["collateral-limits", chainID],
+  token: (chainID: number, params: UseCollateralLimitsParams) => [...collateralLimitsQueryKeys.all(chainID), params],
 };
 
 export default useCollateralLimits;
