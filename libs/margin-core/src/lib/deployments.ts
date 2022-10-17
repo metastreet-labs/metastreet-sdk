@@ -15,7 +15,8 @@ export const DEPLOYMENTS: Record<number, Deployment> = {
   [CHAIN_IDS.mainnet]: {
     vaultAddress: "0x7770cd73e035c37bdf8875eee81577c63202ab8d",
     lbWrapperAddress: "0x558aD8278B6D127dc8F58e02Ee578Df20ec98406",
-    subgraphURI: "https://api.studio.thegraph.com/query/26817/metastreet-powersweep/v1.0.0",
+    subgraphURI:
+      "https://gateway.thegraph.com/api/3da96fefdc83e3aee6b1fbe05079077f/subgraphs/id/HPvcWgsjmQG1U7YeS9RRMqYpQZc2RH8wrd3zatpb3AS6",
     reservoirURL: "https://api.reservoir.tools",
   },
   [CHAIN_IDS.goerli]: {
