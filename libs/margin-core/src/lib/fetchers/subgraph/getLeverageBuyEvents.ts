@@ -36,7 +36,13 @@ const getPayload = (variables: GetPayloadVariables) => {
             repayment
             duration
             maturity
-            listingData
+            listingData {
+              listingPrice
+              consideration
+              totalFees
+              marketplace
+              raw
+            }
           }
           previousLeverageBuy {
             id
@@ -51,7 +57,13 @@ const getPayload = (variables: GetPayloadVariables) => {
             repayment
             duration
             maturity
-            listingData
+            listingData {
+              listingPrice
+              consideration
+              totalFees
+              marketplace
+              raw
+            }
           }
         }
       }

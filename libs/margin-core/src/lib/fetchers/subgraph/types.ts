@@ -7,6 +7,18 @@ export enum LeverageBuyStatus {
   Liquidated = "Liquidated",
 }
 
+export enum Marketplace {
+  Opensea,
+}
+
+export interface ListingData {
+  listingPrice: BigNumber;
+  consideration: BigNumber;
+  totalFees: BigNumber;
+  marketPlace: Marketplace;
+  raw: string;
+}
+
 export interface LeverageBuy {
   id: string;
   escrowID: string;
@@ -20,7 +32,7 @@ export interface LeverageBuy {
   repayment: BigNumber;
   duration: number;
   maturity: number;
-  listingData?: string;
+  listingData?: ListingData;
 }
 
 export enum LeverageBuyEventType {
