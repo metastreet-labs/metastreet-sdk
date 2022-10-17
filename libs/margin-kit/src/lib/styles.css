@@ -341,7 +341,7 @@
 }
 
 .eth-price-wrapper {
-  @apply flex items-center space-x-1;
+  @apply flex items-center space-x-1 text-ms-text-important;
 }
 
 .eth-price-default {

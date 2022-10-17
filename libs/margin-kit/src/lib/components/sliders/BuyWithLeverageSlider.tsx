@@ -16,7 +16,7 @@ const BuyWithLeverageSlider = (props: BuyWithLeverageSliderProps) => {
     <div className={classNames("bwl-slider-wrapper", className)}>
       <InfoRow>
         <InfoRowLabel>{label}</InfoRowLabel>
-        <InfoRowValue>{valueDisplay}</InfoRowValue>
+        <InfoRowValue className="important-text">{valueDisplay}</InfoRowValue>
       </InfoRow>
       <Slider {...rest} />
     </div>
