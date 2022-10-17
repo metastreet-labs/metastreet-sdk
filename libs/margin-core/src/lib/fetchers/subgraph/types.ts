@@ -8,7 +8,7 @@ export enum LeverageBuyStatus {
 }
 
 export enum Marketplace {
-  Opensea,
+  Seaport,
 }
 
 export interface ListingData {
