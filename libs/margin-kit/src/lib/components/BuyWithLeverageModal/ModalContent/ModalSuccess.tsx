@@ -19,15 +19,22 @@ const ModalSuccess = (props: ModalSuccessProps) => {
   };
 
   return (
-    <div className="flex flex-col">
-      <p className="text-center text-msTextImportant">
-        You bought{" "}
-        <span className="font-bold">{count == 1 ? `${collectionName} #${tokenID}` : `${count} ${collectionName}`}</span>{" "}
-        with leverage. You can now track this loan in{" "}
-        <a href={dashboardURL} className="font-bold" rel="noreferrer noopener" target="_blank">
-          trades.metastreet.xyz
-        </a>
-        , the dashboard that centralizes all positions.
+    <div className="bwl-modal-success">
+      <p className="bwl-modal-success-paragraph">
+        Congrats! You bought{" "}
+        <span className="bwl-modal-success-paragraph-strong">
+          {count == 1 ? `${collectionName} #${tokenID}` : `${count} ${collectionName}`}
+        </span>{" "}
+        with leverage. Head to the{" "}
+        <a
+          href={dashboardURL}
+          className="bwl-modal-success-paragraph-strong bwl-modal-success-paragraph-link "
+          rel="noreferrer noopener"
+          target="_blank"
+        >
+          Trades Dashboard
+        </a>{" "}
+        to manage your position.
       </p>
       <MetaStreetButton onClick={onClick}>Check Your Positions</MetaStreetButton>
     </div>
