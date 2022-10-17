@@ -53,6 +53,25 @@
 }
 
 /**************************************************************************/
+/* BWL modal body */
+/**************************************************************************/
+.bwl-modal-success {
+  @apply flex flex-col;
+}
+
+.bwl-modal-success-paragraph {
+  @apply text-center text-ms-text-important;
+}
+
+.bwl-modal-success-paragraph-strong {
+  @apply font-bold;
+}
+
+.bwl-modal-success-paragraph-link {
+  @apply underline hover:text-ms-primary-dark;
+}
+
+/**************************************************************************/
 /* BWL modal overlay */
 /**************************************************************************/
 .bwl-modal-overlay {
@@ -87,7 +106,7 @@
 /* BWL modal panel*/
 /**************************************************************************/
 .bwl-modal-panel {
-  @apply relative flex max-h-full w-[26rem] max-w-full flex-col overflow-hidden rounded-xl bg-white p-8 transition-all;
+  @apply relative flex max-h-full overflow-y-auto w-[26rem] max-w-full flex-col overflow-hidden rounded-xl bg-white p-8 transition-all;
 }
 
 .bwl-modal-panel-close-button {
@@ -341,7 +360,7 @@
 }
 
 .eth-price-wrapper {
-  @apply flex items-center space-x-1;
+  @apply flex items-center space-x-1 text-ms-text-important;
 }
 
 .eth-price-default {
