@@ -87,7 +87,7 @@
 /* BWL modal panel*/
 /**************************************************************************/
 .bwl-modal-panel {
-  @apply relative flex max-h-full w-[26rem] max-w-full flex-col overflow-hidden rounded-xl bg-white p-8 transition-all;
+  @apply relative flex max-h-full overflow-y-auto w-[26rem] max-w-full flex-col overflow-hidden rounded-xl bg-white p-8 transition-all;
 }
 
 .bwl-modal-panel-close-button {
