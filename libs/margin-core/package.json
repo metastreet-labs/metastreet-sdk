@@ -1,9 +1,9 @@
 {
   "name": "@metastreet-labs/margin-core",
-  "version": "0.0.39",
+  "version": "0.0.44",
   "type": "module",
   "sideEffects": false,
   "dependencies": {
-    "@metastreet-labs/pe-contracts-typechain": "0.0.19"
+    "@metastreet-labs/pe-contracts-typechain": "0.0.20"
   }
 }
