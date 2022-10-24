@@ -1,21 +1,31 @@
-import { DEPLOYMENTS, getLeverageBuy, getLeverageBuyEvents } from "@metastreet-labs/margin-core";
+import { DEPLOYMENTS } from "@metastreet-labs/margin-core";
+import { LeverageBuyWrapperV1__factory } from "@metastreet-labs/pe-contracts-typechain";
 import { useEffect } from "react";
-import { useAccount, useProvider } from "wagmi";
+import { useAccount, useProvider, useSigner } from "wagmi";
 
 const Index = () => {
   const provider = useProvider();
   const { address } = useAccount();
+  const { data: signer } = useSigner();
 
   useEffect(() => {
+    // Uncomment this to see the Request by only using a Signer
+    // if (!signer) return;
     const deployment = DEPLOYMENTS[provider.network.chainId];
-    const params = { signerOrProvider: provider, deployment };
-    getLeverageBuy({ escrowID: "0", ...params })
-      .then((json) => console.log({ json }))
-      .catch((e) => console.log(e));
-    getLeverageBuyEvents({ ...params, owner: address, skip: 0, first: 5 })
-      .then((events) => console.log({ events }))
-      .catch((e) => console.log(e));
-  }, [provider, address]);
+    const signerOrProvider = signer ? signer : provider;
+    console.log(signerOrProvider);
+
+    async function getPurchaseEscrow() {
+      try {
+        const lbWrapper = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signerOrProvider);
+        const res = await lbWrapper.purchaseEscrow();
+        console.log(res);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    void getPurchaseEscrow();
+  }, [provider, signer, address]);
   /*
    * Replace the elements below with your own.
    *
