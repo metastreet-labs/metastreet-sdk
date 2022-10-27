@@ -38,7 +38,7 @@
     "react-router-dom": "6.3.0",
     "regenerator-runtime": "0.13.7",
     "tslib": "^2.3.0",
-    "wagmi": "^0.6.4"
+    "wagmi": "^0.7.7"
   },
   "devDependencies": {
     "@nrwl/cli": "14.5.8",
