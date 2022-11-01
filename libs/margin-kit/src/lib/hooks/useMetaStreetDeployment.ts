@@ -5,15 +5,15 @@ import { useProvider } from "wagmi";
 export interface MetaStreetDeployment {
   provider: Provider;
   chainID: number;
-  deployment: Deployment;
+  deployment?: Deployment;
 }
 
-const useMetaStreetDeployment = (): MetaStreetDeployment | undefined => {
+const useMetaStreetDeployment = (): MetaStreetDeployment => {
   const provider = useProvider();
   const chainID = provider.network.chainId;
   const deployment = DEPLOYMENTS[chainID];
 
-  return deployment && { deployment, provider, chainID };
+  return { deployment, provider, chainID };
 };
 
 export default useMetaStreetDeployment;
