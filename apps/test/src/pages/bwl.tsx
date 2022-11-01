@@ -27,7 +27,7 @@ const BWLPage: NextPage = () => {
       // Optional fields
       const tokenImage = token?.token?.image ?? "/token-image-placeholder.png";
       const collectionName = token?.token?.collection?.name ?? "Unnamed";
-      if (tokenID && tokenPrice && collectionAddress) {
+      if (tokenID != undefined && tokenPrice && collectionAddress) {
         setToken({
           tokenID,
           tokenPrice,

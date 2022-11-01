@@ -1,8 +1,8 @@
 import { ReactNode, useState } from "react";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
-import { publicProvider } from "wagmi/providers/public";
+import { infuraProvider } from "wagmi/providers/infura";
 
-const { provider } = configureChains([chain.mainnet, chain.goerli], [publicProvider()]);
+const { provider } = configureChains([chain.mainnet, chain.goerli], [infuraProvider()]);
 
 interface WagmiProviderProps {
   children: ReactNode;

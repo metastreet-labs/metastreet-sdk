@@ -1,12 +1,18 @@
 import { getSupportedCollections, ReadableError } from "@metastreet-labs/margin-core";
 import { useQuery } from "wagmi";
-import useDefinedMetaStreetDeployment from "../../hooks/useDefinedMetaStreetDeployment";
+import useMetaStreetDeployment from "../../hooks/useMetaStreetDeployment";
 
 const useSupportedCollections = () => {
-  const { provider, deployment, chainID } = useDefinedMetaStreetDeployment();
-  return useQuery<string[], ReadableError>(supportedCollectionsQueryKeys.all(chainID), () =>
-    getSupportedCollections({ signerOrProvider: provider, deployment })
-  );
+  const { provider, deployment, chainID } = useMetaStreetDeployment();
+
+  const fetcher = () => {
+    if (!deployment) throw new Error("deployment is undefined");
+    return getSupportedCollections({ signerOrProvider: provider, deployment });
+  };
+
+  return useQuery<string[], ReadableError>(supportedCollectionsQueryKeys.all(chainID), fetcher, {
+    enabled: Boolean(deployment),
+  });
 };
 
 const supportedCollectionsQueryKeys = {

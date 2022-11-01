@@ -1,7 +1,10 @@
+import { Deployment } from "@metastreet-labs/margin-core";
 import { createContext, ReactNode } from "react";
 import useMetaStreetDeployment, { MetaStreetDeployment } from "../../hooks/useMetaStreetDeployment";
 
-export const MetaStreetDeploymentContext = createContext<MetaStreetDeployment | undefined>(undefined);
+type DefinedMetaStreetDeployment = Omit<MetaStreetDeployment, "deployment"> & { deployment: Deployment };
+
+export const MetaStreetDeploymentContext = createContext<DefinedMetaStreetDeployment | undefined>(undefined);
 
 interface MetaStreetDeploymentProviderProps {
   children: ReactNode;
@@ -10,11 +13,15 @@ interface MetaStreetDeploymentProviderProps {
 
 const MetaStreetDeploymentProvider = (props: MetaStreetDeploymentProviderProps) => {
   const { children, errorComponent } = props;
-  const deployment = useMetaStreetDeployment();
+  const { deployment, ...rest } = useMetaStreetDeployment();
 
   if (!deployment) return <>{errorComponent}</>;
 
-  return <MetaStreetDeploymentContext.Provider value={deployment}>{children}</MetaStreetDeploymentContext.Provider>;
+  return (
+    <MetaStreetDeploymentContext.Provider value={{ deployment, ...rest }}>
+      {children}
+    </MetaStreetDeploymentContext.Provider>
+  );
 };
 
 export default MetaStreetDeploymentProvider;
