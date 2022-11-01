@@ -6,7 +6,7 @@ const useSupportedCollections = () => {
   const { provider, deployment, chainID } = useMetaStreetDeployment();
 
   const fetcher = () => {
-    if (!deployment) throw new Error("no deployment is undefined");
+    if (!deployment) throw new Error("deployment is undefined");
     return getSupportedCollections({ signerOrProvider: provider, deployment });
   };
 
