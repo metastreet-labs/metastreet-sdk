@@ -6,7 +6,7 @@ import { BigNumber, BigNumberish, ethers } from "ethers";
 import { withReadableError } from "../errors";
 import { TransactionParams } from "./types";
 
-type RefinanceETHParams = TransactionParams & {
+export type RefinanceETHParams = TransactionParams & {
   escrowID: BigNumberish;
   duration: BigNumberish;
   downPayment: BigNumberish;
