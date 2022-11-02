@@ -3,6 +3,7 @@ export * from "./lib/errors";
 // Fetchers
 export * from "./lib/fetchers/getCollateralLimits";
 export * from "./lib/fetchers/getFlashFee";
+export * from "./lib/fetchers/getOSFees";
 export * from "./lib/fetchers/getReservoirFillCalldata";
 export * from "./lib/fetchers/getSupportedCollections";
 export * from "./lib/fetchers/quoteMultipleERC721";
@@ -20,6 +21,7 @@ export * from "./lib/helpers/getOrderFromReceipt";
 // Transactions
 export * from "./lib/transactions/buyMultipleERC721WithETH";
 export * from "./lib/transactions/buySingleERC721WithETH";
+export * from "./lib/transactions/createListing";
 export * from "./lib/transactions/refinanceETH";
 export * from "./lib/transactions/repayETH";
 export * from "./lib/transactions/types";
