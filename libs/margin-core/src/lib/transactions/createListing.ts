@@ -3,6 +3,7 @@ import {
   PurchaseEscrowPlatform__factory,
 } from "@metastreet-labs/pe-contracts-typechain";
 import { BigNumberish } from "ethers";
+import { withReadableError } from "../errors";
 import { TransactionParams } from "./types";
 
 type CreateListingParams = TransactionParams & {
@@ -18,7 +19,7 @@ type CreateListingParams = TransactionParams & {
   salt: BigNumberish;
 };
 
-const createListing = async (params: CreateListingParams) => {
+const _createListing = async (params: CreateListingParams) => {
   const { deployment, signer } = params;
 
   const lbWrapper = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signer);
@@ -38,4 +39,4 @@ const createListing = async (params: CreateListingParams) => {
   );
 };
 
-export default createListing;
+export const createListing = withReadableError(_createListing);
