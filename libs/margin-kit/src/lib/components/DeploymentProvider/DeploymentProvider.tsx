@@ -4,26 +4,26 @@ import { chain, useNetwork } from "wagmi";
 
 export const DeploymentContext = createContext<Deployment | undefined>(undefined);
 
-interface SubgraphURLs {
+interface SubgraphURIs {
   mainnet?: string;
   goerli?: string;
 }
 
 type DeploymentProviderProps = PropsWithChildren & {
-  subgraphURLs?: SubgraphURLs;
+  subgraphURIs?: SubgraphURIs;
 };
 
 const DeploymentProvider = (props: DeploymentProviderProps) => {
-  const { children, subgraphURLs } = props;
+  const { children, subgraphURIs } = props;
   const { chain: activeChain } = useNetwork();
 
   const chainID = activeChain?.id ?? chain.mainnet.id;
   const deployment = { ...defaultDeployments[chainID] };
 
   if (deployment) {
-    if (subgraphURLs) {
-      if (chainID == chain.mainnet.id && subgraphURLs.mainnet) deployment.subgraphURI = subgraphURLs.mainnet;
-      if (chainID == chain.goerli.id && subgraphURLs.goerli) deployment.subgraphURI = subgraphURLs.goerli;
+    if (subgraphURIs) {
+      if (chainID == chain.mainnet.id && subgraphURIs.mainnet) deployment.subgraphURI = subgraphURIs.mainnet;
+      if (chainID == chain.goerli.id && subgraphURIs.goerli) deployment.subgraphURI = subgraphURIs.goerli;
     }
   }
 
