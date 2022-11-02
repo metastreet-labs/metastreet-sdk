@@ -1,5 +1,6 @@
 export * from "./lib/deployments";
 export * from "./lib/errors";
+// Fetchers
 export * from "./lib/fetchers/getCollateralLimits";
 export * from "./lib/fetchers/getFlashFee";
 export * from "./lib/fetchers/getReservoirFillCalldata";
@@ -11,7 +12,12 @@ export * from "./lib/fetchers/subgraph/getLeverageBuy";
 export * from "./lib/fetchers/subgraph/getLeverageBuyEvents";
 export * from "./lib/fetchers/subgraph/getLeverageBuys";
 export * from "./lib/fetchers/subgraph/types";
+// Types
 export * from "./lib/fetchers/types";
+export type { Consideration, Offer, Order } from "./lib/helpers/cleanupOrder";
+// Helpers
+export * from "./lib/helpers/getOrderFromReceipt";
+// Transactions
 export * from "./lib/transactions/buyMultipleERC721WithETH";
 export * from "./lib/transactions/buySingleERC721WithETH";
 export * from "./lib/transactions/refinanceETH";
