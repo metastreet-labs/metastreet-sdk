@@ -1,5 +1,16 @@
 import { useState } from "react";
 
+export const getTransactionStatus = (steps: TransactionStep[]) => {
+  const initiated = steps[0].status != "idle";
+  const errored = Boolean(steps.find((step) => step.status == "error"));
+  const completed = steps[steps.length - 1].status == "complete";
+  let status: TransactionStatus = "idle";
+  if (initiated) status = "loading";
+  if (errored) status = "error";
+  if (completed) status = "complete";
+  return status;
+};
+
 export interface TransactionState {
   steps: TransactionStep[];
   status: TransactionStatus;
