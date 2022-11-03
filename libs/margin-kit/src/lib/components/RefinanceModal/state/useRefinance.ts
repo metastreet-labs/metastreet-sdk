@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { RefinanceContext } from "./RefinanceContext";
+import RefinanceContext from "./RefinanceContext";
 
 const useRefinance = () => {
   const context = useContext(RefinanceContext);
