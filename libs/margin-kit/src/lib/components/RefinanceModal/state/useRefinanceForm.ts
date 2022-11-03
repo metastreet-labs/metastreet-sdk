@@ -23,7 +23,7 @@ interface UseRefinanceFormParams {
   oldRepayment: BigNumber;
 }
 
-interface UseRefinanceFormResult {
+export interface UseRefinanceFormResult {
   formState: RefinanceFormState;
   setDebtFactor: (debtFactor: number) => void;
   setDuration: (duration: number) => void;
