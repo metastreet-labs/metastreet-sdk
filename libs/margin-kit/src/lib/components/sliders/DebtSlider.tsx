@@ -1,11 +1,15 @@
-import useBuyWithLeverage from "../BuyWithLeverageModal/state/useBuyWithLeverage";
+import { ReactNode } from "react";
 import ETHPrice from "../ETHPrice";
 import BuyWithLeverageSlider from "./BuyWithLeverageSlider";
 
-export const DebtSlider = () => {
-  const { formState, actions } = useBuyWithLeverage();
-  const { debtFactor, debtAmount } = formState;
-  const { setDebtFactor } = actions;
+interface DebtSliderProps {
+  debtAmount: ReactNode;
+  debtFactor: number;
+  setDebtFactor: (debtFactor: number) => void;
+}
+
+export const DebtSlider = (props: DebtSliderProps) => {
+  const { debtAmount, debtFactor, setDebtFactor } = props;
 
   return (
     <BuyWithLeverageSlider

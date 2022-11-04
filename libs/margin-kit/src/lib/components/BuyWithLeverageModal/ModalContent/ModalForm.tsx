@@ -22,7 +22,11 @@ const ModalForm = () => {
 
   return (
     <div className="bwl-modal-form">
-      <DebtSlider />
+      <DebtSlider
+        debtAmount={formState.debtAmount}
+        debtFactor={formState.debtFactor}
+        setDebtFactor={actions.setDebtFactor}
+      />
       <DurationSlider />
       <Divider className="bwl-modal-content-divider" />
       <LeverageDropdown />
