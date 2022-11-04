@@ -1,9 +1,7 @@
 import { GetCollateralLimitsResult } from "@metastreet-labs/margin-core";
-import { BigNumber } from "ethers";
+import { BigNumber, BigNumberish } from "ethers";
 import useCollateralLimits from "../../../lib/hooks/useCollateralLimits";
 import useFlashFee from "../../../lib/hooks/useFlashFee";
-import { BWLToken } from "../../../types";
-import { toUnits } from "../../../utils/numbers";
 import Spinner from "../../Spinner";
 
 interface LoanInfo {
@@ -13,16 +11,16 @@ interface LoanInfo {
 
 interface LoanInfoContainerProps {
   children: (info: LoanInfo) => JSX.Element;
-  tokens: BWLToken[];
+  collectionAddress: string;
+  tokenID: string;
+  flashLoanAmount: BigNumberish;
 }
 
 const LoanInfoContainer = (props: LoanInfoContainerProps) => {
-  const { tokens, children } = props;
-  const totalPrice = tokens.reduce((s, t) => s + t.tokenPrice, 0);
-  const totalPriceUnits = toUnits(totalPrice).toString();
+  const { flashLoanAmount, children, ...token } = props;
 
-  const { data: limits, error: limitsError } = useCollateralLimits(tokens[0]);
-  const { data: flashFee, error: flashFeeError } = useFlashFee(totalPriceUnits);
+  const { data: limits, error: limitsError } = useCollateralLimits(token);
+  const { data: flashFee, error: flashFeeError } = useFlashFee(flashLoanAmount);
 
   const loadingOrError = (error?: string) => {
     return (
