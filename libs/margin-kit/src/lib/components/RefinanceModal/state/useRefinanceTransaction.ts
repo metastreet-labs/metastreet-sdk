@@ -23,11 +23,6 @@ const getSteps = (): TransactionStep[] => [
   },
 ];
 
-export interface RefinanceTransactionState {
-  transactionState: TransactionState;
-  refinance: () => Promise<void>;
-}
-
 interface UseRefinanceTransactionParams {
   escrowID: string;
   formState: RefinanceFormState;
@@ -35,7 +30,12 @@ interface UseRefinanceTransactionParams {
   onError?: (error: unknown) => void;
 }
 
-const useRefinanceTransaction = (params: UseRefinanceTransactionParams): RefinanceTransactionState => {
+export interface UseRefinanceTransactionResult {
+  transactionState: TransactionState;
+  refinance: () => Promise<void>;
+}
+
+const useRefinanceTransaction = (params: UseRefinanceTransactionParams): UseRefinanceTransactionResult => {
   const { escrowID, formState, onSuccess, onError } = params;
   const { data: signer } = useSigner();
   const { deployment } = useDefinedMetaStreetDeployment();

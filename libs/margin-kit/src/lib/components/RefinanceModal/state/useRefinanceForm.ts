@@ -1,7 +1,6 @@
-import { GetCollateralLimitsResult, QuoteRefinanceResult } from "@metastreet-labs/margin-core";
+import { GetCollateralLimitsResult, LeverageBuy, QuoteRefinanceResult } from "@metastreet-labs/margin-core";
 import { BigNumber } from "ethers";
 import { useMemo, useState } from "react";
-import { BWLToken } from "../../../types";
 import { daysFromSeconds } from "../../../utils/dates";
 import useDebouncedQuoteRefinance from "./useDebouncedQuoteRefinance";
 
@@ -17,13 +16,12 @@ export interface RefinanceFormState {
 }
 
 interface UseRefinanceFormParams {
-  token: BWLToken;
+  leverageBuy: LeverageBuy;
   limits: GetCollateralLimitsResult;
   flashFee: BigNumber;
-  oldRepayment: BigNumber;
 }
 
-interface UseRefinanceFormResult {
+export interface UseRefinanceFormResult {
   formState: RefinanceFormState;
   setDebtFactor: (debtFactor: number) => void;
   setDuration: (duration: number) => void;
@@ -35,22 +33,23 @@ const getInitialDebtFactor = (oldRepayment: BigNumber, maxDebt: BigNumber) => {
 };
 
 const useRefinanceForm = (params: UseRefinanceFormParams): UseRefinanceFormResult => {
-  const { token, limits, flashFee, oldRepayment } = params;
+  const { leverageBuy, limits, flashFee } = params;
+  const balance = leverageBuy.repayment;
 
   const maxDebt = useMemo(() => limits.maxPrincipal.sub(flashFee), [limits, flashFee]);
 
-  const [debtFactor, setDebtFactor] = useState(getInitialDebtFactor(oldRepayment, maxDebt));
+  const [debtFactor, setDebtFactor] = useState(getInitialDebtFactor(balance, maxDebt));
   const [duration, setDuration] = useState(daysFromSeconds(limits.minDuration));
 
   const { debtAmount, downPayment } = useMemo(() => {
     const debtAmount = maxDebt.mul(debtFactor * 100).div(100);
-    const downPayment = oldRepayment.sub(debtAmount);
+    const downPayment = balance.sub(debtAmount);
     return { debtAmount, downPayment };
-  }, [debtFactor, maxDebt, oldRepayment]);
+  }, [debtFactor, maxDebt, balance]);
 
   const { quote } = useDebouncedQuoteRefinance({
-    ...token,
-    balance: oldRepayment,
+    ...leverageBuy,
+    balance,
     downPayment,
     duration,
   });
