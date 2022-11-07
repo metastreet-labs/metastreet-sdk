@@ -14,6 +14,7 @@ export type { MetaStreetDeployment } from "./lib/hooks/useMetaStreetDeployment";
 export { default as useCollateralLimits } from "./lib/lib/hooks/useCollateralLimits";
 export { default as useFlashFee } from "./lib/lib/hooks/useFlashFee";
 export { default as useIsCollectionSupported } from "./lib/lib/hooks/useIsCollectionSupported";
+export * from "./lib/lib/hooks/useLeverageBuys";
 export { default as useOSFlagged } from "./lib/lib/hooks/useOSFlagged";
 export { default as useSupportedCollections } from "./lib/lib/hooks/useSupportedCollections";
 // Types
