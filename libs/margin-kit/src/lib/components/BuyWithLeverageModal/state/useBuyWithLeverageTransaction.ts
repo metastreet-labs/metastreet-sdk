@@ -7,7 +7,7 @@ import {
 import { ContractTransaction } from "ethers";
 import { useSigner } from "wagmi";
 import useDefinedMetaStreetDeployment from "../../../hooks/useDefinedMetaStreetDeployment";
-import useTransactionSteps, { TransactionStatus, TransactionStep } from "../../../hooks/useTransactionState";
+import useTransactionSteps, { getTransactionStatus, TransactionStep } from "../../../hooks/useTransactionState";
 import { BWLToken } from "../../../types";
 import { toUnits } from "../../../utils/numbers";
 import { BuyWithLeverageFormState } from "./useBuyWithLeverageForm";
@@ -105,16 +105,8 @@ const useBuyWithLeverageTransaction = (props: UseBuyWithLeverageTransactionProps
     }
   };
 
-  const initiated = steps[0].status != "idle";
-  const errored = Boolean(steps.find((step) => step.status == "error"));
-  const completed = steps[steps.length - 1].status == "complete";
-  let status: TransactionStatus = "idle";
-  if (initiated) status = "loading";
-  if (errored) status = "error";
-  if (completed) status = "complete";
-
   return {
-    transactionState: { steps, status },
+    transactionState: { steps, status: getTransactionStatus(steps) },
     buy,
   };
 };
