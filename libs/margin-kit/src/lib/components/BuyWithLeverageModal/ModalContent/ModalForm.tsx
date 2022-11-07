@@ -15,10 +15,11 @@ import useBuyWithLeverage from "../state/useBuyWithLeverage";
 
 const ModalForm = () => {
   const { data: balance } = useETHBalance();
-  const { formState, actions, limits } = useBuyWithLeverage();
+  const { formState, actions, limits, tokens } = useBuyWithLeverage();
 
   const insufficientFunds = balance && balance.lt(toUnitsBigNum(formState.totalDownPayment));
   const buttonDisabled = !formState.quote || !balance || insufficientFunds;
+  const purchasePrice = tokens.reduce((s, t) => s + t.tokenPrice, 0);
 
   return (
     <div className="bwl-modal-form">
@@ -34,7 +35,12 @@ const ModalForm = () => {
         setDuration={actions.setDuration}
       />
       <Divider className="bwl-modal-content-divider" />
-      <LeverageDropdown />
+      <LeverageDropdown
+        purchasePrice={purchasePrice}
+        debtAmount={formState.debtAmount}
+        limits={limits}
+        tokenCount={tokens.length}
+      />
       <FloorBreakeven />
       <PurpleSection>
         <UpfrontPayment />
