@@ -2,6 +2,7 @@ import { GetCollateralLimitsResult, QuoteMultipleERC721Result } from "@metastree
 import { BigNumber } from "ethers";
 import { useMemo, useState } from "react";
 import { BWLToken } from "../../../types";
+import { daysFromSeconds } from "../../../utils/dates";
 import { fromUnits, toUnitsBigNum } from "../../../utils/numbers";
 import useDebouncedQuote from "./useDebouncedQuote";
 
@@ -31,7 +32,7 @@ const useBuyWithLeverageForm = (props: UseBuyWithLeverageFormProps): UseBuyWithL
   const { tokens, limits, flashFee } = props;
   // state
   const [debtFactor, setDebtFactor] = useState(0.05);
-  const [duration, setDuration] = useState(Math.ceil(limits.minDuration / 86400));
+  const [duration, setDuration] = useState(daysFromSeconds(limits.minDuration) || 1);
 
   // derived state
   const { debtAmount, downPayments, totalDownPayment } = useMemo(() => {

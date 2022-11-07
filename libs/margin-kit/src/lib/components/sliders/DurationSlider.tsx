@@ -1,18 +1,22 @@
-import useBuyWithLeverage from "../BuyWithLeverageModal/state/useBuyWithLeverage";
 import BuyWithLeverageSlider from "./BuyWithLeverageSlider";
 
-export const DurationSlider = () => {
-  const { formState, actions, limits } = useBuyWithLeverage();
-  const { duration } = formState;
-  const { minDuration, maxDuration } = limits;
+interface DurationSliderProps {
+  minDuration: number;
+  maxDuration: number;
+  duration: number;
+  setDuration: (duration: number) => void;
+}
+
+export const DurationSlider = (props: DurationSliderProps) => {
+  const { minDuration, maxDuration, duration, setDuration } = props;
 
   return (
     <BuyWithLeverageSlider
-      min={Math.ceil(minDuration / 86400)}
-      max={Math.floor(maxDuration / 86400)}
+      min={minDuration}
+      max={maxDuration}
       step={1}
       value={duration}
-      onChange={actions.setDuration}
+      onChange={setDuration}
       label="Duration"
       valueDisplay={<span className="font-semibold">{duration} days</span>}
       className="bwl-modal-form-duration-slider"
