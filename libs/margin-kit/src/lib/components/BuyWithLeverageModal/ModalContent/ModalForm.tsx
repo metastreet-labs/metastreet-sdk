@@ -41,7 +41,13 @@ const ModalForm = () => {
         limits={limits}
         tokenCount={tokens.length}
       />
-      <FloorBreakeven />
+      <FloorBreakeven
+        collectionAddress={tokens[0].collectionAddress}
+        downPayment={formState.totalDownPayment}
+        repayment={formState.totalRepayment}
+        tokenCount={tokens.length}
+        label={tokens.length > 1 ? "Floor Breakeven (Per Asset)" : "Floor Breakeven"}
+      />
       <PurpleSection>
         <UpfrontPayment />
         <RepaymentDropdown />

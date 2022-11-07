@@ -2,6 +2,7 @@ import { daysFromSeconds } from "../../../utils/dates";
 import { fromUnits, prettyFormatNumber } from "../../../utils/numbers";
 import Divider from "../../Divider";
 import LeverageDropdown from "../../dropdowns/LeverageDropdown";
+import FloorBreakeven from "../../info-rows/FloorBreakeven";
 import MetaStreetModal from "../../MetaStreetModal";
 import { DebtSlider } from "../../sliders/DebtSlider";
 import DurationSlider from "../../sliders/DurationSlider";
@@ -36,6 +37,13 @@ const RefinanceModalContent = (props: RefinanceModalContentProps) => {
         debtAmount={fromUnits(formState.debtAmount).toNumber()}
         limits={limits}
         tokenCount={1}
+      />
+      <FloorBreakeven
+        collectionAddress={leverageBuy.collectionAddress}
+        downPayment={fromUnits(formState.downPayment).toNumber()}
+        repayment={formState.quote && fromUnits(formState.quote.repayment).toNumber()}
+        tokenCount={1}
+        label="New Floor Breakeven"
       />
       <div className="flex h-56 items-center justify-center">This is a refinance modal</div>
     </>
