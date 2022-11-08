@@ -1,6 +1,7 @@
 import { daysFromSeconds } from "../../../utils/dates";
 import { fromUnits, prettyFormatNumber } from "../../../utils/numbers";
 import Divider from "../../Divider";
+import LeverageDropdown from "../../dropdowns/LeverageDropdown";
 import MetaStreetModal from "../../MetaStreetModal";
 import { DebtSlider } from "../../sliders/DebtSlider";
 import DurationSlider from "../../sliders/DurationSlider";
@@ -13,19 +14,28 @@ interface RefinanceModalContentProps {
 
 const RefinanceModalContent = (props: RefinanceModalContentProps) => {
   const { leverageBuy, formState, actions, limits } = useRefinance();
-  const debtAmount = prettyFormatNumber(fromUnits(formState.debtAmount));
 
   return (
     <>
       <MetaStreetModal.Title>Refinance</MetaStreetModal.Title>
       <RefinanceTokenInfo leverageBuy={leverageBuy} />
       <Divider className="bwl-modal-content-divider" />
-      <DebtSlider debtAmount={debtAmount} debtFactor={formState.debtFactor} setDebtFactor={actions.setDebtFactor} />
+      <DebtSlider
+        debtAmount={prettyFormatNumber(fromUnits(formState.debtAmount))}
+        debtFactor={formState.debtFactor}
+        setDebtFactor={actions.setDebtFactor}
+      />
       <DurationSlider
         minDuration={daysFromSeconds(limits.minDuration, "up")}
         maxDuration={daysFromSeconds(limits.maxDuration)}
         duration={formState.duration}
         setDuration={actions.setDuration}
+      />
+      <LeverageDropdown
+        purchasePrice={fromUnits(leverageBuy.purchasePrice).toNumber()}
+        debtAmount={fromUnits(formState.debtAmount).toNumber()}
+        limits={limits}
+        tokenCount={1}
       />
       <div className="flex h-56 items-center justify-center">This is a refinance modal</div>
     </>

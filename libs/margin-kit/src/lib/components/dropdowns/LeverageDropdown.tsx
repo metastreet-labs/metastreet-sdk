@@ -1,19 +1,23 @@
+import { GetCollateralLimitsResult } from "@metastreet-labs/margin-core";
 import Decimal from "decimal.js";
 import { fromUnits, prettyFormatNumber } from "../../utils/numbers";
-import useBuyWithLeverage from "../BuyWithLeverageModal/state/useBuyWithLeverage";
 import ETHPrice from "../ETHPrice";
 import QuestionMarkCircleIcon from "../icons/QuestionMarkCircleIcon";
 import { InfoRow, InfoRowLabel, InfoRowValue } from "../InfoRow";
 import Tooltip from "../Tooltip";
 import InfoDropdown from "./InfoDropdown";
 
-const LeverageDropdown = () => {
-  const { formState, tokens, limits } = useBuyWithLeverage();
-  const { debtAmount } = formState;
+interface LeverageDropdownProps {
+  purchasePrice: number;
+  debtAmount: number;
+  limits: GetCollateralLimitsResult;
+  tokenCount: number;
+}
 
-  const totalPrice = tokens.reduce((s, t) => s + t.tokenPrice, 0);
+const LeverageDropdown = (props: LeverageDropdownProps) => {
+  const { purchasePrice, debtAmount, limits, tokenCount } = props;
 
-  const leverage = new Decimal(totalPrice / (totalPrice - debtAmount)).toDecimalPlaces(2);
+  const leverage = new Decimal(purchasePrice / (purchasePrice - debtAmount)).toDecimalPlaces(2);
   let leverageStr: string;
   if (leverage.eq(Infinity) || leverage.lte(0)) leverageStr = "N/A";
   else leverageStr = `${leverage}x`;
@@ -24,7 +28,7 @@ const LeverageDropdown = () => {
   const maxLTV = fromUnits(limits.maxLoanToValue).mul(100).toDecimalPlaces(2);
   const maxLTVStr = `(${maxLTV}% max)`;
 
-  const ltv = new Decimal(debtAmount).div(collateralValue.mul(tokens.length)).mul(100).toDecimalPlaces(2);
+  const ltv = new Decimal(debtAmount).div(collateralValue.mul(tokenCount)).mul(100).toDecimalPlaces(2);
   const ltvStr = `${ltv}%`;
 
   return (
