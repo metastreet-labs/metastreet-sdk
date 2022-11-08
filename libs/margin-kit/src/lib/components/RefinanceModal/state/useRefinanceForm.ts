@@ -42,7 +42,7 @@ const useRefinanceForm = (params: UseRefinanceFormParams): UseRefinanceFormResul
   const [duration, setDuration] = useState(daysFromSeconds(limits.minDuration));
 
   const { debtAmount, downPayment } = useMemo(() => {
-    const debtAmount = maxDebt.mul(debtFactor * 100).div(100);
+    const debtAmount = maxDebt.mul(Math.ceil(debtFactor * 100)).div(100);
     const downPayment = balance.sub(debtAmount);
     return { debtAmount, downPayment };
   }, [debtFactor, maxDebt, balance]);
