@@ -1,6 +1,7 @@
 import { GetCollateralLimitsResult, QuoteMultipleERC721Result } from "@metastreet-labs/margin-core";
 import { BigNumber } from "ethers";
 import { useMemo, useState } from "react";
+import useDefinedMetaStreetDeployment from "../../../hooks/useDefinedMetaStreetDeployment";
 import { BWLToken } from "../../../types";
 import { daysFromSeconds } from "../../../utils/dates";
 import { fromUnits, toUnitsBigNum } from "../../../utils/numbers";
@@ -58,10 +59,15 @@ const useBuyWithLeverageForm = (props: UseBuyWithLeverageFormProps): UseBuyWithL
     return { debtAmount, downPayments, totalDownPayment };
   }, [debtFactor, flashFee, limits.maxPrincipal, tokens]);
 
+  // TODO: this should be part of the state
+  const { deployment } = useDefinedMetaStreetDeployment();
+  const vaultAddress = deployment.vaults[0];
+
   const { quote } = useDebouncedQuote({
     tokens: props.tokens,
     downPayments,
     duration,
+    vaultAddress,
   });
 
   // more derived state

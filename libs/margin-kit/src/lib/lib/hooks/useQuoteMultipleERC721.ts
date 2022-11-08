@@ -9,6 +9,7 @@ export interface UseQuoteMultipleERC721Props {
   tokens: BWLToken[];
   downPayments: BigNumberish[];
   duration: number;
+  vaultAddress: string;
 }
 
 const useQuoteMultipleERC721 = (props: UseQuoteMultipleERC721Props) => {
@@ -36,6 +37,7 @@ const useQuoteMultipleERC721 = (props: UseQuoteMultipleERC721Props) => {
       collectionAddresses,
       tokenIDs,
       duration: props.duration * 86400,
+      vaultAddress: props.vaultAddress,
     });
   };
 

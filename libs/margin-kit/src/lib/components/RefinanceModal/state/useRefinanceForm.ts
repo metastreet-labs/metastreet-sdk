@@ -1,6 +1,7 @@
 import { GetCollateralLimitsResult, LeverageBuy, QuoteRefinanceResult } from "@metastreet-labs/margin-core";
 import { BigNumber } from "ethers";
 import { useMemo, useState } from "react";
+import useDefinedMetaStreetDeployment from "../../../hooks/useDefinedMetaStreetDeployment";
 import { daysFromSeconds, daysToSeconds } from "../../../utils/dates";
 import useDebouncedQuoteRefinance from "./useDebouncedQuoteRefinance";
 
@@ -47,11 +48,16 @@ const useRefinanceForm = (params: UseRefinanceFormParams): UseRefinanceFormResul
     return { debtAmount, downPayment };
   }, [debtFactor, maxDebt, balance]);
 
+  // TODO: this should come from the state
+  const { deployment } = useDefinedMetaStreetDeployment();
+  const vaultAddress = deployment.vaults[0];
+
   const { quote } = useDebouncedQuoteRefinance({
     ...leverageBuy,
     balance,
     downPayment,
     duration: daysToSeconds(duration),
+    vaultAddress,
   });
 
   return {

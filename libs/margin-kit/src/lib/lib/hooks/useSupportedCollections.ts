@@ -7,7 +7,11 @@ const useSupportedCollections = () => {
 
   const fetcher = () => {
     if (!deployment) throw new Error("deployment is undefined");
-    return getSupportedCollections({ signerOrProvider: provider, deployment });
+
+    // TODO: this should come from the params
+    const vaultAddress = deployment.vaults[0];
+
+    return getSupportedCollections({ signerOrProvider: provider, deployment, vaultAddress });
   };
 
   return useQuery<string[], ReadableError>(supportedCollectionsQueryKeys.all(chainID), fetcher, {

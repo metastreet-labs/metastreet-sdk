@@ -7,7 +7,7 @@ import {
 import { useQuery } from "wagmi";
 import useDefinedMetaStreetDeployment from "../../hooks/useDefinedMetaStreetDeployment";
 
-type UseCollateralLimitsParams = Pick<GetCollateralLimitsParams, "collectionAddress" | "tokenID">;
+type UseCollateralLimitsParams = Pick<GetCollateralLimitsParams, "collectionAddress" | "tokenID" | "vaultAddress">;
 
 const useCollateralLimits = (params: UseCollateralLimitsParams) => {
   const { provider, deployment, chainID } = useDefinedMetaStreetDeployment();
