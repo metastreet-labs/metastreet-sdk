@@ -1,4 +1,5 @@
 import useETHBalance from "../../../lib/hooks/useETHBalance";
+import { daysFromSeconds } from "../../../utils/dates";
 import { toUnitsBigNum } from "../../../utils/numbers";
 import Divider from "../../Divider";
 import LeverageDropdown from "../../dropdowns/LeverageDropdown";
@@ -14,11 +15,10 @@ import useBuyWithLeverage from "../state/useBuyWithLeverage";
 
 const ModalForm = () => {
   const { data: balance } = useETHBalance();
-  const { formState, actions } = useBuyWithLeverage();
-  const { quote, totalDownPayment } = formState;
+  const { formState, actions, limits } = useBuyWithLeverage();
 
-  const insufficientFunds = balance && balance.lt(toUnitsBigNum(totalDownPayment));
-  const buttonDisabled = !quote || !balance || insufficientFunds;
+  const insufficientFunds = balance && balance.lt(toUnitsBigNum(formState.totalDownPayment));
+  const buttonDisabled = !formState.quote || !balance || insufficientFunds;
 
   return (
     <div className="bwl-modal-form">
@@ -27,7 +27,12 @@ const ModalForm = () => {
         debtFactor={formState.debtFactor}
         setDebtFactor={actions.setDebtFactor}
       />
-      <DurationSlider />
+      <DurationSlider
+        minDuration={daysFromSeconds(limits.minDuration, "up")}
+        maxDuration={daysFromSeconds(limits.maxDuration)}
+        duration={formState.duration}
+        setDuration={actions.setDuration}
+      />
       <Divider className="bwl-modal-content-divider" />
       <LeverageDropdown />
       <FloorBreakeven />

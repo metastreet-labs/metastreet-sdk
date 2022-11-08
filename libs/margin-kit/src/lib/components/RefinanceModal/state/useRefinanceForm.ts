@@ -39,7 +39,7 @@ const useRefinanceForm = (params: UseRefinanceFormParams): UseRefinanceFormResul
   const maxDebt = useMemo(() => limits.maxPrincipal.sub(flashFee), [limits, flashFee]);
 
   const [debtFactor, setDebtFactor] = useState(getInitialDebtFactor(balance, maxDebt));
-  const [duration, setDuration] = useState(daysFromSeconds(limits.minDuration));
+  const [duration, setDuration] = useState(daysFromSeconds(limits.minDuration, "up"));
 
   const { debtAmount, downPayment } = useMemo(() => {
     const debtAmount = maxDebt.mul(Math.ceil(debtFactor * 100)).div(100);
