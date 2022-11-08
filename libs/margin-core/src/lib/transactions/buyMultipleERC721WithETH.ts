@@ -9,6 +9,7 @@ export interface BuyMultipleERC721WithETHParams extends TransactionParams {
   downPayments: BigNumberish[];
   maxRepayments: BigNumberish[];
   duration: number;
+  vaultAddress: string;
 }
 
 const _buyMultipleERC721WithETH = (params: BuyMultipleERC721WithETHParams): Promise<ContractTransaction> => {
@@ -21,7 +22,7 @@ const _buyMultipleERC721WithETH = (params: BuyMultipleERC721WithETHParams): Prom
   return contract.buyMultipleERC721WithETH(
     params.purchasePrices,
     params.fillCallDatas,
-    deployment.vaultAddress,
+    params.vaultAddress,
     params.duration,
     params.downPayments,
     params.maxRepayments,

@@ -6,6 +6,7 @@ import { FetcherParams } from "./types";
 export interface GetCollateralLimitsParams extends FetcherParams {
   collectionAddress: string;
   tokenID: string;
+  vaultAddress: string;
 }
 
 export interface GetCollateralLimitsResult {
@@ -17,10 +18,10 @@ export interface GetCollateralLimitsResult {
 }
 
 const _getCollateralLimits = async (params: GetCollateralLimitsParams): Promise<GetCollateralLimitsResult> => {
-  const { signerOrProvider, deployment, collectionAddress, tokenID } = params;
+  const { signerOrProvider, deployment, collectionAddress, tokenID, vaultAddress } = params;
 
   const lbWrapper = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signerOrProvider);
-  const limits = await lbWrapper.getCollateralLimits(deployment.vaultAddress, collectionAddress, tokenID);
+  const limits = await lbWrapper.getCollateralLimits(vaultAddress, collectionAddress, tokenID);
 
   return {
     minDuration: limits.minDuration,

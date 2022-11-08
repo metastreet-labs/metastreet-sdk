@@ -11,6 +11,7 @@ export type RefinanceETHParams = TransactionParams & {
   duration: BigNumberish;
   downPayment: BigNumberish;
   maxRepayment: BigNumberish;
+  vaultAddress: string;
 };
 
 const _refinanceETH = async (params: RefinanceETHParams) => {
@@ -22,7 +23,7 @@ const _refinanceETH = async (params: RefinanceETHParams) => {
 
   const calldata = ethers.utils.defaultAbiCoder.encode(
     ["address", "uint64", "int256", "uint256"],
-    [deployment.vaultAddress, params.duration, params.downPayment, params.maxRepayment]
+    [params.vaultAddress, params.duration, params.downPayment, params.maxRepayment]
   );
 
   const payable = BigNumber.from(params.downPayment).gt(0);

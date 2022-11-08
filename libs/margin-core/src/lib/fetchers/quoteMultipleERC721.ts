@@ -9,6 +9,7 @@ export interface QuoteMultipleERC721Params extends FetcherParams {
   collectionAddresses: string[];
   tokenIDs: string[];
   duration: number;
+  vaultAddress: string;
 }
 
 export interface QuoteMultipleERC721Result {
@@ -25,7 +26,7 @@ const _quoteMultipleERC721 = async (params: QuoteMultipleERC721Params): Promise<
     params.downPayments,
     params.collectionAddresses,
     params.tokenIDs,
-    deployment.vaultAddress,
+    params.vaultAddress,
     params.duration
   );
   return {
