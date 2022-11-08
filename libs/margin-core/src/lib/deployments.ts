@@ -23,7 +23,7 @@ export const DEPLOYMENTS: Record<number, Deployment> = {
     reservoirURL: "https://api.reservoir.tools",
   },
   [CHAIN_IDS.goerli]: {
-    vaults: ["0x99156878c19c46c492d3ac40a3a8483c3740a9d5"],
+    vaults: ["0x99156878c19c46c492d3ac40a3a8483c3740a9d5", "0x823905D12Ef070eDBE19aD35Bcd1fe719Dd94016"],
     lbWrapperAddress: "0x5D17Fb028eB1D4aC437e2E94aB0A47146d6cC2Ce",
     subgraphURI: "https://api.studio.thegraph.com/query/31830/metastreet-lb-subgraph-goerli/v1.0.0",
     reservoirURL: "https://api-goerli.reservoir.tools",
@@ -45,7 +45,7 @@ export const defaultDeployments: Record<number, Deployment> = {
     reservoirURL: "https://api.reservoir.tools",
   },
   [chain.goerli.id]: {
-    vaults: ["0x99156878c19c46c492d3ac40a3a8483c3740a9d5"],
+    vaults: ["0x99156878c19c46c492d3ac40a3a8483c3740a9d5", "0x823905D12Ef070eDBE19aD35Bcd1fe719Dd94016"],
     lbWrapperAddress: "0x5D17Fb028eB1D4aC437e2E94aB0A47146d6cC2Ce",
     subgraphURI: "https://api.studio.thegraph.com/query/31830/metastreet-lb-subgraph-goerli/v1.0.0",
     reservoirURL: "https://api-goerli.reservoir.tools",
