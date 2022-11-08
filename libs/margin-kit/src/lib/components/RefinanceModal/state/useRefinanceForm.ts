@@ -1,7 +1,7 @@
 import { GetCollateralLimitsResult, LeverageBuy, QuoteRefinanceResult } from "@metastreet-labs/margin-core";
 import { BigNumber } from "ethers";
 import { useMemo, useState } from "react";
-import { daysFromSeconds } from "../../../utils/dates";
+import { daysFromSeconds, daysToSeconds } from "../../../utils/dates";
 import useDebouncedQuoteRefinance from "./useDebouncedQuoteRefinance";
 
 export interface RefinanceFormState {
@@ -51,7 +51,7 @@ const useRefinanceForm = (params: UseRefinanceFormParams): UseRefinanceFormResul
     ...leverageBuy,
     balance,
     downPayment,
-    duration,
+    duration: daysToSeconds(duration),
   });
 
   return {
