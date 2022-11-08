@@ -1,5 +1,5 @@
 import { LeverageBuy } from "@metastreet-labs/margin-core";
-import { useLeverageBuys } from "@metastreet-labs/margin-kit";
+import { RefinanceModal, useLeverageBuys } from "@metastreet-labs/margin-kit";
 import { NextPage } from "next";
 import { useState } from "react";
 import { useQuery } from "wagmi";
@@ -41,6 +41,7 @@ const LBRow = (props: LBRowProps) => {
         <button className="border" onClick={() => setRefiModalOpen(true)}>
           Refinance
         </button>
+        <RefinanceModal isOpen={refiModalOpen} onClose={() => setRefiModalOpen(false)} leverageBuy={leverageBuy} />
       </td>
     </tr>
   );
