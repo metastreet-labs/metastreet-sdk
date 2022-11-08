@@ -28,7 +28,7 @@ const ModalForm = () => {
         setDebtFactor={actions.setDebtFactor}
       />
       <DurationSlider
-        minDuration={daysFromSeconds(limits.minDuration) || 1}
+        minDuration={daysFromSeconds(limits.minDuration, "up")}
         maxDuration={daysFromSeconds(limits.maxDuration)}
         duration={formState.duration}
         setDuration={actions.setDuration}

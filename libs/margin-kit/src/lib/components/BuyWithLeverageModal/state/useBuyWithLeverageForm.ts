@@ -32,7 +32,7 @@ const useBuyWithLeverageForm = (props: UseBuyWithLeverageFormProps): UseBuyWithL
   const { tokens, limits, flashFee } = props;
   // state
   const [debtFactor, setDebtFactor] = useState(0.05);
-  const [duration, setDuration] = useState(daysFromSeconds(limits.minDuration) || 1);
+  const [duration, setDuration] = useState(daysFromSeconds(limits.minDuration, "up"));
 
   // derived state
   const { debtAmount, downPayments, totalDownPayment } = useMemo(() => {

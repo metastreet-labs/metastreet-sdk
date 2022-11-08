@@ -22,7 +22,7 @@ const RefinanceModalContent = (props: RefinanceModalContentProps) => {
       <Divider className="bwl-modal-content-divider" />
       <DebtSlider debtAmount={debtAmount} debtFactor={formState.debtFactor} setDebtFactor={actions.setDebtFactor} />
       <DurationSlider
-        minDuration={daysFromSeconds(limits.minDuration) || 1}
+        minDuration={daysFromSeconds(limits.minDuration, "up")}
         maxDuration={daysFromSeconds(limits.maxDuration)}
         duration={formState.duration}
         setDuration={actions.setDuration}
