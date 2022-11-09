@@ -19,6 +19,8 @@ export * from "./lib/lib/hooks/useLeverageBuys";
 export { default as useOSFlagged } from "./lib/lib/hooks/useOSFlagged";
 export { default as useSupportedCollections } from "./lib/lib/hooks/useSupportedCollections";
 export * from "./lib/lib/hooks/useTokenMetadata";
+export * from "./lib/lib/hooks/useVaultsLimits";
+export * from "./lib/lib/hooks/useVaultsSupportedCollections";
 // Types
 export * from "./lib/types";
 // Utils
