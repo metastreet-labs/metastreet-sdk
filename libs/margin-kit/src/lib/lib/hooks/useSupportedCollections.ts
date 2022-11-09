@@ -11,7 +11,7 @@ const useSupportedCollections = () => {
     // TODO: this should come from the params
     const vaultAddress = deployment.vaults[0];
 
-    return getSupportedCollections({ signerOrProvider: provider, deployment, vaultAddress });
+    return getSupportedCollections({ signerOrProvider: provider, vaultAddress });
   };
 
   return useQuery<string[], ReadableError>(supportedCollectionsQueryKeys.all(chainID), fetcher, {

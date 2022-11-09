@@ -1,8 +1,11 @@
 import { LoanPriceOracle__factory, Vault__factory } from "@metastreet-labs/pe-contracts-typechain";
 import { withReadableError } from "../errors";
-import { FetcherParams } from "./types";
+import { SignerOrProvider } from "./types";
 
-type GetSupportedCollectionsParams = FetcherParams & { vaultAddress: string };
+interface GetSupportedCollectionsParams {
+  signerOrProvider: SignerOrProvider;
+  vaultAddress: string;
+}
 
 const _getSupportedCollections = async (params: GetSupportedCollectionsParams): Promise<string[]> => {
   const { signerOrProvider, vaultAddress } = params;
