@@ -1,4 +1,3 @@
-import { GetCollateralLimitsResult } from "@metastreet-labs/margin-core";
 import { BigNumber } from "ethers";
 import { createContext } from "react";
 import { TransactionState } from "../../../hooks/useTransactionState";
@@ -14,7 +13,6 @@ export interface BuyWithLeverageContextType {
     buy: () => void;
   };
   tokens: BWLToken[];
-  limits: GetCollateralLimitsResult;
   flashFee: BigNumber;
 }
 

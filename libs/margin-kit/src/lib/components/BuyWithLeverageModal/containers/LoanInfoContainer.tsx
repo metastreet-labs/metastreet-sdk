@@ -1,12 +1,11 @@
-import { GetCollateralLimitsResult } from "@metastreet-labs/margin-core";
 import { BigNumber, BigNumberish } from "ethers";
-import useDefinedMetaStreetDeployment from "../../../hooks/useDefinedMetaStreetDeployment";
-import useCollateralLimits from "../../../lib/hooks/useCollateralLimits";
 import useFlashFee from "../../../lib/hooks/useFlashFee";
+import { useSupportingVaultsLimits } from "../../../lib/hooks/useSupportingVaultsLimits";
+import { VaultLimit } from "../../../lib/hooks/useVaultsLimits";
 import Spinner from "../../Spinner";
 
 interface LoanInfo {
-  limits: GetCollateralLimitsResult;
+  limits: VaultLimit[];
   flashFee: BigNumber;
 }
 
@@ -20,12 +19,8 @@ interface LoanInfoContainerProps {
 const LoanInfoContainer = (props: LoanInfoContainerProps) => {
   const { flashLoanAmount, children, ...token } = props;
 
-  // TODO: remove this later, just stitching things out for now
-  const { deployment } = useDefinedMetaStreetDeployment();
-  const vaultAddress = deployment.vaults[0];
-
-  const { data: limits, error: limitsError } = useCollateralLimits({ ...token, vaultAddress });
   const { data: flashFee, error: flashFeeError } = useFlashFee(flashLoanAmount);
+  const { data: limits, error: limitsError } = useSupportingVaultsLimits(token);
 
   const loadingOrError = (error?: string) => {
     return (
@@ -35,10 +30,12 @@ const LoanInfoContainer = (props: LoanInfoContainerProps) => {
     );
   };
 
-  if (limits && flashFee) return children({ limits, flashFee });
+  if (!limits || !flashFee) {
+    const error = limitsError || flashFeeError;
+    if (error) return loadingOrError(error.message);
+  }
 
-  const error = limitsError || flashFeeError;
-  if (error) return loadingOrError(error.message);
+  if (limits && flashFee) return children({ limits, flashFee });
 
   return loadingOrError();
 };
