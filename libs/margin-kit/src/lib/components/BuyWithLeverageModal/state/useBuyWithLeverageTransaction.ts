@@ -46,8 +46,7 @@ const useBuyWithLeverageTransaction = (props: UseBuyWithLeverageTransactionProps
     const purchasePrices = tokens.map((token) => toUnits(token.tokenPrice).toString());
     const downPayments = formState.downPayments.map((downPayment) => downPayment.toString());
     const maxRepayments = formState.quote.repayments.map((repayment) => repayment.mul(105).div(100).toString());
-    // TODO: this should be part of formState
-    const vaultAddress = deployment.vaults[0];
+    const vaultAddress = formState.activeVaultLimits.vaultAddress;
 
     /* send transaction based on the number of tokens */
     const sendTransaction = async () => {

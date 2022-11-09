@@ -1,5 +1,5 @@
-import { GetCollateralLimitsResult } from "@metastreet-labs/margin-core";
 import Decimal from "decimal.js";
+import { VaultLimit } from "../../lib/hooks/useVaultsLimits";
 import { fromUnits, prettyFormatNumber } from "../../utils/numbers";
 import ETHPrice from "../ETHPrice";
 import QuestionMarkCircleIcon from "../icons/QuestionMarkCircleIcon";
@@ -10,7 +10,7 @@ import InfoDropdown from "./InfoDropdown";
 interface LeverageDropdownProps {
   purchasePrice: number;
   debtAmount: number;
-  limits: GetCollateralLimitsResult;
+  limits: VaultLimit;
   tokenCount: number;
 }
 

@@ -1,7 +1,7 @@
-import { GetCollateralLimitsResult, QuoteMultipleERC721Result } from "@metastreet-labs/margin-core";
+import { QuoteMultipleERC721Result } from "@metastreet-labs/margin-core";
 import { BigNumber } from "ethers";
-import { useMemo, useState } from "react";
-import useDefinedMetaStreetDeployment from "../../../hooks/useDefinedMetaStreetDeployment";
+import { useEffect, useMemo, useState } from "react";
+import { VaultLimit } from "../../../lib/hooks/useVaultsLimits";
 import { BWLToken } from "../../../types";
 import { daysFromSeconds } from "../../../utils/dates";
 import { fromUnits, toUnitsBigNum } from "../../../utils/numbers";
@@ -10,6 +10,7 @@ import useDebouncedQuote from "./useDebouncedQuote";
 export interface BuyWithLeverageFormState {
   debtFactor: number;
   debtAmount: number;
+  activeVaultLimits: VaultLimit;
   downPayments: BigNumber[];
   totalDownPayment: number;
   duration: number;
@@ -19,7 +20,7 @@ export interface BuyWithLeverageFormState {
 
 interface UseBuyWithLeverageFormProps {
   tokens: BWLToken[];
-  limits: GetCollateralLimitsResult;
+  limits: VaultLimit[];
   flashFee: BigNumber;
 }
 
@@ -31,9 +32,12 @@ interface UseBuyWithLeverageFormResult {
 
 const useBuyWithLeverageForm = (props: UseBuyWithLeverageFormProps): UseBuyWithLeverageFormResult => {
   const { tokens, limits, flashFee } = props;
+  const maxPrincipal = limits[limits.length - 1].maxPrincipal;
+
   // state
+  const [activeVaultLimits, setActiveLimit] = useState(limits[0]);
   const [debtFactor, setDebtFactor] = useState(0.05);
-  const [duration, setDuration] = useState(daysFromSeconds(limits.minDuration, "up"));
+  const [duration, setDuration] = useState(daysFromSeconds(limits[0].minDuration, "up"));
 
   // derived state
   const { debtAmount, downPayments, totalDownPayment } = useMemo(() => {
@@ -41,7 +45,7 @@ const useBuyWithLeverageForm = (props: UseBuyWithLeverageFormProps): UseBuyWithL
 
     const downPayments = purchasePrices.map((price, idx) => {
       const debtFactorPercent = Math.ceil(debtFactor * 100);
-      let downPayment = price.sub(limits.maxPrincipal.mul(debtFactorPercent).div(100));
+      let downPayment = price.sub(maxPrincipal.mul(debtFactorPercent).div(100));
       if (idx == 0) downPayment = downPayment.add(flashFee);
       return downPayment.isNegative() ? BigNumber.from(0) : downPayment;
     });
@@ -57,17 +61,28 @@ const useBuyWithLeverageForm = (props: UseBuyWithLeverageFormProps): UseBuyWithL
     ).toNumber();
 
     return { debtAmount, downPayments, totalDownPayment };
-  }, [debtFactor, flashFee, limits.maxPrincipal, tokens]);
+  }, [debtFactor, flashFee, maxPrincipal, tokens]);
 
-  // TODO: this should be part of the state
-  const { deployment } = useDefinedMetaStreetDeployment();
-  const vaultAddress = deployment.vaults[0];
+  /* set active vault limits based on the selected debt amount */
+  useEffect(() => {
+    const limit = limits.find((l) => l.maxPrincipal.gte(debtAmount));
+    if (!limit) throw Error("active vault limit is undefined, should never happen");
+    setActiveLimit(limit);
+  }, [debtAmount, limits]);
+
+  /* make sure duration is not out of bounds when the active vault limits change */
+  useEffect(() => {
+    const minDuration = daysFromSeconds(activeVaultLimits.minDuration, "up");
+    const maxDuration = daysFromSeconds(activeVaultLimits.maxDuration);
+    if (duration < minDuration) setDuration(minDuration);
+    else if (duration > maxDuration) setDuration(maxDuration);
+  }, [activeVaultLimits, duration]);
 
   const { quote } = useDebouncedQuote({
     tokens: props.tokens,
     downPayments,
     duration,
-    vaultAddress,
+    vaultAddress: activeVaultLimits.vaultAddress,
   });
 
   // more derived state
@@ -81,6 +96,7 @@ const useBuyWithLeverageForm = (props: UseBuyWithLeverageFormProps): UseBuyWithL
     formState: {
       debtFactor,
       duration,
+      activeVaultLimits,
       downPayments,
       debtAmount: fromUnits(debtAmount).toNumber(),
       quote,
