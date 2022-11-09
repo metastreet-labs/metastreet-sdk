@@ -18,6 +18,7 @@ export { default as useIsCollectionSupported } from "./lib/lib/hooks/useIsCollec
 export * from "./lib/lib/hooks/useLeverageBuys";
 export { default as useOSFlagged } from "./lib/lib/hooks/useOSFlagged";
 export { default as useSupportedCollections } from "./lib/lib/hooks/useSupportedCollections";
+export * from "./lib/lib/hooks/useSupportingVaults";
 export * from "./lib/lib/hooks/useTokenMetadata";
 export * from "./lib/lib/hooks/useVaultsLimits";
 export * from "./lib/lib/hooks/useVaultsSupportedCollections";
