@@ -24,6 +24,8 @@ const _getVaultsSupportedCollections = async (
     result.all = [...result.all, ...collections];
     result[vaultAddresses[idx]] = collections;
   });
+  // remove duplicated values
+  result.all = [...new Set(result.all)];
   return result;
 };
 
