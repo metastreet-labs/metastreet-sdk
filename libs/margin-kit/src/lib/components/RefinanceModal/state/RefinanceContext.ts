@@ -1,4 +1,4 @@
-import { GetCollateralLimitsResult, LeverageBuy } from "@metastreet-labs/margin-core";
+import { LeverageBuy } from "@metastreet-labs/margin-core";
 import { BigNumber } from "ethers";
 import { createContext } from "react";
 import { TransactionState } from "../../../hooks/useTransactionState";
@@ -11,7 +11,6 @@ export interface RefinanceContextType {
   actions: Pick<UseRefinanceFormResult, "setDebtFactor" | "setDuration"> &
     Pick<UseRefinanceTransactionResult, "refinance">;
   leverageBuy: LeverageBuy;
-  limits: GetCollateralLimitsResult;
   flashFee: BigNumber;
 }
 

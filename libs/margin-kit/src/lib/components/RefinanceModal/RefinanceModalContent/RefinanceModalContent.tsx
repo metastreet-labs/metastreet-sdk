@@ -14,7 +14,7 @@ interface RefinanceModalContentProps {
 }
 
 const RefinanceModalContent = (props: RefinanceModalContentProps) => {
-  const { leverageBuy, formState, actions, limits } = useRefinance();
+  const { leverageBuy, formState, actions } = useRefinance();
 
   return (
     <>
@@ -27,15 +27,15 @@ const RefinanceModalContent = (props: RefinanceModalContentProps) => {
         setDebtFactor={actions.setDebtFactor}
       />
       <DurationSlider
-        minDuration={daysFromSeconds(limits.minDuration, "up")}
-        maxDuration={daysFromSeconds(limits.maxDuration)}
+        minDuration={daysFromSeconds(formState.activeLimits.minDuration, "up")}
+        maxDuration={daysFromSeconds(formState.activeLimits.maxDuration)}
         duration={formState.duration}
         setDuration={actions.setDuration}
       />
       <LeverageDropdown
         purchasePrice={fromUnits(leverageBuy.purchasePrice).toNumber()}
         debtAmount={fromUnits(formState.debtAmount).toNumber()}
-        limits={limits}
+        limits={formState.activeLimits}
         tokenCount={1}
       />
       <FloorBreakeven

@@ -1,9 +1,9 @@
-import useSupportedCollections from "./useSupportedCollections";
+import { useVaultsSupportedCollections } from "./useVaultsSupportedCollections";
 
 const useIsCollectionSupported = (collectionAddress: string) => {
-  const { data, error } = useSupportedCollections();
+  const { data, error } = useVaultsSupportedCollections();
 
-  const isCollectionSupported = data?.includes(collectionAddress.toLowerCase());
+  const isCollectionSupported = data?.all.includes(collectionAddress.toLowerCase());
 
   return {
     isCollectionSupported,

@@ -15,7 +15,7 @@ import useBuyWithLeverage from "../state/useBuyWithLeverage";
 
 const ModalForm = () => {
   const { data: balance } = useETHBalance();
-  const { formState, actions, limits, tokens } = useBuyWithLeverage();
+  const { formState, actions, tokens } = useBuyWithLeverage();
 
   const insufficientFunds = balance && balance.lt(toUnitsBigNum(formState.totalDownPayment));
   const buttonDisabled = !formState.quote || !balance || insufficientFunds;
@@ -29,8 +29,8 @@ const ModalForm = () => {
         setDebtFactor={actions.setDebtFactor}
       />
       <DurationSlider
-        minDuration={daysFromSeconds(limits.minDuration, "up")}
-        maxDuration={daysFromSeconds(limits.maxDuration)}
+        minDuration={daysFromSeconds(formState.activeVaultLimits.minDuration, "up")}
+        maxDuration={daysFromSeconds(formState.activeVaultLimits.maxDuration)}
         duration={formState.duration}
         setDuration={actions.setDuration}
       />
@@ -38,7 +38,7 @@ const ModalForm = () => {
       <LeverageDropdown
         purchasePrice={purchasePrice}
         debtAmount={formState.debtAmount}
-        limits={limits}
+        limits={formState.activeVaultLimits}
         tokenCount={tokens.length}
       />
       <FloorBreakeven

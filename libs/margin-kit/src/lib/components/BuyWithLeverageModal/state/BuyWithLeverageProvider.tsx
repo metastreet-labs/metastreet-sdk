@@ -1,6 +1,6 @@
-import { GetCollateralLimitsResult } from "@metastreet-labs/margin-core";
 import { BigNumber } from "ethers";
 import { ReactNode } from "react";
+import { VaultLimits } from "../../../lib/hooks/useVaultsLimits";
 import { BWLToken } from "../../../types";
 import { BuyWithLeverageContext, BuyWithLeverageContextType } from "./context";
 import useBuyWithLeverageForm from "./useBuyWithLeverageForm";
@@ -9,7 +9,7 @@ import useBuyWithLeverageTransaction from "./useBuyWithLeverageTransaction";
 interface BuyWithLeverageProviderProps {
   children: ReactNode;
   tokens: BWLToken[];
-  limits: GetCollateralLimitsResult;
+  limits: VaultLimits[];
   flashFee: BigNumber;
   onBuySuccess?: () => void;
 }
@@ -32,7 +32,6 @@ const BuyWithLeverageProvider = (props: BuyWithLeverageProviderProps) => {
     transactionState,
     actions: { ...formActions, buy },
     tokens,
-    limits,
     flashFee,
   };
 
