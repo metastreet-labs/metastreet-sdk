@@ -32,7 +32,7 @@ const LoanInfoContainer = (props: LoanInfoContainerProps) => {
 
   if (!limits || !flashFee) {
     const error = limitsError || flashFeeError;
-    if (error) return loadingOrError(error.message);
+    return loadingOrError(error?.message);
   }
 
   if (limits && flashFee) return children({ limits, flashFee });
