@@ -5,6 +5,7 @@ import LeverageDropdown from "../../dropdowns/LeverageDropdown";
 import RepaymentDropdown from "../../dropdowns/RepaymentDropdown";
 import FloorBreakeven from "../../info-rows/FloorBreakeven";
 import OwedOrAvailable from "../../info-rows/OwedOrAvailable";
+import RepaymentDate from "../../info-rows/RepaymentDate";
 import MetaStreetModal from "../../MetaStreetModal";
 import PurpleSection from "../../purple-section/PurpleSection";
 import { DebtSlider } from "../../sliders/DebtSlider";
@@ -56,6 +57,7 @@ const RefinanceModalContent = (props: RefinanceModalContentProps) => {
           duration={formState.duration}
           repayment={formState.quote?.repayment && fromUnits(formState.quote.repayment).toNumber()}
         />
+        <RepaymentDate duration={formState.duration} />
       </PurpleSection>
     </>
   );
