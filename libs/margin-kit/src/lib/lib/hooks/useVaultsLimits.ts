@@ -13,6 +13,7 @@ export const useVaultsLimits = (params: UseVaultsLimitsParams) => {
   const { deployment, provider } = useDefinedMetaStreetDeployment();
 
   const fetcher = async () => {
+    // Fetch collateral limits of each vault
     const limits = await Promise.all(
       deployment.vaults.map(async (vaultAddress) => {
         const limit = await getCollateralLimits({
@@ -24,6 +25,7 @@ export const useVaultsLimits = (params: UseVaultsLimitsParams) => {
         return { ...limit, vaultAddress };
       })
     );
+    // it is required that the limits are sorted by maxPrincipal in an ascending order
     limits.sort((a, b) => (a.maxPrincipal.lt(b.maxPrincipal) ? -1 : 1));
     return limits;
   };
