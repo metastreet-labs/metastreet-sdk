@@ -1,13 +1,14 @@
-import { GetCollateralLimitsResult, LeverageBuy } from "@metastreet-labs/margin-core";
+import { LeverageBuy } from "@metastreet-labs/margin-core";
 import { BigNumber } from "ethers";
 import { PropsWithChildren } from "react";
+import { VaultLimits } from "../../../lib/hooks/useVaultsLimits";
 import RefinanceContext, { RefinanceContextType } from "./RefinanceContext";
 import useRefinanceForm from "./useRefinanceForm";
 import useRefinanceTransaction from "./useRefinanceTransaction";
 
 type RefinanceProviderProps = PropsWithChildren & {
   leverageBuy: LeverageBuy;
-  limits: GetCollateralLimitsResult;
+  limits: VaultLimits[];
   flashFee: BigNumber;
   onSuccess?: () => void;
   onError?: (e: unknown) => void;
@@ -23,7 +24,6 @@ const RefinanceProvider = (props: RefinanceProviderProps) => {
     transactionState,
     actions: { ...formActions, refinance },
     leverageBuy,
-    limits,
     flashFee,
   };
   return <RefinanceContext.Provider value={contextValue}>{children}</RefinanceContext.Provider>;
