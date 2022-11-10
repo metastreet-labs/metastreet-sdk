@@ -2,6 +2,7 @@ import { daysFromSeconds } from "../../../utils/dates";
 import { fromUnits, prettyFormatNumber } from "../../../utils/numbers";
 import Divider from "../../Divider";
 import LeverageDropdown from "../../dropdowns/LeverageDropdown";
+import RepaymentDropdown from "../../dropdowns/RepaymentDropdown";
 import FloorBreakeven from "../../info-rows/FloorBreakeven";
 import OwedOrAvailable from "../../info-rows/OwedOrAvailable";
 import MetaStreetModal from "../../MetaStreetModal";
@@ -49,6 +50,12 @@ const RefinanceModalContent = (props: RefinanceModalContentProps) => {
       />
       <PurpleSection>
         <OwedOrAvailable />
+        <RepaymentDropdown
+          label="New Repayment"
+          debtAmount={fromUnits(formState.debtAmount).toNumber()}
+          duration={formState.duration}
+          repayment={formState.quote?.repayment && fromUnits(formState.quote.repayment).toNumber()}
+        />
       </PurpleSection>
     </>
   );

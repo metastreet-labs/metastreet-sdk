@@ -50,7 +50,12 @@ const ModalForm = () => {
       />
       <PurpleSection>
         <UpfrontPayment />
-        <RepaymentDropdown />
+        <RepaymentDropdown
+          label="Total Repayment"
+          debtAmount={formState.debtAmount}
+          duration={formState.duration}
+          repayment={formState.totalRepayment}
+        />
         <RepaymentDate />
       </PurpleSection>
       <MetaStreetButton disabled={buttonDisabled} onClick={actions.buy}>
