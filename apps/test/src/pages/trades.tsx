@@ -1,156 +1,73 @@
-import {
-  DeploymentProvider,
-  useCollateralLimits,
-  UseCollateralLimitsParams,
-  useDeployment,
-  useFlashFee,
-  UseFlashFeeParams,
-  useLeverageBuyEvents,
-  useLeverageBuys,
-  useRepayETH,
-} from "@metastreet-labs/margin-wagmi";
-import { BigNumber, Signer } from "ethers";
-import { useAccount, useSigner } from "wagmi";
+import { LeverageBuy } from "@metastreet-labs/margin-core";
+import { RefinanceModal, useLeverageBuys } from "@metastreet-labs/margin-kit";
+import { NextPage } from "next";
+import { useState } from "react";
+import { useQuery } from "wagmi";
 
-const MaxDebt = ({
-  collectionAddress,
-  tokenID,
-  repayment,
-}: Pick<UseCollateralLimitsParams, "collectionAddress" | "tokenID"> & {
-  repayment: UseFlashFeeParams["loanAmount"];
-}) => {
-  const {
-    data: collateralLimits,
-    isLoading: isCollateralLimitsQueryLoading,
-    error: collateralLimitsQueryError,
-  } = useCollateralLimits({ collectionAddress, tokenID });
-  const {
-    data: flashFee,
-    isLoading: isFlashFeeQueryLoading,
-    error: flashFeeQueryError,
-  } = useFlashFee({ loanAmount: repayment });
-
-  if (collateralLimitsQueryError || flashFeeQueryError) {
-    const error = collateralLimitsQueryError ?? flashFeeQueryError;
-    return <p>{error.message}</p>;
-  }
-
-  if (isCollateralLimitsQueryLoading || isFlashFeeQueryLoading) {
-    return <p>Loading...</p>;
-  }
-
-  const maxDebt = collateralLimits.maxPrincipal.sub(flashFee);
-
-  return <p>{`Max Debt: ${maxDebt}`}</p>;
-};
-
-const SignerProvider = ({ children }: { children: (params: { signer: Signer }) => JSX.Element }) => {
-  const { data } = useSigner();
-  if (!data) {
-    return <div>Loading...</div>;
-  }
-  return children({ signer: data });
-};
-
-const Repay = ({ escrowID, repayment, signer }: { escrowID: string; repayment: BigNumber; signer: Signer }) => {
-  const repayETH = useRepayETH({ escrowID, repayment, signer });
-  return <button onClick={repayETH}>Repay</button>;
-};
-
-// const Refinance = () => {
-//   return <>
-//     <button onClick={}>Refinance</button>
-//     <div>Modal</div>
-//   </>
-// }
-
-const LeverageBuys = () => {
-  const { address } = useAccount();
-  const { data } = useLeverageBuys({
-    first: 1000,
-    owner: address,
-    // owner: "0x70d3Bc54ecAdB55c98AFEC3399bAB17e89F65F61",
-    skip: 0,
-  });
-
-  if (!data) {
-    return <p>Loading...</p>;
-  }
-
-  if (data.length <= 0) {
-    return <p>No transactions</p>;
-  }
-
+const LeverageBuysPage: NextPage = () => {
+  const { data } = useLeverageBuys();
   return (
-    <>
-      {data.map(({ id, escrowID, repayment, duration, maturity, collectionAddress, tokenID }) => {
-        const maturityDate = new Date(0);
-        maturityDate.setUTCSeconds(maturity);
-
-        return (
-          <div key={id}>
-            <p>{`${repayment} wei due in ${duration / 60 / 60 / 24} days on ${maturityDate}`}</p>
-            <MaxDebt collectionAddress={collectionAddress} tokenID={tokenID} repayment={repayment} />
-            <SignerProvider>
-              {({ signer }) => <Repay signer={signer} escrowID={escrowID} repayment={repayment} />}
-            </SignerProvider>
-          </div>
-        );
-      })}
-    </>
-  );
-};
-const PastTransactions = () => {
-  const { address } = useAccount();
-  const { data } = useLeverageBuyEvents({
-    first: 1000,
-    owner: address,
-    // owner: "0xf2391397fa352cad37023731d37b8013c87592c1",
-    skip: 0,
-  });
-
-  if (!data) {
-    return <p>Loading...</p>;
-  }
-
-  if (data.length <= 0) {
-    return <p>No transactions</p>;
-  }
-
-  return (
-    <>
-      {data.map(({ id, type, timestamp, leverageBuy: { duration } }) => {
-        const createdAt = new Date(0);
-        createdAt.setUTCSeconds(timestamp);
-        return (
-          <div key={id}>
-            <p>{`${type} transaction on ${createdAt}. Loan duration: ${duration / 60 / 60 / 24} days`}</p>
-          </div>
-        );
-      })}
-    </>
+    <table className="border-spacing-y-2 border-spacing-x-4 border border-separate">
+      <tr>
+        <th>Image</th>
+        <th>Collection Name</th>
+        <th>Token ID</th>
+        <th></th>
+      </tr>
+      {data?.map((lb) => (
+        <LBRow leverageBuy={lb} key={lb.escrowID} />
+      ))}
+    </table>
   );
 };
 
-const CorrectNetworkChecker = () => {
-  const { chainId } = useDeployment();
-  if (chainId == 4) return null;
-  return <p>Switch to Rinkeby!</p>;
-};
+interface LBRowProps {
+  leverageBuy: LeverageBuy;
+}
 
-const Trades = () => {
-  /*
-   * Replace the elements below with your own.
-   *
-   * Note: The corresponding styles are in the ./index.css file.
-   */
+const LBRow = (props: LBRowProps) => {
+  const { leverageBuy } = props;
+  const { data } = useTokenMetadata(leverageBuy.tokenURI);
+  const [refiModalOpen, setRefiModalOpen] = useState(false);
+
   return (
-    <DeploymentProvider>
-      <CorrectNetworkChecker />
-      <LeverageBuys />
-      <PastTransactions />
-    </DeploymentProvider>
+    <tr>
+      <td>
+        <img src={data?.image} alt="" className="w-10 h-10" />
+      </td>
+      <td>{data?.name ?? "..."}</td>
+      <td>{leverageBuy.tokenID}</td>
+      <td>
+        <button className="border" onClick={() => setRefiModalOpen(true)}>
+          Refinance
+        </button>
+        <RefinanceModal isOpen={refiModalOpen} onClose={() => setRefiModalOpen(false)} leverageBuy={leverageBuy} />
+      </td>
+    </tr>
   );
 };
 
-export default Trades;
+const ipfsToHTTPS = (url: string) => {
+  if (url.startsWith("ipfs://")) return `https://ipfs.io/${url.substring(7)}`;
+  if (url.startsWith("ipfs://ipfs/")) return `https://ipfs.io/ipfs/${url.substring(7)}`;
+  return url;
+};
+
+interface TokenMetadata {
+  name?: string;
+  image?: string;
+  description?: string;
+}
+
+const useTokenMetadata = (tokenURI: string) => {
+  const url = ipfsToHTTPS(tokenURI);
+  const fetcher = async () => {
+    const response = await fetch(url);
+    const json = await response.json();
+    if (!response.ok) throw json;
+    return json;
+  };
+  return useQuery<TokenMetadata, unknown>(["token-metadata", url], fetcher);
+};
+
+export default LeverageBuysPage;
