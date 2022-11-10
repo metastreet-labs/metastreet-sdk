@@ -43,13 +43,6 @@
         "lintFilePatterns": ["libs/margin-wagmi/**/*.{ts,tsx,js,jsx}"]
       }
     },
-    "type-check": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "color": true,
-        "command": "npx tsc -p libs/margin-wagmi/tsconfig.lib.json --noEmit --incremental"
-      }
-    },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/margin-wagmi"],
