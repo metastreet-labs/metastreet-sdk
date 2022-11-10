@@ -1,5 +1,6 @@
 import { GetCollateralLimitsResult } from "@metastreet-labs/margin-core";
 import { BigNumber, BigNumberish } from "ethers";
+import useDefinedMetaStreetDeployment from "../../../hooks/useDefinedMetaStreetDeployment";
 import useCollateralLimits from "../../../lib/hooks/useCollateralLimits";
 import useFlashFee from "../../../lib/hooks/useFlashFee";
 import Spinner from "../../Spinner";
@@ -19,7 +20,11 @@ interface LoanInfoContainerProps {
 const LoanInfoContainer = (props: LoanInfoContainerProps) => {
   const { flashLoanAmount, children, ...token } = props;
 
-  const { data: limits, error: limitsError } = useCollateralLimits(token);
+  // TODO: remove this later, just stitching things out for now
+  const { deployment } = useDefinedMetaStreetDeployment();
+  const vaultAddress = deployment.vaults[0];
+
+  const { data: limits, error: limitsError } = useCollateralLimits({ ...token, vaultAddress });
   const { data: flashFee, error: flashFeeError } = useFlashFee(flashLoanAmount);
 
   const loadingOrError = (error?: string) => {
