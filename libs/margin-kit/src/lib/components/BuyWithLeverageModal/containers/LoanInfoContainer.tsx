@@ -1,11 +1,11 @@
 import { BigNumber, BigNumberish } from "ethers";
 import useFlashFee from "../../../lib/hooks/useFlashFee";
 import { useSupportingVaultsLimits } from "../../../lib/hooks/useSupportingVaultsLimits";
-import { VaultLimit } from "../../../lib/hooks/useVaultsLimits";
+import { VaultLimits } from "../../../lib/hooks/useVaultsLimits";
 import Spinner from "../../Spinner";
 
 interface LoanInfo {
-  limits: VaultLimit[];
+  limits: VaultLimits[];
   flashFee: BigNumber;
 }
 

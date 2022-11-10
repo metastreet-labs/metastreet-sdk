@@ -1,6 +1,6 @@
 import { BigNumber } from "ethers";
 import { ReactNode } from "react";
-import { VaultLimit } from "../../../lib/hooks/useVaultsLimits";
+import { VaultLimits } from "../../../lib/hooks/useVaultsLimits";
 import { BWLToken } from "../../../types";
 import { BuyWithLeverageContext, BuyWithLeverageContextType } from "./context";
 import useBuyWithLeverageForm from "./useBuyWithLeverageForm";
@@ -9,7 +9,7 @@ import useBuyWithLeverageTransaction from "./useBuyWithLeverageTransaction";
 interface BuyWithLeverageProviderProps {
   children: ReactNode;
   tokens: BWLToken[];
-  limits: VaultLimit[];
+  limits: VaultLimits[];
   flashFee: BigNumber;
   onBuySuccess?: () => void;
 }

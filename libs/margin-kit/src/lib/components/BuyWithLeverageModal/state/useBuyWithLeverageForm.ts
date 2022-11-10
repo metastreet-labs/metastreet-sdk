@@ -1,7 +1,7 @@
 import { QuoteMultipleERC721Result } from "@metastreet-labs/margin-core";
 import { BigNumber } from "ethers";
 import { useEffect, useMemo, useState } from "react";
-import { VaultLimit } from "../../../lib/hooks/useVaultsLimits";
+import { VaultLimits } from "../../../lib/hooks/useVaultsLimits";
 import { BWLToken } from "../../../types";
 import { daysFromSeconds } from "../../../utils/dates";
 import { fromUnits, toUnitsBigNum } from "../../../utils/numbers";
@@ -10,7 +10,7 @@ import useDebouncedQuote from "./useDebouncedQuote";
 export interface BuyWithLeverageFormState {
   debtFactor: number;
   debtAmount: number;
-  activeVaultLimits: VaultLimit;
+  activeVaultLimits: VaultLimits;
   downPayments: BigNumber[];
   totalDownPayment: number;
   duration: number;
@@ -20,7 +20,7 @@ export interface BuyWithLeverageFormState {
 
 interface UseBuyWithLeverageFormProps {
   tokens: BWLToken[];
-  limits: VaultLimit[];
+  limits: VaultLimits[];
   flashFee: BigNumber;
 }
 

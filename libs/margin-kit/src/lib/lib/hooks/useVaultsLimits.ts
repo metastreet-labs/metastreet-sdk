@@ -7,7 +7,7 @@ interface UseVaultsLimitsParams {
   tokenID: string;
 }
 
-export type VaultLimit = GetCollateralLimitsResult & { vaultAddress: string };
+export type VaultLimits = GetCollateralLimitsResult & { vaultAddress: string };
 
 export const useVaultsLimits = (params: UseVaultsLimitsParams) => {
   const { deployment, provider } = useDefinedMetaStreetDeployment();
@@ -30,7 +30,7 @@ export const useVaultsLimits = (params: UseVaultsLimitsParams) => {
     return limits;
   };
 
-  return useQuery<VaultLimit[], ReadableError>(vaultsLimitsQueryKeys.token(params), fetcher);
+  return useQuery<VaultLimits[], ReadableError>(vaultsLimitsQueryKeys.token(params), fetcher);
 };
 
 const vaultsLimitsQueryKeys = {
