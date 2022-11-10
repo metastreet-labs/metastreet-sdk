@@ -9,6 +9,7 @@ export interface QuoteRefinanceParams extends FetcherParams {
   balance: BigNumberish;
   downPayment: BigNumberish;
   duration: number;
+  vaultAddress: string;
 }
 
 export interface QuoteRefinanceResult {
@@ -25,7 +26,7 @@ const _quoteRefinance = async (params: QuoteRefinanceParams): Promise<QuoteRefin
     params.downPayment,
     params.collectionAddress,
     params.tokenID,
-    deployment.vaultAddress,
+    params.vaultAddress,
     params.duration
   );
   return {

@@ -9,6 +9,7 @@ export interface BuySingleERC721WithETHParams extends TransactionParams {
   downPayment: BigNumberish;
   maxRepayment: BigNumberish;
   duration: number;
+  vaultAddress: string;
 }
 
 const _buySingleERC721WithETH = (params: BuySingleERC721WithETHParams): Promise<ContractTransaction> => {
@@ -17,7 +18,7 @@ const _buySingleERC721WithETH = (params: BuySingleERC721WithETHParams): Promise<
   return contract.buySingleERC721WithETH(
     params.purchasePrice,
     params.fillCallData,
-    deployment.vaultAddress,
+    params.vaultAddress,
     params.duration,
     params.maxRepayment,
     { value: params.downPayment }
