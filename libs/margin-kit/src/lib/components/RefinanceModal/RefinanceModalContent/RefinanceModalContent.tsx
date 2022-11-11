@@ -3,6 +3,7 @@ import MetaStreetModal from "../../MetaStreetModal";
 import RefinanceTokenInfo from "../../token-info/RefinanceTokenInfo";
 import useRefinance from "../state/useRefinance";
 import RefinanceModalForm from "./RefinanceModalForm";
+import RefinanceModalSuccess, { RefinanceModalSuccessAnimation } from "./RefinanceModalSuccess";
 import RefinanceModalTransaction from "./RefinanceModalTransaction";
 
 interface RefinanceModalContentProps {
@@ -16,11 +17,11 @@ const RefinanceModalContent = (props: RefinanceModalContentProps) => {
   return (
     <>
       <MetaStreetModal.Title>Refinance</MetaStreetModal.Title>
-      {transactionState.status == "complete" ? "Success animation" : <RefinanceTokenInfo leverageBuy={leverageBuy} />}
+      {status == "complete" ? <RefinanceModalSuccessAnimation /> : <RefinanceTokenInfo leverageBuy={leverageBuy} />}
       <Divider className="bwl-modal-content-divider" />
       {status == "idle" ? <RefinanceModalForm /> : null}
       {status == "loading" || status == "error" ? <RefinanceModalTransaction onClose={props.onClose} /> : null}
-      {status == "complete" ? "<ModalSuccess />" : null}
+      {status == "complete" ? <RefinanceModalSuccess onClose={props.onClose} /> : null}
     </>
   );
 };
