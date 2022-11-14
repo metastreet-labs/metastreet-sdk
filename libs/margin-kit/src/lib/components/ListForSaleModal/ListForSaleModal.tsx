@@ -1,6 +1,7 @@
 import { LeverageBuy } from "@metastreet-labs/margin-core";
 import MetaStreetModal, { ModalState } from "../MetaStreetModal";
 import LeverageBuyTokenInfo from "../token-info/LeverageBuyTokenInfo";
+import { Input } from "./Input";
 
 type ListForSaleModal = ModalState & {
   leverageBuy: LeverageBuy;
@@ -14,6 +15,7 @@ export const ListForSaleModal = (props: ListForSaleModal) => {
       <MetaStreetModal.Body onClose={onClose}>
         <MetaStreetModal.Title>List for Sale</MetaStreetModal.Title>
         <LeverageBuyTokenInfo leverageBuy={leverageBuy} />
+        <Input />
       </MetaStreetModal.Body>
     </MetaStreetModal>
   );
