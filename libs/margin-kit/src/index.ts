@@ -3,6 +3,7 @@ export { default as BuyWithLeverage } from "./lib/components/BuyWithLeverage";
 export { default as BuyWithLeverageButton } from "./lib/components/BuyWithLeverageButton";
 export { default as BuyWithLeverageModal } from "./lib/components/BuyWithLeverageModal";
 export { default as DeploymentProvider } from "./lib/components/DeploymentProvider";
+export * from "./lib/components/ListForSaleModal";
 export { default as MetaStreetDeploymentProvider } from "./lib/components/MetaStreetDeploymentProvider";
 export * from "./lib/components/RefinanceModal";
 // Other hooks
