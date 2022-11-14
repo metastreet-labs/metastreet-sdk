@@ -16,27 +16,26 @@ interface RepaymentDropdownProps {
 
 const RepaymentDropdown = (props: RepaymentDropdownProps) => {
   const { label, debtAmount, duration, repayment } = props;
-
   const principal = prettyFormatNumber(debtAmount);
 
-  let rep: ReactNode, totalInterest: ReactNode, dailyInterest: ReactNode;
+  let repaymentNode: ReactNode, totalInterestNode: ReactNode, dailyInterestRateNode: ReactNode;
   if (repayment) {
-    rep = <ETHPrice price={prettyFormatNumber(repayment)} />;
+    repaymentNode = <ETHPrice price={prettyFormatNumber(repayment)} />;
 
-    const interestAmount = new Decimal(repayment).sub(debtAmount);
-    totalInterest = <ETHPrice price={prettyFormatNumber(interestAmount)} />;
+    const totalInterest = new Decimal(repayment).sub(debtAmount);
+    totalInterestNode = <ETHPrice price={prettyFormatNumber(totalInterest)} />;
 
-    const dailyInterestPercent = interestAmount.div(duration).mul(100).div(debtAmount).toDecimalPlaces(2);
-    dailyInterest = `${dailyInterestPercent}%`;
+    const dailyInterestRate = totalInterest.div(duration).mul(100).div(debtAmount).toDecimalPlaces(2);
+    dailyInterestRateNode = `${dailyInterestRate}%`;
   } else {
-    rep = totalInterest = dailyInterest = <LoadingText className="loading-text-purple" />;
+    repaymentNode = totalInterestNode = dailyInterestRateNode = <LoadingText className="loading-text-purple" />;
   }
 
   return (
     <InfoDropdown
       label={<span className="important-text">{label}</span>}
       labelVariant="important"
-      value={rep}
+      value={repaymentNode}
       className="bwl-modal-form-repayment-dropdown"
     >
       <InfoRow>
@@ -47,11 +46,11 @@ const RepaymentDropdown = (props: RepaymentDropdownProps) => {
       </InfoRow>
       <InfoRow>
         <PurpleSectionLabel>Total Interest</PurpleSectionLabel>
-        <InfoRowValue>{totalInterest}</InfoRowValue>
+        <InfoRowValue>{totalInterestNode}</InfoRowValue>
       </InfoRow>
       <InfoRow>
         <PurpleSectionLabel>Daily Interest Rate</PurpleSectionLabel>
-        <InfoRowValue className="important-text">{dailyInterest}</InfoRowValue>
+        <InfoRowValue className="important-text">{dailyInterestRateNode}</InfoRowValue>
       </InfoRow>
     </InfoDropdown>
   );
