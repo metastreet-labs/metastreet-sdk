@@ -3,7 +3,9 @@ import { fromUnits, prettyFormatNumber } from "../../../utils/numbers";
 import Divider from "../../Divider";
 import LeverageDropdown from "../../dropdowns/LeverageDropdown";
 import FloorBreakeven from "../../info-rows/FloorBreakeven";
+import OwedOrAvailable from "../../info-rows/OwedOrAvailable";
 import MetaStreetModal from "../../MetaStreetModal";
+import PurpleSection from "../../purple-section/PurpleSection";
 import { DebtSlider } from "../../sliders/DebtSlider";
 import DurationSlider from "../../sliders/DurationSlider";
 import RefinanceTokenInfo from "../../token-info/RefinanceTokenInfo";
@@ -45,7 +47,9 @@ const RefinanceModalContent = (props: RefinanceModalContentProps) => {
         tokenCount={1}
         label="New Floor Breakeven"
       />
-      <div className="flex h-56 items-center justify-center">This is a refinance modal</div>
+      <PurpleSection>
+        <OwedOrAvailable />
+      </PurpleSection>
     </>
   );
 };
