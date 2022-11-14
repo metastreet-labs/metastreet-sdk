@@ -31,7 +31,9 @@ export interface UseRefinanceFormResult {
 
 const getInitialDebtFactor = (oldRepayment: BigNumber, maxDebt: BigNumber) => {
   const initialDebt = oldRepayment.gt(maxDebt) ? maxDebt : oldRepayment;
-  return initialDebt.div(maxDebt).toNumber();
+  let initialDebtFactor = initialDebt.div(maxDebt).toNumber();
+  if (initialDebtFactor < 0.05) initialDebtFactor = 0.05;
+  return initialDebtFactor;
 };
 
 const useRefinanceForm = (params: UseRefinanceFormParams): UseRefinanceFormResult => {
