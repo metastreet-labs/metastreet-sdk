@@ -11,8 +11,9 @@ export type UseQuoteRefinanceParams = Omit<QuoteRefinanceParams, "signerOrProvid
 
 export const useQuoteRefinance = (params: UseQuoteRefinanceParams) => {
   const { deployment, provider } = useDefinedMetaStreetDeployment();
-  return useQuery<QuoteRefinanceResult, ReadableError>(quoteRefinanceQueryKeys.loanTerms(params), () =>
-    quoteRefinance({ ...params, signerOrProvider: provider, deployment })
+  return useQuery<QuoteRefinanceResult, ReadableError>(
+    quoteRefinanceQueryKeys.loanTerms(params.vaultAddress, params),
+    () => quoteRefinance({ ...params, signerOrProvider: provider, deployment })
   );
 };
 
@@ -21,10 +22,15 @@ type LoanTerms = TokenIdentifier & Pick<QuoteRefinanceParams, "balance" | "downP
 
 const quoteRefinanceQueryKeys = {
   all: () => ["quote-refinance"],
-  token: (token: TokenIdentifier) => [...quoteRefinanceQueryKeys.all(), token.collectionAddress, token.tokenID],
-  loanTerms: (terms: LoanTerms) => {
+  vault: (vaultAddress: string) => [...quoteRefinanceQueryKeys.all(), vaultAddress],
+  token: (vaultAddress: string, token: TokenIdentifier) => [
+    ...quoteRefinanceQueryKeys.vault(vaultAddress),
+    token.collectionAddress,
+    token.tokenID,
+  ],
+  loanTerms: (vaultAddress: string, terms: LoanTerms) => {
     const { balance, downPayment, duration, ...token } = terms;
     const id = `${balance}-${downPayment}-${duration}`;
-    return [...quoteRefinanceQueryKeys.token(token), id];
+    return [...quoteRefinanceQueryKeys.token(vaultAddress, token), id];
   },
 };
