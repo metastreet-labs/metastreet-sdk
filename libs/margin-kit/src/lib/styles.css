@@ -523,3 +523,7 @@
   @apply rounded-lg object-cover;
   filter: drop-shadow(4.4625px 4.4625px 4.4625px rgba(0, 0, 0, 0.25));
 }
+
+.success-animation {
+  @apply w-56 h-56 mx-auto my-4;
+}
