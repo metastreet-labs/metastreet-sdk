@@ -1,4 +1,6 @@
 import { BigNumber } from "ethers";
+import { cleanupOrder } from "../../helpers/cleanupOrder";
+import { decodeOrder } from "../../helpers/decodeOrder";
 import {
   LeverageBuy,
   LeverageBuyEvent,
@@ -41,11 +43,14 @@ export interface RawLeverageBuyEvent {
 }
 
 export const transformRawListingData = (raw: RawListingData): ListingData => {
+  // TODO: grab this directly from raw object once it's implemented
+  const decoded = cleanupOrder(decodeOrder(raw.raw));
   return {
     listingPrice: BigNumber.from(raw.listingPrice),
     consideration: BigNumber.from(raw.consideration),
     totalFees: BigNumber.from(raw.totalFees),
     marketPlace: raw.marketPlace as Marketplace,
+    endTime: parseInt(decoded.endTime),
     raw: raw.raw,
   };
 };

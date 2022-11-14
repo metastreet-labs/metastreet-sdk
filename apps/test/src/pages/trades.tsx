@@ -1,5 +1,6 @@
 import { LeverageBuy } from "@metastreet-labs/margin-core";
 import { RefinanceModal, useLeverageBuys } from "@metastreet-labs/margin-kit";
+import { ethers } from "ethers";
 import { NextPage } from "next";
 import { useState } from "react";
 import { useQuery } from "wagmi";
@@ -8,15 +9,20 @@ const LeverageBuysPage: NextPage = () => {
   const { data } = useLeverageBuys();
   return (
     <table className="border-spacing-y-2 border-spacing-x-4 border border-separate">
-      <tr>
-        <th>Image</th>
-        <th>Collection Name</th>
-        <th>Token ID</th>
-        <th></th>
-      </tr>
-      {data?.map((lb) => (
-        <LBRow leverageBuy={lb} key={lb.escrowID} />
-      ))}
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Collection Name</th>
+          <th>Token ID</th>
+          <th>Refi</th>
+          <th>List</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data?.map((lb) => (
+          <LBRow leverageBuy={lb} key={lb.escrowID} />
+        ))}
+      </tbody>
     </table>
   );
 };
@@ -29,6 +35,11 @@ const LBRow = (props: LBRowProps) => {
   const { leverageBuy } = props;
   const { data } = useTokenMetadata(leverageBuy.tokenURI);
   const [refiModalOpen, setRefiModalOpen] = useState(false);
+
+  let listingTimeRemaining: number | undefined;
+  if (leverageBuy.listingData) {
+    listingTimeRemaining = Math.floor((leverageBuy.listingData.endTime - new Date().getTime() / 1000) / 86400);
+  }
 
   return (
     <tr>
@@ -43,6 +54,16 @@ const LBRow = (props: LBRowProps) => {
         </button>
         <RefinanceModal isOpen={refiModalOpen} onClose={() => setRefiModalOpen(false)} leverageBuy={leverageBuy} />
       </td>
+      {listingTimeRemaining && listingTimeRemaining >= 0 ? (
+        <td>
+          Listed for {ethers.utils.formatEther(leverageBuy.listingData.listingPrice)} ETH,{" "}
+          <button className="border">Delist</button>
+        </td>
+      ) : (
+        <td>
+          Not Listed, <button className="border">List</button>
+        </td>
+      )}
     </tr>
   );
 };
