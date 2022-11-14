@@ -56,7 +56,7 @@ const ModalForm = () => {
           duration={formState.duration}
           repayment={formState.totalRepayment}
         />
-        <RepaymentDate />
+        <RepaymentDate duration={formState.duration} />
       </PurpleSection>
       <MetaStreetButton disabled={buttonDisabled} onClick={actions.buy}>
         {insufficientFunds ? "Insufficient Funds" : "Buy"}

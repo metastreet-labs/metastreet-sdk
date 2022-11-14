@@ -1,11 +1,13 @@
 import Add2Calendar from "add2calendar";
-import useBuyWithLeverage from "../BuyWithLeverageModal/state/useBuyWithLeverage";
 import { InfoRow, InfoRowValue } from "../InfoRow";
 import PurpleSectionLabel from "../purple-section/PurpleSectionLabel";
 
-const RepaymentDate = () => {
-  const { formState } = useBuyWithLeverage();
-  const { duration } = formState;
+interface RepaymentDateProps {
+  duration: number;
+}
+
+const RepaymentDate = (props: RepaymentDateProps) => {
+  const { duration } = props;
   const nowMs = new Date().getTime();
   const periodMs = duration * 86400 * 1000;
   const repaymentDate = new Date(nowMs + periodMs);
