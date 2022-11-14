@@ -1,37 +1,41 @@
 import Decimal from "decimal.js";
 import { ReactNode } from "react";
 import { prettyFormatNumber } from "../../utils/numbers";
-import useBuyWithLeverage from "../BuyWithLeverageModal/state/useBuyWithLeverage";
 import ETHPrice from "../ETHPrice";
 import { InfoRow, InfoRowValue } from "../InfoRow";
 import LoadingText from "../LoadingText";
 import PurpleSectionLabel from "../purple-section/PurpleSectionLabel";
 import InfoDropdown from "./InfoDropdown";
 
-const RepaymentDropdown = () => {
-  const { formState } = useBuyWithLeverage();
-  const { debtAmount, duration, totalRepayment } = formState;
+interface RepaymentDropdownProps {
+  label: ReactNode;
+  debtAmount: number;
+  duration: number;
+  repayment?: number;
+}
 
+const RepaymentDropdown = (props: RepaymentDropdownProps) => {
+  const { label, debtAmount, duration, repayment } = props;
   const principal = prettyFormatNumber(debtAmount);
 
-  let repayment: ReactNode, totalInterest: ReactNode, dailyInterest: ReactNode;
-  if (totalRepayment) {
-    repayment = <ETHPrice price={prettyFormatNumber(totalRepayment)} />;
+  let repaymentNode: ReactNode, totalInterestNode: ReactNode, dailyInterestRateNode: ReactNode;
+  if (repayment) {
+    repaymentNode = <ETHPrice price={prettyFormatNumber(repayment)} />;
 
-    const interestAmount = new Decimal(totalRepayment).sub(debtAmount);
-    totalInterest = <ETHPrice price={prettyFormatNumber(interestAmount)} />;
+    const totalInterest = new Decimal(repayment).sub(debtAmount);
+    totalInterestNode = <ETHPrice price={prettyFormatNumber(totalInterest)} />;
 
-    const dailyInterestPercent = interestAmount.div(duration).mul(100).div(debtAmount).toDecimalPlaces(2);
-    dailyInterest = `${dailyInterestPercent}%`;
+    const dailyInterestRate = totalInterest.div(duration).mul(100).div(debtAmount).toDecimalPlaces(2);
+    dailyInterestRateNode = `${dailyInterestRate}%`;
   } else {
-    repayment = totalInterest = dailyInterest = <LoadingText className="loading-text-purple" />;
+    repaymentNode = totalInterestNode = dailyInterestRateNode = <LoadingText className="loading-text-purple" />;
   }
 
   return (
     <InfoDropdown
-      label={<span className="important-text">Total Repayment</span>}
+      label={<span className="important-text">{label}</span>}
       labelVariant="important"
-      value={repayment}
+      value={repaymentNode}
       className="bwl-modal-form-repayment-dropdown"
     >
       <InfoRow>
@@ -41,12 +45,12 @@ const RepaymentDropdown = () => {
         </InfoRowValue>
       </InfoRow>
       <InfoRow>
-        <PurpleSectionLabel>Total Interest Amount</PurpleSectionLabel>
-        <InfoRowValue>{totalInterest}</InfoRowValue>
+        <PurpleSectionLabel>Total Interest</PurpleSectionLabel>
+        <InfoRowValue>{totalInterestNode}</InfoRowValue>
       </InfoRow>
       <InfoRow>
-        <PurpleSectionLabel>Daily Interest</PurpleSectionLabel>
-        <InfoRowValue className="important-text">{dailyInterest}</InfoRowValue>
+        <PurpleSectionLabel>Daily Interest Rate</PurpleSectionLabel>
+        <InfoRowValue className="important-text">{dailyInterestRateNode}</InfoRowValue>
       </InfoRow>
     </InfoDropdown>
   );
