@@ -16,7 +16,7 @@ export const RefinanceModal = (props: RefinanceModalProps) => {
 
   return (
     <MetaStreetModal isOpen={isOpen} onClose={onClose}>
-      <MetaStreetModal.Body onClose={onClose}>
+      <MetaStreetModal.Body onClose={onClose} className="refi-modal-body">
         <MetaStreetDeploymentProvider
           errorComponent={
             <div className="flex h-56 items-center justify-center">

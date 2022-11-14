@@ -12,6 +12,7 @@ import { DebtSlider } from "../../sliders/DebtSlider";
 import DurationSlider from "../../sliders/DurationSlider";
 import RefinanceTokenInfo from "../../token-info/RefinanceTokenInfo";
 import useRefinance from "../state/useRefinance";
+import RefinanceSubmitButton from "./RefinanceSubmitButton";
 
 interface RefinanceModalContentProps {
   onClose: () => void;
@@ -36,6 +37,7 @@ const RefinanceModalContent = (props: RefinanceModalContentProps) => {
         duration={formState.duration}
         setDuration={actions.setDuration}
       />
+      <Divider className="bwl-modal-content-divider" />
       <LeverageDropdown
         purchasePrice={fromUnits(leverageBuy.purchasePrice).toNumber()}
         debtAmount={fromUnits(formState.debtAmount).toNumber()}
@@ -59,6 +61,7 @@ const RefinanceModalContent = (props: RefinanceModalContentProps) => {
         />
         <RepaymentDate duration={formState.duration} />
       </PurpleSection>
+      <RefinanceSubmitButton />
     </>
   );
 };

@@ -41,9 +41,6 @@ const useRefinanceTransaction = (params: UseRefinanceTransactionParams): UseRefi
   const { deployment } = useDefinedMetaStreetDeployment();
   const [steps, updateStep, resetSteps] = useTransactionSteps(getSteps());
 
-  // TODO: this should come from formState
-  const vaultAddress = deployment.vaults[0];
-
   const refinance = async () => {
     if (!signer || !formState.quote) return;
 
@@ -59,7 +56,7 @@ const useRefinanceTransaction = (params: UseRefinanceTransactionParams): UseRefi
         duration: daysToSeconds(formState.duration),
         downPayment: formState.downPayment,
         maxRepayment: formState.quote.repayment.mul(105).div(100),
-        vaultAddress,
+        vaultAddress: formState.activeLimits.vaultAddress,
       });
     } catch (e) {
       const error = e as ReadableError;
