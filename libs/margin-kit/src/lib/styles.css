@@ -3,6 +3,17 @@
 @tailwind utilities;
 
 /**************************************************************************/
+/* to hide number input arrows */
+/**************************************************************************/
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+/**************************************************************************/
 /* BWL button*/
 /**************************************************************************/
 .bwl-button {
@@ -498,6 +509,29 @@
 
 .transaction-steps-circle-title {
   @apply absolute top-12 whitespace-nowrap text-xs font-semibold;
+}
+
+/**************************************************************************/
+/* List for Sale (lsf) stuff*/
+/**************************************************************************/
+.lsf-input-outer-wrapper {
+  @apply flex flex-col space-y-1 my-4;
+}
+
+.lsf-input-label {
+  @apply text-gray-500 self-start;
+}
+
+.lst-input-inner-wrapper {
+  @apply flex items-center py-2 px-3 border-2 focus-within:border-ms-text-important rounded-lg space-x-2;
+}
+
+.lsf-input-leading {
+  @apply w-8 h-8;
+}
+
+.lsf-input-input {
+  @apply outline-none flex-grow text-ms-text-important text-lg;
 }
 
 /**************************************************************************/
