@@ -61,7 +61,7 @@ export const useListForSaleTransaction = (params: UseListForSaleTransactionParam
     const startTimestamp = Math.ceil(new Date().getTime() / 1000);
     const endTimestamp = startTimestamp + 7 * 86400;
     const salt = BigNumber.from(utils.randomBytes(32));
-    const listingPrice = toUnits(formState.listingPrice).toString();
+    const listingPrice = toUnits(formState.listingPriceNum).toString();
 
     let tx: ContractTransaction;
     try {
