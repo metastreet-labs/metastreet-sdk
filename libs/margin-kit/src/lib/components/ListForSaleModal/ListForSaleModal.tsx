@@ -3,6 +3,7 @@ import MetaStreetDeploymentProvider from "../MetaStreetDeploymentProvider/MetaSt
 import MetaStreetModal, { ModalState } from "../MetaStreetModal";
 import ModalLoadingOrError from "../ModalLoadingOrError";
 import LeverageBuyTokenInfo from "../token-info/LeverageBuyTokenInfo";
+import FeesProvider from "./FeesProvider";
 import { Input } from "./Input";
 
 type ListForSaleModal = ModalState & {
@@ -17,8 +18,10 @@ export const ListForSaleModal = (props: ListForSaleModal) => {
       <MetaStreetModal.Body onClose={onClose}>
         <MetaStreetModal.Title>List for Sale</MetaStreetModal.Title>
         <MetaStreetDeploymentProvider errorComponent={<ModalLoadingOrError error="Unsupported chain" />}>
-          <LeverageBuyTokenInfo leverageBuy={leverageBuy} />
-          <Input />
+          <FeesProvider collectionAddress={leverageBuy.collectionAddress}>
+            <LeverageBuyTokenInfo leverageBuy={leverageBuy} />
+            <Input />
+          </FeesProvider>
         </MetaStreetDeploymentProvider>
       </MetaStreetModal.Body>
     </MetaStreetModal>
