@@ -278,20 +278,8 @@
   @apply w-[28rem];
 }
 
-.refi-amount {
+.refi-owed-or-available {
   @apply mb-1;
-}
-
-.refi-amount-value {
-  @apply font-semibold;
-}
-
-.refi-amount-value-owed {
-  @apply text-red-500 !important;
-}
-
-.refi-amount-value-available {
-  @apply text-green-600 !important;
 }
 
 /**************************************************************************/
@@ -399,6 +387,18 @@
 
 .eth-price-default {
   @apply font-semibold;
+}
+
+.eth-price-colored {
+  @apply font-semibold;
+}
+
+.eth-price-colored-red {
+  @apply text-red-500 !important;
+}
+
+.eth-price-colored-green {
+  @apply text-green-600 !important;
 }
 
 /**************************************************************************/

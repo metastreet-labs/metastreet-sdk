@@ -1,6 +1,5 @@
-import classNames from "classnames";
 import { fromUnits, prettyFormatNumber } from "../../utils/numbers";
-import ETHPrice from "../ETHPrice";
+import ETHPriceColored from "../ETHPriceColored";
 import { InfoRow, InfoRowValue } from "../InfoRow";
 import PurpleSectionLabel from "../purple-section/PurpleSectionLabel";
 import useRefinance from "../RefinanceModal/state/useRefinance";
@@ -10,15 +9,12 @@ const OwedOrAvailable = () => {
   const isOwed = formState.downPayment.gt(0);
 
   return (
-    <InfoRow className="refi-amount">
+    <InfoRow className="refi-owed-or-available">
       <PurpleSectionLabel>Amount Owed/Available</PurpleSectionLabel>
       <InfoRowValue>
-        <ETHPrice
+        <ETHPriceColored
           price={prettyFormatNumber(fromUnits(formState.downPayment.mul(-1)))}
-          className={classNames("refi-amount-value", {
-            "refi-amount-value-owed": isOwed,
-            "refi-amount-value-available": !isOwed,
-          })}
+          color={isOwed ? "red" : "green"}
         />
       </InfoRowValue>
     </InfoRow>

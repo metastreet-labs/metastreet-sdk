@@ -1,6 +1,6 @@
-import classNames from "classnames";
 import { fromUnits, prettyFormatNumber } from "../../../utils/numbers";
 import ETHPrice from "../../ETHPrice";
+import ETHPriceColored from "../../ETHPriceColored";
 import { InfoRow, InfoRowLabel, InfoRowValue } from "../../InfoRow";
 import MetaStreetButton from "../../MetaStreetButton";
 import { useFees } from "../FeesProvider";
@@ -39,15 +39,12 @@ const ListForSaleModalForm = () => {
             <ETHPrice price={prettyFormatNumber(fromUnits(minListingPrice))} />
           </InfoRowValue>
         </InfoRow>
-        <InfoRow className="refi-amount">
+        <InfoRow>
           <InfoRowLabel>Net Profit/Loss</InfoRowLabel>
           <InfoRowValue>
-            <ETHPrice
+            <ETHPriceColored
               price={prettyFormatNumber(fromUnits(netProfit))}
-              className={classNames("refi-amount-value", {
-                "refi-amount-value-owed": netProfit.isNegative(),
-                "refi-amount-value-available": !netProfit.isNegative(),
-              })}
+              color={netProfit.isNegative() ? "red" : "green"}
             />
           </InfoRowValue>
         </InfoRow>
