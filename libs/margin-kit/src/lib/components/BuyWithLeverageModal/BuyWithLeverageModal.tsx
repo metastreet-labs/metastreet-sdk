@@ -3,6 +3,7 @@ import { BWLToken } from "../../types";
 import { toUnits } from "../../utils/numbers";
 import MetaStreetDeploymentProvider from "../MetaStreetDeploymentProvider";
 import MetaStreetModal, { ModalState } from "../MetaStreetModal";
+import ModalLoadingOrError from "../ModalLoadingOrError";
 import LoanInfoContainer from "./containers/LoanInfoContainer";
 import ModalContent from "./ModalContent";
 import BuyWithLeverageProvider from "./state/BuyWithLeverageProvider";
@@ -28,13 +29,7 @@ const BuyWithLeverageModal = (props: BuyWithLeverageModalProps) => {
   return (
     <MetaStreetModal isOpen={isOpen} onClose={onClose}>
       <MetaStreetModal.Body onClose={onClose} hideCloseButton={preventClose}>
-        <MetaStreetDeploymentProvider
-          errorComponent={
-            <div className="flex h-56 items-center justify-center">
-              <span>Unsupported chain</span>
-            </div>
-          }
-        >
+        <MetaStreetDeploymentProvider errorComponent={<ModalLoadingOrError error="Unsupported chain" />}>
           <LoanInfoContainer collectionAddress={collectionAddress} tokenID={tokenID} flashLoanAmount={totalPriceUnits}>
             {({ limits, flashFee }) => (
               <BuyWithLeverageProvider tokens={tokens} limits={limits} flashFee={flashFee} onBuySuccess={onBuySuccess}>
