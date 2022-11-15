@@ -515,7 +515,7 @@
 /* List for Sale (lsf) stuff*/
 /**************************************************************************/
 .lsf-input-outer-wrapper {
-  @apply flex flex-col space-y-1 my-4;
+  @apply flex flex-col space-y-1 mb-4;
 }
 
 .lsf-input-label {
@@ -532,6 +532,18 @@
 
 .lsf-input-input {
   @apply outline-none flex-grow text-ms-text-important text-lg;
+}
+
+.lsf-modal-form-rows {
+  @apply flex flex-col space-y-2;
+}
+
+.lsf-modal-form-rows-marketplace-wrapper {
+  @apply flex items-center space-x-1;
+}
+
+.lsf-modal-form-rows-marketplace-logo {
+  @apply w-5 h-5;
 }
 
 /**************************************************************************/
