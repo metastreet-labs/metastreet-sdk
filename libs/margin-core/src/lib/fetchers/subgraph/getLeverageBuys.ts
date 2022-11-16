@@ -63,8 +63,8 @@ export const getLeverageBuys = async (params: GetLeverageBuysParams): Promise<Le
 
   if (response.ok) {
     const json = await response.json();
-    const rawEvents = json.data.leverageBuys as RawLeverageBuy[];
-    return rawEvents.map(transformRawLeverageBuy);
+    const rawEntities = json.data.leverageBuys as RawLeverageBuy[];
+    return rawEntities.map(transformRawLeverageBuy);
   } else {
     const text = await response.text();
     throw new Error(text);

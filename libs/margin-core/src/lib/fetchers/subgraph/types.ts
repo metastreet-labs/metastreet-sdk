@@ -16,6 +16,7 @@ export interface ListingData {
   consideration: BigNumber;
   totalFees: BigNumber;
   marketPlace: Marketplace;
+  endTime: number;
   raw: string;
 }
 
