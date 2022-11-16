@@ -4,14 +4,15 @@ import {
   GetCollateralLimitsResult,
   ReadableError,
 } from "@metastreet-labs/margin-core";
-import { useQuery } from "wagmi";
-import useMetaStreetDeployment from "../../hooks/useMetaStreetDeployment";
+import { useProvider, useQuery } from "wagmi";
+import useChainID from "../../hooks/useChainID";
 import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
 
 type UseCollateralLimitsParams = Pick<GetCollateralLimitsParams, "collectionAddress" | "tokenID" | "vaultAddress">;
 
 const useCollateralLimits = (params: UseCollateralLimitsParams) => {
-  const { provider, chainID } = useMetaStreetDeployment();
+  const provider = useProvider();
+  const chainID = useChainID();
 
   const [fetcher, enabled] = useFetcherWithDeployment((deployment) => {
     return getCollateralLimits({ signerOrProvider: provider, deployment, ...params });
