@@ -1,5 +1,5 @@
 import { LeverageBuy } from "@metastreet-labs/margin-core";
-import { RefinanceModal, useLeverageBuys } from "@metastreet-labs/margin-kit";
+import { ListForSaleModal, RefinanceModal, useLeverageBuys } from "@metastreet-labs/margin-kit";
 import { ethers } from "ethers";
 import { NextPage } from "next";
 import { useState } from "react";
@@ -35,6 +35,7 @@ const LBRow = (props: LBRowProps) => {
   const { leverageBuy } = props;
   const { data } = useTokenMetadata(leverageBuy.tokenURI);
   const [refiModalOpen, setRefiModalOpen] = useState(false);
+  const [lfsModalOpen, setLSFModalOpen] = useState(false);
 
   let listingTimeRemaining: number | undefined;
   if (leverageBuy.listingData) {
@@ -61,7 +62,11 @@ const LBRow = (props: LBRowProps) => {
         </td>
       ) : (
         <td>
-          Not Listed, <button className="border">List</button>
+          Not Listed,{" "}
+          <button className="border" onClick={() => setLSFModalOpen(true)}>
+            List
+          </button>
+          <ListForSaleModal isOpen={lfsModalOpen} onClose={() => setLSFModalOpen(false)} leverageBuy={leverageBuy} />
         </td>
       )}
     </tr>

@@ -187,7 +187,7 @@
 }
 
 .bwl-modal-content-token-info-single-rows {
-  @apply flex flex-grow flex-col justify-center space-y-2;
+  @apply flex flex-grow flex-col justify-center space-y-1;
 }
 
 .bwl-modal-content-token-info-single-collection-name {
