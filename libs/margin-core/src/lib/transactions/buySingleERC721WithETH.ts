@@ -13,8 +13,7 @@ export interface BuySingleERC721WithETHParams extends TransactionParams {
 }
 
 const _buySingleERC721WithETH = (params: BuySingleERC721WithETHParams): Promise<ContractTransaction> => {
-  const { signer, deployment } = params;
-  const contract = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signer);
+  const contract = LeverageBuyWrapperV1__factory.connect(params.lbWrapperAddress, params.signer);
   return contract.buySingleERC721WithETH(
     params.purchasePrice,
     params.fillCallData,

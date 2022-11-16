@@ -13,8 +13,7 @@ export interface BuyMultipleERC721WithETHParams extends TransactionParams {
 }
 
 const _buyMultipleERC721WithETH = (params: BuyMultipleERC721WithETHParams): Promise<ContractTransaction> => {
-  const { signer, deployment } = params;
-  const contract = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signer);
+  const contract = LeverageBuyWrapperV1__factory.connect(params.lbWrapperAddress, params.signer);
   const totalDownPayment = params.downPayments.reduce(
     (total, downPayment) => BigNumber.from(total).add(downPayment),
     0

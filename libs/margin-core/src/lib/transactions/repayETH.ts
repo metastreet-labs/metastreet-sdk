@@ -12,12 +12,9 @@ export interface RepayETHParams extends TransactionParams {
 }
 
 const _repayETH = async (params: RepayETHParams): Promise<ContractTransaction> => {
-  const { deployment, signer } = params;
-
-  const lbWrapper = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signer);
+  const lbWrapper = LeverageBuyWrapperV1__factory.connect(params.lbWrapperAddress, params.signer);
   const pePlatformAddress = await lbWrapper.purchaseEscrow();
-
-  const pePlatform = PurchaseEscrowPlatform__factory.connect(pePlatformAddress, signer);
+  const pePlatform = PurchaseEscrowPlatform__factory.connect(pePlatformAddress, params.signer);
   return pePlatform.repayETH(params.escrowID, { value: params.repayment });
 };
 

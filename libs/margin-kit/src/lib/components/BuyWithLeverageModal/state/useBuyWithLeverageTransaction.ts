@@ -47,6 +47,7 @@ const useBuyWithLeverageTransaction = (props: UseBuyWithLeverageTransactionProps
     const downPayments = formState.downPayments.map((downPayment) => downPayment.toString());
     const maxRepayments = formState.quote.repayments.map((repayment) => repayment.mul(105).div(100).toString());
     const vaultAddress = formState.activeVaultLimits.vaultAddress;
+    const { lbWrapperAddress } = deployment;
 
     /* send transaction based on the number of tokens */
     const sendTransaction = async () => {
@@ -55,7 +56,7 @@ const useBuyWithLeverageTransaction = (props: UseBuyWithLeverageTransactionProps
       if (tokens.length > 1) {
         return buyMultipleERC721WithETH({
           signer,
-          deployment,
+          lbWrapperAddress,
           purchasePrices,
           downPayments,
           maxRepayments,
@@ -66,7 +67,7 @@ const useBuyWithLeverageTransaction = (props: UseBuyWithLeverageTransactionProps
       } else {
         return buySingleERC721WithETH({
           signer,
-          deployment,
+          lbWrapperAddress,
           purchasePrice: purchasePrices[0],
           downPayment: downPayments[0],
           maxRepayment: maxRepayments[0],

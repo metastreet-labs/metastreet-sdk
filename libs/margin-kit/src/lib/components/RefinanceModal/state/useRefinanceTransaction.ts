@@ -51,7 +51,7 @@ const useRefinanceTransaction = (params: UseRefinanceTransactionParams): UseRefi
     try {
       tx = await refinanceETH({
         signer,
-        deployment,
+        lbWrapperAddress: deployment.lbWrapperAddress,
         escrowID,
         duration: daysToSeconds(formState.duration),
         downPayment: formState.downPayment,

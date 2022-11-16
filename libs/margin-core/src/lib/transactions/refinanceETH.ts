@@ -15,11 +15,9 @@ export type RefinanceETHParams = TransactionParams & {
 };
 
 const _refinanceETH = async (params: RefinanceETHParams) => {
-  const { deployment, signer } = params;
-
-  const lbWrapper = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signer);
+  const lbWrapper = LeverageBuyWrapperV1__factory.connect(params.lbWrapperAddress, params.signer);
   const pePlatformAddress = await lbWrapper.purchaseEscrow();
-  const pePlatform = PurchaseEscrowPlatform__factory.connect(pePlatformAddress, signer);
+  const pePlatform = PurchaseEscrowPlatform__factory.connect(pePlatformAddress, params.signer);
 
   const calldata = ethers.utils.defaultAbiCoder.encode(
     ["address", "uint64", "int256", "uint256"],
@@ -28,7 +26,7 @@ const _refinanceETH = async (params: RefinanceETHParams) => {
 
   const payable = BigNumber.from(params.downPayment).gt(0);
 
-  return pePlatform.transferAndCall(params.escrowID, deployment.lbWrapperAddress, calldata, {
+  return pePlatform.transferAndCall(params.escrowID, params.lbWrapperAddress, calldata, {
     value: payable ? params.downPayment : undefined,
   });
 };

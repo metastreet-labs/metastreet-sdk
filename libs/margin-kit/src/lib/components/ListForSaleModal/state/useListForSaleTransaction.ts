@@ -62,12 +62,13 @@ export const useListForSaleTransaction = (params: UseListForSaleTransactionParam
     const endTimestamp = startTimestamp + 7 * 86400;
     const salt = BigNumber.from(utils.randomBytes(32));
     const listingPrice = toUnits(formState.listingPriceNum).toString();
+    const { lbWrapperAddress } = deployment;
 
     let tx: ContractTransaction;
     try {
       tx = await createListing({
-        deployment,
         signer,
+        lbWrapperAddress,
         escrowID,
         marketplace: Marketplace.Seaport,
         feeBasisPoints: fees.opensea.bps,
