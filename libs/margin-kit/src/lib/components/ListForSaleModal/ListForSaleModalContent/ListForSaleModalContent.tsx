@@ -3,8 +3,13 @@ import MetaStreetModal from "../../MetaStreetModal";
 import LeverageBuyTokenInfo from "../../token-info/LeverageBuyTokenInfo";
 import { useListForSale } from "../state/ListForSaleContext";
 import ListForSaleModalForm from "./ListForSaleModalForm";
+import ListForSaleModalTransaction from "./ListForSaleModalTransaction";
 
-const ListForSaleModalContent = () => {
+interface ListForSaleModalContentProps {
+  onClose: () => void;
+}
+
+const ListForSaleModalContent = (props: ListForSaleModalContentProps) => {
   const { leverageBuy, transactionState } = useListForSale();
   const { status } = transactionState;
 
@@ -14,7 +19,7 @@ const ListForSaleModalContent = () => {
       {status == "complete" ? "<ListForSaleSuccessAnimation />" : <LeverageBuyTokenInfo leverageBuy={leverageBuy} />}
       <Divider className="bwl-modal-content-divider" />
       {status == "idle" ? <ListForSaleModalForm /> : null}
-      {status == "loading" || status == "error" ? "<ListForSaleModalTransaction />" : null}
+      {status == "loading" || status == "error" ? <ListForSaleModalTransaction onClose={props.onClose} /> : null}
       {status == "complete" ? "<ListForSaleModalSuccess />" : null}
     </>
   );

@@ -17,11 +17,11 @@ export const ListForSaleModal = (props: ListForSaleModal) => {
 
   return (
     <MetaStreetModal isOpen={isOpen} onClose={onClose}>
-      <MetaStreetModal.Body onClose={onClose}>
+      <MetaStreetModal.Body onClose={onClose} className="refi-modal-body">
         <MetaStreetDeploymentProvider errorComponent={<ModalLoadingOrError error="Unsupported chain" />}>
           <FeesProvider collectionAddress={leverageBuy.collectionAddress}>
             <ListForSaleProvider leverageBuy={leverageBuy} postOrderToOpenSea={postOrderToOpensea}>
-              <ListForSaleModalContent />
+              <ListForSaleModalContent onClose={onClose} />
             </ListForSaleProvider>
           </FeesProvider>
         </MetaStreetDeploymentProvider>
