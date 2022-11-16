@@ -1,4 +1,5 @@
 import { LeverageBuy } from "@metastreet-labs/margin-core";
+import Decimal from "decimal.js";
 import { useState } from "react";
 import { fromUnits } from "../../../utils/numbers";
 import useListingParams from "./useListingParams";
@@ -28,7 +29,7 @@ export const useListForSaleForm = (params: UseListForSaleFormParams): UseListFor
   const { leverageBuy } = params;
   const { minListingPrice: minListingPriceUnits } = useListingParams(leverageBuy);
 
-  const minListingPrice = fromUnits(minListingPriceUnits).toNumber();
+  const minListingPrice = fromUnits(minListingPriceUnits, Decimal.ROUND_UP).toNumber();
 
   // state
   const [listingPrice, setListingPrice] = useState(minListingPrice.toString());
