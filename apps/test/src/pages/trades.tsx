@@ -1,10 +1,5 @@
 import { cancelListing, LeverageBuy, Marketplace, Order } from "@metastreet-labs/margin-core";
-import {
-  ListForSaleModal,
-  RefinanceModal,
-  useLeverageBuys,
-  useMetaStreetDeployment,
-} from "@metastreet-labs/margin-kit";
+import { ListForSaleModal, RefinanceModal, useDeployment, useLeverageBuys } from "@metastreet-labs/margin-kit";
 import { ethers } from "ethers";
 import { NextPage } from "next";
 import { useState } from "react";
@@ -43,7 +38,7 @@ const LBRow = (props: LBRowProps) => {
   const [lfsModalOpen, setLSFModalOpen] = useState(false);
   const { chain } = useNetwork();
   const { data: signer } = useSigner();
-  const { deployment } = useMetaStreetDeployment();
+  const deployment = useDeployment();
 
   const postOrderToOpensea = async (order: Order) => {
     if (chain?.id != 5) throw new Error("postOrderToOpensea is implemented on goerli only");
