@@ -1,6 +1,7 @@
 import { getCollateralLimits, GetCollateralLimitsResult, ReadableError } from "@metastreet-labs/margin-core";
 import { useQuery } from "wagmi";
-import useDefinedMetaStreetDeployment from "../../hooks/useDefinedMetaStreetDeployment";
+import useMetaStreetDeployment from "../../hooks/useMetaStreetDeployment";
+import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
 
 interface UseVaultsLimitsParams {
   collectionAddress: string;
@@ -10,9 +11,9 @@ interface UseVaultsLimitsParams {
 export type VaultLimits = GetCollateralLimitsResult & { vaultAddress: string };
 
 export const useVaultsLimits = (params: UseVaultsLimitsParams) => {
-  const { deployment, provider } = useDefinedMetaStreetDeployment();
+  const { provider } = useMetaStreetDeployment();
 
-  const fetcher = async () => {
+  const [fetcher, enabled] = useFetcherWithDeployment(async (deployment) => {
     // Fetch collateral limits of each vault
     const limits = await Promise.all(
       deployment.vaults.map(async (vaultAddress) => {
@@ -28,9 +29,9 @@ export const useVaultsLimits = (params: UseVaultsLimitsParams) => {
     // it is required that the limits are sorted by maxPrincipal in an ascending order
     limits.sort((a, b) => (a.maxPrincipal.lt(b.maxPrincipal) ? -1 : 1));
     return limits;
-  };
+  });
 
-  return useQuery<VaultLimits[], ReadableError>(vaultsLimitsQueryKeys.token(params), fetcher);
+  return useQuery<VaultLimits[], ReadableError>(vaultsLimitsQueryKeys.token(params), fetcher, { enabled });
 };
 
 const vaultsLimitsQueryKeys = {

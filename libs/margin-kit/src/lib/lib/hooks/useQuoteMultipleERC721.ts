@@ -1,9 +1,10 @@
 import { quoteMultipleERC721, QuoteMultipleERC721Result, ReadableError } from "@metastreet-labs/margin-core";
 import { BigNumberish } from "ethers";
 import { useQuery } from "wagmi";
-import useDefinedMetaStreetDeployment from "../../hooks/useDefinedMetaStreetDeployment";
+import useMetaStreetDeployment from "../../hooks/useMetaStreetDeployment";
 import { BWLToken } from "../../types";
 import { toUnits } from "../../utils/numbers";
+import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
 
 export interface UseQuoteMultipleERC721Props {
   tokens: BWLToken[];
@@ -13,9 +14,9 @@ export interface UseQuoteMultipleERC721Props {
 }
 
 const useQuoteMultipleERC721 = (props: UseQuoteMultipleERC721Props) => {
-  const { provider, deployment, chainID } = useDefinedMetaStreetDeployment();
+  const { provider, chainID } = useMetaStreetDeployment();
 
-  const fetcher = () => {
+  const [fetcher, enabled] = useFetcherWithDeployment((deployment) => {
     const collectionAddresses = new Array<string>();
     const tokenIDs = new Array<string>();
     const purchasePrices = new Array<BigNumberish>();
@@ -39,11 +40,12 @@ const useQuoteMultipleERC721 = (props: UseQuoteMultipleERC721Props) => {
       duration: props.duration * 86400,
       vaultAddress: props.vaultAddress,
     });
-  };
+  });
 
   return useQuery<QuoteMultipleERC721Result, ReadableError>(
     quoteMultipleERC721QueryKeys.withParams(chainID, props),
-    fetcher
+    fetcher,
+    { enabled }
   );
 };
 

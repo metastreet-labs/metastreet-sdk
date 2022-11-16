@@ -1,6 +1,7 @@
-import { Deployment, DEPLOYMENTS } from "@metastreet-labs/margin-core";
-import { Provider } from "@wagmi/core";
-import { useProvider } from "wagmi";
+import { Deployment } from "@metastreet-labs/margin-core";
+import { chain, Provider } from "@wagmi/core";
+import { useNetwork, useProvider } from "wagmi";
+import useDeployment from "./useDeployment";
 
 export interface MetaStreetDeployment {
   provider: Provider;
@@ -9,11 +10,11 @@ export interface MetaStreetDeployment {
 }
 
 const useMetaStreetDeployment = (): MetaStreetDeployment => {
+  const deployment = useDeployment();
   const provider = useProvider();
-  const chainID = provider.network.chainId;
-  const deployment = DEPLOYMENTS[chainID];
+  const { chain: activeChain } = useNetwork();
 
-  return { deployment, provider, chainID };
+  return { deployment, provider, chainID: activeChain?.id ?? chain.mainnet.id };
 };
 
 export default useMetaStreetDeployment;
