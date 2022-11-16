@@ -20,11 +20,9 @@ type CreateListingParams = TransactionParams & {
 };
 
 const _createListing = async (params: CreateListingParams) => {
-  const { deployment, signer } = params;
-
-  const lbWrapper = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signer);
+  const lbWrapper = LeverageBuyWrapperV1__factory.connect(params.lbWrapperAddress, params.signer);
   const pePlatformAddress = await lbWrapper.purchaseEscrow();
-  const pePlatform = PurchaseEscrowPlatform__factory.connect(pePlatformAddress, signer);
+  const pePlatform = PurchaseEscrowPlatform__factory.connect(pePlatformAddress, params.signer);
   return pePlatform.createListing(
     params.escrowID,
     params.marketplace,
