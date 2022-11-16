@@ -19,8 +19,7 @@ export interface QuoteMultipleERC721Result {
 }
 
 const _quoteMultipleERC721 = async (params: QuoteMultipleERC721Params): Promise<QuoteMultipleERC721Result> => {
-  const { signerOrProvider, deployment } = params;
-  const leverageBuyWrapper = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signerOrProvider);
+  const leverageBuyWrapper = LeverageBuyWrapperV1__factory.connect(params.lbWrapperAddress, params.signerOrProvider);
   const quote = await leverageBuyWrapper.quoteMultipleERC721(
     params.purchasePrices,
     params.downPayments,

@@ -19,8 +19,7 @@ export interface QuoteRefinanceResult {
 }
 
 const _quoteRefinance = async (params: QuoteRefinanceParams): Promise<QuoteRefinanceResult> => {
-  const { signerOrProvider, deployment } = params;
-  const contract = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signerOrProvider);
+  const contract = LeverageBuyWrapperV1__factory.connect(params.lbWrapperAddress, params.signerOrProvider);
   const quote = await contract.quoteRefinance(
     params.balance,
     params.downPayment,
