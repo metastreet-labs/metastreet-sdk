@@ -1,7 +1,8 @@
 import { LeverageBuy } from "@metastreet-labs/margin-core";
 import LoanInfoContainer from "../BuyWithLeverageModal/containers/LoanInfoContainer";
-import MetaStreetDeploymentProvider from "../MetaStreetDeploymentProvider";
+import DefinedDeploymentProvider from "../DefinedDeploymentProvider";
 import MetaStreetModal, { ModalState } from "../MetaStreetModal";
+import ModalLoadingOrError from "../ModalLoadingOrError";
 import RefinanceModalContent from "./RefinanceModalContent/RefinanceModalContent";
 import RefinanceProvider from "./state/RefinanceProvider";
 
@@ -17,13 +18,7 @@ export const RefinanceModal = (props: RefinanceModalProps) => {
   return (
     <MetaStreetModal isOpen={isOpen} onClose={onClose}>
       <MetaStreetModal.Body onClose={onClose} className="refi-modal-body">
-        <MetaStreetDeploymentProvider
-          errorComponent={
-            <div className="flex h-56 items-center justify-center">
-              <span>Unsupported chain</span>
-            </div>
-          }
-        >
+        <DefinedDeploymentProvider errorComponent={<ModalLoadingOrError error="Unsupported chain" />}>
           <LoanInfoContainer
             collectionAddress={leverageBuy.collectionAddress}
             tokenID={leverageBuy.tokenID}
@@ -35,7 +30,7 @@ export const RefinanceModal = (props: RefinanceModalProps) => {
               </RefinanceProvider>
             )}
           </LoanInfoContainer>
-        </MetaStreetDeploymentProvider>
+        </DefinedDeploymentProvider>
       </MetaStreetModal.Body>
     </MetaStreetModal>
   );

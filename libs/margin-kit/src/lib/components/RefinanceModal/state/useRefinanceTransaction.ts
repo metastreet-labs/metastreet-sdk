@@ -1,7 +1,7 @@
 import { ReadableError, refinanceETH } from "@metastreet-labs/margin-core";
 import { ContractTransaction } from "ethers";
 import { useSigner } from "wagmi";
-import useDefinedMetaStreetDeployment from "../../../hooks/useDefinedMetaStreetDeployment";
+import useDefinedDeployment from "../../../hooks/useDefinedDeployment";
 import useTransactionSteps, {
   getTransactionStatus,
   TransactionState,
@@ -38,7 +38,7 @@ export interface UseRefinanceTransactionResult {
 const useRefinanceTransaction = (params: UseRefinanceTransactionParams): UseRefinanceTransactionResult => {
   const { escrowID, formState, onSuccess, onError } = params;
   const { data: signer } = useSigner();
-  const { deployment } = useDefinedMetaStreetDeployment();
+  const deployment = useDefinedDeployment();
   const [steps, updateStep, resetSteps] = useTransactionSteps(getSteps());
 
   const refinance = async () => {

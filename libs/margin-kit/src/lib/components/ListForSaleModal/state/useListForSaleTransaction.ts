@@ -1,7 +1,7 @@
 import { createListing, getOrderFromReceipt, getReadableError, Marketplace, Order } from "@metastreet-labs/margin-core";
 import { BigNumber, ContractReceipt, ContractTransaction, utils } from "ethers";
 import { useSigner } from "wagmi";
-import useDefinedMetaStreetDeployment from "../../../hooks/useDefinedMetaStreetDeployment";
+import useDefinedDeployment from "../../../hooks/useDefinedDeployment";
 import useTransactionSteps, {
   getTransactionStatus,
   TransactionState,
@@ -43,7 +43,7 @@ const getSteps = (): TransactionStep[] => [
 
 export const useListForSaleTransaction = (params: UseListForSaleTransactionParams): UseListForSaleTransactionResult => {
   const { formState, formActions, escrowID, postOrderToOpenSea } = params;
-  const { deployment } = useDefinedMetaStreetDeployment();
+  const deployment = useDefinedDeployment();
   const { data: signer } = useSigner();
   const fees = useFees();
 
