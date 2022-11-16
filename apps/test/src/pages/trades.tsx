@@ -1,9 +1,14 @@
-import { LeverageBuy, Order } from "@metastreet-labs/margin-core";
-import { ListForSaleModal, RefinanceModal, useLeverageBuys } from "@metastreet-labs/margin-kit";
+import { cancelListing, LeverageBuy, Marketplace, Order } from "@metastreet-labs/margin-core";
+import {
+  ListForSaleModal,
+  RefinanceModal,
+  useLeverageBuys,
+  useMetaStreetDeployment,
+} from "@metastreet-labs/margin-kit";
 import { ethers } from "ethers";
 import { NextPage } from "next";
 import { useState } from "react";
-import { useNetwork, useQuery } from "wagmi";
+import { useNetwork, useQuery, useSigner } from "wagmi";
 
 const LeverageBuysPage: NextPage = () => {
   const { data } = useLeverageBuys();
@@ -37,6 +42,8 @@ const LBRow = (props: LBRowProps) => {
   const [refiModalOpen, setRefiModalOpen] = useState(false);
   const [lfsModalOpen, setLSFModalOpen] = useState(false);
   const { chain } = useNetwork();
+  const { data: signer } = useSigner();
+  const { deployment } = useMetaStreetDeployment();
 
   const postOrderToOpensea = async (order: Order) => {
     if (chain?.id != 5) throw new Error("postOrderToOpensea is implemented on goerli only");
@@ -50,6 +57,19 @@ const LBRow = (props: LBRowProps) => {
     });
     const json = await response.json();
     if (!response.ok) throw json;
+  };
+
+  const _cancelListing = () => {
+    if (!signer) throw new Error("cancelListing called without a signer");
+    if (!leverageBuy.listingData) throw new Error("cancelListing called on a non listed LeverageBuy");
+    if (!deployment) throw new Error("cancelListing was called without a deployment");
+    cancelListing({
+      signer,
+      deployment,
+      escrowID: leverageBuy.escrowID,
+      marketplace: Marketplace.Seaport,
+      listingData: leverageBuy.listingData.raw,
+    });
   };
 
   let listingTimeRemaining: number | undefined;
@@ -73,7 +93,9 @@ const LBRow = (props: LBRowProps) => {
       {listingTimeRemaining && listingTimeRemaining >= 0 ? (
         <td>
           Listed for {ethers.utils.formatEther(leverageBuy.listingData.listingPrice)} ETH,{" "}
-          <button className="border">Delist</button>
+          <button className="border" onClick={_cancelListing}>
+            Delist
+          </button>
         </td>
       ) : (
         <td>
