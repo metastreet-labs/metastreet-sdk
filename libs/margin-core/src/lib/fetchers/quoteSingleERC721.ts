@@ -18,14 +18,13 @@ export interface QuoteSingleERC721Result {
 }
 
 const _quoteSingleERC721 = async (params: QuoteSingleERC721Params): Promise<QuoteSingleERC721Result> => {
-  const { signerOrProvider, deployment } = params;
-  const leverageBuyWrapper = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signerOrProvider);
+  const leverageBuyWrapper = LeverageBuyWrapperV1__factory.connect(params.lbWrapperAddress, params.signerOrProvider);
   const quote = await leverageBuyWrapper.quoteSingleERC721(
     params.purchasePrice,
     params.downPayment,
     params.collectionAddress,
     params.tokenID,
-    deployment.lbWrapperAddress,
+    params.lbWrapperAddress,
     params.duration
   );
   return {

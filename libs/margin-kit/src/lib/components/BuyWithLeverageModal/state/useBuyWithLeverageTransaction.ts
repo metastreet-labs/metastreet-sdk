@@ -50,7 +50,7 @@ const useBuyWithLeverageTransaction = (props: UseBuyWithLeverageTransactionProps
 
     /* send transaction based on the number of tokens */
     const sendTransaction = async () => {
-      const fillCallDatas = await Promise.all(tokens.map((t) => getReservoirFillCalldata({ ...t, deployment })));
+      const fillCallDatas = await Promise.all(tokens.map((t) => getReservoirFillCalldata({ ...t, ...deployment })));
 
       if (tokens.length > 1) {
         return buyMultipleERC721WithETH({

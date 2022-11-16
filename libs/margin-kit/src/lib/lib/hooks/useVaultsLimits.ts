@@ -18,8 +18,8 @@ export const useVaultsLimits = (params: UseVaultsLimitsParams) => {
       deployment.vaults.map(async (vaultAddress) => {
         const limit = await getCollateralLimits({
           ...params,
+          ...deployment,
           vaultAddress,
-          deployment,
           signerOrProvider: provider,
         });
         return { ...limit, vaultAddress };

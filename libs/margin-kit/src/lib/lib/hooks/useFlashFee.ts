@@ -11,7 +11,7 @@ const useFlashFee = (loanAmount: BigNumberish) => {
   const [fetcher, enabled] = useFetcherWithDeployment((deployment) => {
     return getFlashFee({
       signerOrProvider: provider,
-      deployment,
+      ...deployment,
       loanAmount,
     });
   });
