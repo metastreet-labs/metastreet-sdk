@@ -39,7 +39,7 @@ const LBRow = (props: LBRowProps) => {
   const { chain } = useNetwork();
 
   const postOrderToOpensea = async (order: Order) => {
-    if (chain?.id != 5) throw new Error("posOrderToOpensea is unimplemented on mainnet");
+    if (chain?.id != 5) throw new Error("postOrderToOpensea is implemented on goerli only");
 
     const headers: HeadersInit = { "content-type": "application/json", accept: "application/json" };
     const body = JSON.stringify({ parameters: order, signature: "0x" });
