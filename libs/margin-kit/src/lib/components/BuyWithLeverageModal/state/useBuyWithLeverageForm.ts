@@ -10,7 +10,7 @@ import useDebouncedQuote from "./useDebouncedQuote";
 export interface BuyWithLeverageFormState {
   debtFactor: number;
   debtAmount: number;
-  activeVaultLimits: VaultLimits;
+  activeLimits: VaultLimits;
   downPayments: BigNumber[];
   totalDownPayment: number;
   duration: number;
@@ -35,12 +35,10 @@ const useBuyWithLeverageForm = (props: UseBuyWithLeverageFormProps): UseBuyWithL
   const maxPrincipal = limits[limits.length - 1].maxPrincipal;
 
   // state
-  const [activeVaultLimits, setActiveLimit] = useState(limits[0]);
   const [debtFactor, setDebtFactor] = useState(0.05);
-  const [duration, setDuration] = useState(daysFromSeconds(limits[0].minDuration, "up"));
 
-  // derived state
-  const { debtAmount, downPayments, totalDownPayment } = useMemo(() => {
+  // derived
+  const { debtAmount, downPayments, totalDownPayment, activeLimits } = useMemo(() => {
     const purchasePrices = tokens.map((token) => toUnitsBigNum(token.tokenPrice));
 
     const downPayments = purchasePrices.map((price, idx) => {
@@ -60,29 +58,28 @@ const useBuyWithLeverageForm = (props: UseBuyWithLeverageFormProps): UseBuyWithL
       downPayments.reduce((total, downPayment) => total.add(downPayment), BigNumber.from(0))
     ).toNumber();
 
-    return { debtAmount, downPayments, totalDownPayment };
-  }, [debtFactor, flashFee, maxPrincipal, tokens]);
+    const activeLimits = limits.find((l) => l.maxPrincipal.gte(debtAmount));
+    if (!activeLimits) throw Error("active vault limit is undefined, should never happen");
 
-  /* set active vault limits based on the selected debt amount */
-  useEffect(() => {
-    const limit = limits.find((l) => l.maxPrincipal.gte(debtAmount));
-    if (!limit) throw Error("active vault limit is undefined, should never happen");
-    setActiveLimit(limit);
-  }, [debtAmount, limits]);
+    return { debtAmount, downPayments, totalDownPayment, activeLimits };
+  }, [debtFactor, flashFee, maxPrincipal, tokens, limits]);
+
+  // state
+  const [duration, setDuration] = useState(daysFromSeconds(activeLimits.minDuration, "up"));
 
   /* make sure duration is not out of bounds when the active vault limits change */
   useEffect(() => {
-    const minDuration = daysFromSeconds(activeVaultLimits.minDuration, "up");
-    const maxDuration = daysFromSeconds(activeVaultLimits.maxDuration);
+    const minDuration = daysFromSeconds(activeLimits.minDuration, "up");
+    const maxDuration = daysFromSeconds(activeLimits.maxDuration);
     if (duration < minDuration) setDuration(minDuration);
     else if (duration > maxDuration) setDuration(maxDuration);
-  }, [activeVaultLimits, duration]);
+  }, [activeLimits, duration]);
 
   const { quote } = useDebouncedQuote({
     tokens: props.tokens,
     downPayments,
     duration,
-    vaultAddress: activeVaultLimits.vaultAddress,
+    vaultAddress: activeLimits.vaultAddress,
   });
 
   // more derived state
@@ -96,7 +93,7 @@ const useBuyWithLeverageForm = (props: UseBuyWithLeverageFormProps): UseBuyWithL
     formState: {
       debtFactor,
       duration,
-      activeVaultLimits,
+      activeLimits,
       downPayments,
       debtAmount: fromUnits(debtAmount).toNumber(),
       quote,

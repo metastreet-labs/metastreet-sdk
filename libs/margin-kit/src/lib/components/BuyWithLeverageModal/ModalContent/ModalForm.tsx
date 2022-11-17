@@ -29,8 +29,8 @@ const ModalForm = () => {
         setDebtFactor={actions.setDebtFactor}
       />
       <DurationSlider
-        minDuration={daysFromSeconds(formState.activeVaultLimits.minDuration, "up")}
-        maxDuration={daysFromSeconds(formState.activeVaultLimits.maxDuration)}
+        minDuration={daysFromSeconds(formState.activeLimits.minDuration, "up")}
+        maxDuration={daysFromSeconds(formState.activeLimits.maxDuration)}
         duration={formState.duration}
         setDuration={actions.setDuration}
       />
@@ -38,7 +38,7 @@ const ModalForm = () => {
       <LeverageDropdown
         purchasePrice={purchasePrice}
         debtAmount={formState.debtAmount}
-        limits={formState.activeVaultLimits}
+        limits={formState.activeLimits}
         tokenCount={tokens.length}
       />
       <FloorBreakeven
