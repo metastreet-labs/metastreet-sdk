@@ -4,18 +4,19 @@ import {
   GetCollateralLimitsResult,
   ReadableError,
 } from "@metastreet-labs/margin-core";
-import { useProvider, useQuery } from "wagmi";
+import { useQuery } from "wagmi";
 import useChainID from "../../hooks/useChainID";
+import useSignerOrProvider from "../../hooks/useSignerOrProvider";
 import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
 
 type UseCollateralLimitsParams = Pick<GetCollateralLimitsParams, "collectionAddress" | "tokenID" | "vaultAddress">;
 
 const useCollateralLimits = (params: UseCollateralLimitsParams) => {
-  const provider = useProvider();
+  const { signerOrProvider } = useSignerOrProvider();
   const chainID = useChainID();
 
   const [fetcher, enabled] = useFetcherWithDeployment((deployment) => {
-    return getCollateralLimits({ signerOrProvider: provider, ...deployment, ...params });
+    return getCollateralLimits({ signerOrProvider, ...deployment, ...params });
   });
 
   return useQuery<GetCollateralLimitsResult, ReadableError>(collateralLimitsQueryKeys.token(chainID, params), fetcher, {

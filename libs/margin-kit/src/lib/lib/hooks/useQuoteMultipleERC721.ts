@@ -1,7 +1,8 @@
 import { quoteMultipleERC721, QuoteMultipleERC721Result, ReadableError } from "@metastreet-labs/margin-core";
 import { BigNumberish } from "ethers";
-import { useProvider, useQuery } from "wagmi";
+import { useQuery } from "wagmi";
 import useChainID from "../../hooks/useChainID";
+import useSignerOrProvider from "../../hooks/useSignerOrProvider";
 import { BWLToken } from "../../types";
 import { toUnits } from "../../utils/numbers";
 import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
@@ -15,7 +16,7 @@ export interface UseQuoteMultipleERC721Props {
 
 const useQuoteMultipleERC721 = (props: UseQuoteMultipleERC721Props) => {
   const chainID = useChainID();
-  const provider = useProvider();
+  const { signerOrProvider } = useSignerOrProvider();
 
   const [fetcher, enabled] = useFetcherWithDeployment((deployment) => {
     const collectionAddresses = new Array<string>();
@@ -32,7 +33,7 @@ const useQuoteMultipleERC721 = (props: UseQuoteMultipleERC721Props) => {
     }
 
     return quoteMultipleERC721({
-      signerOrProvider: provider,
+      signerOrProvider,
       lbWrapperAddress: deployment.lbWrapperAddress,
       purchasePrices,
       downPayments,

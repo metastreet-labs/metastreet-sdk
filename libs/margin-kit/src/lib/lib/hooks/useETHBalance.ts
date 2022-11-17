@@ -1,14 +1,17 @@
-import { useAccount, useProvider, useQuery } from "wagmi";
+import { useAccount, useQuery } from "wagmi";
 import useChainID from "../../hooks/useChainID";
+import useSignerOrProvider from "../../hooks/useSignerOrProvider";
 
 const useETHBalance = () => {
   const { address = "" } = useAccount();
   const chainID = useChainID();
-  const provider = useProvider();
+  const { signer, provider } = useSignerOrProvider();
 
-  return useQuery(ethBalanceQueryKeys.address(chainID, address), () => provider.getBalance(address), {
-    enabled: Boolean(address),
-  });
+  return useQuery(
+    ethBalanceQueryKeys.address(chainID, address),
+    () => (signer ? signer.getBalance() : provider.getBalance(address)),
+    { enabled: Boolean(address) }
+  );
 };
 
 const ethBalanceQueryKeys = {
