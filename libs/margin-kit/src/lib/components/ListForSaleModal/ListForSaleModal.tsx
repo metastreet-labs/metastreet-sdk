@@ -1,5 +1,5 @@
 import { LeverageBuy } from "@metastreet-labs/margin-core";
-import MetaStreetDeploymentProvider from "../MetaStreetDeploymentProvider/MetaStreetDeploymentProvider";
+import DefinedDeploymentProvider from "../DefinedDeploymentProvider";
 import MetaStreetModal, { ModalState } from "../MetaStreetModal";
 import ModalLoadingOrError from "../ModalLoadingOrError";
 import FeesProvider from "./FeesProvider";
@@ -18,13 +18,13 @@ export const ListForSaleModal = (props: ListForSaleModal) => {
   return (
     <MetaStreetModal isOpen={isOpen} onClose={onClose}>
       <MetaStreetModal.Body onClose={onClose} className="refi-modal-body">
-        <MetaStreetDeploymentProvider errorComponent={<ModalLoadingOrError error="Unsupported chain" />}>
+        <DefinedDeploymentProvider errorComponent={<ModalLoadingOrError error="Unsupported chain" />}>
           <FeesProvider collectionAddress={leverageBuy.collectionAddress}>
             <ListForSaleProvider leverageBuy={leverageBuy} postOrderToOpenSea={postOrderToOpensea}>
               <ListForSaleModalContent onClose={onClose} />
             </ListForSaleProvider>
           </FeesProvider>
-        </MetaStreetDeploymentProvider>
+        </DefinedDeploymentProvider>
       </MetaStreetModal.Body>
     </MetaStreetModal>
   );

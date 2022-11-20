@@ -1,9 +1,9 @@
 import { useAccount, useQuery } from "wagmi";
-import useDefinedMetaStreetDeployment from "../../hooks/useDefinedMetaStreetDeployment";
+import useMetaStreetDeployment from "../../hooks/useMetaStreetDeployment";
 
 const useETHBalance = () => {
   const { address = "" } = useAccount();
-  const { provider, chainID } = useDefinedMetaStreetDeployment();
+  const { chainID, provider } = useMetaStreetDeployment();
 
   return useQuery(ethBalanceQueryKeys.address(chainID, address), () => provider.getBalance(address), {
     enabled: Boolean(address),

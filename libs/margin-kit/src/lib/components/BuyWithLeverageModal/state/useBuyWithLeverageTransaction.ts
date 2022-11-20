@@ -6,7 +6,7 @@ import {
 } from "@metastreet-labs/margin-core";
 import { ContractTransaction } from "ethers";
 import { useSigner } from "wagmi";
-import useDefinedMetaStreetDeployment from "../../../hooks/useDefinedMetaStreetDeployment";
+import useDefinedDeployment from "../../../hooks/useDefinedDeployment";
 import useTransactionSteps, { getTransactionStatus, TransactionStep } from "../../../hooks/useTransactionState";
 import { BWLToken } from "../../../types";
 import { toUnits } from "../../../utils/numbers";
@@ -34,7 +34,7 @@ interface UseBuyWithLeverageTransactionProps {
 const useBuyWithLeverageTransaction = (props: UseBuyWithLeverageTransactionProps) => {
   const { tokens, formState, onBuySuccess } = props;
   const { data: signer } = useSigner();
-  const { deployment } = useDefinedMetaStreetDeployment();
+  const deployment = useDefinedDeployment();
   const [steps, updateStep, resetSteps] = useTransactionSteps(getSteps());
 
   const buy = async (): Promise<void> => {

@@ -1,4 +1,4 @@
-import useDefinedMetaStreetDeployment from "../../../hooks/useDefinedMetaStreetDeployment";
+import useMetaStreetDeployment from "../../../hooks/useMetaStreetDeployment";
 import { useTokenMetadata } from "../../../lib/hooks/useTokenMetadata";
 import MetaStreetButton from "../../MetaStreetButton";
 import { RefinanceModalSuccessAnimation } from "../../RefinanceModal/RefinanceModalContent/RefinanceModalSuccess";
@@ -12,7 +12,7 @@ const ListForSaleModalSuccess = (props: ListForSaleModalSuccessProps) => {
   const { leverageBuy } = useListForSale();
   const { tokenURI, tokenID, collectionAddress } = leverageBuy;
   const { data } = useTokenMetadata(tokenURI);
-  const { chainID } = useDefinedMetaStreetDeployment();
+  const { chainID } = useMetaStreetDeployment();
 
   const OS_MAINNET_BASE_URL = "https://opensea.io/assets/ethereum";
   const OS_GOERLI_BASE_URL = "https://testnets.opensea.io/assets/goerli";

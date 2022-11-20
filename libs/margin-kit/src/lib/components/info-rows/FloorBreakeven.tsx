@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import useDefinedMetaStreetDeployment from "../../hooks/useDefinedMetaStreetDeployment";
+import useMetaStreetDeployment from "../../hooks/useMetaStreetDeployment";
 import useFeesQuery from "../../lib/hooks/useFeesQuery";
 import { prettyFormatNumber } from "../../utils/numbers";
 import ETHPrice from "../ETHPrice";
@@ -18,7 +18,7 @@ interface FloorBreakevenProps {
 
 const FloorBreakeven = (props: FloorBreakevenProps) => {
   const { collectionAddress, downPayment, repayment, tokenCount, label } = props;
-  const { chainID } = useDefinedMetaStreetDeployment();
+  const { chainID } = useMetaStreetDeployment();
   const { data: fees } = useFeesQuery({ collectionAddress, chainID });
 
   let floorBreakeven: ReactNode;
