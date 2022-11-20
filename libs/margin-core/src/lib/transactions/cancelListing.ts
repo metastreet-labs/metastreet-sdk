@@ -13,11 +13,9 @@ type CancelListingParams = TransactionParams & {
 };
 
 const _cancelListing = async (params: CancelListingParams) => {
-  const { signer, deployment } = params;
-
-  const lbWrapper = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signer);
+  const lbWrapper = LeverageBuyWrapperV1__factory.connect(params.lbWrapperAddress, params.signer);
   const pePlatformAddress = await lbWrapper.purchaseEscrow();
-  const pePlatform = PurchaseEscrowPlatform__factory.connect(pePlatformAddress, signer);
+  const pePlatform = PurchaseEscrowPlatform__factory.connect(pePlatformAddress, params.signer);
   return pePlatform.cancelListing(params.escrowID, params.marketplace, params.listingData);
 };
 

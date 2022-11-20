@@ -60,7 +60,7 @@ const LBRow = (props: LBRowProps) => {
     if (!deployment) throw new Error("cancelListing was called without a deployment");
     cancelListing({
       signer,
-      deployment,
+      lbWrapperAddress: deployment.lbWrapperAddress,
       escrowID: leverageBuy.escrowID,
       marketplace: Marketplace.Seaport,
       listingData: leverageBuy.listingData.raw,
