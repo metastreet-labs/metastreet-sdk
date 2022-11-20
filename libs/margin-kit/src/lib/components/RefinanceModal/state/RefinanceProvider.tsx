@@ -14,7 +14,7 @@ type RefinanceProviderProps = PropsWithChildren & {
   onError?: (e: unknown) => void;
 };
 
-const RefinanceProvider = (props: RefinanceProviderProps) => {
+export const RefinanceProvider = (props: RefinanceProviderProps) => {
   const { leverageBuy, limits, flashFee, children, ...callbacks } = props;
   const { formState, ...formActions } = useRefinanceForm({ leverageBuy, limits, flashFee });
   const { transactionState, refinance } = useRefinanceTransaction({ formState, ...leverageBuy, ...callbacks });
@@ -28,5 +28,3 @@ const RefinanceProvider = (props: RefinanceProviderProps) => {
   };
   return <RefinanceContext.Provider value={contextValue}>{children}</RefinanceContext.Provider>;
 };
-
-export default RefinanceProvider;

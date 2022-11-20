@@ -1,7 +1,7 @@
 import Divider from "../../Divider";
 import MetaStreetModal from "../../MetaStreetModal";
 import RefinanceTokenInfo from "../../token-info/LeverageBuyTokenInfo";
-import useRefinance from "../state/useRefinance";
+import { useRefinance } from "../state/useRefinance";
 import RefinanceModalForm from "./RefinanceModalForm";
 import RefinanceModalSuccess, { RefinanceModalSuccessAnimation } from "./RefinanceModalSuccess";
 import RefinanceModalTransaction from "./RefinanceModalTransaction";

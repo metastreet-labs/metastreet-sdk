@@ -4,7 +4,7 @@ import DefinedDeploymentProvider from "../DefinedDeploymentProvider";
 import MetaStreetModal, { ModalState } from "../MetaStreetModal";
 import ModalLoadingOrError from "../ModalLoadingOrError";
 import RefinanceModalContent from "./RefinanceModalContent/RefinanceModalContent";
-import RefinanceProvider from "./state/RefinanceProvider";
+import { RefinanceProvider } from "./state/RefinanceProvider";
 
 type RefinanceModalProps = ModalState & {
   leverageBuy: LeverageBuy;

@@ -2,7 +2,7 @@ import { fromUnits, prettyFormatNumber } from "../../utils/numbers";
 import ETHPriceColored from "../ETHPriceColored";
 import { InfoRow, InfoRowValue } from "../InfoRow";
 import PurpleSectionLabel from "../purple-section/PurpleSectionLabel";
-import useRefinance from "../RefinanceModal/state/useRefinance";
+import { useRefinance } from "../RefinanceModal/state/useRefinance";
 
 const OwedOrAvailable = () => {
   const { formState } = useRefinance();
