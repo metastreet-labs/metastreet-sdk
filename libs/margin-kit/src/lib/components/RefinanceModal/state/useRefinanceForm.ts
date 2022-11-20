@@ -9,10 +9,10 @@ export interface RefinanceFormState {
   // state
   debtFactor: number;
   duration: number;
-  activeLimits: VaultLimits;
   // derived
   debtAmount: BigNumber;
   downPayment: BigNumber;
+  activeLimits: VaultLimits;
   // fetched
   quote?: QuoteRefinanceResult;
 }
@@ -44,23 +44,19 @@ const useRefinanceForm = (params: UseRefinanceFormParams): UseRefinanceFormResul
   const maxDebt = useMemo(() => maxPrincipal.sub(flashFee), [maxPrincipal, flashFee]);
 
   // state
-  const [activeLimits, setActiveLimits] = useState(limits[0]);
   const [debtFactor, setDebtFactor] = useState(getInitialDebtFactor(balance, maxDebt));
-  const [duration, setDuration] = useState(daysFromSeconds(activeLimits.minDuration, "up"));
 
   // derived
-  const { debtAmount, downPayment } = useMemo(() => {
+  const { debtAmount, downPayment, activeLimits } = useMemo(() => {
     const debtAmount = maxDebt.mul(Math.ceil(debtFactor * 100)).div(100);
     const downPayment = balance.sub(debtAmount);
-    return { debtAmount, downPayment };
-  }, [debtFactor, maxDebt, balance]);
+    const activeLimits = limits.find((l) => l.maxPrincipal.gte(debtAmount));
+    if (!activeLimits) throw Error("active vault limit is undefined, should never happen");
+    return { debtAmount, downPayment, activeLimits };
+  }, [debtFactor, maxDebt, balance, limits]);
 
-  /* set active vault limits based on the selected debt amount */
-  useEffect(() => {
-    const limit = limits.find((l) => l.maxPrincipal.gte(debtAmount));
-    if (!limit) throw Error("active vault limit is undefined, should never happen");
-    setActiveLimits(limit);
-  }, [debtAmount, limits]);
+  // state
+  const [duration, setDuration] = useState(daysFromSeconds(activeLimits.minDuration, "up"));
 
   /* make sure duration is not out of bounds when the active vault limits change */
   useEffect(() => {
@@ -83,10 +79,10 @@ const useRefinanceForm = (params: UseRefinanceFormParams): UseRefinanceFormResul
       // state
       debtFactor,
       duration,
-      activeLimits,
       // derived
       debtAmount,
       downPayment,
+      activeLimits,
       // fetched
       quote,
     },
