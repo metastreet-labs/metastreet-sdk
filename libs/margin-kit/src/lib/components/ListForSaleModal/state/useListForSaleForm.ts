@@ -4,13 +4,14 @@ import { fromUnits } from "../../../utils/numbers";
 import useListingParams from "./useListingParams";
 
 export interface ListForSaleFormState {
-  listingPrice: number;
+  listingPrice: string;
+  listingPriceNum: number;
   listingPriceError?: string;
   formSubmitted: boolean;
 }
 
 export interface ListForSaleFormActions {
-  setListingPrice: (price: number) => void;
+  setListingPrice: (price: string) => void;
   setFormSubmitted: (submitted: boolean) => void;
 }
 
@@ -28,15 +29,19 @@ export const useListForSaleForm = (params: UseListForSaleFormParams): UseListFor
   const { minListingPrice: minListingPriceUnits } = useListingParams(leverageBuy);
 
   const minListingPrice = fromUnits(minListingPriceUnits).toNumber();
-  const [listingPrice, setListingPrice] = useState(minListingPrice);
+
+  // state
+  const [listingPrice, setListingPrice] = useState(minListingPrice.toString());
   const [formSubmitted, setFormSubmitted] = useState(false);
 
+  // derived
+  const listingPriceNum = parseFloat(listingPrice) || 0;
   let listingPriceError: string | undefined;
-  if (isNaN(listingPrice)) listingPriceError = "Invalid listing price";
-  else if (listingPrice < minListingPrice) listingPriceError = "Listing price is below the minimum";
+  if (isNaN(listingPriceNum)) listingPriceError = "Invalid listing price";
+  else if (listingPriceNum < minListingPrice) listingPriceError = "Listing price is below the minimum";
 
   return {
-    formState: { listingPrice, listingPriceError, formSubmitted },
+    formState: { listingPrice, listingPriceNum, listingPriceError, formSubmitted },
     formActions: { setListingPrice, setFormSubmitted },
   };
 };

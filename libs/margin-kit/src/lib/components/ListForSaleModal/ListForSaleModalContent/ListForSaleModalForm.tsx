@@ -13,7 +13,7 @@ const ListForSaleModalForm = () => {
   const { leverageBuy, formState, actions } = useListForSale();
   const fees = useFees();
   const { minListingPrice, floorBreakeven } = useListingParams(leverageBuy);
-  const { netProfit } = useListingProceeds({ leverageBuy, listingPrice: formState.listingPrice });
+  const { netProfit } = useListingProceeds({ leverageBuy, listingPrice: formState.listingPriceNum });
 
   return (
     <>

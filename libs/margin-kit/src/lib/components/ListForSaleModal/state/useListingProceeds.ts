@@ -1,6 +1,5 @@
 import { LeverageBuy } from "@metastreet-labs/margin-core";
-import { BigNumber } from "ethers";
-import { toUnits } from "../../../utils/numbers";
+import { toUnitsBigNum } from "../../../utils/numbers";
 import { useFees } from "../FeesProvider";
 
 interface UseListingProceedsParams {
@@ -12,7 +11,7 @@ const useListingProceeds = (params: UseListingProceedsParams) => {
   const { leverageBuy, listingPrice } = params;
   const { repayment, downPayment } = leverageBuy;
   const fees = useFees();
-  const inputPrice = BigNumber.from(toUnits(listingPrice).toString());
+  const inputPrice = toUnitsBigNum(listingPrice);
 
   const proceeds = inputPrice
     .mul(10000 - fees.opensea.bps - fees.royalty.bps)

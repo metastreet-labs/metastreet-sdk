@@ -526,12 +526,20 @@
   @apply flex items-center py-2 px-3 border-2 focus-within:border-ms-text-important rounded-lg space-x-2;
 }
 
+.lsf-input-inner-wrapper-error {
+  @apply border-red-500;
+}
+
 .lsf-input-leading {
   @apply w-8 h-8;
 }
 
 .lsf-input-input {
   @apply outline-none flex-grow text-ms-text-important text-lg;
+}
+
+.lsf-input-error-message {
+  @apply text-center text-red-500 text-sm font-medium;
 }
 
 .lsf-modal-form-rows {
