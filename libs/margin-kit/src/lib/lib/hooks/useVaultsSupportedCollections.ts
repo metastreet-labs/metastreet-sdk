@@ -5,23 +5,23 @@ import {
 } from "@metastreet-labs/margin-core";
 import { useQuery } from "wagmi";
 import useMetaStreetDeployment from "../../hooks/useMetaStreetDeployment";
+import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
 
 export const useVaultsSupportedCollections = () => {
-  const { deployment, provider } = useMetaStreetDeployment();
+  const { provider, chainID } = useMetaStreetDeployment();
 
-  const fetcher = () => {
-    if (!deployment) throw new Error("deployment is undefined");
+  const [fetcher, enabled] = useFetcherWithDeployment((deployment) => {
     return getVaultsSupportedCollections({ signerOrProvider: provider, vaultAddresses: deployment.vaults });
-  };
+  });
 
   return useQuery<GetVaultsSupportedCollectionsResult, ReadableError>(
-    vaultsSupportedCollectionsQKs.vaults(deployment?.vaults ?? []),
+    vaultsSupportedCollectionsQKs.chain(chainID),
     fetcher,
-    { enabled: Boolean(deployment) }
+    { enabled }
   );
 };
 
 const vaultsSupportedCollectionsQKs = {
   all: () => ["vaults-supported-collections"],
-  vaults: (vaultAddresses: string[]) => [...vaultsSupportedCollectionsQKs.all(), vaultAddresses.join("-")],
+  chain: (chainID: number) => [...vaultsSupportedCollectionsQKs.all(), chainID],
 };

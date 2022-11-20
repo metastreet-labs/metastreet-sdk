@@ -5,15 +5,22 @@ import {
   ReadableError,
 } from "@metastreet-labs/margin-core";
 import { useQuery } from "wagmi";
-import useDefinedMetaStreetDeployment from "../../hooks/useDefinedMetaStreetDeployment";
+import useMetaStreetDeployment from "../../hooks/useMetaStreetDeployment";
+import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
 
 export type UseQuoteRefinanceParams = Omit<QuoteRefinanceParams, "signerOrProvider" | "deployment">;
 
 export const useQuoteRefinance = (params: UseQuoteRefinanceParams) => {
-  const { deployment, provider } = useDefinedMetaStreetDeployment();
+  const { provider } = useMetaStreetDeployment();
+
+  const [fetcher, enabled] = useFetcherWithDeployment((deployment) => {
+    return quoteRefinance({ ...params, signerOrProvider: provider, deployment });
+  });
+
   return useQuery<QuoteRefinanceResult, ReadableError>(
     quoteRefinanceQueryKeys.loanTerms(params.vaultAddress, params),
-    () => quoteRefinance({ ...params, signerOrProvider: provider, deployment })
+    fetcher,
+    { enabled }
   );
 };
 

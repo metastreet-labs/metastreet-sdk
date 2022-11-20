@@ -1,17 +1,17 @@
 import { getLeverageBuys, LeverageBuy, ReadableError } from "@metastreet-labs/margin-core";
 import { useAccount, useQuery } from "wagmi";
-import useMetaStreetDeployment from "../../hooks/useMetaStreetDeployment";
+import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
 
 export const useLeverageBuys = () => {
-  const { deployment } = useMetaStreetDeployment();
   const { address: owner = "" } = useAccount();
 
-  const fetcher = () => {
-    if (!deployment) throw new Error("unsupported chain");
+  const [fetcher, enabled] = useFetcherWithDeployment((deployment) => {
     return getLeverageBuys({ deployment, owner, skip: 0, first: 1000 });
-  };
+  });
 
-  return useQuery<LeverageBuy[], ReadableError>(leverageBuysQueryKeys.owner(owner), fetcher);
+  return useQuery<LeverageBuy[], ReadableError>(leverageBuysQueryKeys.owner(owner), fetcher, {
+    enabled: Boolean(enabled && owner),
+  });
 };
 
 const leverageBuysQueryKeys = {
