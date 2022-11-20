@@ -1,6 +1,6 @@
 import { GetFeesResult } from "@metastreet-labs/margin-core";
 import { createContext, PropsWithChildren, useContext } from "react";
-import useMetaStreetDeployment from "../../hooks/useMetaStreetDeployment";
+import useChainID from "../../hooks/useChainID";
 import useFeesQuery from "../../lib/hooks/useFeesQuery";
 import ModalLoadingOrError from "../ModalLoadingOrError";
 
@@ -18,7 +18,7 @@ type FeesProviderProps = PropsWithChildren & {
 
 const FeesProvider = (props: FeesProviderProps) => {
   const { children, collectionAddress } = props;
-  const { chainID } = useMetaStreetDeployment();
+  const chainID = useChainID();
   const { data, error } = useFeesQuery({ collectionAddress, chainID });
 
   if (!data) return <ModalLoadingOrError error={error?.message} />;

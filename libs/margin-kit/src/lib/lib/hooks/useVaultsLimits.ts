@@ -1,6 +1,5 @@
 import { getCollateralLimits, GetCollateralLimitsResult, ReadableError } from "@metastreet-labs/margin-core";
-import { useQuery } from "wagmi";
-import useMetaStreetDeployment from "../../hooks/useMetaStreetDeployment";
+import { useProvider, useQuery } from "wagmi";
 import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
 
 interface UseVaultsLimitsParams {
@@ -11,7 +10,7 @@ interface UseVaultsLimitsParams {
 export type VaultLimits = GetCollateralLimitsResult & { vaultAddress: string };
 
 export const useVaultsLimits = (params: UseVaultsLimitsParams) => {
-  const { provider } = useMetaStreetDeployment();
+  const provider = useProvider();
 
   const [fetcher, enabled] = useFetcherWithDeployment(async (deployment) => {
     // Fetch collateral limits of each vault

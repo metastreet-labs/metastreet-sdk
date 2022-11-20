@@ -1,11 +1,12 @@
 import { getFlashFee, ReadableError } from "@metastreet-labs/margin-core";
 import { BigNumber, BigNumberish } from "ethers";
-import { useQuery } from "wagmi";
-import useMetaStreetDeployment from "../../hooks/useMetaStreetDeployment";
+import { useProvider, useQuery } from "wagmi";
+import useChainID from "../../hooks/useChainID";
 import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
 
 const useFlashFee = (loanAmount: BigNumberish) => {
-  const { provider, chainID } = useMetaStreetDeployment();
+  const chainID = useChainID();
+  const provider = useProvider();
 
   const [fetcher, enabled] = useFetcherWithDeployment((deployment) => {
     return getFlashFee({

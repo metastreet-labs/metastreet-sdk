@@ -1,7 +1,7 @@
 import { quoteMultipleERC721, QuoteMultipleERC721Result, ReadableError } from "@metastreet-labs/margin-core";
 import { BigNumberish } from "ethers";
-import { useQuery } from "wagmi";
-import useMetaStreetDeployment from "../../hooks/useMetaStreetDeployment";
+import { useProvider, useQuery } from "wagmi";
+import useChainID from "../../hooks/useChainID";
 import { BWLToken } from "../../types";
 import { toUnits } from "../../utils/numbers";
 import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
@@ -14,7 +14,8 @@ export interface UseQuoteMultipleERC721Props {
 }
 
 const useQuoteMultipleERC721 = (props: UseQuoteMultipleERC721Props) => {
-  const { provider, chainID } = useMetaStreetDeployment();
+  const chainID = useChainID();
+  const provider = useProvider();
 
   const [fetcher, enabled] = useFetcherWithDeployment((deployment) => {
     const collectionAddresses = new Array<string>();
