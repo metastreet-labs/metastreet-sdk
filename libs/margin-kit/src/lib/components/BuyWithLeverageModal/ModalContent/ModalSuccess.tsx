@@ -1,6 +1,6 @@
 import MetaStreetButton from "../../MetaStreetButton";
 import SuccessAnimation from "../../SuccessAnimation";
-import useBuyWithLeverage from "../state/useBuyWithLeverage";
+import { useBuyWithLeverage } from "../state/useBuyWithLeverage";
 
 interface ModalSuccessProps {
   onClose: () => void;

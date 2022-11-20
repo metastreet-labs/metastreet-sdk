@@ -1,5 +1,5 @@
 import TransactionSteps from "../../TransactionSteps";
-import useBuyWithLeverage from "../state/useBuyWithLeverage";
+import { useBuyWithLeverage } from "../state/useBuyWithLeverage";
 
 interface ModalConfirmationProps {
   onClose: () => void;
