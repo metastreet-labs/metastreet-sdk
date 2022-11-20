@@ -50,10 +50,10 @@ const useRefinanceForm = (params: UseRefinanceFormParams): UseRefinanceFormResul
   const { debtAmount, downPayment, activeLimits } = useMemo(() => {
     const debtAmount = maxDebt.mul(Math.ceil(debtFactor * 100)).div(100);
     const downPayment = balance.sub(debtAmount);
-    const activeLimits = limits.find((l) => l.maxPrincipal.gte(debtAmount));
+    const activeLimits = limits.find((l) => l.maxPrincipal.sub(flashFee).gte(debtAmount));
     if (!activeLimits) throw Error("active vault limit is undefined, should never happen");
     return { debtAmount, downPayment, activeLimits };
-  }, [debtFactor, maxDebt, balance, limits]);
+  }, [debtFactor, maxDebt, balance, limits, flashFee]);
 
   // state
   const [duration, setDuration] = useState(daysFromSeconds(activeLimits.minDuration, "up"));
