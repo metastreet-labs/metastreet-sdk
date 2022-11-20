@@ -7,13 +7,13 @@ import {
 import { useProvider, useQuery } from "wagmi";
 import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
 
-export type UseQuoteRefinanceParams = Omit<QuoteRefinanceParams, "signerOrProvider" | "deployment">;
+export type UseQuoteRefinanceParams = Omit<QuoteRefinanceParams, "signerOrProvider" | "lbWrapperAddress">;
 
 export const useQuoteRefinance = (params: UseQuoteRefinanceParams) => {
   const provider = useProvider();
 
   const [fetcher, enabled] = useFetcherWithDeployment((deployment) => {
-    return quoteRefinance({ ...params, signerOrProvider: provider, deployment });
+    return quoteRefinance({ ...params, signerOrProvider: provider, lbWrapperAddress: deployment.lbWrapperAddress });
   });
 
   return useQuery<QuoteRefinanceResult, ReadableError>(

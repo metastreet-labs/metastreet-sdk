@@ -8,7 +8,11 @@ const Index = () => {
 
   useEffect(() => {
     const deployment = DEPLOYMENTS[provider.network.chainId];
-    const params = { signerOrProvider: provider, deployment };
+    const params = {
+      signerOrProvider: provider,
+      subgraphURI: deployment.subgraphURI,
+      lbWrapperAddress: deployment.lbWrapperAddress,
+    };
     getLeverageBuy({ escrowID: "0", ...params })
       .then((json) => console.log({ json }))
       .catch((e) => console.log(e));

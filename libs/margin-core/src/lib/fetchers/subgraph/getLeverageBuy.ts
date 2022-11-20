@@ -37,17 +37,18 @@ const getPayload = (id: string) => {
 };
 
 interface GetLeverageBuyParams extends FetcherParams {
+  subgraphURI: string;
   escrowID: string;
 }
 
 export const getLeverageBuy = async (params: GetLeverageBuyParams): Promise<LeverageBuy> => {
-  const { signerOrProvider, deployment, escrowID } = params;
+  const { signerOrProvider, escrowID, lbWrapperAddress, subgraphURI } = params;
 
-  const lbWrapper = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signerOrProvider);
+  const lbWrapper = LeverageBuyWrapperV1__factory.connect(lbWrapperAddress, signerOrProvider);
   const pePlatformAddress = await lbWrapper.purchaseEscrow();
-  const id = `${deployment.lbWrapperAddress}-${pePlatformAddress}-${escrowID}`.toLowerCase();
+  const id = `${lbWrapperAddress}-${pePlatformAddress}-${escrowID}`.toLowerCase();
 
-  const response = await fetch(params.deployment.subgraphURI, {
+  const response = await fetch(subgraphURI, {
     method: "POST",
     body: getPayload(id),
     headers: { "Content-Type": "application/json" },

@@ -18,9 +18,9 @@ export interface GetCollateralLimitsResult {
 }
 
 const _getCollateralLimits = async (params: GetCollateralLimitsParams): Promise<GetCollateralLimitsResult> => {
-  const { signerOrProvider, deployment, collectionAddress, tokenID, vaultAddress } = params;
+  const { signerOrProvider, lbWrapperAddress, collectionAddress, tokenID, vaultAddress } = params;
 
-  const lbWrapper = LeverageBuyWrapperV1__factory.connect(deployment.lbWrapperAddress, signerOrProvider);
+  const lbWrapper = LeverageBuyWrapperV1__factory.connect(lbWrapperAddress, signerOrProvider);
   const limits = await lbWrapper.getCollateralLimits(vaultAddress, collectionAddress, tokenID);
 
   return {

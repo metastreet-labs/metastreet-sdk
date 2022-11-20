@@ -1,4 +1,3 @@
-import { Deployment } from "../../deployments";
 import { RawLeverageBuyEvent, transformRawLeverageBuyEvent } from "./transformers";
 import { LeverageBuyEvent } from "./types";
 
@@ -73,14 +72,14 @@ const getPayload = (variables: GetPayloadVariables) => {
   return JSON.stringify(payload);
 };
 
-export type GetLeverageBuyEventsParams = { deployment: Deployment } & GetPayloadVariables;
+export type GetLeverageBuyEventsParams = { subgraphURI: string } & GetPayloadVariables;
 
 export type GetLeverageBuyEventsResult = LeverageBuyEvent[];
 
 export const getLeverageBuyEvents = async (params: GetLeverageBuyEventsParams): Promise<GetLeverageBuyEventsResult> => {
-  const { deployment, ...variables } = params;
+  const { subgraphURI, ...variables } = params;
 
-  const response = await fetch(deployment.subgraphURI, {
+  const response = await fetch(subgraphURI, {
     method: "POST",
     body: getPayload(variables),
     headers: { "Content-Type": "application/json" },

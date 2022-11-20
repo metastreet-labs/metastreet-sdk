@@ -33,7 +33,7 @@ const useQuoteMultipleERC721 = (props: UseQuoteMultipleERC721Props) => {
 
     return quoteMultipleERC721({
       signerOrProvider: provider,
-      deployment,
+      lbWrapperAddress: deployment.lbWrapperAddress,
       purchasePrices,
       downPayments,
       collectionAddresses,
