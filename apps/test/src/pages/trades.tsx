@@ -66,7 +66,14 @@ const LBRow = (props: LBRowProps) => {
           <button className="border" onClick={() => setLSFModalOpen(true)}>
             List
           </button>
-          <ListForSaleModal isOpen={lfsModalOpen} onClose={() => setLSFModalOpen(false)} leverageBuy={leverageBuy} />
+          <ListForSaleModal
+            isOpen={lfsModalOpen}
+            onClose={() => setLSFModalOpen(false)}
+            leverageBuy={leverageBuy}
+            postOrderToOpensea={async (order) => {
+              // TODO: post order to OS
+            }}
+          />
         </td>
       )}
     </tr>
