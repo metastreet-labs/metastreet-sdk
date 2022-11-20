@@ -3,16 +3,17 @@ import {
   GetVaultsSupportedCollectionsResult,
   ReadableError,
 } from "@metastreet-labs/margin-core";
-import { useProvider, useQuery } from "wagmi";
+import { useQuery } from "wagmi";
 import useChainID from "../../hooks/useChainID";
+import useSignerOrProvider from "../../hooks/useSignerOrProvider";
 import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
 
 export const useVaultsSupportedCollections = () => {
-  const provider = useProvider();
+  const { signerOrProvider } = useSignerOrProvider();
   const chainID = useChainID();
 
   const [fetcher, enabled] = useFetcherWithDeployment((deployment) => {
-    return getVaultsSupportedCollections({ signerOrProvider: provider, vaultAddresses: deployment.vaults });
+    return getVaultsSupportedCollections({ signerOrProvider, vaultAddresses: deployment.vaults });
   });
 
   return useQuery<GetVaultsSupportedCollectionsResult, ReadableError>(
