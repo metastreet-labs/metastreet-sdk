@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { Fragment } from "react";
 import { TransactionState, TransactionStep } from "../hooks/useTransactionState";
 import CheckIcon from "./icons/CheckIcon";
 import ExclamationCircleIcon from "./icons/ExclamationCircleIcon";
@@ -23,12 +24,12 @@ const TransactionSteps = (props: TransactionStepsProps) => {
     <div className="transaction-steps">
       <div className="transaction-steps-wrapper">
         {steps.map((step, idx) => (
-          <>
+          <Fragment key={idx}>
             {idx != 0 ? (
               <StepDivider className={classNames({ "transaction-steps-divider-inactive": step.status == "idle" })} />
             ) : null}
-            <StepCircle step={step} index={idx} key={idx} />
-          </>
+            <StepCircle step={step} index={idx} />
+          </Fragment>
         ))}
       </div>
       <div
@@ -37,7 +38,7 @@ const TransactionSteps = (props: TransactionStepsProps) => {
           "transaction-steps-description-normal": !errored,
         })}
       >
-        {<ExclamationCircleIcon className="transaction-steps-icon" />}
+        <ExclamationCircleIcon className="transaction-steps-icon" />
         <span className="transaction-steps-text">{description}</span>
       </div>
       <MetaStreetButton loading={!errored} onClick={props.onClose}>
