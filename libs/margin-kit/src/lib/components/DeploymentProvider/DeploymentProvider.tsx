@@ -1,6 +1,7 @@
 import { defaultDeployments, Deployment } from "@metastreet-labs/margin-core";
 import { createContext, PropsWithChildren } from "react";
-import { chain, useNetwork } from "wagmi";
+import { chain } from "wagmi";
+import useChainID from "../../hooks/useChainID";
 
 export const DeploymentContext = createContext<Deployment | undefined>(undefined);
 
@@ -15,9 +16,8 @@ type DeploymentProviderProps = PropsWithChildren & {
 
 const DeploymentProvider = (props: DeploymentProviderProps) => {
   const { children, subgraphURIs } = props;
-  const { chain: activeChain } = useNetwork();
+  const chainID = useChainID();
 
-  const chainID = activeChain?.id ?? chain.mainnet.id;
   const deployment = { ...defaultDeployments[chainID] };
 
   if (deployment) {

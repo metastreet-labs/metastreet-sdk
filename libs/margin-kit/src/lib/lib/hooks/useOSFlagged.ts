@@ -1,5 +1,6 @@
 import { getReadableError } from "@metastreet-labs/margin-core";
-import { useNetwork, useQuery } from "wagmi";
+import { useQuery } from "wagmi";
+import useChainID from "../../hooks/useChainID";
 import getOSFlagged, { BaseToken, GetOSFlaggedResult } from "../fetchers/getOSFlagged";
 
 interface UseOSFlaggedResult<T extends BaseToken> {
@@ -11,8 +12,8 @@ const useOSFlagged = <T extends BaseToken>(
   tokens: T[],
   extraParams?: { onSuccess?: (tokens: GetOSFlaggedResult<T>) => void }
 ): UseOSFlaggedResult<T> => {
-  const { chain } = useNetwork();
-  const isMainnet = chain?.id == 1;
+  const chainID = useChainID();
+  const isMainnet = chainID == 1;
 
   const { data, error } = useQuery<GetOSFlaggedResult<T>, Error>(
     osfQueryKeys.tokens(tokens),
