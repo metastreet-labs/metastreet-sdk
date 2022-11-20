@@ -3,3 +3,7 @@
 @tailwind utilities;
 
 @import "../../../../libs/margin-kit/src/lib/styles.css";
+
+th {
+  @apply text-start;
+}
