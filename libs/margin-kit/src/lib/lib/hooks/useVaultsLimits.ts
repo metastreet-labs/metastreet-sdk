@@ -13,7 +13,7 @@ export type VaultLimits = GetCollateralLimitsResult & { vaultAddress: string };
 export const useVaultsLimits = (params: UseVaultsLimitsParams) => {
   const { signerOrProvider } = useSignerOrProvider();
 
-  const [fetcher, enabled] = useFetcherWithDeployment(async (deployment) => {
+  const fetcher = useFetcherWithDeployment(async (deployment) => {
     // Fetch collateral limits of each vault
     const limits = await Promise.all(
       deployment.vaults.map(async (vaultAddress) => {
@@ -26,7 +26,7 @@ export const useVaultsLimits = (params: UseVaultsLimitsParams) => {
     return limits;
   });
 
-  return useQuery<VaultLimits[], ReadableError>(vaultsLimitsQueryKeys.token(params), fetcher, { enabled });
+  return useQuery<VaultLimits[], ReadableError>(vaultsLimitsQueryKeys.token(params), fetcher);
 };
 
 const vaultsLimitsQueryKeys = {

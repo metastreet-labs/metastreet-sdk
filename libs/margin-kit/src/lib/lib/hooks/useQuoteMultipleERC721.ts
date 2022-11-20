@@ -18,7 +18,7 @@ const useQuoteMultipleERC721 = (props: UseQuoteMultipleERC721Props) => {
   const chainID = useChainID();
   const { signerOrProvider } = useSignerOrProvider();
 
-  const [fetcher, enabled] = useFetcherWithDeployment((deployment) => {
+  const fetcher = useFetcherWithDeployment((deployment) => {
     const collectionAddresses = new Array<string>();
     const tokenIDs = new Array<string>();
     const purchasePrices = new Array<BigNumberish>();
@@ -46,8 +46,7 @@ const useQuoteMultipleERC721 = (props: UseQuoteMultipleERC721Props) => {
 
   return useQuery<QuoteMultipleERC721Result, ReadableError>(
     quoteMultipleERC721QueryKeys.withParams(chainID, props),
-    fetcher,
-    { enabled }
+    fetcher
   );
 };
 

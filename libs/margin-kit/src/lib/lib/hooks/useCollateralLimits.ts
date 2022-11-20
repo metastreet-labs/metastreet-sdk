@@ -15,13 +15,11 @@ const useCollateralLimits = (params: UseCollateralLimitsParams) => {
   const { signerOrProvider } = useSignerOrProvider();
   const chainID = useChainID();
 
-  const [fetcher, enabled] = useFetcherWithDeployment((deployment) => {
+  const fetcher = useFetcherWithDeployment((deployment) => {
     return getCollateralLimits({ signerOrProvider, ...deployment, ...params });
   });
 
-  return useQuery<GetCollateralLimitsResult, ReadableError>(collateralLimitsQueryKeys.token(chainID, params), fetcher, {
-    enabled,
-  });
+  return useQuery<GetCollateralLimitsResult, ReadableError>(collateralLimitsQueryKeys.token(chainID, params), fetcher);
 };
 
 const collateralLimitsQueryKeys = {

@@ -1,17 +1,11 @@
 import { Deployment } from "@metastreet-labs/margin-core";
 import useDeployment from "../../hooks/useDeployment";
 
-type UseFetcherWithDeploymentResult<T> = [() => Promise<T>, boolean];
-
-export const useFetcherWithDeployment = <T>(
-  fetcher: (deployment: Deployment) => Promise<T>
-): UseFetcherWithDeploymentResult<T> => {
+export const useFetcherWithDeployment = <T>(fetcher: (deployment: Deployment) => Promise<T>) => {
   const deployment = useDeployment();
 
-  const useFetcherWithDeployment = () => {
-    if (!deployment) throw new Error("deployment is undefined");
+  return () => {
+    if (!deployment) throw new Error("Unsupported network");
     return fetcher(deployment);
   };
-
-  return [useFetcherWithDeployment, Boolean(deployment)];
 };

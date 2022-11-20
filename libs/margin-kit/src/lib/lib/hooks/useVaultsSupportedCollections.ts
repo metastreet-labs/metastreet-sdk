@@ -12,14 +12,13 @@ export const useVaultsSupportedCollections = () => {
   const { signerOrProvider } = useSignerOrProvider();
   const chainID = useChainID();
 
-  const [fetcher, enabled] = useFetcherWithDeployment((deployment) => {
+  const fetcher = useFetcherWithDeployment((deployment) => {
     return getVaultsSupportedCollections({ signerOrProvider, vaultAddresses: deployment.vaults });
   });
 
   return useQuery<GetVaultsSupportedCollectionsResult, ReadableError>(
     vaultsSupportedCollectionsQKs.chain(chainID),
-    fetcher,
-    { enabled }
+    fetcher
   );
 };
 
