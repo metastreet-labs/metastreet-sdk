@@ -1,4 +1,4 @@
-import { cancelListing, LeverageBuy, Marketplace, Order, repayETH } from "@metastreet-labs/margin-core";
+import { cancelListing, LeverageBuy, ListingData, Marketplace, Order, repayETH } from "@metastreet-labs/margin-core";
 import { ListForSaleModal, RefinanceModal, useDeployment, useLeverageBuys } from "@metastreet-labs/margin-kit";
 import { ethers } from "ethers";
 import { useState } from "react";
@@ -38,24 +38,12 @@ const LBRow = (props: LBRowProps) => {
   const { leverageBuy } = props;
   const { data } = useTokenMetadata(leverageBuy.tokenURI);
   const [refiModalOpen, setRefiModalOpen] = useState(false);
-  const [lfsModalOpen, setLSFModalOpen] = useState(false);
-  const { chain } = useNetwork();
   const { data: signer } = useSigner();
   const deployment = useDeployment();
 
-  const postOrderToOpensea = async (order: Order) => {
-    if (chain?.id != 5) throw new Error("postOrderToOpensea is implemented on goerli only");
-
-    const headers: HeadersInit = { "content-type": "application/json", accept: "application/json" };
-    const body = JSON.stringify({ parameters: order, signature: "0x" });
-    const response = await fetch("https://testnets-api.opensea.io/v2/orders/goerli/seaport/listings", {
-      method: "POST",
-      headers,
-      body,
-    });
-    const json = await response.json();
-    if (!response.ok) throw json;
-  };
+  const { listingData } = leverageBuy;
+  const listingTimeRemaining = listingData && Math.floor((listingData.endTime - new Date().getTime() / 1000) / 86400);
+  const isListed = listingData && listingTimeRemaining && listingTimeRemaining > 0;
 
   const repay = () => {
     if (!signer) throw new Error("repay called without a signer");
@@ -67,24 +55,6 @@ const LBRow = (props: LBRowProps) => {
       lbWrapperAddress: deployment.lbWrapperAddress,
     });
   };
-
-  const _cancelListing = () => {
-    if (!signer) throw new Error("cancelListing called without a signer");
-    if (!deployment) throw new Error("cancelListing was called without a deployment");
-    if (!leverageBuy.listingData) throw new Error("cancelListing called on a non listed LeverageBuy");
-    cancelListing({
-      signer,
-      lbWrapperAddress: deployment.lbWrapperAddress,
-      escrowID: leverageBuy.escrowID,
-      marketplace: Marketplace.Seaport,
-      listingData: leverageBuy.listingData.raw,
-    });
-  };
-
-  let listingTimeRemaining: number | undefined;
-  if (leverageBuy.listingData) {
-    listingTimeRemaining = Math.floor((leverageBuy.listingData.endTime - new Date().getTime() / 1000) / 86400);
-  }
 
   return (
     <tr>
@@ -101,23 +71,90 @@ const LBRow = (props: LBRowProps) => {
         <Button onClick={() => setRefiModalOpen(true)}>Refinance</Button>
         <RefinanceModal isOpen={refiModalOpen} onClose={() => setRefiModalOpen(false)} leverageBuy={leverageBuy} />
       </td>
-      {leverageBuy.listingData && listingTimeRemaining && listingTimeRemaining >= 0 ? (
-        <td>
-          Listed for {ethers.utils.formatEther(leverageBuy.listingData.listingPrice)} ETH,{" "}
-          <Button onClick={_cancelListing}>Delist</Button>
-        </td>
+      {isListed ? (
+        <ListedLB leverageBuy={{ ...leverageBuy, listingData }} />
       ) : (
-        <td>
-          Not Listed, <Button onClick={() => setLSFModalOpen(true)}>List</Button>
-          <ListForSaleModal
-            isOpen={lfsModalOpen}
-            onClose={() => setLSFModalOpen(false)}
-            leverageBuy={leverageBuy}
-            postOrderToOpensea={postOrderToOpensea}
-          />
-        </td>
+        <NotListedLB leverageBuy={leverageBuy} />
       )}
     </tr>
+  );
+};
+
+interface ListedLBProps {
+  leverageBuy: LeverageBuy & { listingData: ListingData };
+}
+
+const ListedLB = ({ leverageBuy }: ListedLBProps) => {
+  const { chain } = useNetwork();
+  const { data: signer } = useSigner();
+  const deployment = useDeployment();
+
+  const delist = () => {
+    if (!signer) throw new Error("cancelListing called without a signer");
+    if (!deployment) throw new Error("cancelListing was called without a deployment");
+    if (!leverageBuy.listingData) throw new Error("cancelListing called on a non listed LeverageBuy");
+    cancelListing({
+      signer,
+      lbWrapperAddress: deployment.lbWrapperAddress,
+      escrowID: leverageBuy.escrowID,
+      marketplace: Marketplace.Seaport,
+      listingData: leverageBuy.listingData.raw,
+    });
+  };
+
+  const OS_MAINNET_BASE_URL = "https://opensea.io/assets/ethereum";
+  const OS_GOERLI_BASE_URL = "https://testnets.opensea.io/assets/goerli";
+  const OS_BASE_URL = chain?.id == 1 ? OS_MAINNET_BASE_URL : OS_GOERLI_BASE_URL;
+  const osURL = `${OS_BASE_URL}/${leverageBuy.collectionAddress}/${leverageBuy.tokenID}`;
+
+  return (
+    <>
+      Listed for {ethers.utils.formatEther(leverageBuy.listingData.listingPrice)} ETH{" "}
+      <a
+        href={osURL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-ms-primary-dark hover:text-ms-primary-light font-medium"
+      >
+        (View on OpenSea)
+      </a>
+      , <Button onClick={delist}>Delist</Button>
+    </>
+  );
+};
+
+interface NotListedLBProps {
+  leverageBuy: LeverageBuy;
+}
+
+const NotListedLB = ({ leverageBuy }: NotListedLBProps) => {
+  const { chain } = useNetwork();
+  const [lfsModalOpen, setLSFModalOpen] = useState(false);
+
+  const postOrderToOpensea = async (order: Order) => {
+    if (chain?.id != 5) throw new Error("postOrderToOpensea is implemented on goerli only");
+
+    const headers: HeadersInit = { "content-type": "application/json", accept: "application/json" };
+    const body = JSON.stringify({ parameters: order, signature: "0x" });
+    const response = await fetch("https://testnets-api.opensea.io/v2/orders/goerli/seaport/listings", {
+      method: "POST",
+      headers,
+      body,
+    });
+    const json = await response.json();
+    if (!response.ok) throw json;
+  };
+
+  return (
+    <>
+      Not Listed, <Button onClick={() => setLSFModalOpen(true)}>List</Button>
+      <ListForSaleModal
+        isOpen={lfsModalOpen}
+        onClose={() => setLSFModalOpen(false)}
+        leverageBuy={leverageBuy}
+        postOrderToOpensea={postOrderToOpensea}
+      />
+    </>
   );
 };
 
