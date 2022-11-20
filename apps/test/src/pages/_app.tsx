@@ -17,7 +17,7 @@ const CustomApp = ({ Component, pageProps }: AppProps) => {
         <Head>
           <title>MetaStreet SDK Demo</title>
         </Head>
-        <main className="app">
+        <main className="flex">
           <Connect>
             <Component {...pageProps} />
           </Connect>

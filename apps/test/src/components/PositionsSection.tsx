@@ -1,29 +1,31 @@
 import { cancelListing, LeverageBuy, Marketplace, Order } from "@metastreet-labs/margin-core";
 import { ListForSaleModal, RefinanceModal, useDeployment, useLeverageBuys } from "@metastreet-labs/margin-kit";
 import { ethers } from "ethers";
-import { NextPage } from "next";
 import { useState } from "react";
 import { useNetwork, useQuery, useSigner } from "wagmi";
+import Button from "./Button";
 
-const LeverageBuysPage: NextPage = () => {
+const PositionsSection = () => {
   const { data } = useLeverageBuys();
   return (
-    <table className="border-spacing-y-2 border-spacing-x-4 border border-separate">
-      <thead>
-        <tr>
-          <th>Image</th>
-          <th>Collection Name</th>
-          <th>Token ID</th>
-          <th>Refi</th>
-          <th>List</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data?.map((lb) => (
-          <LBRow leverageBuy={lb} key={lb.escrowID} />
-        ))}
-      </tbody>
-    </table>
+    <section className="flex flex-col space-y-2">
+      <h1 className="text-2xl font-bold">Your Positions</h1>
+      <table className="border-spacing-y-2 border-spacing-x-4 border border-separate">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Refi</th>
+            <th>List</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data?.map((lb) => (
+            <LBRow leverageBuy={lb} key={lb.escrowID} />
+          ))}
+        </tbody>
+      </table>
+    </section>
   );
 };
 
@@ -77,27 +79,21 @@ const LBRow = (props: LBRowProps) => {
       <td>
         <img src={data?.image} alt="" className="w-10 h-10" />
       </td>
-      <td>{data?.name ?? "..."}</td>
-      <td>{leverageBuy.tokenID}</td>
       <td>
-        <button className="border" onClick={() => setRefiModalOpen(true)}>
-          Refinance
-        </button>
+        {data?.name ?? "..."} #{leverageBuy.tokenID}
+      </td>
+      <td>
+        <Button onClick={() => setRefiModalOpen(true)}>Refinance</Button>
         <RefinanceModal isOpen={refiModalOpen} onClose={() => setRefiModalOpen(false)} leverageBuy={leverageBuy} />
       </td>
       {leverageBuy.listingData && listingTimeRemaining && listingTimeRemaining >= 0 ? (
         <td>
           Listed for {ethers.utils.formatEther(leverageBuy.listingData.listingPrice)} ETH,{" "}
-          <button className="border" onClick={_cancelListing}>
-            Delist
-          </button>
+          <Button onClick={_cancelListing}>Delist</Button>
         </td>
       ) : (
         <td>
-          Not Listed,{" "}
-          <button className="border" onClick={() => setLSFModalOpen(true)}>
-            List
-          </button>
+          Not Listed, <Button onClick={() => setLSFModalOpen(true)}>List</Button>
           <ListForSaleModal
             isOpen={lfsModalOpen}
             onClose={() => setLSFModalOpen(false)}
@@ -133,4 +129,4 @@ const useTokenMetadata = (tokenURI: string) => {
   return useQuery<TokenMetadata, unknown>(["token-metadata", url], fetcher);
 };
 
-export default LeverageBuysPage;
+export default PositionsSection;
