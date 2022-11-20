@@ -22,6 +22,7 @@ export * from "./lib/helpers/getOrderFromReceipt";
 // Transactions
 export * from "./lib/transactions/buyMultipleERC721WithETH";
 export * from "./lib/transactions/buySingleERC721WithETH";
+export * from "./lib/transactions/cancelListing";
 export * from "./lib/transactions/createListing";
 export * from "./lib/transactions/refinanceETH";
 export * from "./lib/transactions/repayETH";
