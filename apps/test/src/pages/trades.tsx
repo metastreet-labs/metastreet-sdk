@@ -1,9 +1,9 @@
-import { LeverageBuy } from "@metastreet-labs/margin-core";
+import { LeverageBuy, Order } from "@metastreet-labs/margin-core";
 import { ListForSaleModal, RefinanceModal, useLeverageBuys } from "@metastreet-labs/margin-kit";
 import { ethers } from "ethers";
 import { NextPage } from "next";
 import { useState } from "react";
-import { useQuery } from "wagmi";
+import { useNetwork, useQuery } from "wagmi";
 
 const LeverageBuysPage: NextPage = () => {
   const { data } = useLeverageBuys();
@@ -36,6 +36,21 @@ const LBRow = (props: LBRowProps) => {
   const { data } = useTokenMetadata(leverageBuy.tokenURI);
   const [refiModalOpen, setRefiModalOpen] = useState(false);
   const [lfsModalOpen, setLSFModalOpen] = useState(false);
+  const { chain } = useNetwork();
+
+  const postOrderToOpensea = async (order: Order) => {
+    if (chain?.id != 5) throw new Error("postOrderToOpensea is implemented on goerli only");
+
+    const headers: HeadersInit = { "content-type": "application/json", accept: "application/json" };
+    const body = JSON.stringify({ parameters: order, signature: "0x" });
+    const response = await fetch("https://testnets-api.opensea.io/v2/orders/goerli/seaport/listings", {
+      method: "POST",
+      headers,
+      body,
+    });
+    const json = await response.json();
+    if (!response.ok) throw json;
+  };
 
   let listingTimeRemaining: number | undefined;
   if (leverageBuy.listingData) {
@@ -70,9 +85,7 @@ const LBRow = (props: LBRowProps) => {
             isOpen={lfsModalOpen}
             onClose={() => setLSFModalOpen(false)}
             leverageBuy={leverageBuy}
-            postOrderToOpensea={async (order) => {
-              // TODO: post order to OS
-            }}
+            postOrderToOpensea={postOrderToOpensea}
           />
         </td>
       )}

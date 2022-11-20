@@ -7,8 +7,9 @@ import { ethers } from "ethers";
 
 const decimals = 18;
 
-export const fromUnits = (value: ethers.BigNumber | Decimal) => {
-  return new Decimal(`${value}`).div(`1e${decimals}`).toSignificantDigits(6, Decimal.ROUND_DOWN);
+export const fromUnits = (value: ethers.BigNumber | Decimal, r?: Decimal.Rounding) => {
+  // Maybe rounding should default to ROUND_UP
+  return new Decimal(`${value}`).div(`1e${decimals}`).toSignificantDigits(6, r ?? Decimal.ROUND_DOWN);
 };
 
 export const toUnits = (value: number) => {
