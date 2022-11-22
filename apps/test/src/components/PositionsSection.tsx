@@ -1,4 +1,4 @@
-import { cancelListing, LeverageBuy, Marketplace, Order } from "@metastreet-labs/margin-core";
+import { cancelListing, LeverageBuy, Marketplace, Order, repayETH } from "@metastreet-labs/margin-core";
 import { ListForSaleModal, RefinanceModal, useDeployment, useLeverageBuys } from "@metastreet-labs/margin-kit";
 import { ethers } from "ethers";
 import { useState } from "react";
@@ -15,6 +15,7 @@ const PositionsSection = () => {
           <tr>
             <th>Image</th>
             <th>Name</th>
+            <th>Repay</th>
             <th>Refi</th>
             <th>List</th>
           </tr>
@@ -56,10 +57,21 @@ const LBRow = (props: LBRowProps) => {
     if (!response.ok) throw json;
   };
 
+  const repay = () => {
+    if (!signer) throw new Error("repay called without a signer");
+    if (!deployment) throw new Error("repay was called without a deployment");
+    repayETH({
+      escrowID: leverageBuy.escrowID,
+      repayment: leverageBuy.repayment,
+      signer,
+      lbWrapperAddress: deployment.lbWrapperAddress,
+    });
+  };
+
   const _cancelListing = () => {
     if (!signer) throw new Error("cancelListing called without a signer");
-    if (!leverageBuy.listingData) throw new Error("cancelListing called on a non listed LeverageBuy");
     if (!deployment) throw new Error("cancelListing was called without a deployment");
+    if (!leverageBuy.listingData) throw new Error("cancelListing called on a non listed LeverageBuy");
     cancelListing({
       signer,
       lbWrapperAddress: deployment.lbWrapperAddress,
@@ -81,6 +93,9 @@ const LBRow = (props: LBRowProps) => {
       </td>
       <td>
         {data?.name ?? "..."} #{leverageBuy.tokenID}
+      </td>
+      <td>
+        <Button onClick={repay}>Repay</Button>
       </td>
       <td>
         <Button onClick={() => setRefiModalOpen(true)}>Refinance</Button>
