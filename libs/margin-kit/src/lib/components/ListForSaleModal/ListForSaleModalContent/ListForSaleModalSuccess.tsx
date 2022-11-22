@@ -2,7 +2,7 @@ import useChainID from "../../../hooks/useChainID";
 import { useTokenMetadata } from "../../../lib/hooks/useTokenMetadata";
 import MetaStreetButton from "../../MetaStreetButton";
 import { RefinanceModalSuccessAnimation } from "../../RefinanceModal/RefinanceModalContent/RefinanceModalSuccess";
-import { useListForSale } from "../state/ListForSaleContext";
+import { useListForSale } from "../state/useListForSale";
 
 interface ListForSaleModalSuccessProps {
   onClose: () => void;

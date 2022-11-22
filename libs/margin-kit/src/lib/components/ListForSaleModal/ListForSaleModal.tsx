@@ -4,7 +4,7 @@ import MetaStreetModal, { ModalState } from "../MetaStreetModal";
 import ModalLoadingOrError from "../ModalLoadingOrError";
 import FeesProvider from "./FeesProvider";
 import ListForSaleModalContent from "./ListForSaleModalContent";
-import ListForSaleProvider from "./state/ListForSaleProvider";
+import { ListForSaleProvider } from "./state/ListForSaleProvider";
 import { UseListForSaleTransactionParams } from "./state/useListForSaleTransaction";
 
 type ListForSaleModal = ModalState & {

@@ -1,7 +1,7 @@
 import Divider from "../../Divider";
 import MetaStreetModal from "../../MetaStreetModal";
 import LeverageBuyTokenInfo from "../../token-info/LeverageBuyTokenInfo";
-import { useListForSale } from "../state/ListForSaleContext";
+import { useListForSale } from "../state/useListForSale";
 import ListForSaleModalForm from "./ListForSaleModalForm";
 import ListForSaleModalSuccess, { ListForSaleModalSuccessAnimation } from "./ListForSaleModalSuccess";
 import ListForSaleModalTransaction from "./ListForSaleModalTransaction";

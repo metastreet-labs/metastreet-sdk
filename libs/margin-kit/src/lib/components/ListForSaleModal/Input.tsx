@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { ChangeEvent, useRef } from "react";
 import ETHLogo from "../ETHLogo";
-import { useListForSale } from "./state/ListForSaleContext";
+import { useListForSale } from "./state/useListForSale";
 
 // Source: @uniswap/interface
 const escapeRegExp = (string: string): string => {

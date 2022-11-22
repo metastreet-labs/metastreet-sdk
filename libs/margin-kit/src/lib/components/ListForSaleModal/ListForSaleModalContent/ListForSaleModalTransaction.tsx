@@ -1,5 +1,5 @@
 import TransactionSteps from "../../TransactionSteps";
-import { useListForSale } from "../state/ListForSaleContext";
+import { useListForSale } from "../state/useListForSale";
 
 interface ListForSaleModalTransactionProps {
   onClose: () => void;

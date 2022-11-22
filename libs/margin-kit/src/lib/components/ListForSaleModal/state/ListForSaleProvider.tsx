@@ -9,7 +9,7 @@ type ListForSaleProviderProps = PropsWithChildren & {
   postOrderToOpenSea: UseListForSaleTransactionParams["postOrderToOpenSea"];
 };
 
-const ListForSaleProvider = (props: ListForSaleProviderProps) => {
+export const ListForSaleProvider = (props: ListForSaleProviderProps) => {
   const { children, leverageBuy, postOrderToOpenSea } = props;
   const { formState, formActions } = useListForSaleForm({ leverageBuy });
   const { transactionState, listForSale } = useListForSaleTransaction({
@@ -28,5 +28,3 @@ const ListForSaleProvider = (props: ListForSaleProviderProps) => {
 
   return <ListForSaleContext.Provider value={contextValue}>{children}</ListForSaleContext.Provider>;
 };
-
-export default ListForSaleProvider;

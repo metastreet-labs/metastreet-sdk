@@ -5,7 +5,7 @@ import { InfoRow, InfoRowLabel, InfoRowValue } from "../../InfoRow";
 import MetaStreetButton from "../../MetaStreetButton";
 import { useFees } from "../FeesProvider";
 import { Input } from "../Input";
-import { useListForSale } from "../state/ListForSaleContext";
+import { useListForSale } from "../state/useListForSale";
 import useListingParams from "../state/useListingParams";
 import useListingProceeds from "../state/useListingProceeds";
 
