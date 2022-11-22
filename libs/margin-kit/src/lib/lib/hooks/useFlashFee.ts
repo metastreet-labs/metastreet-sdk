@@ -9,11 +9,11 @@ const useFlashFee = (loanAmount: BigNumberish) => {
   const chainID = useChainID();
   const { signerOrProvider } = useSignerOrProvider();
 
-  const [fetcher, enabled] = useFetcherWithDeployment((deployment) => {
+  const fetcher = useFetcherWithDeployment((deployment) => {
     return getFlashFee({ signerOrProvider, ...deployment, loanAmount });
   });
 
-  return useQuery<BigNumber, ReadableError>(flashFeeQueryKeys.loanAmount(chainID, loanAmount), fetcher, { enabled });
+  return useQuery<BigNumber, ReadableError>(flashFeeQueryKeys.loanAmount(chainID, loanAmount), fetcher);
 };
 
 const flashFeeQueryKeys = {

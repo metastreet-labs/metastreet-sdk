@@ -5,12 +5,12 @@ import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
 export const useLeverageBuys = () => {
   const { address: owner = "" } = useAccount();
 
-  const [fetcher, enabled] = useFetcherWithDeployment((deployment) => {
+  const fetcher = useFetcherWithDeployment((deployment) => {
     return getLeverageBuys({ ...deployment, owner, skip: 0, first: 1000 });
   });
 
   return useQuery<LeverageBuy[], ReadableError>(leverageBuysQueryKeys.owner(owner), fetcher, {
-    enabled: Boolean(enabled && owner),
+    enabled: Boolean(owner),
   });
 };
 

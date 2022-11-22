@@ -13,14 +13,13 @@ export type UseQuoteRefinanceParams = Omit<QuoteRefinanceParams, "signerOrProvid
 export const useQuoteRefinance = (params: UseQuoteRefinanceParams) => {
   const { signerOrProvider } = useSignerOrProvider();
 
-  const [fetcher, enabled] = useFetcherWithDeployment((deployment) => {
+  const fetcher = useFetcherWithDeployment((deployment) => {
     return quoteRefinance({ ...params, signerOrProvider, lbWrapperAddress: deployment.lbWrapperAddress });
   });
 
   return useQuery<QuoteRefinanceResult, ReadableError>(
     quoteRefinanceQueryKeys.loanTerms(params.vaultAddress, params),
-    fetcher,
-    { enabled }
+    fetcher
   );
 };
 
