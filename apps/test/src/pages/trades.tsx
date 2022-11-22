@@ -85,7 +85,7 @@ const LBRow = (props: LBRowProps) => {
         </button>
         <RefinanceModal isOpen={refiModalOpen} onClose={() => setRefiModalOpen(false)} leverageBuy={leverageBuy} />
       </td>
-      {listingTimeRemaining && listingTimeRemaining >= 0 ? (
+      {leverageBuy.listingData && listingTimeRemaining && listingTimeRemaining >= 0 ? (
         <td>
           Listed for {ethers.utils.formatEther(leverageBuy.listingData.listingPrice)} ETH,{" "}
           <button className="border" onClick={_cancelListing}>
