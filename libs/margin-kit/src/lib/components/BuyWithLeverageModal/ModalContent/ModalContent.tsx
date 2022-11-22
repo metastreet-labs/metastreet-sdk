@@ -3,7 +3,7 @@ import Divider from "../../Divider";
 import MetaStreetModal from "../../MetaStreetModal";
 import MultiTokenInfo from "../../token-info/MultiTokenInfo";
 import SingleTokenInfo from "../../token-info/SingleTokenInfo";
-import useBuyWithLeverage from "../state/useBuyWithLeverage";
+import { useBuyWithLeverage } from "../state/useBuyWithLeverage";
 import ModalConfirmation from "./ModalConfirmation";
 import ModalForm from "./ModalForm";
 import ModalSuccess, { BuyWithLeverageSuccessAnimation } from "./ModalSuccess";

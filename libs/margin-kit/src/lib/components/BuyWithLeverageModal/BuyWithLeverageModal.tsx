@@ -6,7 +6,7 @@ import MetaStreetModal, { ModalState } from "../MetaStreetModal";
 import ModalLoadingOrError from "../ModalLoadingOrError";
 import LoanInfoContainer from "./containers/LoanInfoContainer";
 import ModalContent from "./ModalContent";
-import BuyWithLeverageProvider from "./state/BuyWithLeverageProvider";
+import { BuyWithLeverageProvider } from "./state/BuyWithLeverageProvider";
 
 type BuyWithLeverageModalProps = ModalState & {
   tokens: BWLToken[];

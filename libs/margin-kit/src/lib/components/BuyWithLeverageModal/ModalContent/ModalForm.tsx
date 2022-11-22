@@ -11,7 +11,7 @@ import MetaStreetButton from "../../MetaStreetButton";
 import PurpleSection from "../../purple-section/PurpleSection";
 import { DebtSlider } from "../../sliders/DebtSlider";
 import DurationSlider from "../../sliders/DurationSlider";
-import useBuyWithLeverage from "../state/useBuyWithLeverage";
+import { useBuyWithLeverage } from "../state/useBuyWithLeverage";
 
 const ModalForm = () => {
   const { data: balance } = useETHBalance();

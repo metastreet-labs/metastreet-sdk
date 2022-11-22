@@ -1,5 +1,5 @@
 import { prettyFormatNumber } from "../../utils/numbers";
-import useBuyWithLeverage from "../BuyWithLeverageModal/state/useBuyWithLeverage";
+import { useBuyWithLeverage } from "../BuyWithLeverageModal/state/useBuyWithLeverage";
 import ETHPrice from "../ETHPrice";
 import { InfoRow, InfoRowValue } from "../InfoRow";
 import PurpleSectionLabel from "../purple-section/PurpleSectionLabel";

@@ -14,7 +14,7 @@ interface BuyWithLeverageProviderProps {
   onBuySuccess?: () => void;
 }
 
-const BuyWithLeverageProvider = (props: BuyWithLeverageProviderProps) => {
+export const BuyWithLeverageProvider = (props: BuyWithLeverageProviderProps) => {
   const { tokens, children, limits, flashFee, onBuySuccess } = props;
   const { formState, ...formActions } = useBuyWithLeverageForm({
     tokens,
@@ -37,5 +37,3 @@ const BuyWithLeverageProvider = (props: BuyWithLeverageProviderProps) => {
 
   return <BuyWithLeverageContext.Provider value={contextValue}>{children}</BuyWithLeverageContext.Provider>;
 };
-
-export default BuyWithLeverageProvider;
