@@ -11,7 +11,7 @@ import MetaStreetButton from "../../MetaStreetButton";
 import PurpleSection from "../../purple-section/PurpleSection";
 import { DebtSlider } from "../../sliders/DebtSlider";
 import DurationSlider from "../../sliders/DurationSlider";
-import useRefinance from "../state/useRefinance";
+import { useRefinance } from "../state/useRefinance";
 
 const RefinanceModalForm = () => {
   const { leverageBuy, formState, actions } = useRefinance();

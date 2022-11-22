@@ -1,5 +1,5 @@
 import TransactionSteps from "../../TransactionSteps";
-import useRefinance from "../state/useRefinance";
+import { useRefinance } from "../state/useRefinance";
 
 interface RefinanceModalTransactionProps {
   onClose: () => void;
