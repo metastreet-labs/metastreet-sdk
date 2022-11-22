@@ -4,7 +4,7 @@
   "peerDependencies": {
     "react": "^16 || ^17 || ^18",
     "react-dom": "^16 || ^17 || ^18",
-    "wagmi": "^0.6.4",
+    "wagmi": "^0.8.5",
     "ethers": "^5.7.0"
   }
 }
