@@ -6,6 +6,10 @@ This SDK aims to make it easy for web apps to integrate MetaStreet leverage trad
 - `margin-core`: this package provides functions that let you interact with MetaStreet’s PE contracts, either to send transactions or read on-chain data, which is easier than using `pe-contracts-typechain`. The package also contains functions to easily query the subgraph, as well as all the needed contract addresses and API URLs.
 - `margin-kit`: this is a **React JS** package, which depends on **wagmi**, it contains ready-to-use components that can be plugged into any React app, to integrate MetaStreet’s leveraged trading features in a few lines of code. It also contains building blocks that you can use you build your own custom components.
 
+# Demo
+
+We built a demo app to showcase SDK features, you can check the code under [apps/test](apps/test), or visit the [hosted version](https://sdk-demo-six.vercel.app).
+
 # Installation
 
 ### margin-kit
