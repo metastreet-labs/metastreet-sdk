@@ -4,11 +4,12 @@ This SDK aims to make it easy for web apps to integrate MetaStreet leverage trad
 
 - `pe-contracts-typechain`: this is a very basic package that contains MetaStreet Purchase Escrow (pe) contracts ABIs, and their corresponding typechain generated code.
 - `margin-core`: this package provides functions that let you interact with MetaStreet’s PE contracts, either to send transactions or read on-chain data, which is easier than using `pe-contracts-typechain`. The package also contains functions to easily query the subgraph, as well as all the needed contract addresses and API URLs.
-- `margin-kit`: this is a **React JS** package, which depends on **wagmi**, it contains ready-to-use components that can be plugged into any React app, to integrate MetaStreet’s leveraged trading features in a few lines of code. It also contains building blocks that you can use you build your own custom components.
+- `margin-kit`: this is a **React JS** package, which depends on **wagmi**, it contains ready-to-use components that can be plugged into any React app, to integrate MetaStreet’s leveraged trading features in a few lines of code. It also contains building blocks that you can use to build your own custom components.
 
 # Demo
 
 We built a demo app to showcase SDK features, you can check the code under [apps/test](apps/test), or visit the [hosted version](https://sdk-demo-six.vercel.app).
+You can also see how the SDK is implemented in a full-fledged marketplace on our [PowerSweep](https://powersweep.metastreet.xyz/) ([On Görli](https://powersweep-goerli.metastreet.xyz/)) product.
 
 # Installation
 
