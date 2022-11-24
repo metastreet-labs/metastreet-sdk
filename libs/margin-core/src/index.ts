@@ -14,6 +14,7 @@ export * from "./lib/fetchers/subgraph/getLeverageBuy";
 export * from "./lib/fetchers/subgraph/getLeverageBuyEvents";
 export * from "./lib/fetchers/subgraph/getLeverageBuys";
 export * from "./lib/fetchers/subgraph/types";
+export * from "./lib/fetchers/subgraph/waitForSubgraphSync";
 // Types
 export * from "./lib/fetchers/types";
 export type { Consideration, Offer, Order } from "./lib/helpers/cleanupOrder";
