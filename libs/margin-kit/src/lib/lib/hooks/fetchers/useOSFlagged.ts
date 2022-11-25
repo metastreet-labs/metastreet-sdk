@@ -16,7 +16,7 @@ export const useOSFlagged = <T extends BaseToken>(
   const isMainnet = chainID == 1;
 
   const { data, error } = useQuery<GetOSFlaggedResult<T>, Error>(
-    osfQueryKeys.tokens(tokens),
+    useOSFlaggedQKs.tokens(tokens),
     () => getOSFlagged(tokens),
     { enabled: isMainnet, onSuccess: extraParams?.onSuccess }
   );
@@ -27,7 +27,7 @@ export const useOSFlagged = <T extends BaseToken>(
   return { tokens: data, tokensError: error && getReadableError(error).message };
 };
 
-const osfQueryKeys = {
+export const useOSFlaggedQKs = {
   all: () => ["os-flagged"],
-  tokens: (tokens: BaseToken[]) => [...osfQueryKeys.all(), tokens],
+  tokens: (tokens: BaseToken[]) => [...useOSFlaggedQKs.all(), tokens],
 };

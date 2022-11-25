@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import useChainID from "../../hooks/useChainID";
-import useFeesQuery from "../../lib/hooks/fetchers/useFeesQuery";
+import { useFeesQuery } from "../../lib/hooks/fetchers/useFeesQuery";
 import { prettyFormatNumber } from "../../utils/numbers";
 import ETHPrice from "../ETHPrice";
 import QuestionMarkCircleIcon from "../icons/QuestionMarkCircleIcon";

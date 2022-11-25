@@ -45,20 +45,20 @@ const useQuoteMultipleERC721 = (props: UseQuoteMultipleERC721Props) => {
   });
 
   return useQuery<QuoteMultipleERC721Result, ReadableError>(
-    quoteMultipleERC721QueryKeys.withParams(chainID, props),
+    useQuoteMultipleERC721QKs.withParams(chainID, props),
     fetcher
   );
 };
 
-export const quoteMultipleERC721QueryKeys = {
+export const useQuoteMultipleERC721QKs = {
   all: (chainID: number) => ["quote-multiple-erc721", chainID],
   tokens: (chainID: number, tokens: BWLToken[]) => {
     const id = tokens.map((token) => token.tokenID).join("-");
-    return [...quoteMultipleERC721QueryKeys.all(chainID), id];
+    return [...useQuoteMultipleERC721QKs.all(chainID), id];
   },
   withParams: (chainID: number, params: { tokens: BWLToken[]; downPayments: BigNumberish[]; duration: number }) => {
     const id = `${params.downPayments.join("-")}-${params.duration}`;
-    return [...quoteMultipleERC721QueryKeys.tokens(chainID, params.tokens), id];
+    return [...useQuoteMultipleERC721QKs.tokens(chainID, params.tokens), id];
   },
 };
 
