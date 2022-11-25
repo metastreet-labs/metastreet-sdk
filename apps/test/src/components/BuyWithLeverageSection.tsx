@@ -1,13 +1,12 @@
 import { BuyWithLeverage, BWLToken, useDeployment } from "@metastreet-labs/margin-kit";
-import useChainID from "libs/margin-kit/src/lib/hooks/useChainID";
 import { useState } from "react";
-import { useAccount } from "wagmi";
+import { useAccount, useNetwork } from "wagmi";
 import Button from "./Button";
 import Input from "./Input";
 
 const BuyWithLeverageSection = () => {
   // active chain ID and address, used to construct a call for action link
-  const chainID = useChainID();
+  const chainID = useNetwork().chain?.id ?? 1;
   const { address = "" } = useAccount();
   // deployment object, grabbed from the DeploymentProvider that wraps the app
   const deployment = useDeployment();
