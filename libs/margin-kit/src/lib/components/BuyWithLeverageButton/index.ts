@@ -1,1 +1,1 @@
-export { default } from "./BuyWithLeverageButton";
+export * from "./BuyWithLeverageButton";

@@ -1,6 +1,6 @@
 import { LeverageBuy, repayETH, waitForSubgraphSync } from "@metastreet-labs/margin-core";
 import { useClient, useSigner } from "wagmi";
-import useDeployment from "../../../hooks/useDeployment";
+import { useDeployment } from "../../../hooks/useDeployment";
 import { useLeverageBuyEventsQKs } from "../fetchers/subgraph/useLeverageBuyEvents";
 import { useLeverageBuysQKs } from "../fetchers/subgraph/useLeverageBuys";
 

@@ -14,7 +14,7 @@ type BuyWithLeverageModalProps = ModalState & {
   onBuySuccess?: () => void;
 };
 
-const BuyWithLeverageModal = (props: BuyWithLeverageModalProps) => {
+export const BuyWithLeverageModal = (props: BuyWithLeverageModalProps) => {
   const { isOpen, onClose, title, onBuySuccess } = props;
   const preventClose = false;
   // TODO: this should be handled on the app side
@@ -43,5 +43,3 @@ const BuyWithLeverageModal = (props: BuyWithLeverageModalProps) => {
     </MetaStreetModal>
   );
 };
-
-export default BuyWithLeverageModal;

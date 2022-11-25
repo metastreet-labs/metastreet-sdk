@@ -1,4 +1,4 @@
-import useDebouncedProps from "../../../hooks/useDebouncedProps";
+import { useDebouncedProps } from "../../../hooks/useDebouncedProps";
 import useQuoteMultipleERC721, {
   UseQuoteMultipleERC721Props,
 } from "../../../lib/hooks/fetchers/useQuoteMultipleERC721";

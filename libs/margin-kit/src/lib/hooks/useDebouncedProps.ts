@@ -2,7 +2,7 @@ import { DependencyList, useEffect, useState } from "react";
 
 type UseDebounceResult<T> = [T, boolean];
 
-const useDebouncedProps = <T>(props: T, dependencies?: DependencyList): UseDebounceResult<T> => {
+export const useDebouncedProps = <T>(props: T, dependencies?: DependencyList): UseDebounceResult<T> => {
   const [dp, setDP] = useState(props);
   const [debouncing, setDebouncing] = useState(false);
 
@@ -20,5 +20,3 @@ const useDebouncedProps = <T>(props: T, dependencies?: DependencyList): UseDebou
 
   return [dp, debouncing];
 };
-
-export default useDebouncedProps;

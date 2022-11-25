@@ -14,7 +14,7 @@ type DeploymentProviderProps = PropsWithChildren & {
   subgraphURIs?: SubgraphURIs;
 };
 
-const DeploymentProvider = (props: DeploymentProviderProps) => {
+export const DeploymentProvider = (props: DeploymentProviderProps) => {
   const { children, subgraphURIs } = props;
   const chainID = useChainID();
 
@@ -29,5 +29,3 @@ const DeploymentProvider = (props: DeploymentProviderProps) => {
 
   return <DeploymentContext.Provider value={deployment}>{children}</DeploymentContext.Provider>;
 };
-
-export default DeploymentProvider;
