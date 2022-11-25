@@ -1,6 +1,6 @@
 import { getLeverageBuys, LeverageBuy, ReadableError } from "@metastreet-labs/margin-core";
 import { useAccount, useQuery } from "wagmi";
-import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
+import { useFetcherWithDeployment } from "../useFetcherWithDeployment";
 
 export const useLeverageBuys = () => {
   const { address: owner = "" } = useAccount();
