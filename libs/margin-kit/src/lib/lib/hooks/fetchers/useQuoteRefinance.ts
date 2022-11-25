@@ -5,7 +5,7 @@ import {
   ReadableError,
 } from "@metastreet-labs/margin-core";
 import { useQuery } from "wagmi";
-import useSignerOrProvider from "../../hooks/useSignerOrProvider";
+import useSignerOrProvider from "../../../hooks/useSignerOrProvider";
 import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
 
 export type UseQuoteRefinanceParams = Omit<QuoteRefinanceParams, "signerOrProvider" | "lbWrapperAddress">;

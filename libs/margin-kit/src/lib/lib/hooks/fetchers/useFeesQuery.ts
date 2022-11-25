@@ -1,5 +1,5 @@
 import { useQuery } from "wagmi";
-import getFees, { GetFeesParams, GetFeesResult } from "../fetchers/getFees";
+import getFees, { GetFeesParams, GetFeesResult } from "../../fetchers/getFees";
 
 export type UseFeesQueryParams = GetFeesParams;
 

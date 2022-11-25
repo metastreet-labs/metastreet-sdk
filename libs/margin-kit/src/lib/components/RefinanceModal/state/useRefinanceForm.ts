@@ -1,7 +1,7 @@
 import { LeverageBuy, QuoteRefinanceResult } from "@metastreet-labs/margin-core";
 import { BigNumber } from "ethers";
 import { useEffect, useMemo, useState } from "react";
-import { VaultLimits } from "../../../lib/hooks/useVaultsLimits";
+import { VaultLimits } from "../../../lib/hooks/fetchers/useVaultsLimits";
 import { daysFromSeconds, daysToSeconds } from "../../../utils/dates";
 import useDebouncedQuoteRefinance from "./useDebouncedQuoteRefinance";
 

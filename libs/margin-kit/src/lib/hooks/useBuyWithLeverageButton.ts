@@ -1,6 +1,6 @@
 import { ReadableError } from "@metastreet-labs/margin-core";
 import { useSigner } from "wagmi";
-import useIsCollectionSupported from "../lib/hooks/useIsCollectionSupported";
+import useIsCollectionSupported from "../lib/hooks/fetchers/useIsCollectionSupported";
 import { BWLToken } from "../types";
 import useDeployment from "./useDeployment";
 

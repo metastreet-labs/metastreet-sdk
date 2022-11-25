@@ -1,5 +1,5 @@
 import { Deployment } from "@metastreet-labs/margin-core";
-import useDeployment from "../../hooks/useDeployment";
+import useDeployment from "../../../hooks/useDeployment";
 
 export const useFetcherWithDeployment = <T>(fetcher: (deployment: Deployment) => Promise<T>) => {
   const deployment = useDeployment();

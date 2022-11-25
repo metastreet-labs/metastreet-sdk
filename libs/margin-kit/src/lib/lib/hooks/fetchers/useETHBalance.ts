@@ -1,6 +1,6 @@
 import { useAccount, useQuery } from "wagmi";
-import useChainID from "../../hooks/useChainID";
-import useSignerOrProvider from "../../hooks/useSignerOrProvider";
+import useChainID from "../../../hooks/useChainID";
+import useSignerOrProvider from "../../../hooks/useSignerOrProvider";
 
 const useETHBalance = () => {
   const { address = "" } = useAccount();
