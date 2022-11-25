@@ -1,14 +1,14 @@
-import { cancelListing, LeverageBuy, ListingData, Marketplace, Order } from "@metastreet-labs/margin-core";
+import { LeverageBuy, ListingData, Order } from "@metastreet-labs/margin-core";
 import {
   ListForSaleModal,
   RefinanceModal,
-  useDeployment,
+  useCancelListing,
   useLeverageBuys,
   useRepayETH,
 } from "@metastreet-labs/margin-kit";
 import { ethers } from "ethers";
 import { useState } from "react";
-import { useNetwork, useQuery, useSigner } from "wagmi";
+import { useNetwork, useQuery } from "wagmi";
 import Button from "./Button";
 
 const PositionsSection = () => {
@@ -107,7 +107,11 @@ const RepayButton = (props: RepayButtonProps) => {
     setLoading(false);
   };
 
-  return <Button onClick={repay}>{loading ? "Loading..." : "Repay"}</Button>;
+  return (
+    <Button onClick={repay} loading={loading}>
+      Repay
+    </Button>
+  );
 };
 
 interface ListedLBProps {
@@ -119,22 +123,20 @@ interface ListedLBProps {
 const ListedLB = ({ leverageBuy }: ListedLBProps) => {
   // current chain
   const { chain } = useNetwork();
-  // connected signer
-  const { data: signer } = useSigner();
-  // deployment object, grabbed from the DeploymentProvider that wraps the app
-  const deployment = useDeployment();
+  // cancel listing transaction
+  const cancelListing = useCancelListing();
+  // is the listing currently being cancelled?
+  const [loading, setLoading] = useState(false);
 
   // called when the Delist button is clicked, it initiates a transaction to cancel the listing
-  const delist = () => {
-    if (!signer) throw new Error("cancelListing called without a signer");
-    if (!deployment) throw new Error("cancelListing was called without a deployment");
-    cancelListing({
-      signer,
-      lbWrapperAddress: deployment.lbWrapperAddress,
-      escrowID: leverageBuy.escrowID,
-      marketplace: Marketplace.Seaport,
-      listingData: leverageBuy.listingData.raw,
-    });
+  const delist = async () => {
+    setLoading(true);
+    try {
+      await cancelListing(leverageBuy);
+    } catch {
+      // show a toast or something
+    }
+    setLoading(false);
   };
 
   // construct the OpenSea URL of the listing
@@ -157,7 +159,9 @@ const ListedLB = ({ leverageBuy }: ListedLBProps) => {
         (View on OpenSea)
       </a>
       , {/* Cancel listing button */}
-      <Button onClick={delist}>Delist</Button>
+      <Button onClick={delist} loading={loading}>
+        Delist
+      </Button>
     </>
   );
 };
