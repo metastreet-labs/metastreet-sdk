@@ -8,16 +8,24 @@ interface BuyWithLeverageProps {
   tokens: BWLToken[];
   title?: ReactNode;
   className?: string;
+  callForActionLink?: string;
 }
 
 export const BuyWithLeverage = (props: BuyWithLeverageProps) => {
-  const { tokens, title, className } = props;
+  const { tokens, title, className, callForActionLink } = props;
   const { isOpen, openModal, closeModal, key } = useModalStateWithKey();
 
   return (
     <>
       <BuyWithLeverageButton tokens={tokens} onClick={openModal} className={className} />
-      <BuyWithLeverageModal tokens={tokens} title={title} isOpen={isOpen} onClose={closeModal} key={key} />
+      <BuyWithLeverageModal
+        tokens={tokens}
+        title={title}
+        isOpen={isOpen}
+        onClose={closeModal}
+        callForActionLink={callForActionLink}
+        key={key}
+      />
     </>
   );
 };

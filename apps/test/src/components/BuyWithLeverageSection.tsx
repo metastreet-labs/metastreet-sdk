@@ -1,9 +1,14 @@
 import { BuyWithLeverage, BWLToken, useDeployment } from "@metastreet-labs/margin-kit";
+import useChainID from "libs/margin-kit/src/lib/hooks/useChainID";
 import { useState } from "react";
+import { useAccount } from "wagmi";
 import Button from "./Button";
 import Input from "./Input";
 
 const BuyWithLeverageSection = () => {
+  // active chain ID and address, used to construct a call for action link
+  const chainID = useChainID();
+  const { address = "" } = useAccount();
   // deployment object, grabbed from the DeploymentProvider that wraps the app
   const deployment = useDeployment();
   // value of the collection address input, defaults to Goerli's MultiFaucet NFT
@@ -12,6 +17,11 @@ const BuyWithLeverageSection = () => {
   const [tokenIDs, setTokenIDs] = useState("958576,1390026,940282");
   // the fetched tokens
   const [tokens, setTokens] = useState<BWLToken[]>([]);
+
+  // construct a call for action link, it will be shown on modal success
+  const tradesDashboardLink =
+    chainID == 1 ? "https://powersweep.metastreet.xyz/" : "https://powersweep-goerli.metastreet.xyz/";
+  const callForActionLink = `${tradesDashboardLink}/address/${address}?tab=trades`;
 
   // called when the fetch button is clicked
   // it fetches NFT objects based on the entered collection address and token IDs
@@ -86,7 +96,7 @@ const BuyWithLeverageSection = () => {
           "none"
         )}
         {/* this wraps a BuyWithLeverageButton and BuyWithLeverageModal components */}
-        <BuyWithLeverage tokens={tokens} className="w-56 ml-4" />
+        <BuyWithLeverage tokens={tokens} className="w-56 ml-4" callForActionLink={callForActionLink} />
       </div>
     </section>
   );

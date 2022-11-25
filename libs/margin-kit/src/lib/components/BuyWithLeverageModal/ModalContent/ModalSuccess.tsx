@@ -4,9 +4,8 @@ import { useBuyWithLeverage } from "../state/useBuyWithLeverage";
 
 interface ModalSuccessProps {
   onClose: () => void;
+  callForActionLink?: string;
 }
-
-const dashboardURL = "https://trades.metastreet.xyz";
 
 const ModalSuccess = (props: ModalSuccessProps) => {
   const { tokens } = useBuyWithLeverage();
@@ -15,7 +14,7 @@ const ModalSuccess = (props: ModalSuccessProps) => {
   const count = tokens.length;
 
   const onClick = () => {
-    window.open(dashboardURL, "_blank");
+    window.open(props.callForActionLink, "_blank");
     props.onClose();
   };
 
@@ -28,7 +27,7 @@ const ModalSuccess = (props: ModalSuccessProps) => {
         </span>{" "}
         with leverage. Head to the{" "}
         <a
-          href={dashboardURL}
+          href={props.callForActionLink}
           className="bwl-modal-success-paragraph-strong bwl-modal-success-paragraph-link "
           rel="noreferrer noopener"
           target="_blank"

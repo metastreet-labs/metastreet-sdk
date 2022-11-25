@@ -11,10 +11,11 @@ import ModalSuccess, { BuyWithLeverageSuccessAnimation } from "./ModalSuccess";
 interface ModalContentProps {
   onClose: () => void;
   title: ReactNode;
+  callForActionLink?: string;
 }
 
 const ModalContent = (props: ModalContentProps) => {
-  const { onClose, title } = props;
+  const { onClose, title, callForActionLink } = props;
   const { transactionState, tokens } = useBuyWithLeverage();
   const { status } = transactionState;
   const success = status == "complete";
@@ -37,7 +38,7 @@ const ModalContent = (props: ModalContentProps) => {
       <Divider className="bwl-modal-content-divider" />
       {status == "idle" ? <ModalForm /> : null}
       {status == "loading" || status == "error" ? <ModalConfirmation onClose={onClose} /> : null}
-      {status == "complete" ? <ModalSuccess onClose={onClose} /> : null}
+      {status == "complete" ? <ModalSuccess callForActionLink={callForActionLink} onClose={onClose} /> : null}
     </div>
   );
 };
