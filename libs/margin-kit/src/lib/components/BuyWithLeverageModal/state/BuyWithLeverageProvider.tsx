@@ -1,6 +1,6 @@
 import { BigNumber } from "ethers";
 import { ReactNode } from "react";
-import { VaultLimits } from "../../../lib/hooks/useVaultsLimits";
+import { VaultLimits } from "../../../lib/hooks/fetchers/useVaultsLimits";
 import { BWLToken } from "../../../types";
 import { BuyWithLeverageContext, BuyWithLeverageContextType } from "./context";
 import useBuyWithLeverageForm from "./useBuyWithLeverageForm";

@@ -1,10 +1,10 @@
 import { quoteMultipleERC721, QuoteMultipleERC721Result, ReadableError } from "@metastreet-labs/margin-core";
 import { BigNumberish } from "ethers";
 import { useQuery } from "wagmi";
-import useChainID from "../../hooks/useChainID";
-import useSignerOrProvider from "../../hooks/useSignerOrProvider";
-import { BWLToken } from "../../types";
-import { toUnits } from "../../utils/numbers";
+import useChainID from "../../../hooks/useChainID";
+import useSignerOrProvider from "../../../hooks/useSignerOrProvider";
+import { BWLToken } from "../../../types";
+import { toUnits } from "../../../utils/numbers";
 import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
 
 export interface UseQuoteMultipleERC721Props {

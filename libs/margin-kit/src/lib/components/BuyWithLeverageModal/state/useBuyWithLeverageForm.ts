@@ -1,7 +1,7 @@
 import { QuoteMultipleERC721Result } from "@metastreet-labs/margin-core";
 import { BigNumber } from "ethers";
 import { useEffect, useMemo, useState } from "react";
-import { VaultLimits } from "../../../lib/hooks/useVaultsLimits";
+import { VaultLimits } from "../../../lib/hooks/fetchers/useVaultsLimits";
 import { BWLToken } from "../../../types";
 import { daysFromSeconds } from "../../../utils/dates";
 import { fromUnits, toUnitsBigNum } from "../../../utils/numbers";

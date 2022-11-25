@@ -1,5 +1,5 @@
 import useChainID from "../../../hooks/useChainID";
-import { useTokenMetadata } from "../../../lib/hooks/useTokenMetadata";
+import { useTokenMetadata } from "../../../lib/hooks/fetchers/useTokenMetadata";
 import MetaStreetButton from "../../MetaStreetButton";
 import { RefinanceModalSuccessAnimation } from "../../RefinanceModal/RefinanceModalContent/RefinanceModalSuccess";
 import { useListForSale } from "../state/useListForSale";

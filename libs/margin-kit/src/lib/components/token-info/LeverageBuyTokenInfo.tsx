@@ -1,5 +1,5 @@
 import { LeverageBuy } from "@metastreet-labs/margin-core";
-import { useTokenMetadata } from "../../lib/hooks/useTokenMetadata";
+import { useTokenMetadata } from "../../lib/hooks/fetchers/useTokenMetadata";
 import { daysFromSeconds } from "../../utils/dates";
 import { fromUnits, prettyFormatNumber } from "../../utils/numbers";
 import Divider from "../Divider";

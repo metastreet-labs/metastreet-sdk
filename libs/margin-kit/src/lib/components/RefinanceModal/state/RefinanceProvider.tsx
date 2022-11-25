@@ -1,7 +1,7 @@
 import { LeverageBuy } from "@metastreet-labs/margin-core";
 import { BigNumber } from "ethers";
 import { PropsWithChildren } from "react";
-import { VaultLimits } from "../../../lib/hooks/useVaultsLimits";
+import { VaultLimits } from "../../../lib/hooks/fetchers/useVaultsLimits";
 import RefinanceContext, { RefinanceContextType } from "./RefinanceContext";
 import useRefinanceForm from "./useRefinanceForm";
 import useRefinanceTransaction from "./useRefinanceTransaction";
