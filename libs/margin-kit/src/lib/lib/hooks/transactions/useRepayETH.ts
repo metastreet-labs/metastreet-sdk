@@ -21,8 +21,8 @@ export const useRepayETH = () => {
     const receipt = await tx.wait(2);
     await waitForSubgraphSync({ blockNumber: receipt.blockNumber, subgraphURI: deployment.subgraphURI });
     const owner = await signer.getAddress();
-    queryClient.invalidateQueries(useLeverageBuysQKs.owner(owner));
-    queryClient.invalidateQueries(useLeverageBuyEventsQKs.owner(owner));
+    queryClient.invalidateQueries(useLeverageBuysQKs.owner(deployment.subgraphURI, owner));
+    queryClient.invalidateQueries(useLeverageBuyEventsQKs.owner(deployment.subgraphURI, owner));
     return receipt;
   };
 };
