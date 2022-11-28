@@ -26,6 +26,8 @@ export * from "./lib/lib/hooks/fetchers/useSupportingVaults";
 export * from "./lib/lib/hooks/fetchers/useTokenMetadata";
 export * from "./lib/lib/hooks/fetchers/useVaultsLimits";
 export * from "./lib/lib/hooks/fetchers/useVaultsSupportedCollections";
+// Transaction hooks
+export * from "./lib/lib/hooks/transactions/useRepayETH";
 // Types
 export * from "./lib/types";
 // Utils

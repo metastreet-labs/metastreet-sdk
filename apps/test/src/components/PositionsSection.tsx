@@ -1,22 +1,14 @@
-import {
-  cancelListing,
-  LeverageBuy,
-  ListingData,
-  Marketplace,
-  Order,
-  repayETH,
-  waitForSubgraphSync,
-} from "@metastreet-labs/margin-core";
+import { cancelListing, LeverageBuy, ListingData, Marketplace, Order } from "@metastreet-labs/margin-core";
 import {
   ListForSaleModal,
   RefinanceModal,
   useDeployment,
   useLeverageBuys,
-  useLeverageBuysQKs,
+  useRepayETH,
 } from "@metastreet-labs/margin-kit";
 import { ethers } from "ethers";
 import { useState } from "react";
-import { useClient, useNetwork, useQuery, useSigner } from "wagmi";
+import { useNetwork, useQuery, useSigner } from "wagmi";
 import Button from "./Button";
 
 const PositionsSection = () => {
@@ -99,36 +91,16 @@ interface RepayButtonProps {
 
 const RepayButton = (props: RepayButtonProps) => {
   const { leverageBuy } = props;
-  // deployment object, grabbed from the DeploymentProvider that wraps the app
-  const deployment = useDeployment();
-  // current connected signer
-  const { data: signer } = useSigner();
-  // wagmi query client
-  const { queryClient } = useClient();
+  // repay transaction
+  const repayETH = useRepayETH();
   // is repay transaction currently executing?
   const [loading, setLoading] = useState(false);
 
   // called when the repay button is clicked, it initiates a transaction to repay the loan
   const repay = async () => {
-    if (!signer) throw new Error("repay called without a signer");
-    if (!deployment) throw new Error("repay was called without a deployment");
     setLoading(true);
     try {
-      // send tx
-      const tx = await repayETH({
-        escrowID: leverageBuy.escrowID,
-        repayment: leverageBuy.repayment,
-        signer,
-        lbWrapperAddress: deployment.lbWrapperAddress,
-      });
-      // wait for block confirmations
-      await tx.wait(2);
-      // wait for subgraph sync
-      if (tx.blockNumber) {
-        await waitForSubgraphSync({ blockNumber: tx.blockNumber, subgraphURI: deployment.subgraphURI });
-      }
-      // invalidate leverage buys query
-      queryClient.invalidateQueries(useLeverageBuysQKs.all());
+      await repayETH(leverageBuy);
     } catch {
       // show a toast or something
     }
