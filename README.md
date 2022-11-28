@@ -103,7 +103,7 @@ The loans are represented as `LeverageBuy` objects and used as inputs for differ
 
 > PS: the subgraph also contains a LeverageBuyEvent entity, representing the different events that happened to a LeverageBuy position (refinanced, repaid, listed for sale…etc).
 
-Check out the [demo app](https://github.com/metastreet-labs/metastreet-sdk/blob/main/apps/test/src/components/PositionsSection.tsx#L83) to see how we fetch `LeverageBuy` entities of the connected address, and display them in a table.
+Check out the [demo app](https://github.com/metastreet-labs/metastreet-sdk/blob/main/apps/test/src/components/PositionsSection.tsx#L32) to see how we fetch `LeverageBuy` entities of the connected address, and display them in a table.
 
 ### Refinancing Loans
 
@@ -114,7 +114,7 @@ A loan can be refinanced to extend its leverage/duration, the mechanism is the s
 - `RefinanceModal`: it takes a `LeverageBuy` object, users can select a new `debt` and `duration`, and a new `repayment` will be quoted for them using the `quoteRefinance` contract function. The modal shows different information about the new loan, the same as with the `BuyWithLeverageModal`. Once the user is happy with the new terms, they can hit the Refinance button, triggering the refinance transaction, by calling the `refiannceETH` function from MetaStreet’s `PurchaseEscrowPlatform` contract.
   If you’re not happy with the styling of the modal, you can either try to modify the CSS file or build a completely customized component. If you chose to build it from scratch, you can use the `RefinanceProvider` component which does the heavy lifting and handles all of the state management.
 
-The demo app has a fully functional Refinance implementation, [check out the code.](https://github.com/metastreet-labs/metastreet-sdk/blob/main/apps/test/src/components/PositionsSection.tsx#L83)
+The demo app has a fully functional Refinance implementation, [check out the code.](https://github.com/metastreet-labs/metastreet-sdk/blob/main/apps/test/src/components/PositionsSection.tsx#L76)
 
 ### Listing For Sale
 
@@ -123,18 +123,16 @@ Users can list their loan’s underlying NFT for sale on OpenSea, and when the N
 `margin-kit` offers a modal component that handles listing for sale:
 
 - `ListForSaleModal`: it takes a `LeverageBuy` object and a `postOrderToOpensea` callback that you have to define (more on this below), users can enter their listing price using a number input which is pre-populated with the minimum listing price. The modal also displays different information about the loan, and how much the user will gain/lose after the NFT is sold at the selected price.
-  If you’re not happy with the styling of the modal, you can either try to modify the CSS file or build a completely customized component. If you chose to build it from scratch, you can use the `ListForSaleProvider` component which does the heavy lifting and handles all of the state management. - `postOrderToOpensea(order: Order)`: this is a function that you have to write, it should make a call to OpenSea API to post the order off-chain. This is necessary for the listing to be visible on OpenSea’s frontend. It should make a POST request to [this endpoint for mainnet](https://docs.opensea.io/v2.0/reference/create-an-order), or [this one for Goerli](https://docs.opensea.io/v2.0/reference/create-an-order-testnets). Here is an [example](https://github.com/metastreet-labs/metastreet-sdk/blob/main/apps/test/src/components/PositionsSection.tsx#L162) on how to do it for Goerli.
+  If you’re not happy with the styling of the modal, you can either try to modify the CSS file or build a completely customized component. If you chose to build it from scratch, you can use the `ListForSaleProvider` component which does the heavy lifting and handles all of the state management. - `postOrderToOpensea(order: Order)`: this is a function that you have to write, it should make a call to OpenSea API to post the order off-chain. This is necessary for the listing to be visible on OpenSea’s frontend. It should make a POST request to [this endpoint for mainnet](https://docs.opensea.io/v2.0/reference/create-an-order), or [this one for Goerli](https://docs.opensea.io/v2.0/reference/create-an-order-testnets). Here is an [example](https://github.com/metastreet-labs/metastreet-sdk/blob/main/apps/test/src/components/PositionsSection.tsx#L181) on how to do it for Goerli.
   The reason why we didn’t handle this on the SDK is because the mainnet endpoint requires an OpenSea API key, so the request has to be done server-side.
 
-The listing duration is set to 7 days, after that it will expire and users will have to re-list. There’s a `cancelListing` function on the `PurchaseEscrowPlatform` contract that can be used to cancel a listing before it expires, you can use `cancelListing` from `margin-core`, it takes `{escrowID, marketplace, listingData}` which you can get from the `LeverageBuy` object.
+The listing duration is set to 7 days, after that it will expire and users will have to re-list. There’s a `cancelListing` function on the `PurchaseEscrowPlatform` contract that can be used to cancel a listing before it expires, you can use the `useCancelListing` hook from `margin-kit`, here's an [example](https://github.com/metastreet-labs/metastreet-sdk/blob/main/apps/test/src/components/PositionsSection.tsx#L131)
 
-The demo app has a fully functional List For Sale implementation, [check out the code.](https://github.com/metastreet-labs/metastreet-sdk/blob/main/apps/test/src/components/PositionsSection.tsx#L154) And here’s an [example of how to cancel a listing](https://github.com/metastreet-labs/metastreet-sdk/blob/main/apps/test/src/components/PositionsSection.tsx#L112).
+The demo app has a fully functional List For Sale implementation, [check out the code.](https://github.com/metastreet-labs/metastreet-sdk/blob/main/apps/test/src/components/PositionsSection.tsx#L173).
 
 ### Repaying
 
-Users can choose to repay their loans, in which case the underlying NFT will be transferred to their address. This is done by calling `repayETH` on the `PurchaseEscrowPlatform` contract. You can use `repayETH` from `margin-core`, it takes `{escrowID, repayment}` which you can get from the `LeverageBuy` object.
-
-Here is an [example of how to repay a loan](https://github.com/metastreet-labs/metastreet-sdk/blob/main/apps/test/src/components/PositionsSection.tsx#L57).
+Users can choose to repay their loans, in which case the underlying NFT will be transferred to their address. This is done by calling `repayETH` on the `PurchaseEscrowPlatform` contract. You can use the `useRepayETH` hook from `margin-kit`, here's an [example](https://github.com/metastreet-labs/metastreet-sdk/blob/main/apps/test/src/components/PositionsSection.tsx#L99).
 
 ## License
 
