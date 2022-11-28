@@ -17,12 +17,12 @@ export const useVaultsSupportedCollections = () => {
   });
 
   return useQuery<GetVaultsSupportedCollectionsResult, ReadableError>(
-    vaultsSupportedCollectionsQKs.chain(chainID),
+    useVaultsSupportedCollectionsQKs.chain(chainID),
     fetcher
   );
 };
 
-const vaultsSupportedCollectionsQKs = {
+export const useVaultsSupportedCollectionsQKs = {
   all: () => ["vaults-supported-collections"],
-  chain: (chainID: number) => [...vaultsSupportedCollectionsQKs.all(), chainID],
+  chain: (chainID: number) => [...useVaultsSupportedCollectionsQKs.all(), chainID],
 };

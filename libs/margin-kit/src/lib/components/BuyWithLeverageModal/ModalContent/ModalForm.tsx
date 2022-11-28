@@ -1,4 +1,4 @@
-import useETHBalance from "../../../lib/hooks/fetchers/useETHBalance";
+import { useETHBalance } from "../../../lib/hooks/fetchers/useETHBalance";
 import { daysFromSeconds } from "../../../utils/dates";
 import { toUnitsBigNum } from "../../../utils/numbers";
 import Divider from "../../Divider";

@@ -20,5 +20,10 @@ export const useTokenMetadata = (tokenURI: string) => {
     if (!response.ok) throw json;
     return json;
   };
-  return useQuery<TokenMetadata, unknown>(["token-metadata", url], fetcher);
+  return useQuery<TokenMetadata, unknown>(useTokenMetadataQKs.url(url), fetcher);
+};
+
+export const useTokenMetadataQKs = {
+  all: () => ["token-metadata"],
+  url: (url: string) => [...useTokenMetadataQKs.all(), url],
 };

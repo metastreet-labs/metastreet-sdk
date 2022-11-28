@@ -1,7 +1,7 @@
 import { GetFeesResult } from "@metastreet-labs/margin-core";
 import { createContext, PropsWithChildren, useContext } from "react";
 import useChainID from "../../hooks/useChainID";
-import useFeesQuery from "../../lib/hooks/fetchers/useFeesQuery";
+import { useFeesQuery } from "../../lib/hooks/fetchers/useFeesQuery";
 import ModalLoadingOrError from "../ModalLoadingOrError";
 
 const FeesContext = createContext<GetFeesResult | undefined>(undefined);

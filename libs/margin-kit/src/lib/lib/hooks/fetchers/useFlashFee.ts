@@ -13,10 +13,10 @@ export const useFlashFee = (loanAmount: BigNumberish) => {
     return getFlashFee({ signerOrProvider, ...deployment, loanAmount });
   });
 
-  return useQuery<BigNumber, ReadableError>(flashFeeQueryKeys.loanAmount(chainID, loanAmount), fetcher);
+  return useQuery<BigNumber, ReadableError>(useFlashFeeQKs.loanAmount(chainID, loanAmount), fetcher);
 };
 
-const flashFeeQueryKeys = {
+export const useFlashFeeQKs = {
   all: (chainID: number) => ["flash-fee", chainID],
-  loanAmount: (chainID: number, loanAmount: BigNumberish) => [...flashFeeQueryKeys.all(chainID), loanAmount.toString()],
+  loanAmount: (chainID: number, loanAmount: BigNumberish) => [...useFlashFeeQKs.all(chainID), loanAmount.toString()],
 };

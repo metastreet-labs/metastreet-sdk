@@ -26,10 +26,10 @@ export const useVaultsLimits = (params: UseVaultsLimitsParams) => {
     return limits;
   });
 
-  return useQuery<VaultLimits[], ReadableError>(vaultsLimitsQueryKeys.token(params), fetcher);
+  return useQuery<VaultLimits[], ReadableError>(useVaultsLimitsQKs.token(params), fetcher);
 };
 
-const vaultsLimitsQueryKeys = {
+export const useVaultsLimitsQKs = {
   all: () => ["vaults-limits"],
-  token: (params: UseVaultsLimitsParams) => [...vaultsLimitsQueryKeys.all(), params],
+  token: (params: UseVaultsLimitsParams) => [...useVaultsLimitsQKs.all(), params],
 };

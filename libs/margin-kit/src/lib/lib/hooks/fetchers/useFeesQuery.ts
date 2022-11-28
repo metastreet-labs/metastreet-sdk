@@ -3,9 +3,9 @@ import getFees, { GetFeesParams, GetFeesResult } from "../../fetchers/getFees";
 
 export type UseFeesQueryParams = GetFeesParams;
 
-export default function useFeesQuery(params: UseFeesQueryParams) {
+export const useFeesQuery = (params: UseFeesQueryParams) => {
   return useQuery<GetFeesResult, Error>(
-    useFeesQueryKeys.collection(params),
+    useFeesQueryQKs.collection(params),
     () => getFees(params),
     // no need to refetch at all
     {
@@ -16,9 +16,9 @@ export default function useFeesQuery(params: UseFeesQueryParams) {
       staleTime: 86400,
     }
   );
-}
+};
 
-export const useFeesQueryKeys = {
+export const useFeesQueryQKs = {
   all: (chainID: number) => ["openSea_fees", chainID],
-  collection: (params: GetFeesParams) => [...useFeesQueryKeys.all(params.chainID), params.collectionAddress],
+  collection: (params: GetFeesParams) => [...useFeesQueryQKs.all(params.chainID), params.collectionAddress],
 };

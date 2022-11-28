@@ -18,7 +18,6 @@ export * from "./lib/hooks/useDeployment";
 export * from "./lib/lib/hooks/fetchers/subgraph/useLeverageBuyEvents";
 export * from "./lib/lib/hooks/fetchers/subgraph/useLeverageBuys";
 // Data fetching hooks
-export * from "./lib/lib/hooks/fetchers/useCollateralLimits";
 export * from "./lib/lib/hooks/fetchers/useFlashFee";
 export * from "./lib/lib/hooks/fetchers/useIsCollectionSupported";
 export * from "./lib/lib/hooks/fetchers/useOSFlagged";
