@@ -14,7 +14,7 @@ export interface RawListingData {
   listingPrice: string;
   consideration: string;
   totalFees: string;
-  marketPlace: number;
+  marketplace: number;
   raw: string;
 }
 
@@ -49,7 +49,7 @@ export const transformRawListingData = (raw: RawListingData): ListingData => {
     listingPrice: BigNumber.from(raw.listingPrice),
     consideration: BigNumber.from(raw.consideration),
     totalFees: BigNumber.from(raw.totalFees),
-    marketPlace: raw.marketPlace as Marketplace,
+    marketplace: raw.marketplace as Marketplace,
     endTime: parseInt(decoded.endTime),
     raw: raw.raw,
   };
