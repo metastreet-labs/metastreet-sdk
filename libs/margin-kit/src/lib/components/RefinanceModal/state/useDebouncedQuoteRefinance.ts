@@ -1,5 +1,5 @@
 import useDebouncedProps from "../../../hooks/useDebouncedProps";
-import { useQuoteRefinance, UseQuoteRefinanceParams } from "../../../lib/hooks/useQuoteRefinance";
+import { useQuoteRefinance, UseQuoteRefinanceParams } from "../../../lib/hooks/fetchers/useQuoteRefinance";
 
 const useDebouncedQuoteRefinance = (params: UseQuoteRefinanceParams) => {
   const [debouncedParams, debouncing] = useDebouncedProps(params, [

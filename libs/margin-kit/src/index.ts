@@ -15,15 +15,15 @@ export { useRefinance } from "./lib/components/RefinanceModal/state/useRefinance
 export { default as useDebouncedProps } from "./lib/hooks/useDebouncedProps";
 export { default as useDeployment } from "./lib/hooks/useDeployment";
 // Data fetching hooks
-export { default as useCollateralLimits } from "./lib/lib/hooks/useCollateralLimits";
-export { default as useFlashFee } from "./lib/lib/hooks/useFlashFee";
-export { default as useIsCollectionSupported } from "./lib/lib/hooks/useIsCollectionSupported";
-export * from "./lib/lib/hooks/useLeverageBuys";
-export { default as useOSFlagged } from "./lib/lib/hooks/useOSFlagged";
-export * from "./lib/lib/hooks/useSupportingVaults";
-export * from "./lib/lib/hooks/useTokenMetadata";
-export * from "./lib/lib/hooks/useVaultsLimits";
-export * from "./lib/lib/hooks/useVaultsSupportedCollections";
+export { default as useCollateralLimits } from "./lib/lib/hooks/fetchers/useCollateralLimits";
+export { default as useFlashFee } from "./lib/lib/hooks/fetchers/useFlashFee";
+export { default as useIsCollectionSupported } from "./lib/lib/hooks/fetchers/useIsCollectionSupported";
+export * from "./lib/lib/hooks/fetchers/useLeverageBuys";
+export { default as useOSFlagged } from "./lib/lib/hooks/fetchers/useOSFlagged";
+export * from "./lib/lib/hooks/fetchers/useSupportingVaults";
+export * from "./lib/lib/hooks/fetchers/useTokenMetadata";
+export * from "./lib/lib/hooks/fetchers/useVaultsLimits";
+export * from "./lib/lib/hooks/fetchers/useVaultsSupportedCollections";
 // Types
 export * from "./lib/types";
 // Utils

@@ -1,5 +1,5 @@
 import Decimal from "decimal.js";
-import { VaultLimits } from "../../lib/hooks/useVaultsLimits";
+import { VaultLimits } from "../../lib/hooks/fetchers/useVaultsLimits";
 import { fromUnits, prettyFormatNumber } from "../../utils/numbers";
 import ETHPrice from "../ETHPrice";
 import QuestionMarkCircleIcon from "../icons/QuestionMarkCircleIcon";

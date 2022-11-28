@@ -1,8 +1,8 @@
 import { getFlashFee, ReadableError } from "@metastreet-labs/margin-core";
 import { BigNumber, BigNumberish } from "ethers";
 import { useQuery } from "wagmi";
-import useChainID from "../../hooks/useChainID";
-import useSignerOrProvider from "../../hooks/useSignerOrProvider";
+import useChainID from "../../../hooks/useChainID";
+import useSignerOrProvider from "../../../hooks/useSignerOrProvider";
 import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
 
 const useFlashFee = (loanAmount: BigNumberish) => {

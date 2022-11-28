@@ -1,7 +1,7 @@
 import { BigNumber, BigNumberish } from "ethers";
-import useFlashFee from "../../../lib/hooks/useFlashFee";
-import { useSupportingVaultsLimits } from "../../../lib/hooks/useSupportingVaultsLimits";
-import { VaultLimits } from "../../../lib/hooks/useVaultsLimits";
+import useFlashFee from "../../../lib/hooks/fetchers/useFlashFee";
+import { useSupportingVaultsLimits } from "../../../lib/hooks/fetchers/useSupportingVaultsLimits";
+import { VaultLimits } from "../../../lib/hooks/fetchers/useVaultsLimits";
 import Spinner from "../../Spinner";
 
 interface LoanInfo {
