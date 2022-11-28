@@ -9,12 +9,12 @@ export const useLeverageBuys = () => {
     return getLeverageBuys({ ...deployment, owner, skip: 0, first: 1000 });
   });
 
-  return useQuery<LeverageBuy[], ReadableError>(leverageBuysQueryKeys.owner(owner), fetcher, {
+  return useQuery<LeverageBuy[], ReadableError>(useLeverageBuysQKs.owner(owner), fetcher, {
     enabled: Boolean(owner),
   });
 };
 
-const leverageBuysQueryKeys = {
+export const useLeverageBuysQKs = {
   all: () => ["leverage-buys"],
-  owner: (owner: string) => [...leverageBuysQueryKeys.all(), owner],
+  owner: (owner: string) => [...useLeverageBuysQKs.all(), owner],
 };

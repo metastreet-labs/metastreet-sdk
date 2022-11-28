@@ -1,8 +1,22 @@
-import { cancelListing, LeverageBuy, ListingData, Marketplace, Order, repayETH } from "@metastreet-labs/margin-core";
-import { ListForSaleModal, RefinanceModal, useDeployment, useLeverageBuys } from "@metastreet-labs/margin-kit";
+import {
+  cancelListing,
+  LeverageBuy,
+  ListingData,
+  Marketplace,
+  Order,
+  repayETH,
+  waitForSubgraphSync,
+} from "@metastreet-labs/margin-core";
+import {
+  ListForSaleModal,
+  RefinanceModal,
+  useDeployment,
+  useLeverageBuys,
+  useLeverageBuysQKs,
+} from "@metastreet-labs/margin-kit";
 import { ethers } from "ethers";
 import { useState } from "react";
-import { useNetwork, useQuery, useSigner } from "wagmi";
+import { useClient, useNetwork, useQuery, useSigner } from "wagmi";
 import Button from "./Button";
 
 const PositionsSection = () => {
@@ -38,10 +52,6 @@ interface LBRowProps {
 
 const LBRow = (props: LBRowProps) => {
   const { leverageBuy } = props;
-  // deployment object, grabbed from the DeploymentProvider that wraps the app
-  const deployment = useDeployment();
-  // current connected signer
-  const { data: signer } = useSigner();
   // token metadata of this leverageBuy's underlying NFT (name, image, ...)
   const { data } = useTokenMetadata(leverageBuy.tokenURI);
   // RefinanceModal state
@@ -53,18 +63,6 @@ const LBRow = (props: LBRowProps) => {
   const listingTimeRemaining = listingData && Math.floor((listingData.endTime - new Date().getTime() / 1000) / 86400);
   // the NFT is listed if listing data is not undefined, and remaining time is greater than 0
   const isListed = listingData && listingTimeRemaining && listingTimeRemaining > 0;
-
-  // called when the repay button is clicked, it initiates a transaction to repay the loan
-  const repay = () => {
-    if (!signer) throw new Error("repay called without a signer");
-    if (!deployment) throw new Error("repay was called without a deployment");
-    repayETH({
-      escrowID: leverageBuy.escrowID,
-      repayment: leverageBuy.repayment,
-      signer,
-      lbWrapperAddress: deployment.lbWrapperAddress,
-    });
-  };
 
   return (
     <tr>
@@ -78,7 +76,7 @@ const LBRow = (props: LBRowProps) => {
       </td>
       {/* Repay button */}
       <td>
-        <Button onClick={repay}>Repay</Button>
+        <RepayButton leverageBuy={leverageBuy} />
       </td>
       {/* Refinance button and modal */}
       <td>
@@ -93,6 +91,51 @@ const LBRow = (props: LBRowProps) => {
       )}
     </tr>
   );
+};
+
+interface RepayButtonProps {
+  leverageBuy: LeverageBuy;
+}
+
+const RepayButton = (props: RepayButtonProps) => {
+  const { leverageBuy } = props;
+  // deployment object, grabbed from the DeploymentProvider that wraps the app
+  const deployment = useDeployment();
+  // current connected signer
+  const { data: signer } = useSigner();
+  // wagmi query client
+  const { queryClient } = useClient();
+  // is repay transaction currently executing?
+  const [loading, setLoading] = useState(false);
+
+  // called when the repay button is clicked, it initiates a transaction to repay the loan
+  const repay = async () => {
+    if (!signer) throw new Error("repay called without a signer");
+    if (!deployment) throw new Error("repay was called without a deployment");
+    setLoading(true);
+    try {
+      // send tx
+      const tx = await repayETH({
+        escrowID: leverageBuy.escrowID,
+        repayment: leverageBuy.repayment,
+        signer,
+        lbWrapperAddress: deployment.lbWrapperAddress,
+      });
+      // wait for block confirmations
+      await tx.wait(2);
+      // wait for subgraph sync
+      if (tx.blockNumber) {
+        await waitForSubgraphSync({ blockNumber: tx.blockNumber, subgraphURI: deployment.subgraphURI });
+      }
+      // invalidate leverage buys query
+      queryClient.invalidateQueries(useLeverageBuysQKs.all());
+    } catch {
+      // show a toast or something
+    }
+    setLoading(false);
+  };
+
+  return <Button onClick={repay}>{loading ? "Loading..." : "Repay"}</Button>;
 };
 
 interface ListedLBProps {
