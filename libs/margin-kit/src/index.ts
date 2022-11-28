@@ -14,11 +14,13 @@ export { useRefinance } from "./lib/components/RefinanceModal/state/useRefinance
 // Other hooks
 export { default as useDebouncedProps } from "./lib/hooks/useDebouncedProps";
 export { default as useDeployment } from "./lib/hooks/useDeployment";
+// subgraph fetcher hooks
+export * from "./lib/lib/hooks/fetchers/subgraph/useLeverageBuyEvents";
+export * from "./lib/lib/hooks/fetchers/subgraph/useLeverageBuys";
 // Data fetching hooks
 export { default as useCollateralLimits } from "./lib/lib/hooks/fetchers/useCollateralLimits";
 export { default as useFlashFee } from "./lib/lib/hooks/fetchers/useFlashFee";
 export { default as useIsCollectionSupported } from "./lib/lib/hooks/fetchers/useIsCollectionSupported";
-export * from "./lib/lib/hooks/fetchers/useLeverageBuys";
 export { default as useOSFlagged } from "./lib/lib/hooks/fetchers/useOSFlagged";
 export * from "./lib/lib/hooks/fetchers/useSupportingVaults";
 export * from "./lib/lib/hooks/fetchers/useTokenMetadata";
