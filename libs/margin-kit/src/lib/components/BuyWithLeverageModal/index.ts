@@ -1,1 +1,1 @@
-export { default } from "./BuyWithLeverageModal";
+export * from "./BuyWithLeverageModal";

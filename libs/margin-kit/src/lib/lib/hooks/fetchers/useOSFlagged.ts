@@ -8,7 +8,7 @@ interface UseOSFlaggedResult<T extends BaseToken> {
   tokensError: string | null;
 }
 
-const useOSFlagged = <T extends BaseToken>(
+export const useOSFlagged = <T extends BaseToken>(
   tokens: T[],
   extraParams?: { onSuccess?: (tokens: GetOSFlaggedResult<T>) => void }
 ): UseOSFlaggedResult<T> => {
@@ -31,5 +31,3 @@ const osfQueryKeys = {
   all: () => ["os-flagged"],
   tokens: (tokens: BaseToken[]) => [...osfQueryKeys.all(), tokens],
 };
-
-export default useOSFlagged;

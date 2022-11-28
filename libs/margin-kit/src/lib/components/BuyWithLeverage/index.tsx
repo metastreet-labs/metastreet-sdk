@@ -1,1 +1,1 @@
-export { default } from "./BuyWitLeverage";
+export * from "./BuyWitLeverage";

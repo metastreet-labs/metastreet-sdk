@@ -1,6 +1,4 @@
 import { useContext } from "react";
 import { DeploymentContext } from "../components/DeploymentProvider/DeploymentProvider";
 
-const useDeployment = () => useContext(DeploymentContext);
-
-export default useDeployment;
+export const useDeployment = () => useContext(DeploymentContext);

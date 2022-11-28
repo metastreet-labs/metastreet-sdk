@@ -1,8 +1,8 @@
 import { ReadableError } from "@metastreet-labs/margin-core";
 import { useSigner } from "wagmi";
-import useIsCollectionSupported from "../lib/hooks/fetchers/useIsCollectionSupported";
+import { useIsCollectionSupported } from "../lib/hooks/fetchers/useIsCollectionSupported";
 import { BWLToken } from "../types";
-import useDeployment from "./useDeployment";
+import { useDeployment } from "./useDeployment";
 
 interface UseBuyWithLeverageButtonProps {
   tokens: BWLToken[];

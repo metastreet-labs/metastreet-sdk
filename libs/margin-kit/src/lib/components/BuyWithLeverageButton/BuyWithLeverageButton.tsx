@@ -10,7 +10,7 @@ interface BuyWithLeverageButtonProps {
   className?: string;
 }
 
-const BuyWithLeverageButton = (props: BuyWithLeverageButtonProps) => {
+export const BuyWithLeverageButton = (props: BuyWithLeverageButtonProps) => {
   const { tokens, onClick, className } = props;
   const bwlButton = useBuyWithLeverageButton({ tokens });
 
@@ -19,5 +19,3 @@ const BuyWithLeverageButton = (props: BuyWithLeverageButtonProps) => {
 
   return <BaseBuyWithLeverageButton onClick={onClick} className={className} />;
 };
-
-export default BuyWithLeverageButton;

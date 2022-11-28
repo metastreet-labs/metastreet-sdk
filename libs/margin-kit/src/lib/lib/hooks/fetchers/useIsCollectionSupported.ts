@@ -1,6 +1,6 @@
 import { useVaultsSupportedCollections } from "./useVaultsSupportedCollections";
 
-const useIsCollectionSupported = (collectionAddress: string) => {
+export const useIsCollectionSupported = (collectionAddress: string) => {
   const { data, error } = useVaultsSupportedCollections();
 
   const isCollectionSupported = data?.all.includes(collectionAddress.toLowerCase());
@@ -10,5 +10,3 @@ const useIsCollectionSupported = (collectionAddress: string) => {
     isCollectionSupportedError: error,
   };
 };
-
-export default useIsCollectionSupported;

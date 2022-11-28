@@ -5,7 +5,7 @@ import useChainID from "../../../hooks/useChainID";
 import useSignerOrProvider from "../../../hooks/useSignerOrProvider";
 import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
 
-const useFlashFee = (loanAmount: BigNumberish) => {
+export const useFlashFee = (loanAmount: BigNumberish) => {
   const chainID = useChainID();
   const { signerOrProvider } = useSignerOrProvider();
 
@@ -20,5 +20,3 @@ const flashFeeQueryKeys = {
   all: (chainID: number) => ["flash-fee", chainID],
   loanAmount: (chainID: number, loanAmount: BigNumberish) => [...flashFeeQueryKeys.all(chainID), loanAmount.toString()],
 };
-
-export default useFlashFee;

@@ -1,5 +1,5 @@
 import { BigNumber, BigNumberish } from "ethers";
-import useFlashFee from "../../../lib/hooks/fetchers/useFlashFee";
+import { useFlashFee } from "../../../lib/hooks/fetchers/useFlashFee";
 import { useSupportingVaultsLimits } from "../../../lib/hooks/fetchers/useSupportingVaultsLimits";
 import { VaultLimits } from "../../../lib/hooks/fetchers/useVaultsLimits";
 import Spinner from "../../Spinner";

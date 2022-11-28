@@ -1,1 +1,1 @@
-export { default } from "./DeploymentProvider";
+export * from "./DeploymentProvider";

@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { BWLToken } from "../../types";
-import BuyWithLeverageButton from "../BuyWithLeverageButton";
-import BuyWithLeverageModal from "../BuyWithLeverageModal";
+import { BuyWithLeverageButton } from "../BuyWithLeverageButton";
+import { BuyWithLeverageModal } from "../BuyWithLeverageModal";
 import { useModalStateWithKey } from "../MetaStreetModal";
 
 interface BuyWithLeverageProps {
@@ -10,7 +10,7 @@ interface BuyWithLeverageProps {
   className?: string;
 }
 
-const BuyWithLeverage = (props: BuyWithLeverageProps) => {
+export const BuyWithLeverage = (props: BuyWithLeverageProps) => {
   const { tokens, title, className } = props;
   const { isOpen, openModal, closeModal, key } = useModalStateWithKey();
 
@@ -21,5 +21,3 @@ const BuyWithLeverage = (props: BuyWithLeverageProps) => {
     </>
   );
 };
-
-export default BuyWithLeverage;
