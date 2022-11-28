@@ -11,11 +11,12 @@ import { BuyWithLeverageProvider } from "./state/BuyWithLeverageProvider";
 type BuyWithLeverageModalProps = ModalState & {
   tokens: BWLToken[];
   title?: ReactNode;
+  callForActionLink?: string;
   onBuySuccess?: () => void;
 };
 
 export const BuyWithLeverageModal = (props: BuyWithLeverageModalProps) => {
-  const { isOpen, onClose, title, onBuySuccess } = props;
+  const { isOpen, onClose, title, callForActionLink, onBuySuccess } = props;
   const preventClose = false;
   // TODO: this should be handled on the app side
   // the cart is cleared after a successful purchase. so we need to keep a local copy of the tokens in state.
@@ -34,7 +35,7 @@ export const BuyWithLeverageModal = (props: BuyWithLeverageModalProps) => {
           <LoanInfoContainer collectionAddress={collectionAddress} tokenID={tokenID} flashLoanAmount={totalPriceUnits}>
             {({ limits, flashFee }) => (
               <BuyWithLeverageProvider tokens={tokens} limits={limits} flashFee={flashFee} onBuySuccess={onBuySuccess}>
-                <ModalContent title={title} onClose={onClose} />
+                <ModalContent title={title} callForActionLink={callForActionLink} onClose={onClose} />
               </BuyWithLeverageProvider>
             )}
           </LoanInfoContainer>
