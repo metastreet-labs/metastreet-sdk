@@ -11,7 +11,7 @@
     "test": "nx test",
     "lint": "nx lint",
     "format-check": "nx format:check",
-    "type-check": "nx type-check"
+    "type-check": "nx run-many --all --target=type-check"
   },
   "engines": {
     "node": ">=16.16.0 <17.0.0",
