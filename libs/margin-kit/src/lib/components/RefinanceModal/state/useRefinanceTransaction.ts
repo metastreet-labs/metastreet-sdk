@@ -1,5 +1,5 @@
-import { ReadableError, refinanceETH } from "@metastreet-labs/margin-core";
-import { ContractTransaction } from "ethers";
+import { ReadableError, refinanceETH, waitForSubgraphSync } from "@metastreet-labs/margin-core";
+import { ContractReceipt, ContractTransaction } from "ethers";
 import { useSigner } from "wagmi";
 import useDefinedDeployment from "../../../hooks/useDefinedDeployment";
 import useTransactionSteps, {
@@ -68,12 +68,20 @@ const useRefinanceTransaction = (params: UseRefinanceTransactionParams): UseRefi
     updateStep(0, { status: "complete" });
     updateStep(1, { status: "loading" });
 
+    let receipt: ContractReceipt;
     try {
-      await tx.wait(2);
+      receipt = await tx.wait(2);
     } catch (e) {
       updateStep(1, { status: "error", description: "The transaction wasn't added to the blockchain" });
       onError?.(e);
       return;
+    }
+
+    try {
+      await waitForSubgraphSync({ subgraphURI: deployment.subgraphURI, blockNumber: receipt.blockNumber });
+      updateStep(1, { status: "error", description: "Subgraph sync failed" });
+    } catch (e) {
+      onError?.(e);
     }
 
     updateStep(1, { status: "complete" });
