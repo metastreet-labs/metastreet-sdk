@@ -7,13 +7,20 @@ import {
   useRepayETH,
 } from "@metastreet-labs/margin-kit";
 import { ethers } from "ethers";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { useNetwork, useQuery } from "wagmi";
 import Button from "./Button";
 
 const PositionsSection = () => {
   // a list of all active LeverageBuys (loans) of the connected address
-  const { data } = useLeverageBuys();
+  const { data, error } = useLeverageBuys();
+
+  let body: ReactNode;
+  if (!data) {
+    body = <div className="flex h-44 w-full items-center justify-center">{error ? error.message : "Loading..."}</div>;
+  } else {
+    body = data?.map((lb) => <LBRow leverageBuy={lb} key={lb.escrowID} />);
+  }
 
   return (
     <section className="flex flex-col space-y-2">
@@ -28,11 +35,7 @@ const PositionsSection = () => {
             <th>List</th>
           </tr>
         </thead>
-        <tbody>
-          {data?.map((lb) => (
-            <LBRow leverageBuy={lb} key={lb.escrowID} />
-          ))}
-        </tbody>
+        <tbody>{body}</tbody>
       </table>
     </section>
   );
