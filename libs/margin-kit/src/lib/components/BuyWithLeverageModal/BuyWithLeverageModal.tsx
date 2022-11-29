@@ -1,8 +1,5 @@
 import { ReactNode, useState } from "react";
-import { useAccount, useClient } from "wagmi";
-import { useDeployment } from "../../hooks/useDeployment";
-import { useLeverageBuyEventsQKs } from "../../lib/hooks/fetchers/subgraph/useLeverageBuyEvents";
-import { useLeverageBuysQKs } from "../../lib/hooks/fetchers/subgraph/useLeverageBuys";
+import { useCloseThenInvalidate } from "../../hooks/useCloseThenInvalidate";
 import { BWLToken } from "../../types";
 import { toUnits } from "../../utils/numbers";
 import DefinedDeploymentProvider from "../DefinedDeploymentProvider";
@@ -27,17 +24,7 @@ export const BuyWithLeverageModal = (props: BuyWithLeverageModalProps) => {
   // otherwise, the modal will instantly disappear after the transaction has completed.
   const [tokens] = useState(props.tokens);
 
-  const deployment = useDeployment();
-  const { address } = useAccount();
-  const { queryClient } = useClient();
-
-  const onClose = () => {
-    ogOnClose();
-    if (deployment && address) {
-      queryClient.invalidateQueries(useLeverageBuysQKs.owner(deployment.subgraphURI, address));
-      queryClient.invalidateQueries(useLeverageBuyEventsQKs.owner(deployment.subgraphURI, address));
-    }
-  };
+  const onClose = useCloseThenInvalidate(ogOnClose);
 
   if (!tokens.length) return null;
 
