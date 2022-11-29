@@ -1,4 +1,11 @@
-import { createListing, getOrderFromReceipt, getReadableError, Marketplace, Order } from "@metastreet-labs/margin-core";
+import {
+  createListing,
+  getOrderFromReceipt,
+  getReadableError,
+  Marketplace,
+  Order,
+  waitForSubgraphSync,
+} from "@metastreet-labs/margin-core";
 import { BigNumber, ContractReceipt, ContractTransaction, utils } from "ethers";
 import { useSigner } from "wagmi";
 import useDefinedDeployment from "../../../hooks/useDefinedDeployment";
@@ -101,7 +108,10 @@ export const useListForSaleTransaction = (params: UseListForSaleTransactionParam
 
     try {
       const order = getOrderFromReceipt(receipt);
-      await postOrderToOpenSea(order);
+      await Promise.all([
+        postOrderToOpenSea(order),
+        waitForSubgraphSync({ subgraphURI: deployment.subgraphURI, blockNumber: receipt.blockNumber }),
+      ]);
     } catch (e) {
       const error = getReadableError(e);
       updateStep(2, { status: "error", description: error.message });
