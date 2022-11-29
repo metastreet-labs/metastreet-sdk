@@ -22,8 +22,8 @@ export const useCancelListing = () => {
     const receipt = await tx.wait(2);
     await waitForSubgraphSync({ subgraphURI: deployment.subgraphURI, blockNumber: receipt.blockNumber });
     const address = await signer.getAddress();
-    queryClient.invalidateQueries(useLeverageBuysQKs.owner(address));
-    queryClient.invalidateQueries(useLeverageBuyEventsQKs.owner(address));
+    queryClient.invalidateQueries(useLeverageBuysQKs.owner(deployment.subgraphURI, address));
+    queryClient.invalidateQueries(useLeverageBuyEventsQKs.owner(deployment.subgraphURI, address));
     return receipt;
   };
 };
