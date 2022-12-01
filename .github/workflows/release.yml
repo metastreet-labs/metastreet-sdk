@@ -21,7 +21,7 @@ jobs:
       - run: npm ci
       - name: Version
         shell: bash
-        run:  npx nx affected --target=test --base=main~1 --head=main --target=version
+        run:  npx nx affected --base=main~1 --head=main --target=version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Tag last-release
