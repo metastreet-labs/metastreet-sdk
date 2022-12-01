@@ -41,6 +41,12 @@
       "options": {
         "lintFilePatterns": ["libs/pe-contracts-typechain/**/*.ts"]
       }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "preset": "conventional"
+      }
     }
   },
   "tags": []

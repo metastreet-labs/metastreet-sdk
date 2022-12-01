@@ -72,6 +72,12 @@
         "color": true,
         "command": "npx tsc -p libs/margin-kit/tsconfig.lib.json --noEmit --incremental"
       }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "preset": "conventional"
+      }
     }
   }
 }

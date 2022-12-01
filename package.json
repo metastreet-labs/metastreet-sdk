@@ -42,6 +42,9 @@
     "wagmi": "^0.8.5"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.0.0",
+    "@commitlint/config-conventional": "^17.0.0",
+    "@jscutlery/semver": "^2.29.0",
     "@nrwl/cli": "14.5.8",
     "@nrwl/cypress": "14.5.8",
     "@nrwl/eslint-plugin-nx": "14.5.8",
@@ -71,7 +74,7 @@
     "eslint-plugin-jsx-a11y": "6.6.1",
     "eslint-plugin-react": "7.30.1",
     "eslint-plugin-react-hooks": "4.6.0",
-    "husky": "^8.0.1",
+    "husky": "^8.0.0",
     "imagemin-lint-staged": "^0.5.1",
     "jest": "27.5.1",
     "lint-staged": "^13.0.3",
