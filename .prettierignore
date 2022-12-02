@@ -3,4 +3,6 @@
 /dist
 /coverage
 
+.github
+
 libs/pe-contracts-typechain/src
