@@ -3,6 +3,7 @@ import {
   buySingleERC721WithETH,
   getReadableError,
   getReservoirFillCalldata,
+  waitForSubgraphSync,
 } from "@metastreet-labs/margin-core";
 import { ContractTransaction } from "ethers";
 import { useSigner } from "wagmi";
@@ -97,7 +98,8 @@ const useBuyWithLeverageTransaction = (props: UseBuyWithLeverageTransactionProps
     updateStep(1, { status: "loading" });
     // wait for block confirmation
     try {
-      await tx.wait(2);
+      const receipt = await tx.wait(2);
+      await waitForSubgraphSync({ subgraphURI: deployment.subgraphURI, blockNumber: receipt.blockNumber });
       // if transaction was confirmed, set second step as complete
       updateStep(1, { status: "complete" });
       // call on success callback

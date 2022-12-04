@@ -1,4 +1,8 @@
 import { ReactNode, useState } from "react";
+import { useAccount, useClient } from "wagmi";
+import { useDeployment } from "../../hooks/useDeployment";
+import { useLeverageBuyEventsQKs } from "../../lib/hooks/fetchers/subgraph/useLeverageBuyEvents";
+import { useLeverageBuysQKs } from "../../lib/hooks/fetchers/subgraph/useLeverageBuys";
 import { BWLToken } from "../../types";
 import { toUnits } from "../../utils/numbers";
 import DefinedDeploymentProvider from "../DefinedDeploymentProvider";
@@ -16,12 +20,24 @@ type BuyWithLeverageModalProps = ModalState & {
 };
 
 export const BuyWithLeverageModal = (props: BuyWithLeverageModalProps) => {
-  const { isOpen, onClose, title, callForActionLink, onBuySuccess } = props;
+  const { isOpen, onClose: ogOnClose, title, callForActionLink, onBuySuccess } = props;
   const preventClose = false;
   // TODO: this should be handled on the app side
   // the cart is cleared after a successful purchase. so we need to keep a local copy of the tokens in state.
   // otherwise, the modal will instantly disappear after the transaction has completed.
   const [tokens] = useState(props.tokens);
+
+  const deployment = useDeployment();
+  const { address } = useAccount();
+  const { queryClient } = useClient();
+
+  const onClose = () => {
+    ogOnClose();
+    if (deployment && address) {
+      queryClient.invalidateQueries(useLeverageBuysQKs.owner(deployment.subgraphURI, address));
+      queryClient.invalidateQueries(useLeverageBuyEventsQKs.owner(deployment.subgraphURI, address));
+    }
+  };
 
   if (!tokens.length) return null;
 
