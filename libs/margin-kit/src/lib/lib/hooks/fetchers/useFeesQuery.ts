@@ -1,10 +1,10 @@
-import { useQuery } from "wagmi";
+import { useMetaStreetQuery } from "../../../components/MetaStreetConfig/MetaStreetQueryClientProvider";
 import getFees, { GetFeesParams, GetFeesResult } from "../../fetchers/getFees";
 
 export type UseFeesQueryParams = GetFeesParams;
 
 export const useFeesQuery = (params: UseFeesQueryParams) => {
-  return useQuery<GetFeesResult, Error>(
+  return useMetaStreetQuery<GetFeesResult, Error>(
     useFeesQueryQKs.collection(params),
     () => getFees(params),
     // no need to refetch at all

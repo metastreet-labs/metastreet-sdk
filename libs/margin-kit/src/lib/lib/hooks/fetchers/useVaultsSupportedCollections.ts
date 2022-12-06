@@ -3,7 +3,7 @@ import {
   GetVaultsSupportedCollectionsResult,
   ReadableError,
 } from "@metastreet-labs/margin-core";
-import { useQuery } from "wagmi";
+import { useMetaStreetQuery } from "../../../components/MetaStreetConfig/MetaStreetQueryClientProvider";
 import useChainID from "../../../hooks/meta-street-config/useChainID";
 import useSignerOrProvider from "../../../hooks/meta-street-config/useSignerOrProvider";
 import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
@@ -16,7 +16,7 @@ export const useVaultsSupportedCollections = () => {
     return getVaultsSupportedCollections({ signerOrProvider, vaultAddresses: deployment.vaults });
   });
 
-  return useQuery<GetVaultsSupportedCollectionsResult, ReadableError>(
+  return useMetaStreetQuery<GetVaultsSupportedCollectionsResult, ReadableError>(
     useVaultsSupportedCollectionsQKs.chain(chainID),
     fetcher
   );

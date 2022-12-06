@@ -1,4 +1,4 @@
-import { useQuery } from "wagmi";
+import { useMetaStreetQuery } from "../../../components/MetaStreetConfig/MetaStreetQueryClientProvider";
 import useChainID from "../../../hooks/meta-street-config/useChainID";
 import useSignerAddress from "../../../hooks/meta-street-config/useSignerAddress";
 import useSignerOrProvider from "../../../hooks/meta-street-config/useSignerOrProvider";
@@ -8,7 +8,7 @@ export const useETHBalance = () => {
   const chainID = useChainID();
   const { signer, provider } = useSignerOrProvider();
 
-  return useQuery(
+  return useMetaStreetQuery(
     useETHBalanceQKs.address(chainID, address),
     () => (signer ? signer.getBalance() : provider.getBalance(address)),
     { enabled: Boolean(address) }

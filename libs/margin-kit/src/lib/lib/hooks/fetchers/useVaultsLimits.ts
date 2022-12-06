@@ -1,5 +1,5 @@
 import { getCollateralLimits, GetCollateralLimitsResult, ReadableError } from "@metastreet-labs/margin-core";
-import { useQuery } from "wagmi";
+import { useMetaStreetQuery } from "../../../components/MetaStreetConfig/MetaStreetQueryClientProvider";
 import useSignerOrProvider from "../../../hooks/meta-street-config/useSignerOrProvider";
 import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
 
@@ -26,7 +26,7 @@ export const useVaultsLimits = (params: UseVaultsLimitsParams) => {
     return limits;
   });
 
-  return useQuery<VaultLimits[], ReadableError>(useVaultsLimitsQKs.token(params), fetcher);
+  return useMetaStreetQuery<VaultLimits[], ReadableError>(useVaultsLimitsQKs.token(params), fetcher);
 };
 
 export const useVaultsLimitsQKs = {

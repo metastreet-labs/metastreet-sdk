@@ -1,5 +1,5 @@
 import { getLeverageBuys, LeverageBuy, ReadableError } from "@metastreet-labs/margin-core";
-import { useQuery } from "wagmi";
+import { useMetaStreetQuery } from "../../../../components/MetaStreetConfig/MetaStreetQueryClientProvider";
 import useDeployment from "../../../../hooks/meta-street-config/useDeployment";
 import useSignerAddress from "../../../../hooks/meta-street-config/useSignerAddress";
 import { useFetcherWithDeployment } from "../useFetcherWithDeployment";
@@ -12,7 +12,7 @@ export const useLeverageBuys = () => {
     return getLeverageBuys({ ...deployment, owner, skip: 0, first: 1000 });
   });
 
-  return useQuery<LeverageBuy[], ReadableError>(
+  return useMetaStreetQuery<LeverageBuy[], ReadableError>(
     useLeverageBuysQKs.owner(deployment?.subgraphURI ?? "", owner),
     fetcher,
     { enabled: Boolean(owner) }
