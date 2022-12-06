@@ -1,8 +1,8 @@
 import { ReadableError } from "@metastreet-labs/margin-core";
-import { useSigner } from "wagmi";
 import { useIsCollectionSupported } from "../lib/hooks/fetchers/useIsCollectionSupported";
 import { BWLToken } from "../types";
-import { useDeployment } from "./useDeployment";
+import useDeployment from "./meta-street-config/useDeployment";
+import useSigner from "./meta-street-config/useSigner";
 
 interface UseBuyWithLeverageButtonProps {
   tokens: BWLToken[];
@@ -30,7 +30,7 @@ const useBuyWithLeverageButton = (props: UseBuyWithLeverageButtonProps): UseBuyW
   const collectionAddress = tokens[0]?.collectionAddress ?? "";
   const isSingleCollection = tokens.every((token) => token.collectionAddress == collectionAddress);
 
-  const { data: signer } = useSigner();
+  const signer = useSigner();
   const deployment = useDeployment();
   const { isCollectionSupported, isCollectionSupportedError } = useIsCollectionSupported(collectionAddress);
 

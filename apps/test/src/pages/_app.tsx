@@ -1,7 +1,7 @@
-import { DeploymentProvider } from "@metastreet-labs/margin-kit";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import Connect from "../components/Connect";
+import DemoMetaStreetConfig from "../components/DemoMetaStreetConfig";
 import WagmiProvider from "../components/WagmiProvider";
 import useMounted from "../hooks/useMounted";
 import "../styles/styles.css";
@@ -13,7 +13,7 @@ const CustomApp = ({ Component, pageProps }: AppProps) => {
 
   return (
     <WagmiProvider>
-      <DeploymentProvider>
+      <DemoMetaStreetConfig>
         <Head>
           <title>MetaStreet SDK Demo</title>
         </Head>
@@ -22,7 +22,7 @@ const CustomApp = ({ Component, pageProps }: AppProps) => {
             <Component {...pageProps} />
           </Connect>
         </main>
-      </DeploymentProvider>
+      </DemoMetaStreetConfig>
     </WagmiProvider>
   );
 };
