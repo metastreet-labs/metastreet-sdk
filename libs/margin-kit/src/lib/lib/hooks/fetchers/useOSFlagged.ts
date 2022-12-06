@@ -1,6 +1,6 @@
 import { getReadableError } from "@metastreet-labs/margin-core";
 import { useQuery } from "wagmi";
-import useChainID from "../../../hooks/useChainID";
+import useChainID from "../../../hooks/meta-street-config/useChainID";
 import getOSFlagged, { BaseToken, GetOSFlaggedResult } from "../../fetchers/getOSFlagged";
 
 interface UseOSFlaggedResult<T extends BaseToken> {

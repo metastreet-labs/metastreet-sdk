@@ -4,16 +4,16 @@ export * from "./lib/components/BuyWithLeverageButton";
 export * from "./lib/components/BuyWithLeverageModal";
 export * from "./lib/components/BuyWithLeverageModal/state/BuyWithLeverageProvider";
 export * from "./lib/components/BuyWithLeverageModal/state/useBuyWithLeverage";
-export * from "./lib/components/DeploymentProvider";
 export * from "./lib/components/ListForSaleModal";
 export * from "./lib/components/ListForSaleModal/state/ListForSaleProvider";
 export * from "./lib/components/ListForSaleModal/state/useListForSale";
+export { MetaStreetConfig } from "./lib/components/MetaStreetConfig";
 export * from "./lib/components/RefinanceModal";
 export * from "./lib/components/RefinanceModal/state/RefinanceProvider";
 export * from "./lib/components/RefinanceModal/state/useRefinance";
 // Other hooks
+export * from "./lib/hooks/meta-street-config/useDeployment";
 export * from "./lib/hooks/useDebouncedProps";
-export * from "./lib/hooks/useDeployment";
 // subgraph fetcher hooks
 export * from "./lib/lib/hooks/fetchers/subgraph/useLeverageBuyEvents";
 export * from "./lib/lib/hooks/fetchers/subgraph/useLeverageBuys";

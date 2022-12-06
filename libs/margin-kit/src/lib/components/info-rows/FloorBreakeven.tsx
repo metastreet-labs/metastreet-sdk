@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import useChainID from "../../hooks/useChainID";
+import useChainID from "../../hooks/meta-street-config/useChainID";
 import { useFeesQuery } from "../../lib/hooks/fetchers/useFeesQuery";
 import { prettyFormatNumber } from "../../utils/numbers";
 import ETHPrice from "../ETHPrice";

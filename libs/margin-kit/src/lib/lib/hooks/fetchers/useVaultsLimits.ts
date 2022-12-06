@@ -1,6 +1,6 @@
 import { getCollateralLimits, GetCollateralLimitsResult, ReadableError } from "@metastreet-labs/margin-core";
 import { useQuery } from "wagmi";
-import useSignerOrProvider from "../../../hooks/useSignerOrProvider";
+import useSignerOrProvider from "../../../hooks/meta-street-config/useSignerOrProvider";
 import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
 
 interface UseVaultsLimitsParams {
