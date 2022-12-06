@@ -4,7 +4,7 @@ import {
   QuoteRefinanceResult,
   ReadableError,
 } from "@metastreet-labs/margin-core";
-import { useQuery } from "wagmi";
+import { useMetaStreetQuery } from "../../../components/MetaStreetConfig/MetaStreetQueryClientProvider";
 import useSignerOrProvider from "../../../hooks/meta-street-config/useSignerOrProvider";
 import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
 
@@ -17,7 +17,7 @@ export const useQuoteRefinance = (params: UseQuoteRefinanceParams) => {
     return quoteRefinance({ ...params, signerOrProvider, lbWrapperAddress: deployment.lbWrapperAddress });
   });
 
-  return useQuery<QuoteRefinanceResult, ReadableError>(
+  return useMetaStreetQuery<QuoteRefinanceResult, ReadableError>(
     useQuoteRefinanceQKs.loanTerms(params.vaultAddress, params),
     fetcher
   );
