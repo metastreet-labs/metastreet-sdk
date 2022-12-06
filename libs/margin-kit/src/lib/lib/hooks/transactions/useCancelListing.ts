@@ -1,6 +1,6 @@
 import { cancelListing, LeverageBuy, ListingData, waitForSubgraphSync } from "@metastreet-labs/margin-core";
-import { useClient } from "wagmi";
 import useDeployment from "../../../hooks/meta-street-config/useDeployment";
+import useMetaStreetQueryClient from "../../../hooks/meta-street-config/useMetaStreetQueryClient";
 import useSigner from "../../../hooks/meta-street-config/useSigner";
 import { useLeverageBuyEventsQKs } from "../fetchers/subgraph/useLeverageBuyEvents";
 import { useLeverageBuysQKs } from "../fetchers/subgraph/useLeverageBuys";
@@ -8,7 +8,7 @@ import { useLeverageBuysQKs } from "../fetchers/subgraph/useLeverageBuys";
 export const useCancelListing = () => {
   const signer = useSigner();
   const deployment = useDeployment();
-  const { queryClient } = useClient();
+  const queryClient = useMetaStreetQueryClient();
 
   return async (leverageBuy: LeverageBuy & { listingData: ListingData }) => {
     if (!signer) throw new Error("repay called without a signer");

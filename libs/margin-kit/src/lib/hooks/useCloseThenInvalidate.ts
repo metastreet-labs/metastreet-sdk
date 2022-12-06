@@ -1,13 +1,13 @@
-import { useClient } from "wagmi";
 import { useLeverageBuyEventsQKs } from "../lib/hooks/fetchers/subgraph/useLeverageBuyEvents";
 import { useLeverageBuysQKs } from "../lib/hooks/fetchers/subgraph/useLeverageBuys";
 import useDeployment from "./meta-street-config/useDeployment";
+import useMetaStreetQueryClient from "./meta-street-config/useMetaStreetQueryClient";
 import useSignerAddress from "./meta-street-config/useSignerAddress";
 
 export const useCloseThenInvalidate = (ogOnClose: () => void) => {
   const deployment = useDeployment();
   const address = useSignerAddress();
-  const { queryClient } = useClient();
+  const queryClient = useMetaStreetQueryClient();
 
   return () => {
     ogOnClose();
