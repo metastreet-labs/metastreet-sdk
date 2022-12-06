@@ -1,4 +1,4 @@
-import { useQuery } from "wagmi";
+import { useMetaStreetQuery } from "../../../components/MetaStreetConfig/MetaStreetQueryClientProvider";
 
 const ipfsToHTTPS = (url: string) => {
   if (url.startsWith("ipfs://")) return `https://ipfs.io/${url.substring(7)}`;
@@ -20,7 +20,7 @@ export const useTokenMetadata = (tokenURI: string) => {
     if (!response.ok) throw json;
     return json;
   };
-  return useQuery<TokenMetadata, unknown>(useTokenMetadataQKs.url(url), fetcher);
+  return useMetaStreetQuery<TokenMetadata, unknown>(useTokenMetadataQKs.url(url), fetcher);
 };
 
 export const useTokenMetadataQKs = {

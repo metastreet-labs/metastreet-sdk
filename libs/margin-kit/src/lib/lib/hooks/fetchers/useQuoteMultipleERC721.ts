@@ -1,6 +1,6 @@
 import { quoteMultipleERC721, QuoteMultipleERC721Result, ReadableError } from "@metastreet-labs/margin-core";
 import { BigNumberish } from "ethers";
-import { useQuery } from "wagmi";
+import { useMetaStreetQuery } from "../../../components/MetaStreetConfig/MetaStreetQueryClientProvider";
 import useChainID from "../../../hooks/meta-street-config/useChainID";
 import useSignerOrProvider from "../../../hooks/meta-street-config/useSignerOrProvider";
 import { BWLToken } from "../../../types";
@@ -44,7 +44,7 @@ const useQuoteMultipleERC721 = (props: UseQuoteMultipleERC721Props) => {
     });
   });
 
-  return useQuery<QuoteMultipleERC721Result, ReadableError>(
+  return useMetaStreetQuery<QuoteMultipleERC721Result, ReadableError>(
     useQuoteMultipleERC721QKs.withParams(chainID, props),
     fetcher
   );
