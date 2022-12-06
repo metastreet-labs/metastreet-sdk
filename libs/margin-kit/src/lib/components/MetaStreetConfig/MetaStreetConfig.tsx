@@ -1,11 +1,14 @@
 import { defaultDeployments, Deployment } from "@metastreet-labs/margin-core";
+import { QueryClient } from "@tanstack/react-query";
 import { providers, Signer } from "ethers";
 import { createContext, PropsWithChildren, useContext } from "react";
+import MetaStreetQueryClientProvider from "./MetaStreetQueryClientProvider";
 
 const MAINNET_ID = 1;
 const GOERLI_ID = 5;
 
 interface MetaStreetConfigContext {
+  queryClient: QueryClient;
   deployment?: Deployment;
   chainID: number;
   provider: providers.Provider;
@@ -22,6 +25,7 @@ export const useMetaStreetConfig = () => {
 };
 
 type MetaStreetConfigProps = Pick<MetaStreetConfigContext, "chainID" | "provider" | "signer" | "signerAddress"> & {
+  queryClient: QueryClient;
   subgraphs?: {
     mainnet?: string;
     goerli?: string;
@@ -29,7 +33,7 @@ type MetaStreetConfigProps = Pick<MetaStreetConfigContext, "chainID" | "provider
 };
 
 export const MetaStreetConfig = (props: PropsWithChildren<MetaStreetConfigProps>) => {
-  const { chainID, subgraphs, children, ...rest } = props;
+  const { chainID, subgraphs, children, queryClient, ...rest } = props;
 
   let deployment: Deployment | undefined;
   if (defaultDeployments[chainID]) {
@@ -43,8 +47,12 @@ export const MetaStreetConfig = (props: PropsWithChildren<MetaStreetConfigProps>
   const contextValue: MetaStreetConfigContext = {
     deployment,
     chainID,
+    queryClient,
     ...rest,
   };
-
-  return <MetaStreetConfigContext.Provider value={contextValue}>{children}</MetaStreetConfigContext.Provider>;
+  return (
+    <MetaStreetConfigContext.Provider value={contextValue}>
+      <MetaStreetQueryClientProvider client={queryClient}>{children}</MetaStreetQueryClientProvider>
+    </MetaStreetConfigContext.Provider>
+  );
 };
