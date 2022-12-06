@@ -1,6 +1,7 @@
 import { getLeverageBuyEvents, LeverageBuyEvent, ReadableError } from "@metastreet-labs/margin-core";
-import { useAccount, useQuery } from "wagmi";
-import { useDeployment } from "../../../../hooks/useDeployment";
+import { useQuery } from "wagmi";
+import useDeployment from "../../../../hooks/meta-street-config/useDeployment";
+import useSignerAddress from "../../../../hooks/meta-street-config/useSignerAddress";
 import { useFetcherWithDeployment } from "../useFetcherWithDeployment";
 
 export interface UseLeverageBuyEventsParams {
@@ -10,7 +11,7 @@ export interface UseLeverageBuyEventsParams {
 
 export const useLeverageBuyEvents = (params: UseLeverageBuyEventsParams) => {
   const { skip = 0, first = 100 } = params;
-  const { address: owner = "" } = useAccount();
+  const owner = useSignerAddress() ?? "";
   const deployment = useDeployment();
 
   const fetcher = useFetcherWithDeployment((deployment) => {

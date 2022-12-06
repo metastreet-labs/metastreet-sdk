@@ -1,6 +1,6 @@
 import { Deployment } from "@metastreet-labs/margin-core";
 import { createContext, ReactNode } from "react";
-import { useDeployment } from "../hooks/useDeployment";
+import useDeployment from "../hooks/meta-street-config/useDeployment";
 
 export const DefinedDeploymentContext = createContext<Deployment | undefined>(undefined);
 

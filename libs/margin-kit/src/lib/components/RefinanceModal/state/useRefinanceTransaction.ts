@@ -1,6 +1,6 @@
 import { ReadableError, refinanceETH, waitForSubgraphSync } from "@metastreet-labs/margin-core";
 import { ContractReceipt, ContractTransaction } from "ethers";
-import { useSigner } from "wagmi";
+import useSigner from "../../../hooks/meta-street-config/useSigner";
 import useDefinedDeployment from "../../../hooks/useDefinedDeployment";
 import useTransactionSteps, {
   getTransactionStatus,
@@ -37,7 +37,7 @@ export interface UseRefinanceTransactionResult {
 
 const useRefinanceTransaction = (params: UseRefinanceTransactionParams): UseRefinanceTransactionResult => {
   const { escrowID, formState, onSuccess, onError } = params;
-  const { data: signer } = useSigner();
+  const signer = useSigner();
   const deployment = useDefinedDeployment();
   const [steps, updateStep, resetSteps] = useTransactionSteps(getSteps());
 

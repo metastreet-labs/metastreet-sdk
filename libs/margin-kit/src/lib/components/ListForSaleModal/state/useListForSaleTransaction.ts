@@ -7,7 +7,7 @@ import {
   waitForSubgraphSync,
 } from "@metastreet-labs/margin-core";
 import { BigNumber, ContractReceipt, ContractTransaction, utils } from "ethers";
-import { useSigner } from "wagmi";
+import useSigner from "../../../hooks/meta-street-config/useSigner";
 import useDefinedDeployment from "../../../hooks/useDefinedDeployment";
 import useTransactionSteps, {
   getTransactionStatus,
@@ -51,7 +51,7 @@ const getSteps = (): TransactionStep[] => [
 export const useListForSaleTransaction = (params: UseListForSaleTransactionParams): UseListForSaleTransactionResult => {
   const { formState, formActions, escrowID, postOrderToOpenSea } = params;
   const deployment = useDefinedDeployment();
-  const { data: signer } = useSigner();
+  const signer = useSigner();
   const fees = useFees();
 
   const [steps, updateStep, resetSteps] = useTransactionSteps(getSteps());
