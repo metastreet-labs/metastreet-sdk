@@ -13,6 +13,7 @@ export * from "./lib/components/RefinanceModal/state/RefinanceProvider";
 export * from "./lib/components/RefinanceModal/state/useRefinance";
 // Other hooks
 export * from "./lib/hooks/meta-street-config/useDeployment";
+export * from "./lib/hooks/meta-street-config/useMetaStreetQueryClient";
 export * from "./lib/hooks/useDebouncedProps";
 // subgraph fetcher hooks
 export * from "./lib/lib/hooks/fetchers/subgraph/useLeverageBuyEvents";
