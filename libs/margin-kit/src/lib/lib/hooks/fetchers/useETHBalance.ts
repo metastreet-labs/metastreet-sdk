@@ -1,9 +1,10 @@
-import { useAccount, useQuery } from "wagmi";
-import useChainID from "../../../hooks/useChainID";
-import useSignerOrProvider from "../../../hooks/useSignerOrProvider";
+import { useQuery } from "wagmi";
+import useChainID from "../../../hooks/meta-street-config/useChainID";
+import useSignerAddress from "../../../hooks/meta-street-config/useSignerAddress";
+import useSignerOrProvider from "../../../hooks/meta-street-config/useSignerOrProvider";
 
 export const useETHBalance = () => {
-  const { address = "" } = useAccount();
+  const address = useSignerAddress() ?? "";
   const chainID = useChainID();
   const { signer, provider } = useSignerOrProvider();
 
