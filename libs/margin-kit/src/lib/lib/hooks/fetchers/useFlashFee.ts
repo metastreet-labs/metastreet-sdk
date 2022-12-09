@@ -1,6 +1,6 @@
 import { getFlashFee, ReadableError } from "@metastreet-labs/margin-core";
 import { BigNumber, BigNumberish } from "ethers";
-import { useQuery } from "wagmi";
+import { useMetaStreetQuery } from "../../../components/MetaStreetConfig/MetaStreetQueryClientProvider";
 import useChainID from "../../../hooks/meta-street-config/useChainID";
 import useSignerOrProvider from "../../../hooks/meta-street-config/useSignerOrProvider";
 import { useFetcherWithDeployment } from "./useFetcherWithDeployment";
@@ -13,7 +13,7 @@ export const useFlashFee = (loanAmount: BigNumberish) => {
     return getFlashFee({ signerOrProvider, ...deployment, loanAmount });
   });
 
-  return useQuery<BigNumber, ReadableError>(useFlashFeeQKs.loanAmount(chainID, loanAmount), fetcher);
+  return useMetaStreetQuery<BigNumber, ReadableError>(useFlashFeeQKs.loanAmount(chainID, loanAmount), fetcher);
 };
 
 export const useFlashFeeQKs = {

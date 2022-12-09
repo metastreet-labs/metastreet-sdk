@@ -1,5 +1,5 @@
 import { getReadableError } from "@metastreet-labs/margin-core";
-import { useQuery } from "wagmi";
+import { useMetaStreetQuery } from "../../../components/MetaStreetConfig/MetaStreetQueryClientProvider";
 import useChainID from "../../../hooks/meta-street-config/useChainID";
 import getOSFlagged, { BaseToken, GetOSFlaggedResult } from "../../fetchers/getOSFlagged";
 
@@ -15,7 +15,7 @@ export const useOSFlagged = <T extends BaseToken>(
   const chainID = useChainID();
   const isMainnet = chainID == 1;
 
-  const { data, error } = useQuery<GetOSFlaggedResult<T>, Error>(
+  const { data, error } = useMetaStreetQuery<GetOSFlaggedResult<T>, Error>(
     useOSFlaggedQKs.tokens(tokens),
     () => getOSFlagged(tokens),
     { enabled: isMainnet, onSuccess: extraParams?.onSuccess }
