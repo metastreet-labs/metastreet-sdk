@@ -58,7 +58,7 @@ const useBuyWithLeverageForm = (props: UseBuyWithLeverageFormProps): UseBuyWithL
       downPayments.reduce((total, downPayment) => total.add(downPayment), BigNumber.from(0))
     ).toNumber();
 
-    const activeLimits = limits.find((l) => l.maxPrincipal.sub(flashFee).gte(debtAmount));
+    const activeLimits = limits.find((l) => l.maxPrincipal.mul(tokens.length).sub(flashFee).gte(debtAmount));
     if (!activeLimits) throw Error("active vault limit is undefined, should never happen");
 
     return { debtAmount, downPayments, totalDownPayment, activeLimits };
