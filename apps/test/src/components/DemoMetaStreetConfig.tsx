@@ -1,7 +1,8 @@
 import { MetaStreetConfig } from "@metastreet-labs/margin-kit";
 import { QueryClient } from "@tanstack/react-query";
 import { PropsWithChildren } from "react";
-import { chain, useAccount, useNetwork, useProvider, useSigner } from "wagmi";
+import { useAccount, useNetwork, useProvider, useSigner } from "wagmi";
+import { mainnet } from "wagmi/chains";
 
 const queryClient = new QueryClient();
 
@@ -14,7 +15,7 @@ const DemoMetaStreetConfig = (props: PropsWithChildren) => {
   return (
     <MetaStreetConfig
       queryClient={queryClient}
-      chainID={activeChain?.id ?? chain.mainnet.id}
+      chainID={activeChain?.id ?? mainnet.id}
       provider={provider}
       signer={signer ?? undefined}
       signerAddress={signerAddress}
