@@ -8,7 +8,7 @@ This SDK aims to make it easy for web apps to integrate MetaStreet leverage trad
 
 # Demo
 
-We built a demo app to showcase SDK features, you can check the code under [apps/test](apps/test), or visit the [hosted version](https://sdk-demo-six.vercel.app).
+We built a demo app to showcase SDK features, you can check the code under [apps/test](apps/test), or visit the [hosted version](https://sdk-demo.metastreet.xyz/).
 You can also see how the SDK is implemented in a full-fledged marketplace on our [PowerSweep](https://powersweep.metastreet.xyz/) ([On Görli](https://powersweep-goerli.metastreet.xyz/)) product.
 
 # Installation
