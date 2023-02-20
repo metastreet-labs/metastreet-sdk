@@ -23,6 +23,8 @@ const ZERO_FEES: Fees = {
   bps: 0,
 };
 
+const MIN_CREATOR_FEE_BPS = 50;
+
 const getFees = async (params: GetFeesParams): Promise<GetFeesResult> => {
   const url = params.chainID == 1 ? OS_V1_API_URL_MAINNET : OS_V1_API_URL_GOERLI;
   const response = await fetch(`${url}/asset_contract/${params.collectionAddress}`);
@@ -30,11 +32,18 @@ const getFees = async (params: GetFeesParams): Promise<GetFeesResult> => {
   if (!response.ok) throw json;
 
   const { seller_fees, opensea_fees } = json.collection.fees;
+  const isCreatorFeesEnforced = json.collection.is_creator_fees_enforced;
 
   let royalty: Fees;
   const royaltyRecipient = Object.keys(seller_fees)[0];
-  if (royaltyRecipient) royalty = { recipient: royaltyRecipient, bps: seller_fees[royaltyRecipient] };
-  else royalty = ZERO_FEES;
+  if (royaltyRecipient) {
+    royalty = { recipient: royaltyRecipient, bps: seller_fees[royaltyRecipient] };
+    if (!isCreatorFeesEnforced) {
+      royalty.bps = MIN_CREATOR_FEE_BPS;
+    }
+  } else {
+    royalty = ZERO_FEES;
+  }
 
   let opensea: Fees;
   const openseaFeeRecipient = Object.keys(opensea_fees)[0];
