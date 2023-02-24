@@ -30,6 +30,7 @@ export { LoanPriceOracle__factory } from "./LoanPriceOracle__factory";
 export { MockLoanPriceOracle__factory } from "./MockLoanPriceOracle__factory";
 export { MockReservoirRouter__factory } from "./MockReservoirRouter__factory";
 export { MockVault__factory } from "./MockVault__factory";
+export { Multicall3__factory } from "./Multicall3__factory";
 export { Ownable__factory } from "./Ownable__factory";
 export { PurchaseEscrowNoteAdapter__factory } from "./PurchaseEscrowNoteAdapter__factory";
 export { PurchaseEscrowNoteToken__factory } from "./PurchaseEscrowNoteToken__factory";
