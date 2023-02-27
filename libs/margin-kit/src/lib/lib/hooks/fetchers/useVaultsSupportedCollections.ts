@@ -13,7 +13,11 @@ export const useVaultsSupportedCollections = () => {
   const chainID = useChainID();
 
   const fetcher = useFetcherWithDeployment((deployment) => {
-    return getVaultsSupportedCollections({ signerOrProvider, vaultAddresses: deployment.vaults });
+    return getVaultsSupportedCollections({
+      signerOrProvider,
+      vaultAddresses: deployment.vaults,
+      multicallContractAddress: deployment.multicallContractAddress,
+    });
   });
 
   return useMetaStreetQuery<GetVaultsSupportedCollectionsResult, ReadableError>(
