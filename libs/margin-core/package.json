@@ -1,10 +1,10 @@
 {
   "name": "@metastreet-labs/margin-core",
-  "version": "0.0.52",
+  "version": "0.0.55",
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
   "dependencies": {
-    "@metastreet-labs/pe-contracts-typechain": "0.0.20"
+    "@metastreet-labs/pe-contracts-typechain": "0.0.22"
   }
 }
