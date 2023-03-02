@@ -1,6 +1,6 @@
 {
   "name": "@metastreet-labs/margin-core",
-  "version": "0.0.55",
+  "version": "0.0.56",
   "license": "MIT",
   "type": "module",
   "sideEffects": false,

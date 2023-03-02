@@ -14,7 +14,11 @@ export interface Deployment {
 
 export const defaultDeployments: Record<number, Deployment> = {
   1: {
-    vaults: ["0x7770cd73e035c37bdf8875eee81577c63202ab8d"],
+    vaults: [
+      "0x7770cd73e035c37bdf8875eee81577c63202ab8d",
+      "0xf538ca7b3d5fb67003173f5827cf56d0dcdb08dd",
+      "0xf380f3ba506498d31310141713e31ffd264b3da2",
+    ],
     lbWrapperAddress: "0x558aD8278B6D127dc8F58e02Ee578Df20ec98406",
     multicallContractAddress: "0xcA11bde05977b3631167028862bE2a173976CA11",
     subgraphURI:
