@@ -16,6 +16,7 @@ export const ListForSaleProvider = (props: ListForSaleProviderProps) => {
     formState,
     formActions,
     escrowID: leverageBuy.escrowID,
+    maturity: leverageBuy.maturity,
     postOrderToOpenSea,
   });
 

@@ -27,6 +27,7 @@ export interface UseListForSaleTransactionParams {
   formState: ListForSaleFormState;
   formActions: ListForSaleFormActions;
   escrowID: string;
+  maturity: number;
   postOrderToOpenSea: (order: Order) => Promise<void>;
 }
 
@@ -49,7 +50,7 @@ const getSteps = (): TransactionStep[] => [
 ];
 
 export const useListForSaleTransaction = (params: UseListForSaleTransactionParams): UseListForSaleTransactionResult => {
-  const { formState, formActions, escrowID, postOrderToOpenSea } = params;
+  const { formState, formActions, maturity, escrowID, postOrderToOpenSea } = params;
   const deployment = useDefinedDeployment();
   const signer = useSigner();
   const fees = useFees();
@@ -66,7 +67,7 @@ export const useListForSaleTransaction = (params: UseListForSaleTransactionParam
     updateStep(0, { status: "loading" });
 
     const startTimestamp = Math.ceil(new Date().getTime() / 1000);
-    const endTimestamp = startTimestamp + 7 * 86400;
+    const endTimestamp = Math.min(startTimestamp + 7 * 86400, maturity);
     const salt = BigNumber.from(utils.randomBytes(32));
     const listingPrice = toUnits(formState.listingPriceNum).toString();
     const { lbWrapperAddress } = deployment;
