@@ -11,9 +11,9 @@ const BuyWithLeverageSection = () => {
   // deployment object, grabbed from the DeploymentProvider that wraps the app
   const deployment = useDeployment();
   // value of the collection address input, defaults to Goerli's MultiFaucet NFT
-  const [collectionAddress, setCollectionAddress] = useState("0xf5de760f2e916647fd766b4ad9e85ff943ce3a2b");
+  const [collectionAddress, setCollectionAddress] = useState("0x769272677fab02575e84945f03eca517acc544cc");
   // value of the token IDs input, defaults to 3 random token IDs
-  const [tokenIDs, setTokenIDs] = useState("958576,1390026,940282");
+  const [tokenIDs, setTokenIDs] = useState("7377,3935");
   // the fetched tokens
   const [tokens, setTokens] = useState<BWLToken[]>([]);
 

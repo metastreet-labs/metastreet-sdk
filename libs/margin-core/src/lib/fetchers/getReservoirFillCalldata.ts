@@ -10,20 +10,29 @@ interface GetReservoirFillCalldataProps {
 
 const _getReservoirFillCalldata = async (props: GetReservoirFillCalldataProps): Promise<string> => {
   const { lbWrapperAddress, reservoirURL, collectionAddress, tokenID, apiKey } = props;
-  // construct URL
-  const params = new URLSearchParams();
-  params.append("taker", lbWrapperAddress);
-  params.append("token", `${collectionAddress}:${tokenID}`);
-  params.append("skipBalanceCheck", "true");
-  const url = `${reservoirURL}/execute/buy/v2?${params}`;
+
+  // request url
+  const url = `${reservoirURL}/execute/buy/v7`;
+  // post request body
+  const body = {
+    items: [{ token: `${collectionAddress}:${tokenID}` }],
+    skipBalanceCheck: true,
+    taker: lbWrapperAddress,
+    excludeEOA: true,
+  };
+
   // if api key was passed, add it to the headers
-  const headers: Record<string, string> = {};
+  const headers: Record<string, string> = {
+    accept: "*/*",
+    "content-type": "application/json",
+  };
   if (apiKey) headers["x-api"] = apiKey;
+
   // send the request
-  const response = await fetch(url, { headers });
+  const response = await fetch(url, { method: "POST", body: JSON.stringify(body), headers });
   if (response.ok) {
     const json = await response.json();
-    return json.steps[0].data.data;
+    return json.steps[0].items[0].data.data;
   }
 
   let error: Error;
